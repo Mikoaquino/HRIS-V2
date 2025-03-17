@@ -1,0 +1,4 @@
+<livewire:navbar />
+
+
+@livewireScripts
