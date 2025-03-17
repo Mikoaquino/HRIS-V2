@@ -110,7 +110,7 @@ class UndefinedPropertySolutionProvider implements HasSolutionsForThrowable
     /**
      * @param class-string $class
      *
-     * @return Collection<int, ReflectionProperty>
+     * @return Collection<string, string>
      */
     protected function getAvailableProperties(string $class): Collection
     {

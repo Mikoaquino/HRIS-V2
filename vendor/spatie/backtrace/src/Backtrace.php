@@ -61,7 +61,7 @@ class Backtrace
 
     public function applicationPath(string $applicationPath): self
     {
-        $this->applicationPath = rtrim($applicationPath, '/');
+        $this->applicationPath = $applicationPath;
 
         return $this;
     }

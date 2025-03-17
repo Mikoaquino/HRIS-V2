@@ -2,12 +2,11 @@
 
 namespace Illuminate\Database\Console\Migrations;
 
-use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Str;
 
-class MigrateMakeCommand extends BaseCommand implements PromptsForMissingInput
+class MigrateMakeCommand extends BaseCommand
 {
     /**
      * The console command signature.
@@ -19,7 +18,7 @@ class MigrateMakeCommand extends BaseCommand implements PromptsForMissingInput
         {--table= : The table to migrate}
         {--path= : The location where the migration file should be created}
         {--realpath : Indicate any provided migration file paths are pre-resolved absolute paths}
-        {--fullpath : Output the full path of the migration (Deprecated)}';
+        {--fullpath : Output the full path of the migration}';
 
     /**
      * The console command description.
@@ -111,7 +110,11 @@ class MigrateMakeCommand extends BaseCommand implements PromptsForMissingInput
             $name, $this->getMigrationPath(), $table, $create
         );
 
-        $this->components->info(sprintf('Migration [%s] created successfully.', $file));
+        if (! $this->option('fullpath')) {
+            $file = pathinfo($file, PATHINFO_FILENAME);
+        }
+
+        $this->line("<info>Created Migration:</info> {$file}");
     }
 
     /**
@@ -128,17 +131,5 @@ class MigrateMakeCommand extends BaseCommand implements PromptsForMissingInput
         }
 
         return parent::getMigrationPath();
-    }
-
-    /**
-     * Prompt for missing input arguments using the returned questions.
-     *
-     * @return array
-     */
-    protected function promptForMissingArgumentsUsing()
-    {
-        return [
-            'name' => 'What should the migration be named?',
-        ];
     }
 }

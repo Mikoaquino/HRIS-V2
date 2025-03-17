@@ -5,12 +5,9 @@ namespace Illuminate\Config;
 use ArrayAccess;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Traits\Macroable;
 
 class Repository implements ArrayAccess, ConfigContract
 {
-    use Macroable;
-
     /**
      * All of the configuration items.
      *

@@ -60,7 +60,7 @@ final class Coverage
      */
     public static function report(OutputInterface $output): float
     {
-        if (! file_exists($reportPath = self::getPath())) {
+        if (!file_exists($reportPath = self::getPath())) {
             if (self::usingXdebug()) {
                 $output->writeln(
                     "  <fg=black;bg=yellow;options=bold> WARN </> Unable to get coverage using Xdebug. Did you set <href=https://xdebug.org/docs/code_coverage#mode>Xdebug's coverage mode</>?</>",
@@ -70,7 +70,7 @@ final class Coverage
             }
 
             $output->writeln(
-                '  <fg=black;bg=yellow;options=bold> WARN </> No coverage driver detected.</>',
+                "  <fg=black;bg=yellow;options=bold> WARN </> No coverage driver detected.</>",
             );
 
             return 0.0;
@@ -79,6 +79,7 @@ final class Coverage
         /** @var CodeCoverage $codeCoverage */
         $codeCoverage = require $reportPath;
         unlink($reportPath);
+
 
         $totalCoverage = $codeCoverage->getReport()->percentageOfExecutedLines();
 
@@ -90,10 +91,10 @@ final class Coverage
         $report = $codeCoverage->getReport();
 
         foreach ($report->getIterator() as $file) {
-            if (! $file instanceof File) {
+            if (!$file instanceof File) {
                 continue;
             }
-            $dirname = dirname($file->id());
+            $dirname  = dirname($file->id());
             $basename = basename($file->id(), '.php');
 
             $name = $dirname === '.' ? $basename : implode(DIRECTORY_SEPARATOR, [
@@ -116,7 +117,7 @@ final class Coverage
                 ? '100.0'
                 : number_format($file->percentageOfExecutedLines()->asFloat(), 1, '.', '');
 
-            $takenSize = strlen($rawName.$percentage) + 8 + $linesExecutedTakenSize; // adding 3 space and percent sign
+            $takenSize = strlen($rawName . $percentage) + 8 + $linesExecutedTakenSize; // adding 3 space and percent sign
 
             $percentage = sprintf(
                 '<fg=%s%s>%s</>',
@@ -137,7 +138,7 @@ final class Coverage
 
         $rawName = 'Total Coverage';
 
-        $takenSize = strlen($rawName.$totalCoverage->asString()) + 6;
+        $takenSize = strlen($rawName . $totalCoverage->asString()) + 6;
 
         $output->writeln(sprintf(
             '  <fg=white;options=bold>%s</> <fg=#6C7280>%s</> %s <fg=#6C7280>%%</>',
@@ -156,7 +157,8 @@ final class Coverage
      * ['11', '20..25', '50', '60..80'];
      * ```
      *
-     * @param  File  $file
+     * @param File $file
+     *
      * @return array<int, string>
      */
     public static function getMissingCoverage($file): array
@@ -171,7 +173,7 @@ final class Coverage
             }
 
             if ($shouldBeNewLine) {
-                $array[] = (string) $line;
+                $array[]         = (string) $line;
                 $shouldBeNewLine = false;
 
                 return $array;
@@ -180,7 +182,7 @@ final class Coverage
             $lastKey = count($array) - 1;
 
             if (array_key_exists($lastKey, $array) && str_contains($array[$lastKey], '..')) {
-                [$from] = explode('..', $array[$lastKey]);
+                [$from]          = explode('..', $array[$lastKey]);
                 $array[$lastKey] = $line > $from ? sprintf('%s..%s', $from, $line) : sprintf('%s..%s', $line, $from);
 
                 return $array;

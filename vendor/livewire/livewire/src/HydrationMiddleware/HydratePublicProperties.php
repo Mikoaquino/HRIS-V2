@@ -21,7 +21,6 @@ use Carbon\Carbon;
 use DateTime;
 use DateTimeInterface;
 use stdClass;
-use Normalizer;
 
 class HydratePublicProperties implements HydrationMiddleware
 {
@@ -37,7 +36,6 @@ class HydratePublicProperties implements HydrationMiddleware
         $modelCollections = data_get($request, 'memo.dataMeta.modelCollections', []);
         $stringables = data_get($request, 'memo.dataMeta.stringables', []);
         $wireables = data_get($request, 'memo.dataMeta.wireables', []);
-        $enums = data_get($request, 'memo.dataMeta.enums', []);
 
         foreach ($publicProperties as $property => $value) {
             if ($type = data_get($dates, $property)) {
@@ -52,8 +50,6 @@ class HydratePublicProperties implements HydrationMiddleware
                 data_set($instance, $property, new $types[$type]($value));
             } else if (in_array($property, $collections)) {
                 data_set($instance, $property, collect($value));
-            } else if ($class = data_get($enums, $property)) {
-                data_set($instance, $property, $class::from($value));
             } else if ($serialized = data_get($models, $property)) {
                 static::hydrateModel($serialized, $property, $request, $instance);
             } else if ($serialized = data_get($modelCollections, $property)) {
@@ -95,15 +91,9 @@ class HydratePublicProperties implements HydrationMiddleware
         array_walk($publicData, function ($value, $key) use ($instance, $response) {
             if (
                 // The value is a supported type, set it in the data, if not, throw an exception for the user.
-                is_bool($value) || is_null($value) || is_numeric($value)
+                is_bool($value) || is_null($value) || is_array($value) || is_numeric($value) || is_string($value)
             ) {
                 data_set($response, 'memo.data.'.$key, $value);
-            } else if(is_array($value)) {
-                // The data here needs to be normalised, so that Safari handles special charaters properly without throwing a checksum exception.
-                data_set($response, 'memo.data.'.$key, static::normalizeArray($value));
-            } else if(is_string($value)) {
-                // The data here needs to be normalised, so that Safari handles special charaters properly without throwing a checksum exception.
-                data_set($response, 'memo.data.'.$key, Normalizer::normalize($value));
             } else if ($value instanceof Wireable && version_compare(PHP_VERSION, '7.4', '>=')) {
                 $response->memo['dataMeta']['wireables'][] = $key;
 
@@ -115,8 +105,7 @@ class HydratePublicProperties implements HydrationMiddleware
             } else if ($value instanceof Collection) {
                 $response->memo['dataMeta']['collections'][] = $key;
 
-                // The data here needs to be normalised, so that Safari handles special charaters properly without throwing a checksum exception.
-                data_set($response, 'memo.data.'.$key, static::normalizeCollection($value)->toArray());
+                data_set($response, 'memo.data.'.$key, $value->toArray());
             } else if ($value instanceof DateTimeInterface) {
                 if ($value instanceof IlluminateCarbon) {
                     $response->memo['dataMeta']['dates'][$key] = 'illuminate';
@@ -135,10 +124,6 @@ class HydratePublicProperties implements HydrationMiddleware
                 $response->memo['dataMeta']['stringables'][] = $key;
 
                 data_set($response, 'memo.data.'.$key, $value->__toString());
-            } else if (is_subclass_of($value, 'BackedEnum')) {
-                $response->memo['dataMeta']['enums'][$key] = get_class($value);
-
-                data_set($response, 'memo.data.'.$key, $value->value);
             } else {
                 throw new PublicPropertyTypeNotAllowedException($instance::getName(), $key, $value);
             }
@@ -252,7 +237,7 @@ class HydratePublicProperties implements HydrationMiddleware
 
     public static function processRules($rules) {
         $rules = Collection::wrap($rules);
-
+        
         $rules = $rules
             ->mapInto(Stringable::class);
 
@@ -321,43 +306,5 @@ class HydratePublicProperties implements HydrationMiddleware
         }
 
         return $filteredData;
-    }
-
-    protected static function normalizeArray($value)
-    {
-        return array_map(function ($item) {
-            if (is_string($item)) {
-                return Normalizer::normalize($item);
-            }
-
-            if (is_array($item)) {
-                return static::normalizeArray($item);
-            }
-
-            if ($item instanceof Collection) {
-                return static::normalizeCollection($item);
-            }
-
-            return $item;
-        }, $value);
-    }
-
-    protected static function normalizeCollection($value)
-    {
-        return $value->map(function ($item) {
-            if (is_string($item)) {
-                return Normalizer::normalize($item);
-            }
-
-            if (is_array($item)) {
-                return static::normalizeArray($item);
-            }
-
-            if ($item instanceof Collection) {
-                return static::normalizeCollection($item);
-            }
-
-            return $item;
-        });
     }
 }

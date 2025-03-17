@@ -21,7 +21,6 @@ use Symfony\Component\Console\Command\SignalableCommandInterface;
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Completion\CompletionInput;
 use Symfony\Component\Console\Completion\CompletionSuggestions;
-use Symfony\Component\Console\Completion\Suggestion;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleSignalEvent;
@@ -33,7 +32,6 @@ use Symfony\Component\Console\Exception\NamespaceNotFoundException;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Helper\DebugFormatterHelper;
-use Symfony\Component\Console\Helper\DescriptorHelper;
 use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -74,20 +72,20 @@ class Application implements ResetInterface
 {
     private array $commands = [];
     private bool $wantHelps = false;
-    private ?Command $runningCommand = null;
+    private $runningCommand = null;
     private string $name;
     private string $version;
-    private ?CommandLoaderInterface $commandLoader = null;
+    private $commandLoader = null;
     private bool $catchExceptions = true;
     private bool $autoExit = true;
-    private InputDefinition $definition;
-    private HelperSet $helperSet;
-    private ?EventDispatcherInterface $dispatcher = null;
-    private Terminal $terminal;
+    private $definition;
+    private $helperSet;
+    private $dispatcher = null;
+    private $terminal;
     private string $defaultCommand;
     private bool $singleCommand = false;
     private bool $initialized = false;
-    private SignalRegistry $signalRegistry;
+    private $signalRegistry;
     private array $signalsToDispatchEvent = [];
 
     public function __construct(string $name = 'UNKNOWN', string $version = 'UNKNOWN')
@@ -143,8 +141,13 @@ class Application implements ResetInterface
             @putenv('COLUMNS='.$this->terminal->getWidth());
         }
 
-        $input ??= new ArgvInput();
-        $output ??= new ConsoleOutput();
+        if (null === $input) {
+            $input = new ArgvInput();
+        }
+
+        if (null === $output) {
+            $output = new ConsoleOutput();
+        }
 
         $renderException = function (\Throwable $e) use ($output) {
             if ($output instanceof ConsoleOutputInterface) {
@@ -176,7 +179,7 @@ class Application implements ResetInterface
             $exitCode = $e->getCode();
             if (is_numeric($exitCode)) {
                 $exitCode = (int) $exitCode;
-                if ($exitCode <= 0) {
+                if (0 === $exitCode) {
                     $exitCode = 1;
                 }
             } else {
@@ -225,7 +228,7 @@ class Application implements ResetInterface
         try {
             // Makes ArgvInput::getFirstArgument() able to distinguish an option from an argument.
             $input->bind($this->getDefinition());
-        } catch (ExceptionInterface) {
+        } catch (ExceptionInterface $e) {
             // Errors must be ignored, full binding/validation happens later when the command is known.
         }
 
@@ -255,26 +258,7 @@ class Application implements ResetInterface
             // the command name MUST be the first element of the input
             $command = $this->find($name);
         } catch (\Throwable $e) {
-            if (($e instanceof CommandNotFoundException && !$e instanceof NamespaceNotFoundException) && 1 === \count($alternatives = $e->getAlternatives()) && $input->isInteractive()) {
-                $alternative = $alternatives[0];
-
-                $style = new SymfonyStyle($input, $output);
-                $output->writeln('');
-                $formattedBlock = (new FormatterHelper())->formatBlock(sprintf('Command "%s" is not defined.', $name), 'error', true);
-                $output->writeln($formattedBlock);
-                if (!$style->confirm(sprintf('Do you want to run "%s" instead? ', $alternative), false)) {
-                    if (null !== $this->dispatcher) {
-                        $event = new ConsoleErrorEvent($input, $output, $e);
-                        $this->dispatcher->dispatch($event, ConsoleEvents::ERROR);
-
-                        return $event->getExitCode();
-                    }
-
-                    return 1;
-                }
-
-                $command = $this->find($alternative);
-            } else {
+            if (!($e instanceof CommandNotFoundException && !$e instanceof NamespaceNotFoundException) || 1 !== \count($alternatives = $e->getAlternatives()) || !$input->isInteractive()) {
                 if (null !== $this->dispatcher) {
                     $event = new ConsoleErrorEvent($input, $output, $e);
                     $this->dispatcher->dispatch($event, ConsoleEvents::ERROR);
@@ -286,24 +270,25 @@ class Application implements ResetInterface
                     $e = $event->getError();
                 }
 
-                try {
-                    if ($e instanceof CommandNotFoundException && $namespace = $this->findNamespace($name)) {
-                        $helper = new DescriptorHelper();
-                        $helper->describe($output instanceof ConsoleOutputInterface ? $output->getErrorOutput() : $output, $this, [
-                            'format' => 'txt',
-                            'raw_text' => false,
-                            'namespace' => $namespace,
-                            'short' => false,
-                        ]);
-
-                        return isset($event) ? $event->getExitCode() : 1;
-                    }
-
-                    throw $e;
-                } catch (NamespaceNotFoundException) {
-                    throw $e;
-                }
+                throw $e;
             }
+
+            $alternative = $alternatives[0];
+
+            $style = new SymfonyStyle($input, $output);
+            $style->block(sprintf("\nCommand \"%s\" is not defined.\n", $name), null, 'error');
+            if (!$style->confirm(sprintf('Do you want to run "%s" instead? ', $alternative), false)) {
+                if (null !== $this->dispatcher) {
+                    $event = new ConsoleErrorEvent($input, $output, $e);
+                    $this->dispatcher->dispatch($event, ConsoleEvents::ERROR);
+
+                    return $event->getExitCode();
+                }
+
+                return 1;
+            }
+
+            $command = $this->find($alternative);
         }
 
         if ($command instanceof LazyCommand) {
@@ -317,6 +302,9 @@ class Application implements ResetInterface
         return $exitCode;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function reset()
     {
     }
@@ -365,16 +353,9 @@ class Application implements ResetInterface
             CompletionInput::TYPE_ARGUMENT_VALUE === $input->getCompletionType()
             && 'command' === $input->getCompletionName()
         ) {
-            foreach ($this->all() as $name => $command) {
-                // skip hidden commands and aliased commands as they already get added below
-                if ($command->isHidden() || $command->getName() !== $name) {
-                    continue;
-                }
-                $suggestions->suggestValue(new Suggestion($command->getName(), $command->getDescription()));
-                foreach ($command->getAliases() as $name) {
-                    $suggestions->suggestValue(new Suggestion($name, $command->getDescription()));
-                }
-            }
+            $suggestions->suggestValues(array_filter(array_map(function (Command $command) {
+                return $command->isHidden() ? null : $command->getName();
+            }, $this->all())));
 
             return;
         }
@@ -577,7 +558,7 @@ class Application implements ResetInterface
     {
         $this->init();
 
-        return isset($this->commands[$name]) || ($this->commandLoader?->has($name) && $this->add($this->commandLoader->get($name)));
+        return isset($this->commands[$name]) || ($this->commandLoader && $this->commandLoader->has($name) && $this->add($this->commandLoader->get($name)));
     }
 
     /**
@@ -917,21 +898,11 @@ class Application implements ResetInterface
         }
 
         switch ($shellVerbosity = (int) getenv('SHELL_VERBOSITY')) {
-            case -1:
-                $output->setVerbosity(OutputInterface::VERBOSITY_QUIET);
-                break;
-            case 1:
-                $output->setVerbosity(OutputInterface::VERBOSITY_VERBOSE);
-                break;
-            case 2:
-                $output->setVerbosity(OutputInterface::VERBOSITY_VERY_VERBOSE);
-                break;
-            case 3:
-                $output->setVerbosity(OutputInterface::VERBOSITY_DEBUG);
-                break;
-            default:
-                $shellVerbosity = 0;
-                break;
+            case -1: $output->setVerbosity(OutputInterface::VERBOSITY_QUIET); break;
+            case 1: $output->setVerbosity(OutputInterface::VERBOSITY_VERBOSE); break;
+            case 2: $output->setVerbosity(OutputInterface::VERBOSITY_VERY_VERBOSE); break;
+            case 3: $output->setVerbosity(OutputInterface::VERBOSITY_DEBUG); break;
+            default: $shellVerbosity = 0; break;
         }
 
         if (true === $input->hasParameterOption(['--quiet', '-q'], true)) {
@@ -977,26 +948,22 @@ class Application implements ResetInterface
             }
         }
 
-        if ($this->signalsToDispatchEvent) {
-            $commandSignals = $command instanceof SignalableCommandInterface ? $command->getSubscribedSignals() : [];
+        if ($command instanceof SignalableCommandInterface && ($this->signalsToDispatchEvent || $command->getSubscribedSignals())) {
+            if (!$this->signalRegistry) {
+                throw new RuntimeException('Unable to subscribe to signal events. Make sure that the `pcntl` extension is installed and that "pcntl_*" functions are not disabled by your php.ini\'s "disable_functions" directive.');
+            }
 
-            if ($commandSignals || null !== $this->dispatcher) {
-                if (!$this->signalRegistry) {
-                    throw new RuntimeException('Unable to subscribe to signal events. Make sure that the `pcntl` extension is installed and that "pcntl_*" functions are not disabled by your php.ini\'s "disable_functions" directive.');
-                }
+            if (Terminal::hasSttyAvailable()) {
+                $sttyMode = shell_exec('stty -g');
 
-                if (Terminal::hasSttyAvailable()) {
-                    $sttyMode = shell_exec('stty -g');
-
-                    foreach ([\SIGINT, \SIGTERM] as $signal) {
-                        $this->signalRegistry->register($signal, static function () use ($sttyMode) {
-                            shell_exec('stty '.$sttyMode);
-                        });
-                    }
+                foreach ([\SIGINT, \SIGTERM] as $signal) {
+                    $this->signalRegistry->register($signal, static function () use ($sttyMode) {
+                        shell_exec('stty '.$sttyMode);
+                    });
                 }
             }
 
-            if (null !== $this->dispatcher) {
+            if ($this->dispatcher) {
                 foreach ($this->signalsToDispatchEvent as $signal) {
                     $event = new ConsoleSignalEvent($command, $input, $output, $signal);
 
@@ -1013,7 +980,7 @@ class Application implements ResetInterface
                 }
             }
 
-            foreach ($commandSignals as $signal) {
+            foreach ($command->getSubscribedSignals() as $signal) {
                 $this->signalRegistry->register($signal, [$command, 'handleSignal']);
             }
         }
@@ -1026,7 +993,7 @@ class Application implements ResetInterface
         try {
             $command->mergeApplicationDefinition();
             $input->bind($command->getDefinition());
-        } catch (ExceptionInterface) {
+        } catch (ExceptionInterface $e) {
             // ignore invalid options/arguments for now, to allow the event listeners to customize the InputDefinition
         }
 

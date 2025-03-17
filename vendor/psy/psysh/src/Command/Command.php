@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2023 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -86,7 +86,7 @@ abstract class Command extends BaseCommand
     /**
      * These arguments will be excluded from help output.
      *
-     * @return string[]
+     * @return array
      */
     protected function getHiddenArguments(): array
     {
@@ -108,7 +108,7 @@ abstract class Command extends BaseCommand
     /**
      * These options will be excluded from help output.
      *
-     * @return string[]
+     * @return array
      */
     protected function getHiddenOptions(): array
     {
@@ -117,6 +117,8 @@ abstract class Command extends BaseCommand
 
     /**
      * Format command aliases as text..
+     *
+     * @return string
      */
     private function aliasesAsText(): string
     {
@@ -125,6 +127,8 @@ abstract class Command extends BaseCommand
 
     /**
      * Format command arguments as text.
+     *
+     * @return string
      */
     private function argumentsAsText(): string
     {
@@ -143,7 +147,7 @@ abstract class Command extends BaseCommand
 
                 $description = \str_replace("\n", "\n".\str_pad('', $max + 2, ' '), $argument->getDescription());
 
-                $messages[] = \sprintf(" <info>%-{$max}s</info> %s%s", $argument->getName(), $description, $default);
+                $messages[] = \sprintf(" <info>%-${max}s</info> %s%s", $argument->getName(), $description, $default);
             }
 
             $messages[] = '';
@@ -154,6 +158,8 @@ abstract class Command extends BaseCommand
 
     /**
      * Format options as text.
+     *
+     * @return string
      */
     private function optionsAsText(): string
     {
@@ -176,7 +182,7 @@ abstract class Command extends BaseCommand
 
                 $optionMax = $max - \strlen($option->getName()) - 2;
                 $messages[] = \sprintf(
-                    " <info>%s</info> %-{$optionMax}s%s%s%s",
+                    " <info>%s</info> %-${optionMax}s%s%s%s",
                     '--'.$option->getName(),
                     $option->getShortcut() ? \sprintf('(-%s) ', $option->getShortcut()) : '',
                     $description,
@@ -193,6 +199,8 @@ abstract class Command extends BaseCommand
 
     /**
      * Calculate the maximum padding width for a set of lines.
+     *
+     * @return int
      */
     private function getMaxWidth(): int
     {
@@ -218,6 +226,8 @@ abstract class Command extends BaseCommand
      * Format an option default as text.
      *
      * @param mixed $default
+     *
+     * @return string
      */
     private function formatDefaultValue($default): string
     {
@@ -263,6 +273,8 @@ abstract class Command extends BaseCommand
 
     /**
      * Legacy fallback for getTable.
+     *
+     * @return TableHelper
      */
     protected function getTableHelper(): TableHelper
     {

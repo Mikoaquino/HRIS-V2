@@ -90,8 +90,6 @@ class TestableLivewire
                 'effects' => $this->rawMountedResponse->effects,
             ], $isInitial = true);
         }
-
-        Livewire::flushState();
     }
 
     public function updateComponent($output, $isInitial = false)

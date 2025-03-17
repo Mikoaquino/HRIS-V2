@@ -2,6 +2,7 @@
 
 namespace Spatie\FlareClient\Context;
 
+use Exception;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,7 +86,7 @@ class RequestContextProvider implements ContextProvider
     {
         try {
             $session = $this->request->getSession();
-        } catch (Throwable $exception) {
+        } catch (Exception $exception) {
             $session = [];
         }
 
@@ -120,15 +121,7 @@ class RequestContextProvider implements ContextProvider
      */
     public function getHeaders(): array
     {
-        /** @var array<string, list<string|null>> $headers */
-        $headers = $this->request->headers->all();
-
-        return array_filter(
-            array_map(
-                fn (array $header) => $header[0],
-                $headers
-            )
-        );
+        return $this->request->headers->all();
     }
 
     /**

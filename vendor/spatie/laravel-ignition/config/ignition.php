@@ -3,10 +3,6 @@
 use Spatie\Ignition\Solutions\SolutionProviders\BadMethodCallSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\MergeConflictSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
-use Spatie\LaravelIgnition\Recorders\DumpRecorder\DumpRecorder;
-use Spatie\LaravelIgnition\Recorders\JobRecorder\JobRecorder;
-use Spatie\LaravelIgnition\Recorders\LogRecorder\LogRecorder;
-use Spatie\LaravelIgnition\Recorders\QueryRecorder\QueryRecorder;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\DefaultDbNameSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\GenericLaravelExceptionSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
@@ -16,7 +12,6 @@ use Spatie\LaravelIgnition\Solutions\SolutionProviders\MissingColumnSolutionProv
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\MissingImportSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\MissingLivewireComponentSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\MissingMixManifestSolutionProvider;
-use Spatie\LaravelIgnition\Solutions\SolutionProviders\MissingViteManifestSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\RunningLaravelDuskInProductionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\TableNotFoundSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\UndefinedViewVariableSolutionProvider;
@@ -79,7 +74,6 @@ return [
     | You can enable the command registration below.
     |
     */
-
     'register_commands' => env('REGISTER_IGNITION_COMMANDS', false),
 
     /*
@@ -111,7 +105,6 @@ return [
         MissingColumnSolutionProvider::class,
         UnknownValidationSolutionProvider::class,
         MissingMixManifestSolutionProvider::class,
-        MissingViteManifestSolutionProvider::class,
         MissingLivewireComponentSolutionProvider::class,
         UndefinedViewVariableSolutionProvider::class,
         GenericLaravelExceptionSolutionProvider::class,
@@ -138,19 +131,14 @@ return [
     |--------------------------------------------------------------------------
     |
     | Some solutions that Ignition displays are runnable and can perform
-    | various tasks. By default, runnable solutions are only enabled when your
-    | app has debug mode enabled and the environment is `local` or
-    | `development`.
+    | various tasks. By default, runnable solutions are enabled when your app
+    | has debug mode enabled. You may also fully disable this feature.
     |
-    | Using the `IGNITION_ENABLE_RUNNABLE_SOLUTIONS` environment variable, you
-    | can override this behaviour and enable or disable runnable solutions
-    | regardless of the application's environment.
-    |
-    | Default: env('IGNITION_ENABLE_RUNNABLE_SOLUTIONS')
+    | Default: env('IGNITION_ENABLE_RUNNABLE_SOLUTIONS', env('APP_DEBUG', false))
     |
     */
 
-    'enable_runnable_solutions' => env('IGNITION_ENABLE_RUNNABLE_SOLUTIONS'),
+    'enable_runnable_solutions' => env('IGNITION_ENABLE_RUNNABLE_SOLUTIONS', env('APP_DEBUG', false)),
 
     /*
     |--------------------------------------------------------------------------
@@ -187,48 +175,6 @@ return [
     | specify a route prefix that will be used to host all internal links.
     |
     */
-
     'housekeeping_endpoint_prefix' => '_ignition',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Settings File
-    |--------------------------------------------------------------------------
-    |
-    | Ignition allows you to save your settings to a specific global file.
-    |
-    | If no path is specified, a file with settings will be saved to the user's
-    | home directory. The directory depends on the OS and its settings but it's
-    | typically `~/.ignition.json`. In this case, the settings will be applied
-    | to all of your projects where Ignition is used and the path is not
-    | specified.
-    |
-    | However, if you want to store your settings on a project basis, or you
-    | want to keep them in another directory, you can specify a path where
-    | the settings file will be saved. The path should be an existing directory
-    | with correct write access.
-    | For example, create a new `ignition` folder in the storage directory and
-    | use `storage_path('ignition')` as the `settings_file_path`.
-    |
-    | Default value: '' (empty string)
-    */
-
-    'settings_file_path' => '',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Recorders
-    |--------------------------------------------------------------------------
-    |
-    | Ignition registers a couple of recorders when it is enabled. Below you may
-    | specify a recorders will be used to record specific events.
-    |
-    */
-
-    'recorders' => [
-        DumpRecorder::class,
-        JobRecorder::class,
-        LogRecorder::class,
-        QueryRecorder::class
-    ]
 ];

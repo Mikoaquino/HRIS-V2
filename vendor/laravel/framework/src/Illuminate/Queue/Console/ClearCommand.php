@@ -6,11 +6,9 @@ use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Contracts\Queue\ClearableQueue;
 use ReflectionClass;
-use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-#[AsCommand(name: 'queue:clear')]
 class ClearCommand extends Command
 {
     use ConfirmableTrait;
@@ -28,8 +26,6 @@ class ClearCommand extends Command
      * This name is used to identify the command during lazy loading.
      *
      * @var string|null
-     *
-     * @deprecated
      */
     protected static $defaultName = 'queue:clear';
 
@@ -59,14 +55,14 @@ class ClearCommand extends Command
         // connection being run for the queue operation currently being executed.
         $queueName = $this->getQueue($connection);
 
-        $queue = $this->laravel['queue']->connection($connection);
+        $queue = ($this->laravel['queue'])->connection($connection);
 
         if ($queue instanceof ClearableQueue) {
             $count = $queue->clear($queueName);
 
-            $this->components->info('Cleared '.$count.' jobs from the ['.$queueName.'] queue');
+            $this->line('<info>Cleared '.$count.' jobs from the ['.$queueName.'] queue</info> ');
         } else {
-            $this->components->error('Clearing queues is not supported on ['.(new ReflectionClass($queue))->getShortName().']');
+            $this->line('<error>Clearing queues is not supported on ['.(new ReflectionClass($queue))->getShortName().']</error> ');
         }
 
         return 0;

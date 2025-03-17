@@ -5,9 +5,6 @@ namespace Illuminate\Hashing;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Support\Manager;
 
-/**
- * @mixin \Illuminate\Contracts\Hashing\Hasher
- */
 class HashManager extends Manager implements Hasher
 {
     /**

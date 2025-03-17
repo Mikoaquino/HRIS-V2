@@ -10,7 +10,7 @@ class Argon2IdHasher extends ArgonHasher
      * Check the given plain value against a hash.
      *
      * @param  string  $value
-     * @param  string|null  $hashedValue
+     * @param  string  $hashedValue
      * @param  array  $options
      * @return bool
      *
@@ -22,7 +22,7 @@ class Argon2IdHasher extends ArgonHasher
             throw new RuntimeException('This password does not use the Argon2id algorithm.');
         }
 
-        if (is_null($hashedValue) || strlen($hashedValue) === 0) {
+        if (strlen($hashedValue) === 0) {
             return false;
         }
 

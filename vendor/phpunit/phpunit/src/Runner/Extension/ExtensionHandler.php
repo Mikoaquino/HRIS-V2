@@ -76,7 +76,7 @@ final class ExtensionHandler
         } catch (ReflectionException $e) {
             throw new Exception(
                 $e->getMessage(),
-                $e->getCode(),
+                (int) $e->getCode(),
                 $e
             );
         }
@@ -100,7 +100,6 @@ final class ExtensionHandler
         if ($extensionConfiguration->hasSourceFile()) {
             /**
              * @noinspection PhpIncludeInspection
-             *
              * @psalm-suppress UnresolvableInclude
              */
             require_once $extensionConfiguration->sourceFile();

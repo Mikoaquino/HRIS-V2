@@ -48,13 +48,8 @@ class LaravelSolutionTransformer extends SolutionTransformer
     protected function executeEndpoint(): ?string
     {
         try {
-            // The action class needs to be prefixed with a `\` to Laravel from trying
-            // to add its own global namespace from RouteServiceProvider::$namespace.
-
-            return action('\\'.ExecuteSolutionController::class);
+            return action(ExecuteSolutionController::class);
         } catch (Throwable $exception) {
-            report($exception);
-
             return null;
         }
     }

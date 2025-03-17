@@ -16,7 +16,6 @@ class Factory implements FactoryContract
     use Macroable,
         Concerns\ManagesComponents,
         Concerns\ManagesEvents,
-        Concerns\ManagesFragments,
         Concerns\ManagesLayouts,
         Concerns\ManagesLoops,
         Concerns\ManagesStacks,
@@ -482,7 +481,6 @@ class Factory implements FactoryContract
         $this->flushSections();
         $this->flushStacks();
         $this->flushComponents();
-        $this->flushFragments();
     }
 
     /**

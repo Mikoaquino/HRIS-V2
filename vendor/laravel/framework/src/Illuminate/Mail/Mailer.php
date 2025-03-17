@@ -253,8 +253,6 @@ class Mailer implements MailerContract, MailQueueContract
             return $this->sendMailable($view);
         }
 
-        $data['mailer'] = $this->name;
-
         // First we need to parse the view, which could either be a string or an array
         // containing both an HTML and plain text versions of the view which should
         // be used when sending an e-mail. We will extract both of them out here.
@@ -284,15 +282,11 @@ class Mailer implements MailerContract, MailQueueContract
         $symfonyMessage = $message->getSymfonyMessage();
 
         if ($this->shouldSendMessage($symfonyMessage, $data)) {
-            $symfonySentMessage = $this->sendSymfonyMessage($symfonyMessage);
+            $sentMessage = $this->sendSymfonyMessage($symfonyMessage);
 
-            if ($symfonySentMessage) {
-                $sentMessage = new SentMessage($symfonySentMessage);
+            $this->dispatchSentEvent($message, $data);
 
-                $this->dispatchSentEvent($sentMessage, $data);
-
-                return $sentMessage;
-            }
+            return $sentMessage === null ? null : new SentMessage($sentMessage);
         }
     }
 
@@ -391,8 +385,6 @@ class Mailer implements MailerContract, MailQueueContract
      */
     protected function setGlobalToAndRemoveCcAndBcc($message)
     {
-        $message->forgetTo();
-
         $message->to($this->to['address'], $this->to['name'], true);
 
         $message->forgetCc();
@@ -547,7 +539,7 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Dispatch the message sent event.
      *
-     * @param  \Illuminate\Mail\SentMessage  $message
+     * @param  \Illuminate\Mail\Message  $message
      * @param  array  $data
      * @return void
      */
@@ -555,7 +547,7 @@ class Mailer implements MailerContract, MailQueueContract
     {
         if ($this->events) {
             $this->events->dispatch(
-                new MessageSent($message, $data)
+                new MessageSent($message->getSymfonyMessage(), $data)
             );
         }
     }

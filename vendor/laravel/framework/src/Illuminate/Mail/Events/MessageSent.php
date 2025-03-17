@@ -2,20 +2,16 @@
 
 namespace Illuminate\Mail\Events;
 
-use Exception;
-use Illuminate\Mail\SentMessage;
+use Symfony\Component\Mime\Email;
 
-/**
- * @property \Symfony\Component\Mime\Email $message
- */
 class MessageSent
 {
     /**
-     * The message that was sent.
+     * The Symfony Email instance.
      *
-     * @var \Illuminate\Mail\SentMessage
+     * @var \Symfony\Component\Mime\Email
      */
-    public $sent;
+    public $message;
 
     /**
      * The message data.
@@ -27,14 +23,14 @@ class MessageSent
     /**
      * Create a new event instance.
      *
-     * @param  \Illuminate\Mail\SentMessage  $message
+     * @param  \Symfony\Component\Mime\Email  $message
      * @param  array  $data
      * @return void
      */
-    public function __construct(SentMessage $message, array $data = [])
+    public function __construct(Email $message, array $data = [])
     {
-        $this->sent = $message;
         $this->data = $data;
+        $this->message = $message;
     }
 
     /**
@@ -47,11 +43,11 @@ class MessageSent
         $hasAttachments = collect($this->message->getAttachments())->isNotEmpty();
 
         return $hasAttachments ? [
-            'sent' => base64_encode(serialize($this->sent)),
+            'message' => base64_encode(serialize($this->message)),
             'data' => base64_encode(serialize($this->data)),
             'hasAttachments' => true,
         ] : [
-            'sent' => $this->sent,
+            'message' => $this->message,
             'data' => $this->data,
             'hasAttachments' => false,
         ];
@@ -66,28 +62,11 @@ class MessageSent
     public function __unserialize(array $data)
     {
         if (isset($data['hasAttachments']) && $data['hasAttachments'] === true) {
-            $this->sent = unserialize(base64_decode($data['sent']));
+            $this->message = unserialize(base64_decode($data['message']));
             $this->data = unserialize(base64_decode($data['data']));
         } else {
-            $this->sent = $data['sent'];
+            $this->message = $data['message'];
             $this->data = $data['data'];
         }
-    }
-
-    /**
-     * Dynamically get the original message.
-     *
-     * @param  string  $key
-     * @return mixed
-     *
-     * @throws \Exception
-     */
-    public function __get($key)
-    {
-        if ($key === 'message') {
-            return $this->sent->getOriginalMessage();
-        }
-
-        throw new Exception('Unable to access undefined property on '.__CLASS__.': '.$key);
     }
 }

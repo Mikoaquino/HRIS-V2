@@ -6,10 +6,8 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 use Illuminate\Filesystem\Filesystem;
 use LogicException;
-use Symfony\Component\Console\Attribute\AsCommand;
 use Throwable;
 
-#[AsCommand(name: 'config:cache')]
 class ConfigCacheCommand extends Command
 {
     /**
@@ -25,8 +23,6 @@ class ConfigCacheCommand extends Command
      * This name is used to identify the command during lazy loading.
      *
      * @var string|null
-     *
-     * @deprecated
      */
     protected static $defaultName = 'config:cache';
 
@@ -66,7 +62,7 @@ class ConfigCacheCommand extends Command
      */
     public function handle()
     {
-        $this->callSilent('config:clear');
+        $this->call('config:clear');
 
         $config = $this->getFreshConfiguration();
 
@@ -84,7 +80,7 @@ class ConfigCacheCommand extends Command
             throw new LogicException('Your configuration files are not serializable.', 0, $e);
         }
 
-        $this->components->info('Configuration cached successfully.');
+        $this->info('Configuration cached successfully!');
     }
 
     /**

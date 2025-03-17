@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "ext-hash": "*",
+        "ext-json": "*",
         "ext-mbstring": "*",
         "ext-openssl": "*",
         "illuminate/contracts": "^9.0",

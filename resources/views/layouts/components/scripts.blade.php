@@ -31,7 +31,7 @@
 		<script src="{{asset('assets/plugins/sidebar/sidebar.js')}}"></script>
 		<script src="{{asset('assets/plugins/sidebar/sidebar-custom.js')}}"></script>
 
-		@yield('scripts')
+        @yield('scripts')
 
 		<!-- EVA-ICONS JS -->
 		<script src="{{asset('assets/plugins/eva-icons/eva-icons.min.js')}}"></script>

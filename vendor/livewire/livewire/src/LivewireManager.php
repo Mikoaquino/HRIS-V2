@@ -27,7 +27,7 @@ class LivewireManager
     ];
 
     public static $isLivewireRequestTestingOverride = false;
-
+    
     public static $currentCompilingViewPath;
     public static $currentCompilingChildCounter;
 
@@ -36,10 +36,6 @@ class LivewireManager
         if (is_null($viewClass)) {
             $viewClass = $alias;
             $alias = $viewClass::getName();
-        }
-
-        if (is_object($viewClass)) {
-            $viewClass = get_class($viewClass);
         }
 
         $this->componentAliases[$alias] = $viewClass;
@@ -252,7 +248,7 @@ HTML;
             $fullAssetPath = ($this->isRunningServerless() ? config('app.asset_url') : $assetsUrl).'/vendor/livewire'.$versionedFileName;
 
             if ($manifest !== $publishedManifest) {
-                $assetWarning = <<<HTML
+                $assetWarning = <<<'HTML'
 <script {$nonce}>
     console.warn("Livewire: The published Livewire assets are out of date\n See: https://laravel-livewire.com/docs/installation/")
 </script>
@@ -376,7 +372,7 @@ HTML;
                 return str(request('fingerprint')['url'])->after(request()->root());
             }
 
-            return request('fingerprint.path');
+            return request('fingerprint')['path'];
         }
 
         return request()->path();
@@ -393,7 +389,7 @@ HTML;
                 return 'GET';
             }
 
-            return request('fingerprint.method', 'POST');
+            return request('fingerprint')['method'];
         }
 
         return request()->method();
@@ -463,10 +459,9 @@ HTML;
 
     public function flushState()
     {
-        static::$isLivewireRequestTestingOverride = false;
         static::$currentCompilingChildCounter = null;
         static::$currentCompilingViewPath = null;
-
+        
         $this->shouldDisableBackButtonCache = false;
 
         $this->dispatch('flush-state');

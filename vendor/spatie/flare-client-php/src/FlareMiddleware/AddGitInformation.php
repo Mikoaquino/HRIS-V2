@@ -5,7 +5,6 @@ namespace Spatie\FlareClient\FlareMiddleware;
 use Closure;
 use Spatie\FlareClient\Report;
 use Symfony\Component\Process\Process;
-use Throwable;
 
 class AddGitInformation
 {
@@ -13,22 +12,19 @@ class AddGitInformation
 
     public function handle(Report $report, Closure $next)
     {
-        try {
-            $this->baseDir = $this->getGitBaseDirectory();
+        $this->baseDir = $this->getGitBaseDirectory();
 
-            if (! $this->baseDir) {
-                return $next($report);
-            }
-
-            $report->group('git', [
-                'hash' => $this->hash(),
-                'message' => $this->message(),
-                'tag' => $this->tag(),
-                'remote' => $this->remote(),
-                'isDirty' => ! $this->isClean(),
-            ]);
-        } catch (Throwable) {
+        if (! $this->baseDir) {
+            return $next($report);
         }
+
+        $report->group('git', [
+            'hash' => $this->hash(),
+            'message' => $this->message(),
+            'tag' => $this->tag(),
+            'remote' => $this->remote(),
+            'isDirty' => ! $this->isClean(),
+        ]);
 
         return $next($report);
     }
@@ -61,7 +57,7 @@ class AddGitInformation
     protected function getGitBaseDirectory(): ?string
     {
         /** @var Process $process */
-        $process = Process::fromShellCommandline("echo $(git rev-parse --show-toplevel)")->setTimeout(1);
+        $process = Process::fromShellCommandline("echo $(git rev-parse --show-toplevel)");
 
         $process->run();
 
@@ -80,7 +76,7 @@ class AddGitInformation
 
     protected function command($command)
     {
-        $process = Process::fromShellCommandline($command, $this->baseDir)->setTimeout(1);
+        $process = Process::fromShellCommandline($command, $this->baseDir);
 
         $process->run();
 

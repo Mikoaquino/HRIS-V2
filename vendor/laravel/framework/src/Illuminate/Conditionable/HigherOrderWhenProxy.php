@@ -19,53 +19,16 @@ class HigherOrderWhenProxy
     protected $condition;
 
     /**
-     * Indicates whether the proxy has a condition.
-     *
-     * @var bool
-     */
-    protected $hasCondition = false;
-
-    /**
-     * Determine whether the condition should be negated.
-     *
-     * @var bool
-     */
-    protected $negateConditionOnCapture;
-
-    /**
      * Create a new proxy instance.
      *
      * @param  mixed  $target
+     * @param  bool  $condition
      * @return void
      */
-    public function __construct($target)
+    public function __construct($target, $condition)
     {
         $this->target = $target;
-    }
-
-    /**
-     * Set the condition on the proxy.
-     *
-     * @param  bool  $condition
-     * @return $this
-     */
-    public function condition($condition)
-    {
-        [$this->condition, $this->hasCondition] = [$condition, true];
-
-        return $this;
-    }
-
-    /**
-     * Indicate that the condition should be negated.
-     *
-     * @return $this
-     */
-    public function negateConditionOnCapture()
-    {
-        $this->negateConditionOnCapture = true;
-
-        return $this;
+        $this->condition = $condition;
     }
 
     /**
@@ -76,12 +39,6 @@ class HigherOrderWhenProxy
      */
     public function __get($key)
     {
-        if (! $this->hasCondition) {
-            $condition = $this->target->{$key};
-
-            return $this->condition($this->negateConditionOnCapture ? ! $condition : $condition);
-        }
-
         return $this->condition
             ? $this->target->{$key}
             : $this->target;
@@ -96,12 +53,6 @@ class HigherOrderWhenProxy
      */
     public function __call($method, $parameters)
     {
-        if (! $this->hasCondition) {
-            $condition = $this->target->{$method}(...$parameters);
-
-            return $this->condition($this->negateConditionOnCapture ? ! $condition : $condition);
-        }
-
         return $this->condition
             ? $this->target->{$method}(...$parameters)
             : $this->target;

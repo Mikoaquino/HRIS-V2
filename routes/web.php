@@ -121,19 +121,6 @@ use App\Http\Livewire\Width;
 use App\Http\Livewire\WishList;
 use Illuminate\Support\Facades\Route;
 
-// CGE extensions
-use App\Http\Livewire\Users;
-use App\Http\Livewire\Mrsdashboard;
-use App\Http\Livewire\Trips;
-use App\Http\Livewire\People;
-use App\Http\Livewire\Newtrips;
-use App\Http\Livewire\Auditlogs;
-use App\Http\Livewire\Tripedit;
-use App\Http\Livewire\Viewtrip;
-
-//not confirmed
-use App\Http\Controllers\AuthController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -145,31 +132,9 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', Mrsdashboard::class);
-    Route::get('/dashboard', Mrsdashboard::class)->name('home');
-
-    Route::get('/users', Users::class);
-    Route::get('/trips', Trips::class)->name('trips');
-    Route::get('/people', People::class)->name('people');
-    Route::get('/trips/new', Newtrips::class)->name('newtrip');
-    Route::get('/auditlogs', Auditlogs::class);
-    Route::get('/tripedit/{id}', Tripedit::class)->name('tripedit');
-    Route::get('/viewtrip/{id}', Viewtrip::class)->name('viewtrip');
+Route::get('/', function () {
+    return view('livewire.index');
 });
-
-Route::group(['middleware' => 'checkUserLoggedIn'], function () {
-    Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
-    Route::get('/auth/register', [AuthController::class, 'register']);
-});
-
-
-
-
-
-// template defaults
 Route::get('aboutus', Aboutus::class);
 Route::get('accordion', Accordion::class);
 Route::get('alerts', Alerts::class);

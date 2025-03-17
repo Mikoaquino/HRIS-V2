@@ -5,7 +5,6 @@ namespace Illuminate\Database\Concerns;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\MultipleRecordsFoundException;
-use Illuminate\Database\Query\Expression;
 use Illuminate\Database\RecordsNotFoundException;
 use Illuminate\Pagination\Cursor;
 use Illuminate\Pagination\CursorPaginator;
@@ -13,7 +12,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\LazyCollection;
-use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
 use InvalidArgumentException;
 use RuntimeException;
@@ -113,9 +111,9 @@ trait BuildsQueries
      */
     public function chunkById($count, callable $callback, $column = null, $alias = null)
     {
-        $column ??= $this->defaultKeyName();
+        $column = $column ?? $this->defaultKeyName();
 
-        $alias ??= $column;
+        $alias = $alias ?? $column;
 
         $lastId = null;
 
@@ -142,7 +140,7 @@ trait BuildsQueries
                 return false;
             }
 
-            $lastId = data_get($results->last(), $alias);
+            $lastId = $results->last()->{$alias};
 
             if ($lastId === null) {
                 throw new RuntimeException("The chunkById operation was aborted because the [{$alias}] column is not present in the query result.");
@@ -256,9 +254,9 @@ trait BuildsQueries
             throw new InvalidArgumentException('The chunk size should be at least 1');
         }
 
-        $column ??= $this->defaultKeyName();
+        $column = $column ?? $this->defaultKeyName();
 
-        $alias ??= $column;
+        $alias = $alias ?? $column;
 
         return LazyCollection::make(function () use ($chunkSize, $column, $alias, $descending) {
             $lastId = null;
@@ -309,14 +307,12 @@ trait BuildsQueries
     {
         $result = $this->take(2)->get($columns);
 
-        $count = $result->count();
-
-        if ($count === 0) {
+        if ($result->isEmpty()) {
             throw new RecordsNotFoundException;
         }
 
-        if ($count > 1) {
-            throw new MultipleRecordsFoundException($count);
+        if ($result->count() > 1) {
+            throw new MultipleRecordsFoundException;
         }
 
         return $result->first();
@@ -326,7 +322,7 @@ trait BuildsQueries
      * Paginate the given query using a cursor paginator.
      *
      * @param  int  $perPage
-     * @param  array|string  $columns
+     * @param  array  $columns
      * @param  string  $cursorName
      * @param  \Illuminate\Pagination\Cursor|string|null  $cursor
      * @return \Illuminate\Contracts\Pagination\CursorPaginator
@@ -343,35 +339,19 @@ trait BuildsQueries
 
         if (! is_null($cursor)) {
             $addCursorConditions = function (self $builder, $previousColumn, $i) use (&$addCursorConditions, $cursor, $orders) {
-                $unionBuilders = isset($builder->unions) ? collect($builder->unions)->pluck('query') : collect();
-
                 if (! is_null($previousColumn)) {
-                    $originalColumn = $this->getOriginalColumnNameForCursorPagination($this, $previousColumn);
-
                     $builder->where(
-                        Str::contains($originalColumn, ['(', ')']) ? new Expression($originalColumn) : $originalColumn,
+                        $this->getOriginalColumnNameForCursorPagination($this, $previousColumn),
                         '=',
                         $cursor->parameter($previousColumn)
                     );
-
-                    $unionBuilders->each(function ($unionBuilder) use ($previousColumn, $cursor) {
-                        $unionBuilder->where(
-                            $this->getOriginalColumnNameForCursorPagination($this, $previousColumn),
-                            '=',
-                            $cursor->parameter($previousColumn)
-                        );
-
-                        $this->addBinding($unionBuilder->getRawBindings()['where'], 'union');
-                    });
                 }
 
-                $builder->where(function (self $builder) use ($addCursorConditions, $cursor, $orders, $i, $unionBuilders) {
+                $builder->where(function (self $builder) use ($addCursorConditions, $cursor, $orders, $i) {
                     ['column' => $column, 'direction' => $direction] = $orders[$i];
 
-                    $originalColumn = $this->getOriginalColumnNameForCursorPagination($this, $column);
-
                     $builder->where(
-                        Str::contains($originalColumn, ['(', ')']) ? new Expression($originalColumn) : $originalColumn,
+                        $this->getOriginalColumnNameForCursorPagination($this, $column),
                         $direction === 'asc' ? '>' : '<',
                         $cursor->parameter($column)
                     );
@@ -381,24 +361,6 @@ trait BuildsQueries
                             $addCursorConditions($builder, $column, $i + 1);
                         });
                     }
-
-                    $unionBuilders->each(function ($unionBuilder) use ($column, $direction, $cursor, $i, $orders, $addCursorConditions) {
-                        $unionBuilder->where(function ($unionBuilder) use ($column, $direction, $cursor, $i, $orders, $addCursorConditions) {
-                            $unionBuilder->where(
-                                $this->getOriginalColumnNameForCursorPagination($this, $column),
-                                $direction === 'asc' ? '>' : '<',
-                                $cursor->parameter($column)
-                            );
-
-                            if ($i < $orders->count() - 1) {
-                                $unionBuilder->orWhere(function (self $builder) use ($addCursorConditions, $column, $i) {
-                                    $addCursorConditions($builder, $column, $i + 1);
-                                });
-                            }
-
-                            $this->addBinding($unionBuilder->getRawBindings()['where'], 'union');
-                        });
-                    });
                 });
             };
 
@@ -427,12 +389,12 @@ trait BuildsQueries
 
         if (! is_null($columns)) {
             foreach ($columns as $column) {
-                if (($position = strripos($column, ' as ')) !== false) {
-                    $original = substr($column, 0, $position);
+                if (($position = stripos($column, ' as ')) !== false) {
+                    $as = substr($column, $position, 4);
 
-                    $alias = substr($column, $position + 4);
+                    [$original, $alias] = explode($as, $column);
 
-                    if ($parameter === $alias || $builder->getGrammar()->wrap($parameter) === $alias) {
+                    if ($parameter === $alias) {
                         return $original;
                     }
                 }

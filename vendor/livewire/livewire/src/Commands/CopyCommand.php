@@ -4,7 +4,6 @@ namespace Livewire\Commands;
 
 use Illuminate\Support\Facades\File;
 
-#[\AllowDynamicProperties]
 class CopyCommand extends FileManipulationCommand
 {
     protected $signature = 'livewire:copy {name} {new-name} {--inline} {--force} {--test}';

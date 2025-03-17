@@ -11,8 +11,7 @@ use Illuminate\Support\Arr;
 use InvalidArgumentException;
 
 /**
- * @mixin \Illuminate\Cache\Repository
- * @mixin \Illuminate\Contracts\Cache\LockProvider
+ * @mixin \Illuminate\Contracts\Cache\Repository
  */
 class CacheManager implements FactoryContract
 {
@@ -265,7 +264,7 @@ class CacheManager implements FactoryContract
             'endpoint' => $config['endpoint'] ?? null,
         ];
 
-        if (isset($config['key'], $config['secret'])) {
+        if (isset($config['key']) && isset($config['secret'])) {
             $dynamoConfig['credentials'] = Arr::only(
                 $config, ['key', 'secret', 'token']
             );
@@ -329,7 +328,7 @@ class CacheManager implements FactoryContract
      * Get the cache connection configuration.
      *
      * @param  string  $name
-     * @return array|null
+     * @return array
      */
     protected function getConfig($name)
     {
@@ -369,7 +368,7 @@ class CacheManager implements FactoryContract
      */
     public function forgetDriver($name = null)
     {
-        $name ??= $this->getDefaultDriver();
+        $name = $name ?? $this->getDefaultDriver();
 
         foreach ((array) $name as $cacheName) {
             if (isset($this->stores[$cacheName])) {
@@ -388,7 +387,7 @@ class CacheManager implements FactoryContract
      */
     public function purge($name = null)
     {
-        $name ??= $this->getDefaultDriver();
+        $name = $name ?? $this->getDefaultDriver();
 
         unset($this->stores[$name]);
     }

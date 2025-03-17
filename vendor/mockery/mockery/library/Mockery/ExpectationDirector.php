@@ -213,14 +213,6 @@ class ExpectationDirector
      */
     public function getExpectationCount()
     {
-        $count = 0;
-        /** @var Expectation $expectations */
-        $expectations = $this->getExpectations() ?: $this->getDefaultExpectations();
-        foreach ($expectations as $expectation) {
-            if ($expectation->isCallCountConstrained()) {
-                $count++;
-            }
-        }
-        return $count;
+        return count($this->getExpectations()) ?: count($this->getDefaultExpectations());
     }
 }

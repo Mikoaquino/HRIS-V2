@@ -13,8 +13,8 @@ final class Number implements Extension\NumberExtension
 {
     public function numberBetween(int $min = 0, int $max = 2147483647): int
     {
-        $int1 = min($min, $max);
-        $int2 = max($min, $max);
+        $int1 = $min < $max ? $min : $max;
+        $int2 = $min < $max ? $max : $min;
 
         return mt_rand($int1, $int2);
     }

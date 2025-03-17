@@ -24,10 +24,6 @@ class UnsupportedSchemeException extends LogicException
             'class' => Bridge\Google\Transport\GmailTransportFactory::class,
             'package' => 'symfony/google-mailer',
         ],
-        'infobip' => [
-            'class' => Bridge\Infobip\Transport\InfobipTransportFactory::class,
-            'package' => 'symfony/infobip-mailer',
-        ],
         'mailgun' => [
             'class' => Bridge\Mailgun\Transport\MailgunTransportFactory::class,
             'package' => 'symfony/mailgun-mailer',
@@ -39,10 +35,6 @@ class UnsupportedSchemeException extends LogicException
         'mandrill' => [
             'class' => Bridge\Mailchimp\Transport\MandrillTransportFactory::class,
             'package' => 'symfony/mailchimp-mailer',
-        ],
-        'ohmysmtp' => [
-            'class' => Bridge\OhMySmtp\Transport\OhMySmtpTransportFactory::class,
-            'package' => 'symfony/oh-my-smtp-mailer',
         ],
         'postmark' => [
             'class' => Bridge\Postmark\Transport\PostmarkTransportFactory::class,
@@ -59,6 +51,10 @@ class UnsupportedSchemeException extends LogicException
         'ses' => [
             'class' => Bridge\Amazon\Transport\SesTransportFactory::class,
             'package' => 'symfony/amazon-mailer',
+        ],
+        'ohmysmtp' => [
+            'class' => Bridge\OhMySmtp\Transport\OhMySmtpTransportFactory::class,
+            'package' => 'symfony/oh-my-smtp-mailer',
         ],
     ];
 

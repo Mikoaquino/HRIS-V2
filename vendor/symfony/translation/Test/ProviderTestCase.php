@@ -18,7 +18,6 @@ use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\Translation\Dumper\XliffFileDumper;
 use Symfony\Component\Translation\Loader\LoaderInterface;
 use Symfony\Component\Translation\Provider\ProviderInterface;
-use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -30,12 +29,11 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
  */
 abstract class ProviderTestCase extends TestCase
 {
-    protected HttpClientInterface $client;
-    protected LoggerInterface|MockObject $logger;
+    protected $client;
+    protected $logger;
     protected string $defaultLocale;
-    protected LoaderInterface|MockObject $loader;
-    protected XliffFileDumper|MockObject $xliffFileDumper;
-    protected TranslatorBagInterface|MockObject $translatorBag;
+    protected $loader;
+    protected $xliffFileDumper;
 
     abstract public function createProvider(HttpClientInterface $client, LoaderInterface $loader, LoggerInterface $logger, string $defaultLocale, string $endpoint): ProviderInterface;
 
@@ -57,11 +55,17 @@ abstract class ProviderTestCase extends TestCase
         return $this->client ??= new MockHttpClient();
     }
 
+    /**
+     * @return LoaderInterface&MockObject
+     */
     protected function getLoader(): LoaderInterface
     {
         return $this->loader ??= $this->createMock(LoaderInterface::class);
     }
 
+    /**
+     * @return LoaderInterface&MockObject
+     */
     protected function getLogger(): LoggerInterface
     {
         return $this->logger ??= $this->createMock(LoggerInterface::class);
@@ -72,13 +76,11 @@ abstract class ProviderTestCase extends TestCase
         return $this->defaultLocale ??= 'en';
     }
 
+    /**
+     * @return LoaderInterface&MockObject
+     */
     protected function getXliffFileDumper(): XliffFileDumper
     {
         return $this->xliffFileDumper ??= $this->createMock(XliffFileDumper::class);
-    }
-
-    protected function getTranslatorBag(): TranslatorBagInterface
-    {
-        return $this->translatorBag ??= $this->createMock(TranslatorBagInterface::class);
     }
 }

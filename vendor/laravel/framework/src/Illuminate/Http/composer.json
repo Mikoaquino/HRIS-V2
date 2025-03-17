@@ -15,9 +15,7 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "ext-filter": "*",
-        "fruitcake/php-cors": "^1.2",
-        "guzzlehttp/uri-template": "^1.0",
+        "ext-json": "*",
         "illuminate/collections": "^9.0",
         "illuminate/macroable": "^9.0",
         "illuminate/session": "^9.0",
@@ -33,7 +31,7 @@
     },
     "suggest": {
         "ext-gd": "Required to use Illuminate\\Http\\Testing\\FileFactory::image().",
-        "guzzlehttp/guzzle": "Required to use the HTTP Client (^7.5)."
+        "guzzlehttp/guzzle": "Required to use the HTTP Client (^7.2)."
     },
     "extra": {
         "branch-alias": {

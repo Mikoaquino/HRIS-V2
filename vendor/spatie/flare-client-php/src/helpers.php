@@ -1,6 +1,7 @@
 <?php
 
 if (! function_exists('array_merge_recursive_distinct')) {
+
     /**
      * @param array<int|string, mixed> $array1
      * @param array<int|string, mixed> $array2

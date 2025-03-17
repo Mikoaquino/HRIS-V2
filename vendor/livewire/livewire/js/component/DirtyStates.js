@@ -44,7 +44,7 @@ export default function () {
     store.registerHook('message.received', (message, component) => {
         component.dirtyEls.forEach(element => {
             if (element.__livewire_dirty_cleanup) {
-                element.__livewire_dirty_cleanup.forEach(cleanup => cleanup())
+                element.__livewire_dirty_cleanup()
                 delete element.__livewire_dirty_cleanup
             }
         })
@@ -60,32 +60,30 @@ export default function () {
 }
 
 function setDirtyState(el, isDirty) {
-    el.__livewire_dirty_cleanup = [];
+    const directive = wireDirectives(el).get('dirty')
 
-    // Process each of the 'dirty' directives for the element
-    wireDirectives(el).all()
-        .filter(directive => directive.type === 'dirty')
-        .forEach(directive => {
-            if (directive.modifiers.includes('class')) {
-                const classes = directive.value.split(' ')
-                if (directive.modifiers.includes('remove') !== isDirty) {
-                    el.classList.add(...classes)
-                    el.__livewire_dirty_cleanup.push(() => el.classList.remove(...classes))
-                } else {
-                    el.classList.remove(...classes)
-                    el.__livewire_dirty_cleanup.push(() => el.classList.add(...classes))
-                }
-            } else if (directive.modifiers.includes('attr')) {
-                if (directive.modifiers.includes('remove') !== isDirty) {
-                    el.setAttribute(directive.value, true)
-                    el.__livewire_dirty_cleanup.push(() => el.removeAttribute(directive.value))
-                } else {
-                    el.removeAttribute(directive.value)
-                    el.__livewire_dirty_cleanup.push(() => el.setAttribute(directive.value, true))
-                }
-            } else if (!wireDirectives(el).get('model')) {
-                el.style.display = isDirty ? 'inline-block' : 'none'
-                el.__livewire_dirty_cleanup.push(() => (el.style.display = isDirty ? 'none' : 'inline-block'))
-            }
-        });
+    if (directive.modifiers.includes('class')) {
+        const classes = directive.value.split(' ')
+        if (directive.modifiers.includes('remove') !== isDirty) {
+            el.classList.add(...classes)
+            el.__livewire_dirty_cleanup = () => el.classList.remove(...classes)
+        } else {
+            el.classList.remove(...classes)
+            el.__livewire_dirty_cleanup = () => el.classList.add(...classes)
+        }
+    } else if (directive.modifiers.includes('attr')) {
+        if (directive.modifiers.includes('remove') !== isDirty) {
+            el.setAttribute(directive.value, true)
+            el.__livewire_dirty_cleanup = () =>
+                el.removeAttribute(directive.value)
+        } else {
+            el.removeAttribute(directive.value)
+            el.__livewire_dirty_cleanup = () =>
+                el.setAttribute(directive.value, true)
+        }
+    } else if (! wireDirectives(el).get('model')) {
+        el.style.display = isDirty ? 'inline-block' : 'none'
+        el.__livewire_dirty_cleanup = () =>
+            (el.style.display = isDirty ? 'none' : 'inline-block')
+    }
 }

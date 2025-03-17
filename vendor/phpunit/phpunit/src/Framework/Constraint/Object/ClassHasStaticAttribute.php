@@ -16,8 +16,6 @@ use ReflectionException;
 
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
- *
- * @deprecated https://github.com/sebastianbergmann/phpunit/issues/4601
  */
 final class ClassHasStaticAttribute extends ClassHasAttribute
 {
@@ -50,7 +48,7 @@ final class ClassHasStaticAttribute extends ClassHasAttribute
         } catch (ReflectionException $e) {
             throw new Exception(
                 $e->getMessage(),
-                $e->getCode(),
+                (int) $e->getCode(),
                 $e
             );
         }

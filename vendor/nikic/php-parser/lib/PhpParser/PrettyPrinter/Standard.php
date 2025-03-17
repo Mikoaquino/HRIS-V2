@@ -46,15 +46,7 @@ class Standard extends PrettyPrinterAbstract
     }
 
     protected function pUnionType(Node\UnionType $node) {
-        $types = [];
-        foreach ($node->types as $typeNode) {
-            if ($typeNode instanceof Node\IntersectionType) {
-                $types[] = '('. $this->p($typeNode) . ')';
-                continue;
-            }
-            $types[] = $this->p($typeNode);
-        }
-        return implode('|', $types);
+        return $this->pImplode($node->types, '|');
     }
 
     protected function pIntersectionType(Node\IntersectionType $node) {

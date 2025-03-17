@@ -16,39 +16,18 @@ class GenerateSignedUploadUrl
 
     public function forS3($file, $visibility = 'private')
     {
-        $driver = FileUploadConfiguration::storage()->getDriver();
-
-        // Flysystem V2+ doesn't allow direct access to adapter, so we need to invade instead.
-        if (method_exists($driver, 'getAdapter')) {
-            $adapter = $driver->getAdapter();
-        } else {
-            $adapter = invade($driver)->adapter;
-        }
+        $adapter = FileUploadConfiguration::storage()->getDriver()->getAdapter();
 
         if ($adapter instanceof CachedAdapter) {
             $adapter = $adapter->getAdapter();
-        }
-
-        // Flysystem V2+ doesn't allow direct access to client, so we need to invade instead.
-        if (method_exists($adapter, 'getClient')) {
-            $client = $adapter->getClient();
-        } else {
-            $client = invade($adapter)->client;
-        }
-
-        // Flysystem V2+ doesn't allow direct access to bucket, so we need to invade instead.
-        if (method_exists($adapter, 'getBucket')) {
-            $bucket = $adapter->getBucket();
-        } else {
-            $bucket = invade($adapter)->bucket;
         }
 
         $fileType = $file->getMimeType();
         $fileHashName = TemporaryUploadedFile::generateHashNameWithOriginalNameEmbedded($file);
         $path = FileUploadConfiguration::path($fileHashName);
 
-        $command = $client->getCommand('putObject', array_filter([
-            'Bucket' => $bucket,
+        $command = $adapter->getClient()->getCommand('putObject', array_filter([
+            'Bucket' => $adapter->getBucket(),
             'Key' => $path,
             'ACL' => $visibility,
             'ContentType' => $fileType ?: 'application/octet-stream',
@@ -56,7 +35,7 @@ class GenerateSignedUploadUrl
             'Expires' => null,
         ]));
 
-        $signedRequest = $client->createPresignedRequest(
+        $signedRequest = $adapter->getClient()->createPresignedRequest(
             $command,
             '+' . FileUploadConfiguration::maxUploadTime() . ' minutes'
         );

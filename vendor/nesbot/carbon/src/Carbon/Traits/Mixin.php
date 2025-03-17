@@ -151,12 +151,22 @@ trait Mixin
     protected static function bindMacroContext($context, callable $callable)
     {
         static::$macroContextStack[] = $context;
+        $exception = null;
+        $result = null;
 
         try {
-            return $callable();
-        } finally {
-            array_pop(static::$macroContextStack);
+            $result = $callable();
+        } catch (Throwable $throwable) {
+            $exception = $throwable;
         }
+
+        array_pop(static::$macroContextStack);
+
+        if ($exception) {
+            throw $exception;
+        }
+
+        return $result;
     }
 
     /**

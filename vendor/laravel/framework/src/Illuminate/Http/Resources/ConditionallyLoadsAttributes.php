@@ -3,7 +3,6 @@
 namespace Illuminate\Http\Resources;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 
 trait ConditionallyLoadsAttributes
 {
@@ -93,7 +92,7 @@ trait ConditionallyLoadsAttributes
     }
 
     /**
-     * Retrieve a value if the given "condition" is truthy.
+     * Retrieve a value based on a given condition.
      *
      * @param  bool  $condition
      * @param  mixed  $value
@@ -110,21 +109,6 @@ trait ConditionallyLoadsAttributes
     }
 
     /**
-     * Retrieve a value if the given "condition" is falsy.
-     *
-     * @param  bool  $condition
-     * @param  mixed  $value
-     * @param  mixed  $default
-     * @return \Illuminate\Http\Resources\MissingValue|mixed
-     */
-    public function unless($condition, $value, $default = null)
-    {
-        $arguments = func_num_args() === 2 ? [$value] : [$value, $default];
-
-        return $this->when(! $condition, ...$arguments);
-    }
-
-    /**
      * Merge a value into the array.
      *
      * @param  mixed  $value
@@ -136,7 +120,7 @@ trait ConditionallyLoadsAttributes
     }
 
     /**
-     * Merge a value if the given condition is truthy.
+     * Merge a value based on a given condition.
      *
      * @param  bool  $condition
      * @param  mixed  $value
@@ -145,18 +129,6 @@ trait ConditionallyLoadsAttributes
     protected function mergeWhen($condition, $value)
     {
         return $condition ? new MergeValue(value($value)) : new MissingValue;
-    }
-
-    /**
-     * Merge a value unless the given condition is truthy.
-     *
-     * @param  bool  $condition
-     * @param  mixed  $value
-     * @return \Illuminate\Http\Resources\MergeValue|mixed
-     */
-    protected function mergeUnless($condition, $value)
-    {
-        return ! $condition ? new MergeValue(value($value)) : new MissingValue;
     }
 
     /**
@@ -170,57 +142,6 @@ trait ConditionallyLoadsAttributes
         return new MergeValue(
             Arr::only($this->resource->toArray(), $attributes)
         );
-    }
-
-    /**
-     * Retrieve an attribute if it exists on the resource.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @param  mixed  $default
-     * @return \Illuminate\Http\Resources\MissingValue|mixed
-     */
-    public function whenHas($attribute, $value = null, $default = null)
-    {
-        if (func_num_args() < 3) {
-            $default = new MissingValue;
-        }
-
-        if (! array_key_exists($attribute, $this->resource->getAttributes())) {
-            return value($default);
-        }
-
-        return func_num_args() === 1
-                ? $this->resource->{$attribute}
-                : value($value, $this->resource->{$attribute});
-    }
-
-    /**
-     * Retrieve a model attribute if it is null.
-     *
-     * @param  mixed  $value
-     * @param  mixed  $default
-     * @return \Illuminate\Http\Resources\MissingValue|mixed
-     */
-    protected function whenNull($value, $default = null)
-    {
-        $arguments = func_num_args() == 1 ? [$value] : [$value, $default];
-
-        return $this->when(is_null($value), ...$arguments);
-    }
-
-    /**
-     * Retrieve a model attribute if it is not null.
-     *
-     * @param  mixed  $value
-     * @param  mixed  $default
-     * @return \Illuminate\Http\Resources\MissingValue|mixed
-     */
-    protected function whenNotNull($value, $default = null)
-    {
-        $arguments = func_num_args() == 1 ? [$value] : [$value, $default];
-
-        return $this->when(! is_null($value), ...$arguments);
     }
 
     /**
@@ -270,37 +191,6 @@ trait ConditionallyLoadsAttributes
     }
 
     /**
-     * Retrieve a relationship count if it exists.
-     *
-     * @param  string  $relationship
-     * @param  mixed  $value
-     * @param  mixed  $default
-     * @return \Illuminate\Http\Resources\MissingValue|mixed
-     */
-    public function whenCounted($relationship, $value = null, $default = null)
-    {
-        if (func_num_args() < 3) {
-            $default = new MissingValue;
-        }
-
-        $attribute = (string) Str::of($relationship)->snake()->finish('_count');
-
-        if (! isset($this->resource->getAttributes()[$attribute])) {
-            return value($default);
-        }
-
-        if (func_num_args() === 1) {
-            return $this->resource->{$attribute};
-        }
-
-        if ($this->resource->{$attribute} === null) {
-            return;
-        }
-
-        return value($value, $this->resource->{$attribute});
-    }
-
-    /**
      * Execute a callback if the given pivot table has been loaded.
      *
      * @param  string  $table
@@ -329,7 +219,7 @@ trait ConditionallyLoadsAttributes
         }
 
         return $this->when(
-            isset($this->resource->$accessor) &&
+            $this->resource->$accessor &&
             ($this->resource->$accessor instanceof $table ||
             $this->resource->$accessor->getTable() === $table),
             ...[$value, $default]

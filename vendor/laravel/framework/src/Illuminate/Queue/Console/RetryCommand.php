@@ -8,9 +8,7 @@ use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Queue\Events\JobRetryRequested;
 use Illuminate\Support\Arr;
 use RuntimeException;
-use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'queue:retry')]
 class RetryCommand extends Command
 {
     /**
@@ -29,8 +27,6 @@ class RetryCommand extends Command
      * This name is used to identify the command during lazy loading.
      *
      * @var string|null
-     *
-     * @deprecated
      */
     protected static $defaultName = 'queue:retry';
 
@@ -48,27 +44,21 @@ class RetryCommand extends Command
      */
     public function handle()
     {
-        $jobsFound = count($ids = $this->getJobIds()) > 0;
-
-        if ($jobsFound) {
-            $this->components->info('Pushing failed queue jobs back onto the queue.');
-        }
-
-        foreach ($ids as $id) {
+        foreach ($this->getJobIds() as $id) {
             $job = $this->laravel['queue.failer']->find($id);
 
             if (is_null($job)) {
-                $this->components->error("Unable to find failed job with ID [{$id}].");
+                $this->error("Unable to find failed job with ID [{$id}].");
             } else {
                 $this->laravel['events']->dispatch(new JobRetryRequested($job));
 
-                $this->components->task($id, fn () => $this->retryJob($job));
+                $this->retryJob($job);
+
+                $this->info("The failed job [{$id}] has been pushed back onto the queue!");
 
                 $this->laravel['queue.failer']->forget($id);
             }
         }
-
-        $jobsFound ? $this->newLine() : $this->components->info('No retryable jobs found.');
     }
 
     /**
@@ -109,7 +99,7 @@ class RetryCommand extends Command
                         ->toArray();
 
         if (count($ids) === 0) {
-            $this->components->error("Unable to find failed jobs for queue [{$queue}].");
+            $this->error("Unable to find failed jobs for queue [{$queue}].");
         }
 
         return $ids;

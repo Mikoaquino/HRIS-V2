@@ -664,7 +664,6 @@ abstract class ParserAbstract implements Parser
             'false'    => true,
             'mixed'    => true,
             'never'    => true,
-            'true'     => true,
         ];
 
         if (!$name->isUnqualified()) {
@@ -874,15 +873,6 @@ abstract class ParserAbstract implements Parser
             $attributes['endTokenPos'] = $commentEndTokenPos;
         }
         return $attributes;
-    }
-
-    protected function checkClassModifier($a, $b, $modifierPos) {
-        try {
-            Class_::verifyClassModifier($a, $b);
-        } catch (Error $error) {
-            $error->setAttributes($this->getAttributesAt($modifierPos));
-            $this->emitError($error);
-        }
     }
 
     protected function checkModifier($a, $b, $modifierPos) {

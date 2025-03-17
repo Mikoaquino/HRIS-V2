@@ -158,7 +158,7 @@ class RedisManager implements Factory
     /**
      * Get the connector instance for the current driver.
      *
-     * @return \Illuminate\Contracts\Redis\Connector|null
+     * @return \Illuminate\Contracts\Redis\Connector
      */
     protected function connector()
     {

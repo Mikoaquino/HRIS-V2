@@ -6,9 +6,7 @@ use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Contracts\CallableDispatcher;
 use Illuminate\Routing\Contracts\ControllerDispatcher as ControllerDispatcherContract;
-use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Matching\HostValidator;
 use Illuminate\Routing\Matching\MethodValidator;
 use Illuminate\Routing\Matching\SchemeValidator;
@@ -18,6 +16,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Laravel\SerializableClosure\SerializableClosure;
 use LogicException;
+use ReflectionFunction;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 
 class Route
@@ -234,7 +233,9 @@ class Route
             $callable = unserialize($this->action['uses'])->getClosure();
         }
 
-        return $this->container[CallableDispatcher::class]->dispatch($this, $callable);
+        return $callable(...array_values($this->resolveMethodDependencies(
+            $this->parametersWithoutNulls(), new ReflectionFunction($callable)
+        )));
     }
 
     /**
@@ -269,22 +270,12 @@ class Route
     public function getController()
     {
         if (! $this->controller) {
-            $class = $this->getControllerClass();
+            $class = $this->parseControllerCallback()[0];
 
             $this->controller = $this->container->make(ltrim($class, '\\'));
         }
 
         return $this->controller;
-    }
-
-    /**
-     * Get the controller class used for the route.
-     *
-     * @return string
-     */
-    public function getControllerClass()
-    {
-        return $this->parseControllerCallback()[0];
     }
 
     /**
@@ -305,17 +296,6 @@ class Route
     protected function parseControllerCallback()
     {
         return Str::parseCallback($this->action['uses']);
-    }
-
-    /**
-     * Flush the cached container instance on the route.
-     *
-     * @return void
-     */
-    public function flushController()
-    {
-        $this->computedMiddleware = null;
-        $this->controller = null;
     }
 
     /**
@@ -489,7 +469,9 @@ class Route
      */
     public function parametersWithoutNulls()
     {
-        return array_filter($this->parameters(), fn ($p) => ! is_null($p));
+        return array_filter($this->parameters(), function ($p) {
+            return ! is_null($p);
+        });
     }
 
     /**
@@ -515,7 +497,9 @@ class Route
     {
         preg_match_all('/\{(.*?)\}/', $this->getDomain().$this->uri, $matches);
 
-        return array_map(fn ($m) => trim($m, '?'), $matches[1]);
+        return array_map(function ($m) {
+            return trim($m, '?');
+        }, $matches[1]);
     }
 
     /**
@@ -796,7 +780,7 @@ class Route
      */
     public function prefix($prefix)
     {
-        $prefix ??= '';
+        $prefix = $prefix ?? '';
 
         $this->updatePrefixOnAction($prefix);
 
@@ -1083,47 +1067,16 @@ class Route
             return [];
         }
 
-        [$controllerClass, $controllerMethod] = [
-            $this->getControllerClass(),
-            $this->getControllerMethod(),
-        ];
-
-        if (is_a($controllerClass, HasMiddleware::class, true)) {
-            return $this->staticallyProvidedControllerMiddleware(
-                $controllerClass, $controllerMethod
-            );
-        }
-
-        if (method_exists($controllerClass, 'getMiddleware')) {
-            return $this->controllerDispatcher()->getMiddleware(
-                $this->getController(), $controllerMethod
-            );
-        }
-
-        return [];
-    }
-
-    /**
-     * Get the statically provided controller middleware for the given class and method.
-     *
-     * @param  string  $class
-     * @param  string  $method
-     * @return array
-     */
-    protected function staticallyProvidedControllerMiddleware(string $class, string $method)
-    {
-        return collect($class::middleware())->reject(function ($middleware) use ($method) {
-            return $this->controllerDispatcher()::methodExcludedByOptions(
-                $method, ['only' => $middleware->only, 'except' => $middleware->except]
-            );
-        })->map->middleware->values()->all();
+        return $this->controllerDispatcher()->getMiddleware(
+            $this->getController(), $this->getControllerMethod()
+        );
     }
 
     /**
      * Specify middleware that should be removed from the given route.
      *
      * @param  array|string  $middleware
-     * @return $this
+     * @return $this|array
      */
     public function withoutMiddleware($middleware)
     {
@@ -1147,23 +1100,11 @@ class Route
     /**
      * Indicate that the route should enforce scoping of multiple implicit Eloquent bindings.
      *
-     * @return $this
+     * @return bool
      */
     public function scopeBindings()
     {
         $this->action['scope_bindings'] = true;
-
-        return $this;
-    }
-
-    /**
-     * Indicate that the route should not enforce scoping of multiple implicit Eloquent bindings.
-     *
-     * @return $this
-     */
-    public function withoutScopedBindings()
-    {
-        $this->action['scope_bindings'] = false;
 
         return $this;
     }
@@ -1176,16 +1117,6 @@ class Route
     public function enforcesScopedBindings()
     {
         return (bool) ($this->action['scope_bindings'] ?? false);
-    }
-
-    /**
-     * Determine if the route should prevent scoping of multiple implicit Eloquent bindings.
-     *
-     * @return bool
-     */
-    public function preventsScopedBindings()
-    {
-        return isset($this->action['scope_bindings']) && $this->action['scope_bindings'] === false;
     }
 
     /**

@@ -21,8 +21,9 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 	/**
 	 * Transforms array to ArrayHash.
 	 * @param  array<T>  $array
+	 * @return static
 	 */
-	public static function from(array $array, bool $recursive = true): static
+	public static function from(array $array, bool $recursive = true)
 	{
 		$obj = new static;
 		foreach ($array as $key => $value) {
@@ -37,13 +38,11 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 
 	/**
 	 * Returns an iterator over all items.
-	 * @return \Iterator<int|string, T>
+	 * @return \RecursiveArrayIterator<array-key, T>
 	 */
-	public function &getIterator(): \Iterator
+	public function getIterator(): \RecursiveArrayIterator
 	{
-		foreach ((array) $this as $key => $foo) {
-			yield $key => $this->$key;
-		}
+		return new \RecursiveArrayIterator((array) $this);
 	}
 
 

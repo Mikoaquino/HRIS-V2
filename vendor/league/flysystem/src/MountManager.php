@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace League\Flysystem;
 
-use DateTimeInterface;
 use Throwable;
 
-use function method_exists;
 use function sprintf;
 
 class MountManager implements FilesystemOperator
@@ -184,7 +182,7 @@ class MountManager implements FilesystemOperator
         try {
             $filesystem->delete($path);
         } catch (UnableToDeleteFile $exception) {
-            throw UnableToDeleteFile::atLocation($location, $exception->reason(), $exception);
+            throw UnableToDeleteFile::atLocation($location, '', $exception);
         }
     }
 
@@ -196,7 +194,7 @@ class MountManager implements FilesystemOperator
         try {
             $filesystem->deleteDirectory($path);
         } catch (UnableToDeleteDirectory $exception) {
-            throw UnableToDeleteDirectory::atLocation($location, $exception->reason(), $exception);
+            throw UnableToDeleteDirectory::atLocation($location, '', $exception);
         }
     }
 
@@ -225,7 +223,7 @@ class MountManager implements FilesystemOperator
             $destinationPath,
             $source,
             $destination
-        ) : $this->moveAcrossFilesystems($source, $destination, $config);
+        ) : $this->moveAcrossFilesystems($source, $destination);
     }
 
     public function copy(string $source, string $destination, array $config = []): void
@@ -250,42 +248,6 @@ class MountManager implements FilesystemOperator
             $source,
             $destination
         );
-    }
-
-    public function publicUrl(string $path, array $config = []): string
-    {
-        /** @var FilesystemOperator $filesystem */
-        [$filesystem, $path] = $this->determineFilesystemAndPath($path);
-
-        if ( ! method_exists($filesystem, 'publicUrl')) {
-            throw new UnableToGeneratePublicUrl(sprintf('%s does not support generating public urls.', $filesystem::class), $path);
-        }
-
-        return $filesystem->publicUrl($path, $config);
-    }
-
-    public function temporaryUrl(string $path, DateTimeInterface $expiresAt, array $config = []): string
-    {
-        /** @var FilesystemOperator $filesystem */
-        [$filesystem, $path] = $this->determineFilesystemAndPath($path);
-
-        if ( ! method_exists($filesystem, 'temporaryUrl')) {
-            throw new UnableToGenerateTemporaryUrl(sprintf('%s does not support generating public urls.', $filesystem::class), $path);
-        }
-
-        return $filesystem->temporaryUrl($path, $expiresAt, $config);
-    }
-
-    public function checksum(string $path, array $config = []): string
-    {
-        /** @var FilesystemOperator $filesystem */
-        [$filesystem, $path] = $this->determineFilesystemAndPath($path);
-
-        if ( ! method_exists($filesystem, 'checksum')) {
-            throw new UnableToProvideChecksum(sprintf('%s does not support providing checksums.', $filesystem::class), $path);
-        }
-
-        return $filesystem->checksum($path, $config);
     }
 
     private function mountFilesystems(array $filesystems): void
@@ -386,10 +348,10 @@ class MountManager implements FilesystemOperator
         }
     }
 
-    private function moveAcrossFilesystems(string $source, string $destination, array $config = []): void
+    private function moveAcrossFilesystems(string $source, string $destination): void
     {
         try {
-            $this->copy($source, $destination, $config);
+            $this->copy($source, $destination);
             $this->delete($source);
         } catch (UnableToCopyFile | UnableToDeleteFile $exception) {
             throw UnableToMoveFile::fromLocationTo($source, $destination, $exception);

@@ -42,10 +42,10 @@ use Symfony\Component\Routing\RequestContextAwareInterface;
  */
 class RouterListener implements EventSubscriberInterface
 {
-    private RequestMatcherInterface|UrlMatcherInterface $matcher;
-    private RequestContext $context;
-    private ?LoggerInterface $logger;
-    private RequestStack $requestStack;
+    private $matcher;
+    private $context;
+    private $logger;
+    private $requestStack;
     private ?string $projectDir;
     private bool $debug;
 
@@ -68,7 +68,7 @@ class RouterListener implements EventSubscriberInterface
         $this->debug = $debug;
     }
 
-    private function setCurrentRequest(?Request $request)
+    private function setCurrentRequest(Request $request = null)
     {
         if (null !== $request) {
             try {
@@ -83,7 +83,7 @@ class RouterListener implements EventSubscriberInterface
      * After a sub-request is done, we need to reset the routing context to the parent request so that the URL generator
      * operates on the correct context again.
      */
-    public function onKernelFinishRequest()
+    public function onKernelFinishRequest(FinishRequestEvent $event)
     {
         $this->setCurrentRequest($this->requestStack->getParentRequest());
     }
@@ -108,12 +108,14 @@ class RouterListener implements EventSubscriberInterface
                 $parameters = $this->matcher->match($request->getPathInfo());
             }
 
-            $this->logger?->info('Matched route "{route}".', [
-                'route' => $parameters['_route'] ?? 'n/a',
-                'route_parameters' => $parameters,
-                'request_uri' => $request->getUri(),
-                'method' => $request->getMethod(),
-            ]);
+            if (null !== $this->logger) {
+                $this->logger->info('Matched route "{route}".', [
+                    'route' => $parameters['_route'] ?? 'n/a',
+                    'route_parameters' => $parameters,
+                    'request_uri' => $request->getUri(),
+                    'method' => $request->getMethod(),
+                ]);
+            }
 
             $request->attributes->add($parameters);
             unset($parameters['_route'], $parameters['_controller']);

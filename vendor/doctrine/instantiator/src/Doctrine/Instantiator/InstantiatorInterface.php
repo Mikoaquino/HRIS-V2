@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Doctrine\Instantiator;
 
 use Doctrine\Instantiator\Exception\ExceptionInterface;
@@ -12,13 +10,14 @@ use Doctrine\Instantiator\Exception\ExceptionInterface;
 interface InstantiatorInterface
 {
     /**
-     * @phpstan-param class-string<T> $className
+     * @param string $className
      *
-     * @phpstan-return T
+     * @return object
      *
      * @throws ExceptionInterface
      *
      * @template T of object
+     * @phpstan-param class-string<T> $className
      */
-    public function instantiate(string $className): object;
+    public function instantiate($className);
 }

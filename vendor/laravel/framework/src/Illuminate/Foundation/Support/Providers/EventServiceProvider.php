@@ -11,7 +11,7 @@ class EventServiceProvider extends ServiceProvider
     /**
      * The event handler mappings for the application.
      *
-     * @var array<string, array<int, string>>
+     * @var array
      */
     protected $listen = [];
 
@@ -40,7 +40,7 @@ class EventServiceProvider extends ServiceProvider
             $events = $this->getEvents();
 
             foreach ($events as $event => $listeners) {
-                foreach (array_unique($listeners, SORT_REGULAR) as $listener) {
+                foreach (array_unique($listeners) as $listener) {
                     Event::listen($event, $listener);
                 }
             }

@@ -129,8 +129,6 @@ class CallbackEvent extends Event
     /**
      * Do not allow the event to overlap each other.
      *
-     * The expiration time of the underlying cache lock may be specified in minutes.
-     *
      * @param  int  $expiresAt
      * @return $this
      *
@@ -186,7 +184,7 @@ class CallbackEvent extends Event
      */
     public function mutexName()
     {
-        return 'framework/schedule-'.sha1($this->description ?? '');
+        return 'framework/schedule-'.sha1($this->description);
     }
 
     /**

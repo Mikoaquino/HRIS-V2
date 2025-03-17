@@ -202,8 +202,7 @@ class StartSession
         if ($request->isMethod('GET') &&
             $request->route() instanceof Route &&
             ! $request->ajax() &&
-            ! $request->prefetch() &&
-            ! $request->isPrecognitive()) {
+            ! $request->prefetch()) {
             $session->setPreviousUrl($request->fullUrl());
         }
     }
@@ -234,9 +233,7 @@ class StartSession
      */
     protected function saveSession($request)
     {
-        if (! $request->isPrecognitive()) {
-            $this->manager->driver()->save();
-        }
+        $this->manager->driver()->save();
     }
 
     /**

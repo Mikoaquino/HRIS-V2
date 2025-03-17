@@ -3,16 +3,20 @@
 namespace Spatie\LaravelIgnition\Http\Middleware;
 
 use Closure;
-use Spatie\LaravelIgnition\Support\RunnableSolutionsGuard;
 
 class RunnableSolutionsEnabled
 {
     public function handle($request, Closure $next)
     {
-        if (! RunnableSolutionsGuard::check()) {
+        if (! $this->ignitionEnabled()) {
             abort(404);
         }
 
         return $next($request);
+    }
+
+    protected function ignitionEnabled(): bool
+    {
+        return config('ignition.enable_runnable_solutions') ?? config('app.debug');
     }
 }

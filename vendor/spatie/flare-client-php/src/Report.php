@@ -25,7 +25,7 @@ class Report
 
     protected string $message = '';
 
-    /** @var array<int, array{time: int, name: string, message_level: string, meta_data: array, microtime: float}> */
+    /** @var array<int, array<string, mixed>> */
     protected array $glows = [];
 
     /** @var array<int, array<int|string, mixed>> */
@@ -83,6 +83,7 @@ class Report
     {
         /** @phpstan-ignore-next-line */
         if ($throwable::class === ViewException::class) {
+
             /** @phpstan-ignore-next-line */
             if ($previous = $throwable->getPrevious()) {
                 return get_class($previous);

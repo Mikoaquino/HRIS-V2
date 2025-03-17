@@ -27,7 +27,6 @@ use function is_string;
 use function mt_srand;
 use function range;
 use function realpath;
-use function sort;
 use function sprintf;
 use function time;
 use PHPUnit\Framework\Exception;
@@ -93,6 +92,11 @@ final class TestRunner extends BaseTestRunner
     public const FAILURE_EXIT = 1;
 
     public const EXCEPTION_EXIT = 2;
+
+    /**
+     * @var bool
+     */
+    private static $versionStringPrinted = false;
 
     /**
      * @var CodeCoverageFilter
@@ -308,7 +312,7 @@ final class TestRunner extends BaseTestRunner
                     } catch (ReflectionException $e) {
                         throw new Exception(
                             $e->getMessage(),
-                            $e->getCode(),
+                            (int) $e->getCode(),
                             $e
                         );
                     }
@@ -326,7 +330,11 @@ final class TestRunner extends BaseTestRunner
             $this->printer->setShowProgressAnimation(!$arguments['noInteraction']);
         }
 
-        $this->write(Version::getVersionString() . "\n");
+        $this->printer->write(
+            Version::getVersionString() . "\n"
+        );
+
+        self::$versionStringPrinted = true;
 
         foreach ($arguments['listeners'] as $listener) {
             $result->addListener($listener);
@@ -572,9 +580,6 @@ final class TestRunner extends BaseTestRunner
             $warnings[] = 'Directives printerClass and testdox are mutually exclusive';
         }
 
-        $warnings = array_merge($warnings, $suite->warnings());
-        sort($warnings);
-
         foreach ($warnings as $warning) {
             $this->writeMessage('Warning', $warning);
         }
@@ -616,7 +621,7 @@ final class TestRunner extends BaseTestRunner
             exit(self::SUCCESS_EXIT);
         }
 
-        $this->write("\n");
+        $this->printer->write("\n");
 
         if (isset($codeCoverage)) {
             $result->setCodeCoverage($codeCoverage);
@@ -648,6 +653,18 @@ final class TestRunner extends BaseTestRunner
             if ($extension instanceof BeforeFirstTestHook) {
                 $extension->executeBeforeFirstTest();
             }
+        }
+
+        $testSuiteWarningsPrinted = false;
+
+        foreach ($suite->warnings() as $warning) {
+            $this->writeMessage('Warning', $warning);
+
+            $testSuiteWarningsPrinted = true;
+        }
+
+        if ($testSuiteWarningsPrinted) {
+            $this->write(PHP_EOL);
         }
 
         $suite->run($result);
@@ -1008,19 +1025,17 @@ final class TestRunner extends BaseTestRunner
                 $arguments['excludeGroups'] = array_diff($groupConfiguration->exclude()->asArrayOfStrings(), $groupCliArgs);
             }
 
-            if (!isset($this->arguments['noExtensions'])) {
-                $extensionHandler = new ExtensionHandler;
+            $extensionHandler = new ExtensionHandler;
 
-                foreach ($arguments['configurationObject']->extensions() as $extension) {
-                    $extensionHandler->registerExtension($extension, $this);
-                }
-
-                foreach ($arguments['configurationObject']->listeners() as $listener) {
-                    $arguments['listeners'][] = $extensionHandler->createTestListenerInstance($listener);
-                }
-
-                unset($extensionHandler);
+            foreach ($arguments['configurationObject']->extensions() as $extension) {
+                $extensionHandler->registerExtension($extension, $this);
             }
+
+            foreach ($arguments['configurationObject']->listeners() as $listener) {
+                $arguments['listeners'][] = $extensionHandler->createTestListenerInstance($listener);
+            }
+
+            unset($extensionHandler);
 
             foreach ($arguments['unavailableExtensions'] as $extension) {
                 $arguments['warnings'][] = sprintf(
@@ -1127,11 +1142,6 @@ final class TestRunner extends BaseTestRunner
         $arguments['timeoutForMediumTests']                           = $arguments['timeoutForMediumTests'] ?? 10;
         $arguments['timeoutForSmallTests']                            = $arguments['timeoutForSmallTests'] ?? 1;
         $arguments['verbose']                                         = $arguments['verbose'] ?? false;
-
-        if ($arguments['reportLowUpperBound'] > $arguments['reportHighLowerBound']) {
-            $arguments['reportLowUpperBound']  = 50;
-            $arguments['reportHighLowerBound'] = 90;
-        }
     }
 
     private function processSuiteFilters(TestSuite $suite, array $arguments): void
@@ -1231,7 +1241,7 @@ final class TestRunner extends BaseTestRunner
 
     private function codeCoverageGenerationStart(string $format): void
     {
-        $this->write(
+        $this->printer->write(
             sprintf(
                 "\nGenerating code coverage report in %s format ... ",
                 $format
@@ -1243,7 +1253,7 @@ final class TestRunner extends BaseTestRunner
 
     private function codeCoverageGenerationSucceeded(): void
     {
-        $this->write(
+        $this->printer->write(
             sprintf(
                 "done [%s]\n",
                 $this->timer->stop()->asString()
@@ -1253,7 +1263,7 @@ final class TestRunner extends BaseTestRunner
 
     private function codeCoverageGenerationFailed(\Exception $e): void
     {
-        $this->write(
+        $this->printer->write(
             sprintf(
                 "failed [%s]\n%s\n",
                 $this->timer->stop()->asString(),

@@ -22,8 +22,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 class Request extends SymfonyRequest implements Arrayable, ArrayAccess
 {
-    use Concerns\CanBePrecognitive,
-        Concerns\InteractsWithContentTypes,
+    use Concerns\InteractsWithContentTypes,
         Concerns\InteractsWithFlashData,
         Concerns\InteractsWithInput,
         Macroable;
@@ -240,36 +239,6 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     }
 
     /**
-     * Get the host name.
-     *
-     * @return string
-     */
-    public function host()
-    {
-        return $this->getHost();
-    }
-
-    /**
-     * Get the HTTP host being requested.
-     *
-     * @return string
-     */
-    public function httpHost()
-    {
-        return $this->getHttpHost();
-    }
-
-    /**
-     * Get the scheme and HTTP host.
-     *
-     * @return string
-     */
-    public function schemeAndHttpHost()
-    {
-        return $this->getSchemeAndHttpHost();
-    }
-
-    /**
      * Determine if the request is the result of an AJAX call.
      *
      * @return bool
@@ -438,7 +407,9 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     {
         $request = $to ?: new static;
 
-        $files = array_filter($from->files->all());
+        $files = $from->files->all();
+
+        $files = is_array($files) ? array_filter($files) : $files;
 
         $request->initialize(
             $from->query->all(),
@@ -451,10 +422,6 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
         );
 
         $request->headers->replace($from->headers->all());
-
-        $request->setRequestLocale($from->getLocale());
-
-        $request->setDefaultRequestLocale($from->getDefaultLocale());
 
         $request->setJson($from->json());
 
@@ -571,28 +538,6 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     public function setLaravelSession($session)
     {
         $this->session = $session;
-    }
-
-    /**
-     * Set the locale for the request instance.
-     *
-     * @param  string  $locale
-     * @return void
-     */
-    public function setRequestLocale(string $locale)
-    {
-        $this->locale = $locale;
-    }
-
-    /**
-     * Set the default locale for the request instance.
-     *
-     * @param  string  $locale
-     * @return void
-     */
-    public function setDefaultRequestLocale(string $locale)
-    {
-        $this->defaultLocale = $locale;
     }
 
     /**
@@ -724,10 +669,8 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
      */
     public function offsetExists($offset): bool
     {
-        $route = $this->route();
-
         return Arr::has(
-            $this->all() + ($route ? $route->parameters() : []),
+            $this->all() + $this->route()->parameters(),
             $offset
         );
     }
@@ -785,6 +728,8 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
      */
     public function __get($key)
     {
-        return Arr::get($this->all(), $key, fn () => $this->route($key));
+        return Arr::get($this->all(), $key, function () use ($key) {
+            return $this->route($key);
+        });
     }
 }

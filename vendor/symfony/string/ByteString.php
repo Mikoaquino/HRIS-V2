@@ -48,7 +48,7 @@ class ByteString extends AbstractString
             throw new InvalidArgumentException(sprintf('A strictly positive length is expected, "%d" given.', $length));
         }
 
-        $alphabet ??= self::ALPHABET_ALPHANUMERIC;
+        $alphabet = $alphabet ?? self::ALPHABET_ALPHANUMERIC;
         $alphabetSize = \strlen($alphabet);
         $bits = (int) ceil(log($alphabetSize, 2.0));
         if ($bits <= 0 || $bits > 56) {
@@ -103,10 +103,7 @@ class ByteString extends AbstractString
     public function camel(): static
     {
         $str = clone $this;
-
-        $parts = explode(' ', trim(ucwords(preg_replace('/[^a-zA-Z0-9\x7f-\xff]++/', ' ', $this->string))));
-        $parts[0] = 1 !== \strlen($parts[0]) && ctype_upper($parts[0]) ? $parts[0] : lcfirst($parts[0]);
-        $str->string = implode('', $parts);
+        $str->string = lcfirst(str_replace(' ', '', ucwords(preg_replace('/[^a-zA-Z0-9\x7f-\xff]++/', ' ', $this->string))));
 
         return $str;
     }
@@ -240,7 +237,15 @@ class ByteString extends AbstractString
 
         try {
             if (false === $match($regexp, $this->string, $matches, $flags | \PREG_UNMATCHED_AS_NULL, $offset)) {
-                throw new RuntimeException('Matching failed with error: '.preg_last_error_msg());
+                $lastError = preg_last_error();
+
+                foreach (get_defined_constants(true)['pcre'] as $k => $v) {
+                    if ($lastError === $v && '_ERROR' === substr($k, -6)) {
+                        throw new RuntimeException('Matching failed with '.$k.'.');
+                    }
+                }
+
+                throw new RuntimeException('Matching failed with unknown error code.');
             }
         } finally {
             restore_error_handler();
@@ -307,7 +312,7 @@ class ByteString extends AbstractString
                 $lastError = preg_last_error();
 
                 foreach (get_defined_constants(true)['pcre'] as $k => $v) {
-                    if ($lastError === $v && str_ends_with($k, '_ERROR')) {
+                    if ($lastError === $v && '_ERROR' === substr($k, -6)) {
                         throw new RuntimeException('Matching failed with '.$k.'.');
                     }
                 }
@@ -342,7 +347,7 @@ class ByteString extends AbstractString
 
     public function snake(): static
     {
-        $str = $this->camel();
+        $str = $this->camel()->title();
         $str->string = strtolower(preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\d])([A-Z])/'], '\1_\2', $str->string));
 
         return $str;
@@ -358,7 +363,7 @@ class ByteString extends AbstractString
 
     public function split(string $delimiter, int $limit = null, int $flags = null): array
     {
-        if (1 > $limit ??= \PHP_INT_MAX) {
+        if (1 > $limit = $limit ?? \PHP_INT_MAX) {
             throw new InvalidArgumentException('Split limit must be a positive integer.');
         }
 

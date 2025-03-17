@@ -6,7 +6,6 @@ use Stringable;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\ComponentAttributeBag;
 
-#[\AllowDynamicProperties]
 class WireDirective implements Htmlable, Stringable
 {
     public function __construct($name, $directive, $value)

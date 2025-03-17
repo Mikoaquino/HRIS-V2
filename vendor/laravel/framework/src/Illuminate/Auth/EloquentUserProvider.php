@@ -25,13 +25,6 @@ class EloquentUserProvider implements UserProvider
     protected $model;
 
     /**
-     * The callback that may modify the user retrieval queries.
-     *
-     * @var (\Closure(\Illuminate\Database\Eloquent\Builder):mixed)|null
-     */
-    protected $queryCallback;
-
-    /**
      * Create a new database user provider.
      *
      * @param  \Illuminate\Contracts\Hashing\Hasher  $hasher
@@ -80,7 +73,8 @@ class EloquentUserProvider implements UserProvider
 
         $rememberToken = $retrievedModel->getRememberToken();
 
-        return $rememberToken && hash_equals($rememberToken, $token) ? $retrievedModel : null;
+        return $rememberToken && hash_equals($rememberToken, $token)
+                        ? $retrievedModel : null;
     }
 
     /**
@@ -111,13 +105,9 @@ class EloquentUserProvider implements UserProvider
      */
     public function retrieveByCredentials(array $credentials)
     {
-        $credentials = array_filter(
-            $credentials,
-            fn ($key) => ! str_contains($key, 'password'),
-            ARRAY_FILTER_USE_KEY
-        );
-
-        if (empty($credentials)) {
+        if (empty($credentials) ||
+           (count($credentials) === 1 &&
+            str_contains($this->firstCredentialKey($credentials), 'password'))) {
             return;
         }
 
@@ -127,6 +117,10 @@ class EloquentUserProvider implements UserProvider
         $query = $this->newModelQuery();
 
         foreach ($credentials as $key => $value) {
+            if (str_contains($key, 'password')) {
+                continue;
+            }
+
             if (is_array($value) || $value instanceof Arrayable) {
                 $query->whereIn($key, $value);
             } elseif ($value instanceof Closure) {
@@ -140,6 +134,19 @@ class EloquentUserProvider implements UserProvider
     }
 
     /**
+     * Get the first key from the credential array.
+     *
+     * @param  array  $credentials
+     * @return string|null
+     */
+    protected function firstCredentialKey(array $credentials)
+    {
+        foreach ($credentials as $key => $value) {
+            return $key;
+        }
+    }
+
+    /**
      * Validate a user against the given credentials.
      *
      * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
@@ -148,9 +155,7 @@ class EloquentUserProvider implements UserProvider
      */
     public function validateCredentials(UserContract $user, array $credentials)
     {
-        if (is_null($plain = $credentials['password'])) {
-            return false;
-        }
+        $plain = $credentials['password'];
 
         return $this->hasher->check($plain, $user->getAuthPassword());
     }
@@ -163,13 +168,9 @@ class EloquentUserProvider implements UserProvider
      */
     protected function newModelQuery($model = null)
     {
-        $query = is_null($model)
+        return is_null($model)
                 ? $this->createModel()->newQuery()
                 : $model->newQuery();
-
-        with($query, $this->queryCallback);
-
-        return $query;
     }
 
     /**
@@ -226,29 +227,6 @@ class EloquentUserProvider implements UserProvider
     public function setModel($model)
     {
         $this->model = $model;
-
-        return $this;
-    }
-
-    /**
-     * Get the callback that modifies the query before retrieving users.
-     *
-     * @return \Closure|null
-     */
-    public function getQueryCallback()
-    {
-        return $this->queryCallback;
-    }
-
-    /**
-     * Sets the callback to modify the query before retrieving users.
-     *
-     * @param  (\Closure(\Illuminate\Database\Eloquent\Builder):mixed)|null  $queryCallback
-     * @return $this
-     */
-    public function withQuery($queryCallback = null)
-    {
-        $this->queryCallback = $queryCallback;
 
         return $this;
     }

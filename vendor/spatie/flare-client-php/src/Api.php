@@ -32,7 +32,8 @@ class Api
     public function report(Report $report): void
     {
         try {
-            $this->sendReportsImmediately
+            /** @phpstan-ignore-next-line */
+            $this->sendReportsImmediately()
                 ? $this->sendReportToApi($report)
                 : $this->addReportToQueue($report);
         } catch (Exception $e) {

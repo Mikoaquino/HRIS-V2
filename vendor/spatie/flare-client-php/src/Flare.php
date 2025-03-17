@@ -12,7 +12,6 @@ use Spatie\FlareClient\Concerns\HasContext;
 use Spatie\FlareClient\Context\BaseContextProviderDetector;
 use Spatie\FlareClient\Context\ContextProviderDetector;
 use Spatie\FlareClient\Enums\MessageLevels;
-use Spatie\FlareClient\FlareMiddleware\AddEnvironmentInformation;
 use Spatie\FlareClient\FlareMiddleware\AddGlows;
 use Spatie\FlareClient\FlareMiddleware\CensorRequestBodyFields;
 use Spatie\FlareClient\FlareMiddleware\FlareMiddleware;
@@ -52,9 +51,6 @@ class Flare
     /** @var null|callable */
     protected $filterExceptionsCallable = null;
 
-    /** @var null|callable */
-    protected $filterReportsCallable = null;
-
     protected ?string $stage = null;
 
     protected ?string $requestId = null;
@@ -89,7 +85,7 @@ class Flare
         return $this;
     }
 
-    public function setStage(?string $stage): self
+    public function setStage(string $stage): self
     {
         $this->stage = $stage;
 
@@ -120,13 +116,6 @@ class Flare
     public function filterExceptionsUsing(callable $filterExceptionsCallable): self
     {
         $this->filterExceptionsCallable = $filterExceptionsCallable;
-
-        return $this;
-    }
-
-    public function filterReportsUsing(callable $filterReportsCallable): self
-    {
-        $this->filterReportsCallable = $filterReportsCallable;
 
         return $this;
     }
@@ -205,10 +194,7 @@ class Flare
 
     protected function registerDefaultMiddleware(): self
     {
-        return $this->registerMiddleware([
-            new AddGlows($this->recorder),
-            new AddEnvironmentInformation(),
-        ]);
+        return $this->registerMiddleware(new AddGlows($this->recorder));
     }
 
     /**
@@ -221,6 +207,7 @@ class Flare
         if (! is_array($middleware)) {
             $middleware = [$middleware];
         }
+
 
         $this->middleware = array_merge($this->middleware, $middleware);
 
@@ -288,19 +275,17 @@ class Flare
         return $this;
     }
 
-    public function report(Throwable $throwable, callable $callback = null, Report $report = null): ?Report
+    public function report(Throwable $throwable, callable $callback = null): ?Report
     {
         if (! $this->shouldSendReport($throwable)) {
             return null;
         }
 
-        $report ??= $this->createReport($throwable);
+        $report = $this->createReport($throwable);
 
         if (! is_null($callback)) {
             call_user_func($callback, $report);
         }
-
-        $this->recorder->reset();
 
         $this->sendReportToApi($report);
 
@@ -309,11 +294,11 @@ class Flare
 
     protected function shouldSendReport(Throwable $throwable): bool
     {
-        if (isset($this->reportErrorLevels) && $throwable instanceof Error) {
+        if ($this->reportErrorLevels && $throwable instanceof Error) {
             return (bool)($this->reportErrorLevels & $throwable->getCode());
         }
 
-        if (isset($this->reportErrorLevels) && $throwable instanceof ErrorException) {
+        if ($this->reportErrorLevels && $throwable instanceof ErrorException) {
             return (bool)($this->reportErrorLevels & $throwable->getSeverity());
         }
 
@@ -342,12 +327,6 @@ class Flare
 
     protected function sendReportToApi(Report $report): void
     {
-        if ($this->filterReportsCallable) {
-            if (! call_user_func($this->filterReportsCallable, $report)) {
-                return;
-            }
-        }
-
         try {
             $this->api->report($report);
         } catch (Exception $exception) {

@@ -33,7 +33,7 @@ abstract class Component
     protected $shouldSkipRender = null;
     protected $preRenderedView;
     protected $forStack = [];
-
+    
     public function __construct($id = null)
     {
         $this->id = $id ?? str()->random(20);
@@ -98,7 +98,7 @@ abstract class Component
     public function bootIfNotBooted()
     {
         if (method_exists($this, $method = 'boot')) {
-            ImplicitlyBoundMethod::call(app(), [$this, $method]);
+            ImplicitlyBoundMethod::call(app(), [$this, $method]); 
         }
     }
 
@@ -163,9 +163,7 @@ abstract class Component
 
     public function renderToView()
     {
-        if ($this->shouldSkipRender) {
-            return $this->keepRenderedChildren();
-        }
+        if ($this->shouldSkipRender) return null;
 
         Livewire::dispatch('component.rendering', $this);
 
@@ -274,17 +272,15 @@ abstract class Component
     {
         return $this->forStack;
     }
-
+    
     function __isset($property)
     {
         try {
-            $value = $this->__get($property);
-
-            if (isset($value)) {
-                return true;
-            }
-        } catch(PropertyNotFoundException $ex) {}
-
+            $this->__get($property);
+            return true;
+        } catch(PropertyNotFoundException $ex) {
+            return false;
+        }
         return false;
     }
 

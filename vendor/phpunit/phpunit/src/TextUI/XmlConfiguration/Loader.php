@@ -72,7 +72,7 @@ final class Loader
         } catch (XmlException $e) {
             throw new Exception(
                 $e->getMessage(),
-                $e->getCode(),
+                (int) $e->getCode(),
                 $e
             );
         }
@@ -84,7 +84,7 @@ final class Loader
         } catch (XmlException $e) {
             throw new Exception(
                 $e->getMessage(),
-                $e->getCode(),
+                (int) $e->getCode(),
                 $e
             );
         }

@@ -3,7 +3,6 @@
 namespace Illuminate\Foundation\Validation;
 
 use Illuminate\Contracts\Validation\Factory;
-use Illuminate\Foundation\Precognition;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -26,13 +25,6 @@ trait ValidatesRequests
             $validator = $this->getValidationFactory()->make($request->all(), $validator);
         }
 
-        if ($request->isPrecognitive()) {
-            $validator->after(Precognition::afterValidationHook($request))
-                ->setRules(
-                    $request->filterPrecognitiveRules($validator->getRulesWithoutPlaceholders())
-                );
-        }
-
         return $validator->validate();
     }
 
@@ -50,18 +42,9 @@ trait ValidatesRequests
     public function validate(Request $request, array $rules,
                              array $messages = [], array $customAttributes = [])
     {
-        $validator = $this->getValidationFactory()->make(
+        return $this->getValidationFactory()->make(
             $request->all(), $rules, $messages, $customAttributes
-        );
-
-        if ($request->isPrecognitive()) {
-            $validator->after(Precognition::afterValidationHook($request))
-                ->setRules(
-                    $request->filterPrecognitiveRules($validator->getRulesWithoutPlaceholders())
-                );
-        }
-
-        return $validator->validate();
+        )->validate();
     }
 
     /**

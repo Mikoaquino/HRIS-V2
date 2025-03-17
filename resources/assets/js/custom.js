@@ -446,11 +446,11 @@ $(function() {
 	/*Icon Text Sidemenu End*/
 
 	/*Side icon menu Start*/
-		$('body').addClass('sideicon-menu');
-		$('body').addClass('sidenav-toggled');
-		if(document.querySelector('.sideicon-menu').classList.contains('error-page1') !== true){
-		hovermenu();
-        }
+		// $('body').addClass('sideicon-menu');
+		// $('body').addClass('sidenav-toggled');
+		// if(document.querySelector('.sideicon-menu').classList.contains('error-page1') !== true){
+		// hovermenu();
+        // }
 	/*Side icon menu End*/
 
 	/*hover submenu start*/

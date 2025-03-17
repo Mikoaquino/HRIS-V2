@@ -83,7 +83,7 @@ class Directive {
     parseOutMethodAndParams(rawMethod) {
         let method = rawMethod
         let params = []
-        const methodAndParamString = method.match(/(.*?)\((.*)\)/s)
+        const methodAndParamString = method.match(/(.*?)\((.*)\)/)
 
         if (methodAndParamString) {
             method = methodAndParamString[1]

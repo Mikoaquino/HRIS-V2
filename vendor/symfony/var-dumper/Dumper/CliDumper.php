@@ -61,6 +61,9 @@ class CliDumper extends AbstractDumper
 
     private bool $handlesHrefGracefully;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct($output = null, string $charset = null, int $flags = 0)
     {
         parent::__construct($output, $charset, $flags);
@@ -80,7 +83,7 @@ class CliDumper extends AbstractDumper
             ]);
         }
 
-        $this->displayOptions['fileLinkFormat'] = \ini_get('xdebug.file_link_format') ?: get_cfg_var('xdebug.file_link_format') ?: 'file://%f#L%l';
+        $this->displayOptions['fileLinkFormat'] = ini_get('xdebug.file_link_format') ?: get_cfg_var('xdebug.file_link_format') ?: 'file://%f#L%l';
     }
 
     /**
@@ -119,6 +122,9 @@ class CliDumper extends AbstractDumper
         $this->displayOptions = $displayOptions + $this->displayOptions;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function dumpScalar(Cursor $cursor, string $type, string|int|float|bool|null $value)
     {
         $this->dumpKey($cursor);
@@ -147,12 +153,17 @@ class CliDumper extends AbstractDumper
                     $style = 'float';
                 }
 
-                $value = match (true) {
-                    \INF === $value => 'INF',
-                    -\INF === $value => '-INF',
-                    is_nan($value) => 'NAN',
-                    default => !str_contains($value = (string) $value, $this->decimalPoint) ? $value .= $this->decimalPoint.'0' : $value,
-                };
+                switch (true) {
+                    case \INF === $value:  $value = 'INF'; break;
+                    case -\INF === $value: $value = '-INF'; break;
+                    case is_nan($value):  $value = 'NAN'; break;
+                    default:
+                        $value = (string) $value;
+                        if (!str_contains($value, $this->decimalPoint)) {
+                            $value .= $this->decimalPoint.'0';
+                        }
+                        break;
+                }
                 break;
 
             case 'NULL':
@@ -174,6 +185,9 @@ class CliDumper extends AbstractDumper
         $this->endValue($cursor);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function dumpString(Cursor $cursor, string $str, bool $bin, int $cut)
     {
         $this->dumpKey($cursor);
@@ -190,7 +204,7 @@ class CliDumper extends AbstractDumper
                 'length' => 0 <= $cut ? mb_strlen($str, 'UTF-8') + $cut : 0,
                 'binary' => $bin,
             ];
-            $str = $bin && str_contains($str, "\0") ? [$str] : explode("\n", $str);
+            $str = $bin && false !== strpos($str, "\0") ? [$str] : explode("\n", $str);
             if (isset($str[1]) && !isset($str[2]) && !isset($str[1][0])) {
                 unset($str[1]);
                 $str[0] .= "\n";
@@ -259,9 +273,14 @@ class CliDumper extends AbstractDumper
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function enterHash(Cursor $cursor, int $type, string|int|null $class, bool $hasChild)
     {
-        $this->colors ??= $this->supportsColors();
+        if (null === $this->colors) {
+            $this->colors = $this->supportsColors();
+        }
 
         $this->dumpKey($cursor);
         $attr = $cursor->attr;
@@ -295,6 +314,9 @@ class CliDumper extends AbstractDumper
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function leaveHash(Cursor $cursor, int $type, string|int|null $class, bool $hasChild, int $cut)
     {
         if (empty($cursor->attr['cut_hash'])) {
@@ -415,7 +437,9 @@ class CliDumper extends AbstractDumper
      */
     protected function style(string $style, string $value, array $attr = []): string
     {
-        $this->colors ??= $this->supportsColors();
+        if (null === $this->colors) {
+            $this->colors = $this->supportsColors();
+        }
 
         $this->handlesHrefGracefully ??= 'JetBrains-JediTerm' !== getenv('TERMINAL_EMULATOR')
             && (!getenv('KONSOLE_VERSION') || (int) getenv('KONSOLE_VERSION') > 201100);
@@ -521,6 +545,9 @@ class CliDumper extends AbstractDumper
         return static::$defaultColors = $this->hasColorSupport($h);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function dumpLine(int $depth, bool $endOfValue = false)
     {
         if ($this->colors) {

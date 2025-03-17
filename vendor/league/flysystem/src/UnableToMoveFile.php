@@ -34,8 +34,7 @@ final class UnableToMoveFile extends RuntimeException implements FilesystemOpera
         string $destinationPath,
         Throwable $previous = null
     ): UnableToMoveFile {
-        $message = $previous?->getMessage() ?? "Unable to move file from $sourcePath to $destinationPath";
-        $e = new static($message, 0, $previous);
+        $e = new static("Unable to move file from $sourcePath to $destinationPath", 0, $previous);
         $e->source = $sourcePath;
         $e->destination = $destinationPath;
 

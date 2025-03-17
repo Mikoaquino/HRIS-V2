@@ -134,22 +134,22 @@ class Request
     protected $content;
 
     /**
-     * @var string[]
+     * @var array
      */
     protected $languages;
 
     /**
-     * @var string[]
+     * @var array
      */
     protected $charsets;
 
     /**
-     * @var string[]
+     * @var array
      */
     protected $encodings;
 
     /**
-     * @var string[]
+     * @var array
      */
     protected $acceptableContentTypes;
 
@@ -199,7 +199,7 @@ class Request
     protected $defaultLocale = 'en';
 
     /**
-     * @var array<string, string[]>
+     * @var array
      */
     protected static $formats;
 
@@ -502,10 +502,10 @@ class Request
         $cookies = [];
 
         foreach ($this->cookies as $k => $v) {
-            $cookies[] = \is_array($v) ? http_build_query([$k => $v], '', '; ', \PHP_QUERY_RFC3986) : "$k=$v";
+            $cookies[] = $k.'='.$v;
         }
 
-        if ($cookies) {
+        if (!empty($cookies)) {
             $cookieHeader = 'Cookie: '.implode('; ', $cookies)."\r\n";
         }
 
@@ -542,7 +542,7 @@ class Request
 
         $request = ['g' => $_GET, 'p' => $_POST, 'c' => $_COOKIE];
 
-        $requestOrder = \ini_get('request_order') ?: \ini_get('variables_order');
+        $requestOrder = ini_get('request_order') ?: ini_get('variables_order');
         $requestOrder = preg_replace('#[^cgp]#', '', strtolower($requestOrder)) ?: 'gp';
 
         $_REQUEST = [[]];
@@ -578,8 +578,6 @@ class Request
 
     /**
      * Gets the list of trusted proxies.
-     *
-     * @return string[]
      */
     public static function getTrustedProxies(): array
     {
@@ -614,8 +612,6 @@ class Request
 
     /**
      * Gets the list of trusted host patterns.
-     *
-     * @return string[]
      */
     public static function getTrustedHosts(): array
     {
@@ -694,8 +690,6 @@ class Request
 
     /**
      * Gets the Session.
-     *
-     * @throws SessionNotFoundException When session is not set properly
      */
     public function getSession(): SessionInterface
     {
@@ -819,7 +813,11 @@ class Request
      */
     public function getPathInfo(): string
     {
-        return $this->pathInfo ??= $this->preparePathInfo();
+        if (null === $this->pathInfo) {
+            $this->pathInfo = $this->preparePathInfo();
+        }
+
+        return $this->pathInfo;
     }
 
     /**
@@ -836,7 +834,11 @@ class Request
      */
     public function getBasePath(): string
     {
-        return $this->basePath ??= $this->prepareBasePath();
+        if (null === $this->basePath) {
+            $this->basePath = $this->prepareBasePath();
+        }
+
+        return $this->basePath;
     }
 
     /**
@@ -869,7 +871,11 @@ class Request
      */
     private function getBaseUrlReal(): string
     {
-        return $this->baseUrl ??= $this->prepareBaseUrl();
+        if (null === $this->baseUrl) {
+            $this->baseUrl = $this->prepareBaseUrl();
+        }
+
+        return $this->baseUrl;
     }
 
     /**
@@ -956,7 +962,7 @@ class Request
         $scheme = $this->getScheme();
         $port = $this->getPort();
 
-        if (('http' === $scheme && 80 == $port) || ('https' === $scheme && 443 == $port)) {
+        if (('http' == $scheme && 80 == $port) || ('https' == $scheme && 443 == $port)) {
             return $this->getHost();
         }
 
@@ -970,7 +976,11 @@ class Request
      */
     public function getRequestUri(): string
     {
-        return $this->requestUri ??= $this->prepareRequestUri();
+        if (null === $this->requestUri) {
+            $this->requestUri = $this->prepareRequestUri();
+        }
+
+        return $this->requestUri;
     }
 
     /**
@@ -1234,8 +1244,6 @@ class Request
 
     /**
      * Gets the mime types associated with the format.
-     *
-     * @return string[]
      */
     public static function getMimeTypes(string $format): array
     {
@@ -1275,7 +1283,7 @@ class Request
     /**
      * Associates a format with mime types.
      *
-     * @param string|string[] $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the content type)
+     * @param string|array $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the content type)
      */
     public function setFormat(?string $format, string|array $mimeTypes)
     {
@@ -1299,7 +1307,9 @@ class Request
      */
     public function getRequestFormat(?string $default = 'html'): ?string
     {
-        $this->format ??= $this->attributes->get('_format');
+        if (null === $this->format) {
+            $this->format = $this->attributes->get('_format');
+        }
 
         return $this->format ?? $default;
     }
@@ -1313,23 +1323,9 @@ class Request
     }
 
     /**
-     * Gets the usual name of the format associated with the request's media type (provided in the Content-Type header).
-     *
-     * @deprecated since Symfony 6.2, use getContentTypeFormat() instead
+     * Gets the format associated with the request.
      */
     public function getContentType(): ?string
-    {
-        trigger_deprecation('symfony/http-foundation', '6.2', 'The "%s()" method is deprecated, use "getContentTypeFormat()" instead.', __METHOD__);
-
-        return $this->getContentTypeFormat();
-    }
-
-    /**
-     * Gets the usual name of the format associated with the request's media type (provided in the Content-Type header).
-     *
-     * @see Request::$formats
-     */
-    public function getContentTypeFormat(): ?string
     {
         return $this->getFormat($this->headers->get('CONTENT_TYPE', ''));
     }
@@ -1436,7 +1432,6 @@ class Request
      * @param bool $asResource If true, a resource will be returned
      *
      * @return string|resource
-     * @psalm-return ($asResource is true ? resource : string)
      */
     public function getContent(bool $asResource = false)
     {
@@ -1571,8 +1566,6 @@ class Request
 
     /**
      * Gets a list of languages acceptable by the client browser ordered in the user browser preferences.
-     *
-     * @return string[]
      */
     public function getLanguages(): array
     {
@@ -1582,8 +1575,7 @@ class Request
 
         $languages = AcceptHeader::fromString($this->headers->get('Accept-Language'))->all();
         $this->languages = [];
-        foreach ($languages as $acceptHeaderItem) {
-            $lang = $acceptHeaderItem->getValue();
+        foreach ($languages as $lang => $acceptHeaderItem) {
             if (str_contains($lang, '-')) {
                 $codes = explode('-', $lang);
                 if ('i' === $codes[0]) {
@@ -1612,8 +1604,6 @@ class Request
 
     /**
      * Gets a list of charsets acceptable by the client browser in preferable order.
-     *
-     * @return string[]
      */
     public function getCharsets(): array
     {
@@ -1621,13 +1611,11 @@ class Request
             return $this->charsets;
         }
 
-        return $this->charsets = array_map('strval', array_keys(AcceptHeader::fromString($this->headers->get('Accept-Charset'))->all()));
+        return $this->charsets = array_keys(AcceptHeader::fromString($this->headers->get('Accept-Charset'))->all());
     }
 
     /**
      * Gets a list of encodings acceptable by the client browser in preferable order.
-     *
-     * @return string[]
      */
     public function getEncodings(): array
     {
@@ -1635,13 +1623,11 @@ class Request
             return $this->encodings;
         }
 
-        return $this->encodings = array_map('strval', array_keys(AcceptHeader::fromString($this->headers->get('Accept-Encoding'))->all()));
+        return $this->encodings = array_keys(AcceptHeader::fromString($this->headers->get('Accept-Encoding'))->all());
     }
 
     /**
      * Gets a list of content types acceptable by the client browser in preferable order.
-     *
-     * @return string[]
      */
     public function getAcceptableContentTypes(): array
     {
@@ -1649,7 +1635,7 @@ class Request
             return $this->acceptableContentTypes;
         }
 
-        return $this->acceptableContentTypes = array_map('strval', array_keys(AcceptHeader::fromString($this->headers->get('Accept'))->all()));
+        return $this->acceptableContentTypes = array_keys(AcceptHeader::fromString($this->headers->get('Accept'))->all());
     }
 
     /**
@@ -1887,7 +1873,7 @@ class Request
             if (class_exists(\Locale::class, false)) {
                 \Locale::setDefault($locale);
             }
-        } catch (\Exception) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -2019,7 +2005,9 @@ class Request
                 unset($clientIps[$key]);
 
                 // Fallback to this when the client IP falls into the range of trusted proxies
-                $firstTrustedIp ??= $clientIp;
+                if (null === $firstTrustedIp) {
+                    $firstTrustedIp = $clientIp;
+                }
             }
         }
 

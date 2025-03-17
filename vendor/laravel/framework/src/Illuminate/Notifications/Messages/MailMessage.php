@@ -3,12 +3,13 @@
 namespace Illuminate\Notifications\Messages;
 
 use Illuminate\Container\Container;
-use Illuminate\Contracts\Mail\Attachable;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Mail\Attachment;
 use Illuminate\Mail\Markdown;
 use Illuminate\Support\Traits\Conditionable;
+use Symfony\Component\Mailer\Header\MetadataHeader;
+use Symfony\Component\Mailer\Header\TagHeader;
+use Symfony\Component\Mime\Email;
 
 class MailMessage extends SimpleMessage implements Renderable
 {
@@ -83,20 +84,6 @@ class MailMessage extends SimpleMessage implements Renderable
      * @var array
      */
     public $rawAttachments = [];
-
-    /**
-     * The tags for the message.
-     *
-     * @var array
-     */
-    public $tags = [];
-
-    /**
-     * The metadata for the message.
-     *
-     * @var array
-     */
-    public $metadata = [];
 
     /**
      * Priority level of the message.
@@ -243,20 +230,12 @@ class MailMessage extends SimpleMessage implements Renderable
     /**
      * Attach a file to the message.
      *
-     * @param  string|\Illuminate\Contracts\Mail\Attachable|\Illuminate\Mail\Attachment  $file
+     * @param  string  $file
      * @param  array  $options
      * @return $this
      */
     public function attach($file, array $options = [])
     {
-        if ($file instanceof Attachable) {
-            $file = $file->toMailAttachment();
-        }
-
-        if ($file instanceof Attachment) {
-            return $file->attachTo($this);
-        }
-
         $this->attachments[] = compact('file', 'options');
 
         return $this;
@@ -285,9 +264,9 @@ class MailMessage extends SimpleMessage implements Renderable
      */
     public function tag($value)
     {
-        array_push($this->tags, $value);
-
-        return $this;
+        return $this->withSymfonyMessage(function (Email $message) use ($value) {
+            $message->getHeaders()->add(new TagHeader($value));
+        });
     }
 
     /**
@@ -299,9 +278,9 @@ class MailMessage extends SimpleMessage implements Renderable
      */
     public function metadata($key, $value)
     {
-        $this->metadata[$key] = $value;
-
-        return $this;
+        return $this->withSymfonyMessage(function (Email $message) use ($key, $value) {
+            $message->getHeaders()->add(new MetadataHeader($key, $value));
+        });
     }
 
     /**
@@ -356,7 +335,7 @@ class MailMessage extends SimpleMessage implements Renderable
     /**
      * Render the mail notification message into an HTML string.
      *
-     * @return \Illuminate\Support\HtmlString
+     * @return string
      */
     public function render()
     {

@@ -72,7 +72,7 @@ class IpUtils
             [$address, $netmask] = explode('/', $ip, 2);
 
             if ('0' === $netmask) {
-                return self::$checkedIps[$cacheKey] = false !== filter_var($address, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV4);
+                return self::$checkedIps[$cacheKey] = filter_var($address, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV4);
             }
 
             if ($netmask < 0 || $netmask > 32) {
@@ -113,17 +113,8 @@ class IpUtils
             throw new \RuntimeException('Unable to check Ipv6. Check that PHP was not compiled with option "disable-ipv6".');
         }
 
-        // Check to see if we were given a IP4 $requestIp or $ip by mistake
-        if (!filter_var($requestIp, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV6)) {
-            return self::$checkedIps[$cacheKey] = false;
-        }
-
         if (str_contains($ip, '/')) {
             [$address, $netmask] = explode('/', $ip, 2);
-
-            if (!filter_var($address, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV6)) {
-                return self::$checkedIps[$cacheKey] = false;
-            }
 
             if ('0' === $netmask) {
                 return (bool) unpack('n*', @inet_pton($address));
@@ -133,10 +124,6 @@ class IpUtils
                 return self::$checkedIps[$cacheKey] = false;
             }
         } else {
-            if (!filter_var($ip, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV6)) {
-                return self::$checkedIps[$cacheKey] = false;
-            }
-
             $address = $ip;
             $netmask = 128;
         }
@@ -168,7 +155,7 @@ class IpUtils
     public static function anonymize(string $ip): string
     {
         $wrappedIPv6 = false;
-        if (str_starts_with($ip, '[') && str_ends_with($ip, ']')) {
+        if ('[' === substr($ip, 0, 1) && ']' === substr($ip, -1, 1)) {
             $wrappedIPv6 = true;
             $ip = substr($ip, 1, -1);
         }

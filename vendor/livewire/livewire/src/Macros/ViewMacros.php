@@ -4,7 +4,6 @@ namespace Livewire\Macros;
 
 use Illuminate\View\AnonymousComponent;
 
-#[\AllowDynamicProperties]
 class ViewMacros
 {
     public function extends()
@@ -28,7 +27,7 @@ class ViewMacros
             unset($params['attributes']);
 
             if (is_subclass_of($view, \Illuminate\View\Component::class)) {
-                $layout = app()->makeWith($view, $params);
+                $layout = new $view();
                 $view = $layout->resolveView()->name();
             } else {
                 $layout = new AnonymousComponent($view, $params);

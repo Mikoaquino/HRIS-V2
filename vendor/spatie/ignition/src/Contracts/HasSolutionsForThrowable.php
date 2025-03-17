@@ -4,9 +4,6 @@ namespace Spatie\Ignition\Contracts;
 
 use Throwable;
 
-/**
- * Interface used for SolutionProviders.
- */
 interface HasSolutionsForThrowable
 {
     public function canSolve(Throwable $throwable): bool;

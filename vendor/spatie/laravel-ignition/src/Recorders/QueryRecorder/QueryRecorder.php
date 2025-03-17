@@ -19,7 +19,7 @@ class QueryRecorder
     public function __construct(
         Application $app,
         bool $reportBindings = true,
-        ?int $maxQueries = 200
+        ?int $maxQueries = null
     ) {
         $this->app = $app;
         $this->reportBindings = $reportBindings;

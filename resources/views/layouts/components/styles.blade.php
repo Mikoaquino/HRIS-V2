@@ -1,5 +1,5 @@
 		<!-- FAVICON -->
-		<link rel="icon" href="{{asset('assets/img/brand/favicon.png')}}" type="image/x-icon" />
+		<link rel="icon" href="{{asset('assets/img/brand/favicon.png')}}" type="image/x-icon"/>
 
 		<!-- ICONS CSS -->
 		<link href="{{asset('assets/plugins/icons/icons.css')}}" rel="stylesheet">
@@ -13,7 +13,7 @@
 		<!-- P-SCROLL BAR CSS -->
 		<link href="{{asset('assets/plugins/perfect-scrollbar/p-scrollbar.css')}}" rel="stylesheet" />
 
-		@yield('styles')
+        @yield('styles')
 
 		<!-- STYLES CSS -->
 		<link href="{{asset('assets/css/style.css')}}" rel="stylesheet">

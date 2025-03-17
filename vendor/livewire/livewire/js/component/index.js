@@ -82,7 +82,7 @@ export default class Component {
         }
 
         if (countElementsBeforeMarker(this.el.nextSibling) > 0) {
-            console.warn(`Livewire: Multiple root elements detected. This is not supported. See docs for more information https://laravel-livewire.com/docs/2.x/troubleshooting#root-element-issues`, this.el)
+            console.warn(`Livewire: Multiple root elements detected. This is not supported. See docs for more information https://laravel-livewire.com/docs/2.x/rendering-components#returning-blade`, this.el)
         }
     }
 
@@ -279,7 +279,7 @@ export default class Component {
 
     handleResponse(message) {
         let response = message.response
-
+        
         this.updateServerMemoFromResponseAndMergeBackIntoResponse(message)
 
         store.callHook('message.received', message, this)
@@ -362,7 +362,7 @@ export default class Component {
 
             const modelValue = directives.get('model').value
 
-            if (! (el.nodeName == 'SELECT' && ! el.multiple) && DOM.hasFocus(el) && ! dirtyInputs.includes(modelValue)) return
+            if (DOM.hasFocus(el) && ! dirtyInputs.includes(modelValue)) return
 
             DOM.setInputValueFromModel(el, this)
         })

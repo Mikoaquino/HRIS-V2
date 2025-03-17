@@ -65,7 +65,7 @@ trait Base
 	}
 
 
-	public function assert(callable $handler, ?string $description = null): self
+	public function assert(callable $handler, string $description = null): self
 	{
 		$this->asserts[] = [$handler, $description];
 		return $this;
@@ -89,7 +89,6 @@ trait Base
 			);
 			return null;
 		}
-
 		return $this->default;
 	}
 
@@ -99,7 +98,6 @@ trait Base
 		if ($this->before) {
 			$value = ($this->before)($value);
 		}
-
 		return $value;
 	}
 
@@ -126,7 +124,6 @@ trait Base
 			);
 			return false;
 		}
-
 		return true;
 	}
 
@@ -148,6 +145,7 @@ trait Base
 				);
 				return false;
 			}
+
 		} elseif ((is_int($value) || is_float($value)) && !self::isInRange($value, $range)) {
 			$context->addError(
 				'The %label% %path% expects to be in range %expected%, %value% given.',
@@ -156,7 +154,6 @@ trait Base
 			);
 			return false;
 		}
-
 		return true;
 	}
 
@@ -178,7 +175,6 @@ trait Base
 				foreach ($value as $k => $v) {
 					$object->$k = $v;
 				}
-
 				$value = $object;
 			}
 		}

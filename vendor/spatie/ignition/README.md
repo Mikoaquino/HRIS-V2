@@ -2,6 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/ignition.svg?style=flat-square)](https://packagist.org/packages/spatie/ignition)
 [![Run tests](https://github.com/spatie/ignition/actions/workflows/run-tests.yml/badge.svg)](https://github.com/spatie/ignition/actions/workflows/run-tests.yml)
+[![PHPStan](https://github.com/spatie/ignition/actions/workflows/phpstan.yml/badge.svg)](https://github.com/spatie/ignition/actions/workflows/phpstan.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/ignition.svg?style=flat-square)](https://packagist.org/packages/spatie/ignition)
 
 [Ignition](https://flareapp.io/docs/ignition-for-laravel/introduction) is a beautiful and customizable error page for
@@ -50,11 +51,7 @@ on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
-For Laravel apps, head over to [laravel-ignition](https://github.com/spatie/laravel-ignition).
-
-For Symfony apps, go to [symfony-ignition-bundle](https://github.com/spatie/symfony-ignition-bundle).
-
-For all other PHP projects, install the package via composer:
+You can install the package via composer:
 
 ```bash
 composer require spatie/ignition
@@ -62,7 +59,7 @@ composer require spatie/ignition
 
 ## Usage
 
-In order to display the Ignition error page when an error occurs in your project, you must add this code. Typically, this would be done in the bootstrap part of your application.
+In order display the Ignition error page when an error occurs in your project, you must add this code. Typically, this would be done in the bootstrap part of your application.
 
 ```php
 \Spatie\Ignition\Ignition::make()->register();
@@ -81,7 +78,7 @@ more cleaner.
 
 ### Using dark mode
 
-By default, Ignition uses a nice white based theme. If this is too bright for your eyes, you can use dark mode.
+By default, Ignition uses a nice white based them. If this is too bright for your eyes, you can use dark mode.
 
 ```php
 \Spatie\Ignition\Ignition::make()
@@ -121,7 +118,7 @@ the exception gets thrown.
 use Spatie\Ignition\Contracts\Solution;
 use Spatie\Ignition\Contracts\ProvidesSolution;
 
-class CustomException extends Exception implements ProvidesSolution
+class CustomException implements ProvidesSolution
 {
     public function getSolution(): Solution
     {
@@ -178,7 +175,7 @@ interface HasSolutionsForThrowable
 {
     public function canSolve(Throwable $throwable): bool;
 
-    /** @return \Spatie\Ignition\Contracts\Solution[] */
+    /** \Facade\Ignition\Contracts\Solution[] */
     public function getSolutions(Throwable $throwable): array;
 }
 ```
@@ -200,7 +197,7 @@ To register a solution provider to Ignition you must call the `addSolutionProvid
 
 ### Sending exceptions to Flare
 
-Ignition comes with the ability to send exceptions to [Flare](https://flareapp.io), an exception monitoring service. Flare
+Ignition comes the ability to send exceptions to [Flare](https://flareapp.io), an exception monitoring service. Flare
 can notify you when new exceptions are occurring in your production environment.
 
 To send exceptions to Flare, simply call the `sendToFlareMethod` and pass it the API key you got when creating a project
@@ -259,7 +256,7 @@ use Spatie\FlareClient\Flare;
 
 ### Anonymize request to Flare
 
-By default, the Ignition collects information about the IP address of your application users. If you don't want to send this information to Flare, call `anonymizeIp()`.
+By default, the Ignition collects information about the IP address of your application users. If you want don't want to send this information to Flare, call `anonymizeIp()`.
 
 ```php
 use Spatie\FlareClient\Flare;
@@ -279,7 +276,7 @@ When an exception occurs in a web request, the Flare client will pass on any req
 
 In some cases, such as a login page, these request fields may contain a password that you don't want to send to Flare.
 
-To censor out values of certain fields, you can use `censorRequestBodyFields`. You should pass it the names of the fields you wish to censor.
+To censor out values of certain fields, you can use call `censorRequestBodyFields`. You should pass it the names of the fields you wish to censor.
 
 ```php
 use Spatie\FlareClient\Flare;
@@ -333,11 +330,11 @@ use Spatie\FlareClient\Flare;
 
 ### Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information about what has changed recently.
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## Dev setup
 

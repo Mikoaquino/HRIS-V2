@@ -78,62 +78,6 @@ class View implements ArrayAccess, Htmlable, ViewContract
     }
 
     /**
-     * Get the evaluated contents of a given fragment.
-     *
-     * @param  string  $fragment
-     * @return string
-     */
-    public function fragment($fragment)
-    {
-        return $this->render(function () use ($fragment) {
-            return $this->factory->getFragment($fragment);
-        });
-    }
-
-    /**
-     * Get the evaluated contents for a given array of fragments.
-     *
-     * @param  array  $fragments
-     * @return string
-     */
-    public function fragments(array $fragments)
-    {
-        return collect($fragments)->map(fn ($f) => $this->fragment($f))->implode('');
-    }
-
-    /**
-     * Get the evaluated contents of a given fragment if the given condition is true.
-     *
-     * @param  bool  $boolean
-     * @param  string  $fragment
-     * @return string
-     */
-    public function fragmentIf($boolean, $fragment)
-    {
-        if (value($boolean)) {
-            return $this->fragment($fragment);
-        }
-
-        return $this->render();
-    }
-
-    /**
-     * Get the evaluated contents for a given array of fragments if the given condition is true.
-     *
-     * @param  bool  $boolean
-     * @param  array  $fragments
-     * @return string
-     */
-    public function fragmentsIf($boolean, array $fragments)
-    {
-        if (value($boolean)) {
-            return $this->fragments($fragments);
-        }
-
-        return $this->render();
-    }
-
-    /**
      * Get the string contents of the view.
      *
      * @param  callable|null  $callback
@@ -168,7 +112,7 @@ class View implements ArrayAccess, Htmlable, ViewContract
      */
     protected function renderContents()
     {
-        // We will keep track of the number of views being rendered so we can flush
+        // We will keep track of the amount of views being rendered so we can flush
         // the section after the complete rendering operation is done. This will
         // clear out the sections for any separate views that may be rendered.
         $this->factory->incrementRender();
@@ -178,7 +122,7 @@ class View implements ArrayAccess, Htmlable, ViewContract
         $contents = $this->getContents();
 
         // Once we've finished rendering the view, we'll decrement the render count
-        // so that each section gets flushed out next time a view is created and
+        // so that each sections get flushed out next time a view is created and
         // no old sections are staying around in the memory of an environment.
         $this->factory->decrementRender();
 

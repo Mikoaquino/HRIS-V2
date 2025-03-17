@@ -14,6 +14,7 @@ use Spatie\FlareClient\FlareMiddleware\FlareMiddleware;
 use Spatie\FlareClient\Report;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
+use Spatie\Ignition\Contracts\ProvidesSolution;
 use Spatie\Ignition\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
@@ -48,10 +49,6 @@ class Ignition
 
     /** @var ArrayObject<int, callable(Throwable): mixed> */
     protected ArrayObject $documentationLinkResolvers;
-
-    protected string $customHtmlHead = '';
-
-    protected string $customHtmlBody = '';
 
     public static function make(): self
     {
@@ -154,7 +151,7 @@ class Ignition
     }
 
     /**
-     * @param array<int, HasSolutionsForThrowable|class-string<HasSolutionsForThrowable>> $solutionProviders
+     * @param array<int, ProvidesSolution|class-string<ProvidesSolution>> $solutionProviders
      *
      * @return $this
      */
@@ -165,28 +162,16 @@ class Ignition
         return $this;
     }
 
-    /** @deprecated Use `setTheme('dark')` instead */
     public function useDarkMode(): self
     {
-        return $this->setTheme('dark');
-    }
-
-    /** @deprecated Use `setTheme($theme)` instead */
-    public function theme(string $theme): self
-    {
-        return $this->setTheme($theme);
-    }
-
-    public function setTheme(string $theme): self
-    {
-        $this->ignitionConfig->setOption('theme', $theme);
+        $this->theme('dark');
 
         return $this;
     }
 
-    public function setEditor(string $editor): self
+    public function theme(string $theme): self
     {
-        $this->ignitionConfig->setOption('editor', $editor);
+        $this->ignitionConfig->setOption('theme', $theme);
 
         return $this;
     }
@@ -270,68 +255,31 @@ class Ignition
         throw new ErrorException($message, 0, $level, $file, $line);
     }
 
-    /**
-     * This is the main entry point for the framework agnostic Ignition package.
-     * Displays the Ignition page and optionally sends a report to Flare.
-     */
     public function handleException(Throwable $throwable): Report
     {
         $this->setUpFlare();
 
-        $report = $this->createReport($throwable);
+        $report = $this->flare->createReport($throwable);
 
         if ($this->shouldDisplayException && $this->inProductionEnvironment !== true) {
             $this->renderException($throwable, $report);
         }
 
         if ($this->flare->apiTokenSet() && $this->inProductionEnvironment !== false) {
-            $this->flare->report($throwable, report: $report);
+            $this->flare->report($throwable);
         }
 
         return $report;
     }
 
-    /**
-     * This is the main entrypoint for laravel-ignition. It only renders the exception.
-     * Sending the report to Flare is handled in the laravel-ignition log handler.
-     */
-    public function renderException(Throwable $throwable, ?Report $report = null): void
+    /** @return array<class-string<HasSolutionsForThrowable>> */
+    protected function getDefaultSolutionProviders(): array
     {
-        $this->setUpFlare();
-
-        $report ??= $this->createReport($throwable);
-
-        $viewModel = new ErrorPageViewModel(
-            $throwable,
-            $this->ignitionConfig,
-            $report,
-            $this->solutionProviderRepository->getSolutionsForThrowable($throwable),
-            $this->solutionTransformerClass,
-            $this->customHtmlHead,
-            $this->customHtmlBody
-        );
-
-        (new Renderer())->render(['viewModel' => $viewModel]);
-    }
-
-    /**
-     * Add custom HTML which will be added to the head tag of the error page.
-     */
-    public function addCustomHtmlToHead(string $html): self
-    {
-        $this->customHtmlHead .= $html;
-
-        return $this;
-    }
-
-    /**
-     * Add custom HTML which will be added to the body tag of the error page.
-     */
-    public function addCustomHtmlToBody(string $html): self
-    {
-        $this->customHtmlBody .= $html;
-
-        return $this;
+        return [
+            BadMethodCallSolutionProvider::class,
+            MergeConflictSolutionProvider::class,
+            UndefinedPropertySolutionProvider::class,
+        ];
     }
 
     protected function setUpFlare(): self
@@ -353,18 +301,16 @@ class Ignition
         return $this;
     }
 
-    /** @return array<class-string<HasSolutionsForThrowable>> */
-    protected function getDefaultSolutionProviders(): array
+    public function renderException(Throwable $throwable, Report $report): void
     {
-        return [
-            BadMethodCallSolutionProvider::class,
-            MergeConflictSolutionProvider::class,
-            UndefinedPropertySolutionProvider::class,
-        ];
-    }
+        $viewModel = new ErrorPageViewModel(
+            $throwable,
+            $this->ignitionConfig,
+            $report,
+            $this->solutionProviderRepository->getSolutionsForThrowable($throwable),
+            $this->solutionTransformerClass,
+        );
 
-    protected function createReport(Throwable $throwable): Report
-    {
-        return $this->flare->createReport($throwable);
+        (new Renderer())->render(['viewModel' => $viewModel]);
     }
 }

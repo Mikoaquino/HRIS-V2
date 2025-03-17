@@ -15,8 +15,6 @@ class Client
 
     protected int $timeout;
 
-    protected $lastRequest = null;
-
     public function __construct(
         ?string $apiToken = null,
         string $baseUrl = 'https://reporting.flareapp.io/api',
