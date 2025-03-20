@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Casts\Hash;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -14,7 +15,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $fillable = [
         'email',
+        'employee_id',
         'password',
+        'status',
     ];
 
     protected $hidden = [
@@ -26,7 +29,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'deleted_at'        => 'datetime',
         'created_at'        => 'datetime',
-        'updated_at'        => 'datetime'
+        'updated_at'        => 'datetime',
+        'password'          => Hash::class,
     ];
 
     public function employee(): BelongsTo
