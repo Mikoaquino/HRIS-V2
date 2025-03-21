@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        activity()->disableLogging();
+        
         $this->call(UserSeeder::class);
     }
 }
