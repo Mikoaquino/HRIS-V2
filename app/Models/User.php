@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use App\Casts\Hash;
+use Spatie\Activitylog\LogOptions;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +14,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, LogsActivity;
+
+    protected const LOG_NAME = 'user';
 
     protected $fillable = [
         'email',
@@ -27,14 +32,29 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'deleted_at'        => 'datetime',
-        'created_at'        => 'datetime',
-        'updated_at'        => 'datetime',
-        'password'          => Hash::class,
+        'deleted_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'password' => Hash::class,
     ];
 
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    public function getActivityLogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll()
+            ->useLogName(self::LOG_NAME)
+            ->dontSubmitEmptyLogs()
+            ->setDescriptionForEvent(function (string $event) {
+                $causer = Auth::user() ?? 'System';
+                return match ($event) {
+                    'created' => __('activity.create.user', ['causer' => $causer]),
+                    'updated' => __('activity.update.user', ['causer' => $causer]),
+                };
+            });
     }
 }
