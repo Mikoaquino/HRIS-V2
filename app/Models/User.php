@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\Hash;
+use App\Enums\UserStatus;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -36,6 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'password' => Hash::class,
+        'status' => UserStatus::class,
     ];
 
     public function employee(): BelongsTo
