@@ -7,7 +7,7 @@ return [
     ],
     'update' => [
         'employee' => ':causer updated an existing employee record.',
-        'user' => ':causer updated :pronoun user credential(s).',
+        'user' => ':causer updated user credential(s).',
     ],
     'temporary_delete' => [
         'employee' => [
