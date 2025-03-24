@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class EmployeeController extends Controller
 {
-    public function __construct(protected Employee $employee) {}
+    public function __construct() {}
 
     public function index()
     {
@@ -31,11 +30,6 @@ class EmployeeController extends Controller
     }
 
     public function destroy(int $id)
-    {
-        //
-    }
-
-    public function forceDestroy(int $id)
     {
         //
     }
