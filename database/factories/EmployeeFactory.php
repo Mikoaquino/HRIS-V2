@@ -20,7 +20,6 @@ class EmployeeFactory extends Factory
             'first_name' => fake()->firstName(),
             'middle_name' => fake()->randomElement([fake()->firstName(), null]),
             'last_name' => fake()->lastName(),
-            'deleted_at' => fake()->randomElement([now(), null]),
         ];
     }
 }
