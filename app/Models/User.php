@@ -8,16 +8,22 @@ use Spatie\Activitylog\LogOptions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
-    use HasFactory, Notifiable, LogsActivity;
+    use HasFactory, Notifiable, LogsActivity, SoftDeletes;
 
     protected const LOG_NAME = 'user';
+
+    protected static $recordEvents = [
+        'created',
+        'updated',
+        'deleted',
+    ];
 
     protected $fillable = [
         'email',
@@ -32,7 +38,6 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'deleted_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
@@ -56,6 +61,9 @@ class User extends Authenticatable implements MustVerifyEmail
                 return match ($event) {
                     'created' => __('activity.create.user', ['causer' => $causer]),
                     'updated' => __('activity.update.user', ['causer' => $causer]),
+                    'deleted' => $this->exists
+                        ? __('activity.temporary_delete.user.single', ['causer' => $causer])
+                        : __('activity.force_delete.user.single', ['causer' => $causer]),
                 };
             });
     }
