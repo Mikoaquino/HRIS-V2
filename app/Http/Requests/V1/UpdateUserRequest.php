@@ -28,7 +28,7 @@ class UpdateUserRequest extends FormRequest
             return $baseRules;
         }
         
-        foreach($baseRules as &$rule) {
+        foreach ($baseRules as &$rule) {
             array_unshift($rule, 'sometimes');
         }
 
