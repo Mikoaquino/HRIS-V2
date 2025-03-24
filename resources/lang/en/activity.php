@@ -10,15 +10,15 @@ return [
         'user' => ':causer updated user credential(s).',
     ],
     'temporary_delete' => [
-        'employee' => [
-            'single' => ':causer temporarily deleted an employee.',
-            'batch' => ':causer temporarily deleted :count employees.'
+        'user' => [
+            'single' => ':causer temporarily deleted a user.',
+            'batch' => ':causer temporarily deleted :count users.'
         ]
     ],
     'force_delete' => [
-        'employee' => [
-            'single' => ':causer permanently deleted an employee.',
-            'batch' => ':causer permanently deleted :count employees.',
+        'user' => [
+            'single' => ':causer permanently deleted a user.',
+            'batch' => ':causer permanently deleted :count users.',
         ]
     ]
 ];
