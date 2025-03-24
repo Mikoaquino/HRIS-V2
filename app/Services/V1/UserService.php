@@ -2,6 +2,7 @@
 
 namespace App\Services\V1;
 
+use App\Enums\UserStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Filters\V1\UserFilter;
@@ -26,7 +27,7 @@ class UserService
         return $users->paginate()->appends($request->query());
     }
 
-    public function createUser(array $validatedRequest)
+    public function createUser(array $validatedRequest): User
     {
         return DB::transaction(fn () => $this->user->create($validatedRequest));
     }
@@ -42,10 +43,38 @@ class UserService
         return $user;
     }
 
-    public function updateUser(array $validatedRequest, string $id)
+    public function updateUser(array $validatedRequest, string $id): User
     {
         $user = $this->user->findOrFail($id);
 
         return DB::transaction(fn () => tap($user)->update($validatedRequest));
+    }
+
+    public function deleteUser(string $id)
+    {
+        $user = $this->user->withTrashed()->findOrFail($id);
+
+        if ($user->trashed()) {
+            return $this->permanentlyDeleteUser($user);
+        }
+
+        return $this->temporarilyDeleteUser($user);
+    }
+
+    public function temporarilyDeleteUser(User $user)
+    {
+        return DB::transaction(function () use ($user) {
+            $user->deleteOrFail();
+            $user->status = UserStatus::INACTIVE;
+            $user->saveQuietly();
+        });
+    }
+
+    public function permanentlyDeleteUser(User $user)
+    {
+        return DB::transaction(function () use ($user) {
+            $user->employee->forceDelete();
+            $user->forceDelete();
+        });
     }
 }
