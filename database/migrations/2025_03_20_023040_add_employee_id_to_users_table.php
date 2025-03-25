@@ -17,9 +17,9 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->after('email', function ($table) {
                 $table->foreignIdFor(Employee::class)
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->cascadeOnDelete();
             });
         });
     }

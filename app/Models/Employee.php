@@ -2,17 +2,27 @@
 
 namespace App\Models;
 
+use Spatie\Activitylog\LogOptions;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Employee extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, LogsActivity;
+
+    protected const LOG_NAME = 'employee';
+
+    protected static $recordEvents = [
+        'created',
+        'updated',
+    ];
 
     protected $guarded = [
+        'id',
         'created_at',
         'updated_at',
     ];
@@ -33,5 +43,20 @@ class Employee extends Model
     public function account(): HasOne
     {
         return $this->hasOne(User::class);
+    }
+
+    public function getActivityLogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll()
+            ->useLogName(self::LOG_NAME)
+            ->dontSubmitEmptyLogs()
+            ->setDescriptionForEvent(function (string $event) {
+                $causer = Auth::user() ?? 'System';
+                return match ($event) {
+                    'created' => __('activity.create.employee', ['causer' => $causer]),
+                    'updated' => __('activity.update.employee', ['causer' => $causer]),
+                };
+            });
     }
 }
