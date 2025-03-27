@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\User;
+use App\Services\V1\AccessTokenService;
 use App\Traits\HttpResponse;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\V1\StoreAccessTokenRequest;
 
@@ -15,30 +15,31 @@ class AccessTokenController extends Controller
 {
     use HttpResponse;
 
-    public function store(StoreAccessTokenRequest $request): JsonResponse
+    public function __construct(protected AccessTokenService $accessToken) {}
+
+    public function store(StoreAccessTokenRequest $request)
     {
-        $user = User::firstWhere('email', $request->email);
-
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            return $this->error(
-                message: __('auth.failed'),
-                status: Response::HTTP_UNAUTHORIZED
+        try {
+            $token = $this->accessToken->createToken($request);
+            if (! $token) {
+                return $this->error(
+                    message: __('auth.failed'),
+                    status: Response::HTTP_UNAUTHORIZED
+                );
+            }
+            return $this->success(
+                data: ['token' => $token],
+                status: Response::HTTP_CREATED,
             );
+        } catch (Exception $e) {
+            return $this->error(message: $e->getMessage());
         }
-
-        return $this->success(
-            data: ['token' => $user->createToken('basic')->plainTextToken],
-            status: Response::HTTP_CREATED,
-        );
     }
 
     public function destroy(Request $request): JsonResponse
     {
-        $request->user()->tokens()->delete();
+        if (! $this->accessToken->revokeTokens($request));
         
-        return $this->success(
-            message: __('auth.tokens.deleted'),
-            status: Response::HTTP_NO_CONTENT
-        );
+        return $this->success(message: __('auth.tokens.deleted'));
     }
 }
