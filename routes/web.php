@@ -254,3 +254,9 @@ Route::get('widget-notification', WidgetNotification::class);
 Route::get('widgets', Widgets::class);
 Route::get('width', Width::class);
 Route::get('wish-list', WishList::class);
+Route::get('audit-trail', function () {
+    return view('livewire.audit-trails');
+});
+Route::get('hr-dashboard', function () {
+    return view('livewire.hr-dashboard');
+});
