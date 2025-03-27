@@ -1,1 +1,0 @@
-$((function(){"use strict";new PerfectScrollbar("#mainInvoiceList",{suppressScrollX:!0}),new PerfectScrollbar(".main-content-body-invoice",{suppressScrollX:!0}),$("#mainInvoiceList .media").on("click",(function(e){$(this).addClass("selected"),$(this).siblings().removeClass("selected"),$("body").addClass("main-content-body-show")}))}));
