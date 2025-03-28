@@ -17,10 +17,10 @@ class AccessTokenController extends Controller
 
     public function __construct(protected AccessTokenService $accessToken) {}
 
-    public function store(StoreAccessTokenRequest $request)
+    public function store(StoreAccessTokenRequest $request): JsonResponse
     {
         try {
-            $token = $this->accessToken->createToken($request);
+            $token = $this->accessToken->createToken($request->validated());
             if (! $token) {
                 return $this->error(
                     message: __('auth.failed'),
