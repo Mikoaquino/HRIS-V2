@@ -16,6 +16,7 @@ class UserResource extends JsonResource
             'status' => $this->status,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
+            'deletedAt' => $this->deleted_at,
             'employee' => new EmployeeResource($this->whenLoaded('employee')),
         ];
     }
