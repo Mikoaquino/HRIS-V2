@@ -1,1 +1,0 @@
-$((function(){$(".counter-plus").on("click",(function(){var n=$(this).closest("div").find(".qty"),i=parseInt(n.val());isNaN(i)||n.val(i+1)})),$(".counter-minus").on("click",(function(){var n=$(this).closest("div").find(".qty"),i=parseInt(n.val());!isNaN(i)&&i>0&&n.val(i-1)}))}));
