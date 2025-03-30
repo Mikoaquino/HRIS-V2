@@ -54,17 +54,19 @@ class User extends Authenticatable
     public function getActivityLogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->logAll()
+            ->logFillable()
+            ->logExcept(['password', 'remember_token'])
+            ->logOnlyDirty()
             ->useLogName(self::LOG_NAME)
             ->dontSubmitEmptyLogs()
             ->setDescriptionForEvent(function (string $event) {
-                $causer = Auth::user() ?? 'System';
+                $causer = Auth::user()->last_name ?? 'System';
                 return match ($event) {
                     'created' => __('activity.create.user', ['causer' => $causer]),
-                    'updated' => __('activity.update.user', ['causer' => $causer]),
-                    'deleted' => $this->exists
+                    'updated' => $this->deleted_at
                         ? __('activity.temporary_delete.user.single', ['causer' => $causer])
-                        : __('activity.force_delete.user.single', ['causer' => $causer]),
+                        : __('activity.update.user', ['causer' => $causer]),
+                    'deleted' => __('activity.force_delete.user.single', ['causer' => $causer]),
                 };
             });
     }

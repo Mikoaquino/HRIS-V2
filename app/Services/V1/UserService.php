@@ -64,9 +64,9 @@ class UserService
     public function temporarilyDeleteUser(User $user)
     {
         return DB::transaction(function () use ($user) {
-            $user->deleteOrFail();
+            $user->deleted_at = now();
             $user->status = UserStatus::INACTIVE;
-            $user->saveQuietly();
+            $user->save();
         });
     }
 
