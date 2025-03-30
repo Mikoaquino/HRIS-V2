@@ -1,11 +1,18 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AccessTokenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\EmployeeController;
 
-// TODO: Add middleware (policies|gate, auth, etc.)
 Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function () {
-    Route::apiResource('employees', EmployeeController::class);
-    Route::apiResource('users', UserController::class);
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::apiResource('employees', EmployeeController::class);
+        Route::apiResource('users', UserController::class);        
+    });
+
+    Route::prefix('auth')->group(function () {
+        Route::post('login', [AccessTokenController::class, 'store'])->middleware('guest');
+        Route::post('logout', [AccessTokenController::class, 'destroy'])->middleware('auth:sanctum');
+    });
 });
