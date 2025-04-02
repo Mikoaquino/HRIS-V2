@@ -125,7 +125,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <button
-                                            class="border-end-0 border-start-0 border-top-0   border-bottom-4 bg-transparent text-info border-info fw-bold"
+                                            class="border-end-0 border-start-0 border-top-0   border-bottom-4 bg-transparent text-primary bd-primary fw-bold"
                                             data-bs-toggle="tab" data-bs-target="#absence">
                                             Absence Rate
                                         </button>
@@ -293,15 +293,34 @@
                         ctx.save();
                         ctx.beginPath();
 
-                        // Create rounded rectangle path
-                        const radius = 10; // Adjust for desired roundness
-                        ctx.moveTo(x - width / 2 + radius, y);
-                        ctx.arcTo(x + width / 2, y, x + width / 2, bottom, radius);
-                        ctx.arcTo(x + width / 2, bottom, x - width / 2, bottom, radius);
-                        ctx.arcTo(x - width / 2, bottom, x - width / 2, y, radius);
-                        ctx.arcTo(x - width / 2, y, x + width / 2, y, radius);
 
-                        ctx.clip();
+                        const radius = 8;
+
+                        if (datasetIndex === 0) {
+                            ctx.moveTo(x - width / 2, y);
+                            ctx.lineTo(x + width / 2, y);
+                            ctx.lineTo(x + width / 2, bottom - radius);
+                            ctx.arcTo(x + width / 2, bottom, x + width / 2 - radius, bottom,
+                                radius);
+                            ctx.lineTo(x - width / 2 + radius, bottom);
+                            ctx.arcTo(x - width / 2, bottom, x - width / 2, bottom - radius,
+                                radius);
+                            ctx.lineTo(x - width / 2, y);
+                        } else {
+                            ctx.moveTo(x - width / 2, bottom);
+                            ctx.lineTo(x - width / 2, y + radius);
+                            ctx.arcTo(x - width / 2, y, x - width / 2 + radius, y, radius);
+                            ctx.lineTo(x + width / 2 - radius, y);
+                            ctx.arcTo(x + width / 2, y, x + width / 2, y + radius, radius);
+                            ctx.lineTo(x + width / 2, bottom);
+                            ctx.lineTo(x - width / 2, bottom);
+                        }
+
+                        ctx.closePath();
+
+                        ctx.fillStyle = dataset.backgroundColor[index] || dataset
+                            .backgroundColor;
+                        ctx.fill();
 
                         ctx.restore();
                     });
@@ -311,44 +330,62 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             var ctx = document.getElementById('absenceRateChart').getContext('2d');
+
+            const totalEmployees = [16, 18, 18, 14, 12, 14, 16, 20, 14, 16, 14, 16];
+            const presentEmployees = [10, 12, 14, 12, 8, 11, 12, 14, 13, 11, 10, 14];
+            const absentEmployees = totalEmployees.map((total, index) => total - presentEmployees[index]);
+
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            const barColors = [
+                'rgba(78, 198, 176, 1)',
+                'rgba(255, 110, 110, 1)',
+                'rgba(255, 204, 51, 1)',
+                'rgba(46, 213, 152, 1)',
+                'rgba(34, 124, 157, 1)',
+                'rgba(238, 82, 107, 1)',
+                'rgba(248, 148, 114, 1)',
+                'rgba(102, 204, 170, 1)',
+                'rgba(138, 140, 236, 1)',
+                'rgba(249, 161, 58, 1)',
+                'rgba(232, 193, 210, 1)',
+                'rgba(128, 140, 153, 1)'
+            ];
+
+            // Create chart
             var chart = new Chart(ctx, {
                 type: 'bar',
-                plugins: ['roundedBars'],
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
-                        'Dec'
-                    ],
+                    labels: months,
                     datasets: [{
-                            label: 'Total Employees',
-                            data: [16, 18, 18, 14, 12, 14, 16, 20, 14, 16, 14, 16],
-                            backgroundColor: 'rgba(220, 220, 240, 1)', // Light grey for top part
+                            label: 'Present Employees',
+                            data: presentEmployees,
+                            backgroundColor: barColors,
                             borderWidth: 0,
-                            order: 2
+                            borderRadius: {
+                                topLeft: 8,
+                                topRight: 8,
+                                bottomLeft: 0,
+                                bottomRight: 0
+                            },
+                            borderSkipped: false
                         },
                         {
-                            label: 'Present Employees',
-                            data: [10, 12, 14, 12, 10, 11, 12, 14, 11, 12, 10, 14],
-                            backgroundColor: [
-                                'rgba(10, 188, 170, 1)', // Teal green for January
-                                'rgba(255, 110, 110, 1)', // Coral red for February
-                                'rgba(255, 204, 51, 1)', // Yellow for March
-                                'rgba(10, 188, 170, 1)', // Teal green for April
-                                'rgba(51, 102, 153, 1)', // Dark blue for May
-                                'rgba(255, 110, 110, 1)', // Coral red for June
-                                'rgba(255, 152, 102, 1)', // Orange for July
-                                'rgba(102, 204, 153, 1)', // Seafoam green for August
-                                'rgba(153, 153, 255, 1)', // Lavender for September
-                                'rgba(255, 179, 71, 1)', // Light orange for October
-                                'rgba(204, 204, 204, 1)', // Light grey for November
-                                'rgba(128, 128, 128, 1)' // Grey for December
-                            ],
+                            label: 'Absent Employees',
+                            data: absentEmployees,
+                            backgroundColor: 'rgba(0, 0, 0, 1)',
                             borderWidth: 0,
-                            order: 1
+                            borderRadius: {
+                                topLeft: 8,
+                                topRight: 8,
+                                bottomLeft: 0,
+                                bottomRight: 0
+                            },
+                            borderSkipped: false
                         }
                     ]
                 },
                 options: {
-                    borderRadius: 10,
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
@@ -359,9 +396,28 @@
                             enabled: true,
                             mode: 'index',
                             intersect: false,
-                            backgroundColor: 'rgba(0,0,0,0.7)',
+                            backgroundColor: 'rgba(25, 25, 65, 0.9)',
                             titleColor: 'white',
-                            bodyColor: 'white'
+                            bodyColor: 'white',
+                            cornerRadius: 8,
+                            padding: 10,
+                            callbacks: {
+                                label: function(context) {
+                                    const datasetIndex = context.datasetIndex;
+                                    const dataIndex = context.dataIndex;
+                                    let value = context.raw;
+
+                                    if (datasetIndex === 0) {
+                                        return `Present: ${value}`;
+                                    } else {
+                                        return `Absent: ${value}`;
+                                    }
+                                },
+                                afterBody: function(tooltipItems) {
+                                    const index = tooltipItems[0].dataIndex;
+                                    return `Total: ${totalEmployees[index]}`;
+                                }
+                            }
                         }
                     },
                     scales: {
@@ -370,8 +426,15 @@
                             grid: {
                                 display: false
                             },
+                            border: {
+                                display: false
+                            },
                             ticks: {
-                                color: 'rgba(0,0,0,0.6)'
+                                color: 'rgba(150, 150, 150, 0.8)',
+                                font: {
+                                    family: "'Helvetica', 'Arial', sans-serif",
+                                    size: 12
+                                }
                             }
                         },
                         y: {
@@ -379,16 +442,74 @@
                             beginAtZero: true,
                             max: 20,
                             grid: {
-                                color: 'rgba(0,0,0,0.1)',
+                                display: true,
                                 drawBorder: false
                             },
-                            ticks: {
+                            border: {
                                 display: false
+                            },
+                            ticks: {
+                                stepSize: 4,
+                                color: 'rgba(150, 150, 150, 0.8)',
+                                font: {
+                                    family: "'Helvetica', 'Arial', sans-serif",
+                                    size: 12
+                                },
+                                padding: 10,
+                                callback: function(value) {
+                                    return value.toString().padStart(2, '0');
+                                }
                             }
                         }
-                    }
+                    },
+                    layout: {
+                        padding: {
+                            top: 20,
+                            right: 20,
+                            bottom: 10,
+                            left: 10
+                        }
+                    },
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.9
                 }
             });
+
+
+            const addHighlightLabel = function() {
+                const meta = chart.getDatasetMeta(1);
+                const rect = meta.data[7];
+
+                const x = rect.x;
+                const y = rect.y - 30;
+
+
+                const ctx = chart.ctx;
+                ctx.save();
+
+                ctx.beginPath();
+                ctx.fillStyle = 'rgba(25, 25, 65, 0.9)';
+                ctx.roundRect(x - 15, y - 15, 30, 30, 5);
+                ctx.fill();
+
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 14px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('77', x, y);
+
+                ctx.beginPath();
+                ctx.fillStyle = 'rgba(25, 25, 65, 0.9)';
+                ctx.moveTo(x, y + 15);
+                ctx.lineTo(x - 8, y + 25);
+                ctx.lineTo(x + 8, y + 25);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.restore();
+            };
+
+            chart.options.plugins.afterDraw = addHighlightLabel;
         });
     </script>
 

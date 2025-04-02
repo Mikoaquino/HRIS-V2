@@ -120,6 +120,7 @@ use App\Http\Livewire\Widgets;
 use App\Http\Livewire\Width;
 use App\Http\Livewire\WishList;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\EmpDashboard; //Employee Dashboard
 
 /*
 |--------------------------------------------------------------------------
@@ -201,6 +202,9 @@ Route::get('image-compare', ImageCompare::class);
 Route::get('images', Images::class);
 Route::get('index', Index::class);
 Route::get('index1', Index1::class);
+
+Route::get('/emp-dashboard', EmpDashboard::class)->name('dashboard'); //Employee Dashboard
+
 Route::get('index2', Index2::class);
 Route::get('invoice', Invoice::class);
 Route::get('list-group', ListGroup::class);

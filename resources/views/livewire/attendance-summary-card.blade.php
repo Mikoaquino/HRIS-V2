@@ -1,6 +1,6 @@
 <div class="card border-0 shadow-sm">
     <div class="card-body">
-        <h5 class="card-title text-center mb-3">Today's Attendance Summary</h5>
+        <h5 class="text-center mb-3">Today's Attendance Summary</h5>
 
         <div class="progress" style="height: 6px;">
             <div class="progress-bar bg-success mx-1" role="progressbar"
