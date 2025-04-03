@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\Hash;
 use App\Enums\UserStatus;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -15,7 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, LogsActivity, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, LogsActivity, SoftDeletes;
 
     protected const LOG_NAME = 'user';
 

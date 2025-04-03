@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Employee;
 use App\Enums\UserStatus;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,7 +25,7 @@ class UserFactory extends Factory
         return [
             'email' => fake()->unique()->safeEmail(),
             'employee_id' => Employee::factory(),
-            'password' => Hash::make('password'), // password
+            'password' => 'password',
             'status' => $status,
             'remember_token' => Str::random(10),
             'deleted_at' => $deleted,

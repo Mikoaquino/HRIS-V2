@@ -1,1 +1,0 @@
-$((function(o){"use strict";$("#vmap").vectorMap({map:"world_en",backgroundColor:"transparent",color:"#ffffff",hoverOpacity:.7,selectedColor:"#666666",enableZoom:!0,showTooltip:!0,scaleColors:["#00b9ff","#7550f6"],values:sample_data,normalizeFunction:"polynomial"})}));
