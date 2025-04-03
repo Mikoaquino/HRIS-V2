@@ -90,9 +90,24 @@ public function store(Request $request)
             );
         }
     }
-
-    public function destroy(int $id)
+    
+public function destroy($id)
     {
-        //
+        $employee = Employee::find($id);
+
+        if (!$employee){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Employee not found'
+            ], 404);
+        }
+
+        $employee->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Employee deleted successfully'
+        ],200);
+        
     }
 }
