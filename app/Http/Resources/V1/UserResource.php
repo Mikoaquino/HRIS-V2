@@ -12,11 +12,11 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'email' => $this->email,
             'password' => $this->password,
-            'rememberToken' => $this->remember_token,
+            'remember_token' => $this->remember_token,
             'status' => $this->status,
-            'createdAt' => $this->created_at,
-            'updatedAt' => $this->updated_at,
-            'deletedAt' => $this->deleted_at,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'deleted_at' => $this->deleted_at,
             'employee' => new EmployeeResource($this->whenLoaded('employee')),
         ];
     }

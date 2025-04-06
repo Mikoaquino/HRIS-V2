@@ -8,8 +8,6 @@ class ApiFilter
 {
     protected $params = [];
 
-    protected $columnMap = [];
-
     protected $operatorMap = [];
 
     public function transform(Request $request): array
@@ -21,12 +19,10 @@ class ApiFilter
 
             if (! isset($query)) continue;
 
-            $column = $this->columnMap[$param] ?? $param;
-
             foreach($operators as $operator) {
                 if (isset($query[$operator])) {
                     $clause[] = [
-                        $column, 
+                        $param, 
                         $this->operatorMap[$operator], 
                         $query[$operator]
                     ];
