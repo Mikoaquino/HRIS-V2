@@ -23,11 +23,4 @@ class StoreUserRequest extends FormRequest
             'status' => ['required', 'string', Rule::in(UserStatus::getValues())],
         ];
     }
-
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'employee_id' => $this->employeeId,
-        ]);
-    }
 }

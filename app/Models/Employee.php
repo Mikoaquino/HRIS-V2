@@ -52,7 +52,7 @@ class Employee extends Model
             ->useLogName(self::LOG_NAME)
             ->dontSubmitEmptyLogs()
             ->setDescriptionForEvent(function (string $event) {
-                $causer = Auth::user() ?? 'System';
+                $causer = Auth::user()->employee->full_name ?? 'System';
                 return match ($event) {
                     'created' => __('activity.create.employee', ['causer' => $causer]),
                     'updated' => __('activity.update.employee', ['causer' => $causer]),
