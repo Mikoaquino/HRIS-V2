@@ -58,7 +58,7 @@ class User extends Authenticatable
             ->useLogName(self::LOG_NAME)
             ->dontSubmitEmptyLogs()
             ->setDescriptionForEvent(function (string $event) {
-                $causer = Auth::user() ?? 'System';
+                $causer = Auth::user()->employee->full_name ?? 'System';
                 return match ($event) {
                     'created' => __('activity.create.user', ['causer' => $causer]),
                     'updated' => __('activity.update.user', ['causer' => $causer]),
