@@ -8,11 +8,12 @@ class UserFilter extends ApiFilter
 {
     protected $params = [
         'email' => ['eq'],
-        'rememberToken' => ['eq'],
+        'remember_token' => ['eq'],
         'password' => ['eq'],
         'status' => ['eq', 'ne'],
-        'createdAt' => ['eq', 'gt', 'gte', 'eq', 'lt', 'lte'],
-        'updatedAt' => ['eq', 'gt', 'gte', 'eq', 'lt', 'lte'],
+        'created_at' => ['eq', 'gt', 'gte', 'lt', 'lte'],
+        'updated_at' => ['eq', 'gt', 'gte', 'lt', 'lte'],
+        'deleted_at' => ['eq', 'gt', 'gte', 'lt', 'lte'],
     ];
 
     protected $operatorMap = [
@@ -22,14 +23,5 @@ class UserFilter extends ApiFilter
         'ne' => '!=',
         'lt' => '<',
         'lte' => '<=',
-    ];
-
-    protected $columnMap = [
-        'email' => 'email',
-        'rememberToken' => 'remember_token',
-        'password' => 'password',
-        'status' => 'status',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at',
     ];
 }
