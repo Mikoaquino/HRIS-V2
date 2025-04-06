@@ -8,7 +8,8 @@ use Spatie\Activitylog\Models\Activity;
 
 class ActivityController extends Controller
 {
-    public function index()
+
+    public function index(): ActivityCollection
     {
         return ActivityCollection::make(Activity::paginate(10));
     }
