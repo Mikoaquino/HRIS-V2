@@ -27,12 +27,13 @@ class EmployeeService
         return $employees->paginate()->appends($request->query());
     }
     
-    /*
+    
     public function createEmployee(array $validatedRequest): Employee
     {
-        
+        return DB::transaction(fn () => $this->employee->create($validatedRequest));
+    
     }
-    */
+
     
     public function getEmployee(Request $request, string $id): Employee
     {
