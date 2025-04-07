@@ -9,6 +9,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Employee extends Model
 {
@@ -43,6 +44,31 @@ class Employee extends Model
     public function account(): HasOne
     {
         return $this->hasOne(User::class);
+    }
+
+    public function educations(): HasMany
+    {
+        return $this->hasMany(EmployeeEducation::class);
+    }
+
+    public function workExperiences(): HasMany
+    {
+        return $this->hasMany(EmployeeWorkExperience::class);
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(EmployeeAttachment::class);
+    }
+
+    public function lifecycle(): HasOne
+    {
+        return $this->hasOne(EmployeeLifecycle::class);
+    }
+
+    public function termination(): HasOne
+    {
+        return $this->hasOne(TerminatedEmployee::class);
     }
 
     public function getActivityLogOptions(): LogOptions
