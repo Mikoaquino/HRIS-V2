@@ -35,12 +35,12 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request):JsonResponse|EmployeeResource
     {
         try {
-        $employee = $this->employeeService->createEmployee($request->validated());
-        return $this->success(
-            data: EmployeeResource::make($employee),
-            message: __('response.success.create', ['resource' => 'employee']),
-            status: Response::HTTP_CREATED
-        );
+            $employee = $this->employeeService->createEmployee($request->validated());
+            return $this->success(
+                data: EmployeeResource::make($employee),
+                message: __('response.success.create', ['resource' => 'employee']),
+                status: Response::HTTP_CREATED
+            );
         } catch (Exception $e) {
             return $this->error(message: $e->getMessage());
         }
