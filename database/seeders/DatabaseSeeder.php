@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +15,13 @@ class DatabaseSeeder extends Seeder
     {
         activity()->disableLogging();
         
-        $this->call(UserSeeder::class);
+        $this->call([
+            UserSeeder::class,
+            EmployeeEducationSeeder::class,
+            EmployeeWorkExperienceSeeder::class,
+            EmployeeAttachmentSeeder::class,
+            EmployeeLifecycleSeeder::class,
+            TerminatedEmployeeSeeder::class,
+        ]);
     }
 }
