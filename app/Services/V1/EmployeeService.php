@@ -20,8 +20,8 @@ class EmployeeService
 
         $employees = $this->employee->where($queryClause);
 
-        if ($request->query('includeEmployee')) {
-            $employees = $employees->with('employee');
+        if ($request->query('includeAccount')) {
+            $employees = $employees->with('account');
         }
 
         return $employees->paginate()->appends($request->query());
@@ -39,8 +39,8 @@ class EmployeeService
     {
         $employee = $this->employee->findOrFail($id);
 
-        if ($request->query('includeEmployee')) {
-            return $employee->loadMissing('employee');
+        if ($request->query('includeAccount')) {
+            return $employee->loadMissing('account');
         }
 
         return $employee;
