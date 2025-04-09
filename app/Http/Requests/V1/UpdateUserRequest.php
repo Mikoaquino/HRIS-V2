@@ -11,7 +11,6 @@ class UpdateUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        // TODO: Add authorization
         return true;
     }
 
@@ -33,14 +32,5 @@ class UpdateUserRequest extends FormRequest
         }
 
         return $baseRules;
-    }
-
-    protected function prepareForValidation(): void
-    {
-        if ($this->has('employeeId')) {
-            $this->merge([
-                'employee_id' => $this->employeeId,
-            ]);
-        }
     }
 }

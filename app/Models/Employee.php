@@ -9,6 +9,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Employee extends Model
 {
@@ -45,6 +46,31 @@ class Employee extends Model
         return $this->hasOne(User::class);
     }
 
+    public function educations(): HasMany
+    {
+        return $this->hasMany(EmployeeEducation::class);
+    }
+
+    public function workExperiences(): HasMany
+    {
+        return $this->hasMany(EmployeeWorkExperience::class);
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(EmployeeAttachment::class);
+    }
+
+    public function lifecycle(): HasOne
+    {
+        return $this->hasOne(EmployeeLifecycle::class);
+    }
+
+    public function termination(): HasOne
+    {
+        return $this->hasOne(TerminatedEmployee::class);
+    }
+
     public function getActivityLogOptions(): LogOptions
     {
         return LogOptions::defaults()
@@ -52,7 +78,7 @@ class Employee extends Model
             ->useLogName(self::LOG_NAME)
             ->dontSubmitEmptyLogs()
             ->setDescriptionForEvent(function (string $event) {
-                $causer = Auth::user() ?? 'System';
+                $causer = Auth::user()->employee->full_name ?? 'System';
                 return match ($event) {
                     'created' => __('activity.create.employee', ['causer' => $causer]),
                     'updated' => __('activity.update.employee', ['causer' => $causer]),
