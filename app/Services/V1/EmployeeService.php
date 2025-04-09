@@ -39,7 +39,7 @@ class EmployeeService
     {
         $employee = $this->employee->findOrFail($id);
 
-        if ($request->query('includeAccounts')) {
+        if ($request->query('includeAccount')) {
             return $employee->loadMissing('account');
         }
 
