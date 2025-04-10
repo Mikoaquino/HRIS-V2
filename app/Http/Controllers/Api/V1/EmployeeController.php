@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Employee;
 use Symfony\Component\HttpFoundation\Response;
 use App\Traits\HttpResponse;
+use App\Http\Requests\V1\StoreEmployeeRequest;
 
 class EmployeeController extends Controller
 {
@@ -31,35 +32,20 @@ class EmployeeController extends Controller
         }
     }
 
-public function store(Request $request)
-{
-    // Validate input
-    $validator = Validator::make($request->all(), [
-        'first_name' => 'required|string|max:255',
-        'middle_name' => 'nullable|string|max:255',
-        'last_name' => 'required|string|max:255',
-    ]);
-
-    if ($validator->fails()) {
-        return response()->json([
-            'status' => 'error',
-            'errors' => $validator->errors(),
-        ], 422);
+    public function store(StoreEmployeeRequest $request):JsonResponse|EmployeeResource
+    {
+        try {
+            $employee = $this->employeeService->createEmployee($request->validated());
+            return $this->success(
+                data: EmployeeResource::make($employee),
+                message: __('response.success.create', ['resource' => 'employee']),
+                status: Response::HTTP_CREATED
+            );
+        } catch (Exception $e) {
+            return $this->error(message: $e->getMessage());
+        }
     }
 
-    // Create employee
-    $employee = Employee::create([
-        'first_name' => $request->first_name,
-        'middle_name' => $request->middle_name,
-        'last_name' => $request->last_name,
-    ]);
-
-    return response()->json([
-        'status' => 'success',
-            'message' => 'Employee created successfully!',
-            'data' => new EmployeeResource($employee)
-        ], 201);
-    }
 
 
     public function show(Request $request, string $id): JsonResponse|EmployeeResource

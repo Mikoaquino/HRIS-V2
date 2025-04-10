@@ -20,26 +20,27 @@ class EmployeeService
 
         $employees = $this->employee->where($queryClause);
 
-        if ($request->query('includeEmployee')) {
-            $employees = $employees->with('employee');
+        if ($request->query('includeAccount')) {
+            $employees = $employees->with('account');
         }
 
         return $employees->paginate()->appends($request->query());
     }
     
-    /*
+    
     public function createEmployee(array $validatedRequest): Employee
     {
-        
+        return DB::transaction(fn () => $this->employee->create($validatedRequest));
+    
     }
-    */
+
     
     public function getEmployee(Request $request, string $id): Employee
     {
         $employee = $this->employee->findOrFail($id);
 
-        if ($request->query('includeEmployee')) {
-            return $employee->loadMissing('employee');
+        if ($request->query('includeAccount')) {
+            return $employee->loadMissing('account');
         }
 
         return $employee;
