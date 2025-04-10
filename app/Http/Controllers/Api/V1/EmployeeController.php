@@ -91,23 +91,25 @@ public function store(Request $request)
         }
     }
     
-public function destroy($id)
+    public function destroy(string $id): JsonResponse
     {
-        $employee = Employee::find($id);
-
-        if (!$employee){
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Employee not found'
-            ], 404);
+        try {
+            $employee = Employee::find($id);
+    
+            if (!$employee) {
+                throw new Exception('Employee not found');
+            }
+    
+            $employee->delete();
+    
+            return $this->success(
+                message: __('response.success.delete', ['resource' => 'employee'])
+            );
+        } catch (Exception $e) {
+            return $this->error(
+                message: $e->getMessage(),
+                status: Response::HTTP_NOT_FOUND,
+            );
         }
-
-        $employee->delete();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Employee deleted successfully'
-        ],200);
-        
     }
-}
+}    
