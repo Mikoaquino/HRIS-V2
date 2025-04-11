@@ -3,7 +3,7 @@
         <button wire:click="getPreviousMonth" class="btn btn-link text-muted p-0">
             <i class="fas fa-chevron-left"></i>
         </button>
-        <h5 class="card-title mb-0">{{ $currentMonth }} {{ $currentYear }}</h5>
+        <h5 class="mb-0">{{ $currentMonth }} {{ $currentYear }}</h5>
         <button wire:click="getNextMonth" class="btn btn-link text-muted p-0">
             <i class="fas fa-chevron-right"></i>
         </button>
@@ -35,7 +35,7 @@
                             @else
                                 <td class="text-center p-1">
                                     <button wire:click="selectDate({{ $day }})"
-                                        class="btn p-1 {{ $day === $selectedDate ? 'bg-success text-white rounded-circle' : 'text-dark' }}"
+                                        class="btn p-1 {{ $day === $selectedDate ? 'bg-primary text-white rounded-circle' : 'text-dark' }}"
                                         style="width: 32px; height: 32px;">
                                         {{ $day }}
                                     </button>

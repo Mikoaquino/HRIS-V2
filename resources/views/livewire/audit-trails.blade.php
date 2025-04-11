@@ -8,8 +8,48 @@
     <link href="{{ asset('assets/plugins/datatable/responsive.bootstrap5.css') }}" rel="stylesheet" />
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css">
+
+
     <!-- INTERNAL Select2 css -->
     <link href="{{ asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
+    <style>
+        .notification:before {
+            content: "";
+            position: absolute;
+            top: 0px !important;
+            bottom: 5px;
+            width: 2px !important;
+            background-color: var(--primary02);
+            left: 2.5% !important;
+            margin-left: -2.5px;
+        }
+
+        .notification .notification-icon {
+            left: -2.5% !important;
+            position: absolute !important;
+            width: 10%;
+            text-align: center;
+            top: auto !important;
+        }
+
+        .notification .notification-icon a {
+            text-decoration: none;
+            width: 15px !important;
+            height: 15px !important;
+            display: inline-block;
+            border-radius: 50%;
+            background: #fff;
+            line-height: 10px;
+            color: #fff;
+            font-size: 14px;
+            border: 3px solid var(--primary-bg-color);
+            transition: border-color 0.2s linear;
+        }
+
+        .image-audit {
+            border-radius: 50%;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -23,7 +63,7 @@
         $logs = json_decode(
             json_encode([
                 [
-                    'log_number' => 'LOG-0010',
+                    'log_number' => 'LOG#0010',
                     'name' => 'John Doe',
                     'email' => 'johndoe@example.com',
                     'role' => 'Admin',
@@ -33,7 +73,7 @@
                     'timestamp' => '01-13-2025 08:15:30',
                 ],
                 [
-                    'log_number' => 'LOG-0009',
+                    'log_number' => 'LOG#0009',
                     'name' => 'John Doe',
                     'email' => 'johndoe@example.com',
                     'role' => 'Admin',
@@ -43,7 +83,7 @@
                     'timestamp' => '01-13-2025 08:15:30',
                 ],
                 [
-                    'log_number' => 'LOG-0008',
+                    'log_number' => 'LOG#0008',
                     'name' => 'John Doe',
                     'email' => 'johndoe@example.com',
                     'role' => 'User',
@@ -53,7 +93,7 @@
                     'timestamp' => '01-13-2025 08:15:30',
                 ],
                 [
-                    'log_number' => 'LOG-0007',
+                    'log_number' => 'LOG#0007',
                     'name' => 'John Doe',
                     'email' => 'johndoe@example.com',
                     'role' => 'User',
@@ -72,29 +112,51 @@
             <div class="card custom-card overflow-hidden">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered text-nowrap border-bottom" id="basic-datatable">
-                            <thead>
+                        <table class="table m-0 border-0 text-nowrap notification" id="basic-datatable">
+                            <thead class="d-none border-0">
                                 <tr>
-
+                                    <th>Date Done</th>
                                     <th>Log Number</th>
+                                    <th>Name</th>
                                     <th>Action</th>
                                     <th>Description</th>
-                                    <th>Status</th>
+
                                     <th>Timestamp</th>
-                                    <th>Performed By</th>
 
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="border-0">
                                 @foreach ($logs as $log)
-                                    <tr>
+                                    <tr class="border-0">
 
-                                        <td>{{ $log->log_number }}</td>
-                                        <td>{{ $log->action }}</td>
-                                        <td>{{ $log->description }}</td>
-                                        <td>{{ $log->status }}</td>
-                                        <td>{{ $log->timestamp }}</td>
-                                        <td>{{ $log->name }}</td>
+                                        <td class="date-cell bd-t-0 bd-e">
+                                            <div class="notification-icon">
+                                                <a href="javascript:void(0);"></a>
+                                            </div>
+                                            <div class="text-center">
+
+                                                <div class="fw-bold">{{ date('l', strtotime($log->timestamp)) }}</div>
+                                                <div>{{ date('H:i', strtotime($log->timestamp)) }}</div>
+                                            </div>
+                                        </td>
+                                        <td class="bd-b">{{ $log->log_number }}</td>
+                                        <td class="bd-b ">
+                                            <div class="d-flex align-items-center">
+                                                <img class="image-audit me-2" src="{!! 'https://placehold.co/40' !!}"
+                                                    alt="Placeholder">
+                                                <div class="text-center">
+                                                    <p class="mb-0 fw-semibold">{{ $log->name }}</p>
+                                                    <p class="mb-0 text-muted small">{{ $log->role }}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="bd-b">
+                                            <div class="badge badge-pill badge-primary px-2 py-2">{{ $log->action }} </div>
+                                        </td>
+                                        <td class="bd-b">{{ $log->description }}</td>
+
+                                        <td class="bd-b bd-e">{{ date('F d, Y', strtotime($log->timestamp)) }}</td>
+
 
                                     </tr>
                                 @endforeach
@@ -131,7 +193,7 @@
             language: {
                 searchPlaceholder: 'Search...',
                 sSearch: '',
-                lengthMenu: '_MENU_ entries per page'
+                lengthMenu: '_MENU_ activity logs'
             },
             initComplete: function() {
                 // Find the search container
@@ -139,7 +201,7 @@
 
                 // Create a custom filter container
                 var filterControlsContainer = $(
-                '<div class="d-flex align-items-center filter-controls"></div>');
+                    '<div class="d-flex align-items-center filter-controls"></div>');
 
                 // Clear Filter Button
                 var clearFilterBtn = $('<button class="btn btn-outline-danger btn-sm me-2" id="clearFilters">' +
@@ -147,17 +209,31 @@
                     '</button>');
 
                 // Action Dropdown
-                var actionDropdown = $(
-                    '<select class="form-select form-select-sm me-2" style="width: 120px;">' +
-                    '<option>Action</option>' +
-                    '<option>Option 1</option>' +
-                    '<option>Option 2</option>' +
-                    '</select>');
+                var actionDropdown = $(`
+    <select class="form-select form-select-sm me-2" style="width: 200px;">
+        <option value="" disabled selected>Action</option>
+        <optgroup label="Authentication">
+            <option value="login">Log in</option>
+            <option value="logout">Log out</option>
+        </optgroup>
+        <optgroup label="Account Management">
+            <option value="add_account">Add Account</option>
+            <option value="delete_account">Delete Account</option>
+        </optgroup>
+        <optgroup label="Audit Trail">
+            <option value="view_audit_trail">View Audit Trail</option>
+        </optgroup>
+        <optgroup label="Dashboard">
+            <option value="view_dashboard">View Dashboard</option>
+        </optgroup>
+    </select>
+`);
+
 
                 // Date Picker
                 var datePicker = $(
                     '<input type="text" class="form-control form-control-sm me-2" style="width: 150px;" placeholder="MM/dd/yyyy">'
-                    );
+                );
 
                 // Assemble filter controls
                 filterControlsContainer
