@@ -1,1 +1,23 @@
-$((function(){"use strict";$("#navComplex").lightSlider({autoWidth:!0,pager:!1,slideMargin:3}),$(".main-nav-tabs .tab-link").on("click",(function(i){i.preventDefault(),$(this).addClass("active"),$(this).parent().siblings().find(".tab-link").removeClass("active");var a=$(this).attr("href");$(a).addClass("active"),$(a).siblings().removeClass("active")}))}));
+/******/ (() => { // webpackBootstrap
+/*!*******************************************!*\
+  !*** ./resources/assets/js/navigation.js ***!
+  \*******************************************/
+$(function () {
+  'use strict';
+
+  $('#navComplex').lightSlider({
+    autoWidth: true,
+    pager: false,
+    slideMargin: 3
+  });
+  $('.main-nav-tabs .tab-link').on('click', function (e) {
+    e.preventDefault();
+    $(this).addClass('active');
+    $(this).parent().siblings().find('.tab-link').removeClass('active');
+    var target = $(this).attr('href');
+    $(target).addClass('active');
+    $(target).siblings().removeClass('active');
+  });
+});
+/******/ })()
+;

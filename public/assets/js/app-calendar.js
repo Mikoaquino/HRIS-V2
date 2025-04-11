@@ -1,1 +1,186 @@
-$((function(){"use strict";var e=["2018-5-10","2018-5-11","2018-5-12","2018-5-13","2018-5-14","2018-5-15","2018-5-16"];new Date,$(".fc-datepicker").datepicker({showOtherMonths:!0,selectOtherMonths:!0,dateFormat:"yy-mm-dd",beforeShowDay:function(t){for(var n=t.getMonth(),a=t.getDate(),i=t.getFullYear(),o=0;o<e.length;o++)if(-1!=$.inArray(i+"-"+(n+1)+"-"+a,e))return[!0,"ui-date-highlighted",""];return[!0]}}),function(e){for(var t=0,n=[" AM"," PM"],a=[],i=[12,1,2,3,4,5,6,7,8,9,10,11],o=0;o<i.length;o++){for(a.push(i[o]+":"+t+t+n[0]);t<30;)a.push(i[o]+":"+((t+=30)<10?"O"+t:t)+n[0]);t=0}a=a.concat(a.slice(0).map((function(e){return e.replace(n[0],n[1])}))),$.each(a,(function(t,n){$(e).append('<option value="'+n+'">'+n+"</option>")}))}(".main-event-time"),$("#calendar").fullCalendar({header:{left:"prev,next today",center:"title",right:"month,agendaWeek,agendaDay,listWeek"},navLinks:!0,selectable:!0,selectLongPressDelay:100,editable:!0,nowIndicator:!0,defaultView:"listMonth",views:{agenda:{columnHeaderHtml:function(e){return"<span>"+e.format("ddd")+"</span><span>"+e.format("DD")+"</span>"}},day:{columnHeader:!1},listMonth:{listDayFormat:"ddd DD",listDayAltFormat:!1},listWeek:{listDayFormat:"ddd DD",listDayAltFormat:!1},agendaThreeDay:{type:"agenda",duration:{days:3},titleFormat:"MMMM YYYY"}},eventSources:[azCalendarEvents,azBirthdayEvents,azHolidayEvents,azOtherEvents],eventAfterAllRender:function(e){"listMonth"!==e.name&&"listWeek"!==e.name||e.el.find(".fc-list-heading-main").each((function(){var e=$(this).text().split(" "),t=moment().format("DD");$(this).html(e[0]+"<span>"+e[1]+"</span>"),t===e[1]&&$(this).addClass("now")})),console.log(e.el)},eventRender:function(e,t){e.description&&(t.find(".fc-list-item-title").append('<span class="fc-desc">'+e.description+"</span>"),t.find(".fc-content").append('<span class="fc-desc">'+e.description+"</span>"));var n=e.source.borderColor?e.source.borderColor:e.borderColor;t.find(".fc-list-item-time").css({color:n,borderColor:n}),t.find(".fc-list-item-title").css({borderColor:n}),t.css("borderLeftColor",n)}});var t=$("#calendar").fullCalendar("getCalendar");window.matchMedia("(min-width: 576px)").matches&&t.changeView("agendaWeek"),window.matchMedia("(min-width: 992px)").matches&&t.changeView("month"),t.option("windowResize",(function(e){"listWeek"===e.name&&(window.matchMedia("(min-width: 992px)").matches?t.changeView("month"):t.changeView("listWeek"))})),t.getDate(),t.option("select",(function(e,t){$("#modalSetSchedule").modal("show"),$("#mainEventStartDate").val(e.format("LL")),$("#EventEndDate").val(t.format("LL")),$("#mainEventStartTime").val(e.format("LT")).trigger("change"),$("#EventEndTime").val(t.format("LT")).trigger("change")})),t.on("eventClick",(function(e,t,n){var a=$("#modalCalendarEvent");a.modal("show"),a.find(".event-title").text(e.title),e.description?(a.find(".event-desc").text(e.description),a.find(".event-desc").prev().removeClass("d-none")):(a.find(".event-desc").text(""),a.find(".event-desc").prev().addClass("d-none")),a.find(".event-start-date").text(moment(e.start).format("LLL")),a.find(".event-end-date").text(moment(e.end).format("LLL")),a.find(".modal-header").css("backgroundColor",e.source.borderColor?e.source.borderColor:e.borderColor)})),$(".main-nav-calendar-event a").on("click",(function(e){e.preventDefault(),$(this).hasClass("exclude")?($(this).removeClass("exclude"),$(this).is(":first-child")&&t.addEventSource(azCalendarEvents),$(this).is(":nth-child(2)")&&t.addEventSource(azBirthdayEvents),$(this).is(":nth-child(3)")&&t.addEventSource(azHolidayEvents),$(this).is(":nth-child(4)")&&t.addEventSource(azOtherEvents)):($(this).addClass("exclude"),$(this).is(":first-child")&&t.removeEventSource(1),$(this).is(":nth-child(2)")&&t.removeEventSource(2),$(this).is(":nth-child(3)")&&t.removeEventSource(3),$(this).is(":nth-child(4)")&&t.removeEventSource(4)),t.render(),window.matchMedia("(max-width: 575px)").matches&&$("body").removeClass("main-content-left-show")}))}));
+/******/ (() => { // webpackBootstrap
+/*!*********************************************!*\
+  !*** ./resources/assets/js/app-calendar.js ***!
+  \*********************************************/
+$(function () {
+  'use strict';
+
+  // Datepicker found in left sidebar of the page
+  var highlightedDays = ['2018-5-10', '2018-5-11', '2018-5-12', '2018-5-13', '2018-5-14', '2018-5-15', '2018-5-16'];
+  var date = new Date();
+  $('.fc-datepicker').datepicker({
+    showOtherMonths: true,
+    selectOtherMonths: true,
+    dateFormat: 'yy-mm-dd',
+    beforeShowDay: function beforeShowDay(date) {
+      var m = date.getMonth(),
+        d = date.getDate(),
+        y = date.getFullYear();
+      for (var i = 0; i < highlightedDays.length; i++) {
+        if ($.inArray(y + '-' + (m + 1) + '-' + d, highlightedDays) != -1) {
+          return [true, 'ui-date-highlighted', ''];
+        }
+      }
+      return [true];
+    }
+  });
+  var generateTime = function generateTime(element) {
+    var n = 0,
+      min = 30,
+      periods = [' AM', ' PM'],
+      times = [],
+      hours = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    for (var i = 0; i < hours.length; i++) {
+      times.push(hours[i] + ':' + n + n + periods[0]);
+      while (n < 60 - min) {
+        times.push(hours[i] + ':' + ((n += min) < 10 ? 'O' + n : n) + periods[0]);
+      }
+      n = 0;
+    }
+    times = times.concat(times.slice(0).map(function (time) {
+      return time.replace(periods[0], periods[1]);
+    }));
+    //console.log(times);
+    $.each(times, function (index, val) {
+      $(element).append('<option value="' + val + '">' + val + '</option>');
+    });
+  };
+  generateTime('.main-event-time');
+  // Initialize fullCalendar
+  $('#calendar').fullCalendar({
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay,listWeek'
+    },
+    navLinks: true,
+    selectable: true,
+    selectLongPressDelay: 100,
+    editable: true,
+    nowIndicator: true,
+    defaultView: 'listMonth',
+    views: {
+      agenda: {
+        columnHeaderHtml: function columnHeaderHtml(mom) {
+          return '<span>' + mom.format('ddd') + '</span>' + '<span>' + mom.format('DD') + '</span>';
+        }
+      },
+      day: {
+        columnHeader: false
+      },
+      listMonth: {
+        listDayFormat: 'ddd DD',
+        listDayAltFormat: false
+      },
+      listWeek: {
+        listDayFormat: 'ddd DD',
+        listDayAltFormat: false
+      },
+      agendaThreeDay: {
+        type: 'agenda',
+        duration: {
+          days: 3
+        },
+        titleFormat: 'MMMM YYYY'
+      }
+    },
+    eventSources: [azCalendarEvents, azBirthdayEvents, azHolidayEvents, azOtherEvents],
+    eventAfterAllRender: function eventAfterAllRender(view) {
+      if (view.name === 'listMonth' || view.name === 'listWeek') {
+        var dates = view.el.find('.fc-list-heading-main');
+        dates.each(function () {
+          var text = $(this).text().split(' ');
+          var now = moment().format('DD');
+          $(this).html(text[0] + '<span>' + text[1] + '</span>');
+          if (now === text[1]) {
+            $(this).addClass('now');
+          }
+        });
+      }
+      console.log(view.el);
+    },
+    eventRender: function eventRender(event, element) {
+      if (event.description) {
+        element.find('.fc-list-item-title').append('<span class="fc-desc">' + event.description + '</span>');
+        element.find('.fc-content').append('<span class="fc-desc">' + event.description + '</span>');
+      }
+      var eBorderColor = event.source.borderColor ? event.source.borderColor : event.borderColor;
+      element.find('.fc-list-item-time').css({
+        color: eBorderColor,
+        borderColor: eBorderColor
+      });
+      element.find('.fc-list-item-title').css({
+        borderColor: eBorderColor
+      });
+      element.css('borderLeftColor', eBorderColor);
+    }
+  });
+  var azCalendar = $('#calendar').fullCalendar('getCalendar');
+  // change view to week when in tablet
+  if (window.matchMedia('(min-width: 576px)').matches) {
+    azCalendar.changeView('agendaWeek');
+  }
+  // change view to month when in desktop
+  if (window.matchMedia('(min-width: 992px)').matches) {
+    azCalendar.changeView('month');
+  }
+  // change view based in viewport width when resize is detected
+  azCalendar.option('windowResize', function (view) {
+    if (view.name === 'listWeek') {
+      if (window.matchMedia('(min-width: 992px)').matches) {
+        azCalendar.changeView('month');
+      } else {
+        azCalendar.changeView('listWeek');
+      }
+    }
+  });
+  // display current date
+  var azDateNow = azCalendar.getDate();
+  azCalendar.option('select', function (startDate, endDate) {
+    $('#modalSetSchedule').modal('show');
+    $('#mainEventStartDate').val(startDate.format('LL'));
+    $('#EventEndDate').val(endDate.format('LL'));
+    $('#mainEventStartTime').val(startDate.format('LT')).trigger('change');
+    $('#EventEndTime').val(endDate.format('LT')).trigger('change');
+  });
+  // Display calendar event modal
+  azCalendar.on('eventClick', function (calEvent, jsEvent, view) {
+    var modal = $('#modalCalendarEvent');
+    modal.modal('show');
+    modal.find('.event-title').text(calEvent.title);
+    if (calEvent.description) {
+      modal.find('.event-desc').text(calEvent.description);
+      modal.find('.event-desc').prev().removeClass('d-none');
+    } else {
+      modal.find('.event-desc').text('');
+      modal.find('.event-desc').prev().addClass('d-none');
+    }
+    modal.find('.event-start-date').text(moment(calEvent.start).format('LLL'));
+    modal.find('.event-end-date').text(moment(calEvent.end).format('LLL'));
+    //styling
+    modal.find('.modal-header').css('backgroundColor', calEvent.source.borderColor ? calEvent.source.borderColor : calEvent.borderColor);
+  });
+  // Enable/disable calendar events from displaying in calendar
+  $('.main-nav-calendar-event a').on('click', function (e) {
+    e.preventDefault();
+    if ($(this).hasClass('exclude')) {
+      $(this).removeClass('exclude');
+      $(this).is(':first-child') ? azCalendar.addEventSource(azCalendarEvents) : '';
+      $(this).is(':nth-child(2)') ? azCalendar.addEventSource(azBirthdayEvents) : '';
+      $(this).is(':nth-child(3)') ? azCalendar.addEventSource(azHolidayEvents) : '';
+      $(this).is(':nth-child(4)') ? azCalendar.addEventSource(azOtherEvents) : '';
+    } else {
+      $(this).addClass('exclude');
+      $(this).is(':first-child') ? azCalendar.removeEventSource(1) : '';
+      $(this).is(':nth-child(2)') ? azCalendar.removeEventSource(2) : '';
+      $(this).is(':nth-child(3)') ? azCalendar.removeEventSource(3) : '';
+      $(this).is(':nth-child(4)') ? azCalendar.removeEventSource(4) : '';
+    }
+    azCalendar.render();
+    if (window.matchMedia('(max-width: 575px)').matches) {
+      $('body').removeClass('main-content-left-show');
+    }
+  });
+});
+/******/ })()
+;

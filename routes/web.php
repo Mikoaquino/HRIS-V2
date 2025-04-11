@@ -120,6 +120,10 @@ use App\Http\Livewire\Widgets;
 use App\Http\Livewire\Width;
 use App\Http\Livewire\WishList;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -254,3 +258,15 @@ Route::get('widget-notification', WidgetNotification::class);
 Route::get('widgets', Widgets::class);
 Route::get('width', Width::class);
 Route::get('wish-list', WishList::class);
+Route::middleware(['auth'])->group(function ()
+ {
+    Route::resource('users', UserController::class);
+    Route::post('users/bulk-delete', [UserController::class, 'bulkDestroy'])->name('users.bulk-destroy');
+    Route::post('users/{user}/verify', [UserController::class, 'verify'])->name('users.verify');
+    Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('/mobile-otp', [AuthController::class, 'sendOtp'])->name('auth.mobile-otp');
+
+});
+Route::get('/users', function () {
+    return view('users.index'); // Contains <livewire:userlist />
+});
