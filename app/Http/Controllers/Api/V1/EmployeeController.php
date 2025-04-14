@@ -77,25 +77,4 @@ class EmployeeController extends Controller
         }
     }
     
-    public function destroy(string $id): JsonResponse
-    {
-        try {
-            $employee = Employee::find($id);
-    
-            if (!$employee) {
-                throw new Exception('Employee not found');
-            }
-    
-            $employee->delete();
-    
-            return $this->success(
-                message: __('response.success.delete', ['resource' => 'employee'])
-            );
-        } catch (Exception $e) {
-            return $this->error(
-                message: $e->getMessage(),
-                status: Response::HTTP_NOT_FOUND,
-            );
-        }
-    }
 }    
