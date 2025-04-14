@@ -1,19 +1,23 @@
-Setting up for Frontend Development
+Frontend Development File Structure and Rules:
 
-1. First, go to the client directory of the project, do so by typing
+1.  Everything outside of features directory should be usable globally. (ex. If its a reusable component amongst different pages, add it to components outside of features.)
 
-```
-cd HRIS-v2/client
-```
+2.  When trying to add a feature first acknowledge if it is a standalone feature or if it should be iin an existing module.
+    If the feature is a standalone feature create a new directory under feature directory.
+    If the feature is NOT a standalone feature add to existing directories (ex. add LoginPage and RegisterPage in pages of auth rather than seperating it in login folder and register folder).
+3.  Naming Convention to Follow
+    Components and Views - PascalCase
+    Hooks - camelCase
+    Functions - camelCase
+    Variables - camelCase
+    Types & Interface - PascalCase
+    Folders - camelCase
+    Files (non-components) - camelCase
+    Routes - kebab-case
 
-2. Then go ahead and install the node modules necessary for this project by typing
+examples:
+camelCase - useLogin (lowercase first word, uppercase following words)
+PascalCase - LoginPage (Uppercase each starting letter of a word.)
+kebab-case - /user-profile (seperated by a '-')
 
-```
-npm install
-```
-
-3. Lastly, to go ahead and set the server up and continue developing, type the following command.
-
-```
-npm run dev
-```
+This is the initial documentation for Frontend Development. It will be updated and expanded as new questions arise or changes are made to the project.
