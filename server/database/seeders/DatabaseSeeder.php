@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
         activity()->disableLogging();
         
         $this->call([
+            PsgcSeeder::class,
             UserSeeder::class,
             EmployeeEducationSeeder::class,
             EmployeeWorkExperienceSeeder::class,
@@ -21,5 +23,9 @@ class DatabaseSeeder extends Seeder
             EmployeeLifecycleSeeder::class,
             TerminatedEmployeeSeeder::class,
         ]);
+
+        $this->command->info("<fg=yellow;options=bold>  Seeding regions, provinces, cities, and barangays table. This may take a while, you can leave this terminal open.</>");
+        Artisan::call('queue:work --queue=seed-psgc-address --stop-when-empty');
+        $this->command->info("\n\n<fg=green;options=bold>  Finished seeding. :)</>");
     }
 }
