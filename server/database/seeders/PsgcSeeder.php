@@ -13,7 +13,7 @@ class PsgcSeeder extends Seeder
      */
     public function run(): void
     {
-        Excel::queueImport(new PsgcImport, storage_path('PSGC-4Q-2024-Publication-Datafile.xlsx'))
+        Excel::import(new PsgcImport, storage_path('PSGC-4Q-2024-Publication-Datafile.xlsx'))
             ->allOnQueue('seed-psgc-address');
     }
 }
