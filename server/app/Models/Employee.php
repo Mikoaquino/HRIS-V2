@@ -71,6 +71,16 @@ class Employee extends Model
         return $this->hasOne(TerminatedEmployee::class);
     }
 
+    public function presentAddress(): HasOne
+    {
+        return $this->hasOne(EmployeePresentAddress::class);
+    }
+
+    public function permanentAddress(): HasOne
+    {
+        return $this->hasOne(EmployeePermanentAddress::class);
+    }
+
     public function getActivityLogOptions(): LogOptions
     {
         return LogOptions::defaults()
