@@ -11,6 +11,11 @@ class Region extends Model
 
     protected $fillable = [];
 
+    public function getRouteKeyName(): string
+    {
+        return 'code';
+    }
+
     public function provinces(): HasMany
     {
         return $this->hasMany(Province::class, 'region_code', 'region_code');

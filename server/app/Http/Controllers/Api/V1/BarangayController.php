@@ -14,24 +14,13 @@ class BarangayController extends Controller
 {
     use HttpResponse;
     
-    public function __construct(protected Barangay $barangay) {}
-
     public function index(): BarangayCollection
     {
-        return BarangayCollection::make($this->barangay->paginate());
+        return BarangayCollection::make(Barangay::paginate());
     }
 
-    public function show(string $code): JsonResponse
+    public function show(Barangay $barangay): JsonResponse
     {
-        $barangay = $this->barangay->firstWhere('code', $code);
-
-        if (! $barangay) {
-            return $this->error(
-                message: __('response.error.show', ['resource' => $code]),
-                status: Response::HTTP_NOT_FOUND
-            );
-        }
-
         return $this->success(
             data: BarangayResource::make($barangay),
             status: Response::HTTP_FOUND,

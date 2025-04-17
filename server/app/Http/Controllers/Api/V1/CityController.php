@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\CityCollection;
 use App\Http\Resources\V1\CityResource;
+use App\Models\City;
 use Symfony\Component\HttpFoundation\Response;
 
 class CityController extends Controller
@@ -24,16 +25,9 @@ class CityController extends Controller
         return CityCollection::make($cities);
     }
 
-    public function show(Request $request, string $code): JsonResponse
+    public function show(Request $request, City $city): JsonResponse
     {
-        $city = $this->service->getCity($request, $code);
-
-        if (! $city) {
-            return $this->error(
-                message: __('response.error.show', ['resource' => $code]),
-                status: Response::HTTP_NOT_FOUND
-            );
-        }
+        $city = $this->service->getCity($request, $city);
 
         return $this->success(
             data: CityResource::make($city),

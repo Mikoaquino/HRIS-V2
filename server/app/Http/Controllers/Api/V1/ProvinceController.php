@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\ProvinceCollection;
 use App\Http\Resources\V1\ProvinceResource;
+use App\Models\Province;
 use App\Services\V1\ProvinceService;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,16 +25,9 @@ class ProvinceController extends Controller
         return $this->success(ProvinceCollection::make($provinces));
     }
 
-    public function show(Request $request, string $code): JsonResponse
+    public function show(Request $request, Province $province): JsonResponse
     {
-        $province = $this->service->getProvince($request, $code);
-
-        if (! $province) {
-            return $this->error(
-                message: __('response.error.show', ['resource' => $code]),
-                status: Response::HTTP_NOT_FOUND
-            );
-        }
+        $province = $this->service->getProvince($request, $province);
 
         return $this->success(
             data: ProvinceResource::make($province),

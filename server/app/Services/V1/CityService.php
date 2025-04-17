@@ -23,14 +23,8 @@ class CityService
         return $query->paginate()->appends($request->query());
     }
 
-    public function getCity(Request $request, string $code): ?City
+    public function getCity(Request $request, City $city): City
     {
-        $city = $this->city->firstWhere('code', $code);
-
-        if (! $city) {
-            return null;
-        }
-
         if ($request->has('load')) {
             $relationships = explode(',', $request->load);
 

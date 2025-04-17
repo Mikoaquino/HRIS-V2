@@ -23,14 +23,8 @@ class ProvinceService
         return $query->get();
     }
 
-    public function getProvince(Request $request, string $code): ?Province
+    public function getProvince(Request $request, Province $province): Province
     {
-        $province = $this->province->firstWhere('code', $code);
-
-        if (! $province) {
-            return null;
-        }
-
         if ($request->has('load')) {
             $relationships = explode(',', $request->load);
 

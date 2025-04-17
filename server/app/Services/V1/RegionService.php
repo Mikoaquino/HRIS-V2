@@ -22,14 +22,8 @@ class RegionService
         return $query->get();
     }
 
-    public function getRegion(Request $request, string $code): ?Region
+    public function getRegion(Request $request, Region $region): Region
     {
-        $region = $this->region->firstWhere('code', $code);
-
-        if (! $region) {
-            return null;
-        }
-
         if ($request->has('load')) {
             $relationships = explode(',', $request->load);
 

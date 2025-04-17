@@ -12,6 +12,11 @@ class City extends Model
 
     protected $fillable = [];
 
+    public function getRouteKeyName(): string
+    {
+        return 'code';
+    }
+
     public function barangays(): HasMany
     {
         return $this->hasMany(Barangay::class, 'city_code', 'city_code');

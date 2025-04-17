@@ -11,6 +11,11 @@ class Barangay extends Model
 
     protected $fillable = [];
 
+    public function getRouteKeyName(): string
+    {
+        return 'code';
+    }
+
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class, 'city_code', 'city_code');
