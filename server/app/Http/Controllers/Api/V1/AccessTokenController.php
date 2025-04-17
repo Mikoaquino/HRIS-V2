@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use Exception;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,30 +14,28 @@ class AccessTokenController extends Controller
 {
     use HttpResponse;
 
-    public function __construct(protected AccessTokenService $accessToken) {}
+    public function __construct(protected AccessTokenService $service) {}
 
     public function store(StoreAccessTokenRequest $request): JsonResponse
     {
-        try {
-            $token = $this->accessToken->createToken($request->validated());
-            if (! $token) {
-                return $this->error(
-                    message: __('auth.failed'),
-                    status: Response::HTTP_UNAUTHORIZED
-                );
-            }
-            return $this->success(
-                data: ['token' => $token],
-                status: Response::HTTP_CREATED,
+        $token = $this->service->createToken($request->validated());
+
+        if (! $token) {
+            return $this->error(
+                message: __('auth.failed'),
+                status: Response::HTTP_UNAUTHORIZED
             );
-        } catch (Exception $e) {
-            return $this->error(message: $e->getMessage());
         }
+        
+        return $this->success(
+            data: ['token' => $token],
+            status: Response::HTTP_CREATED,
+        );
     }
 
     public function destroy(Request $request): JsonResponse
     {
-        if (! $this->accessToken->revokeTokens($request));
+        if (! $this->service->revokeTokens($request));
         
         return $this->success(message: __('auth.tokens.deleted'));
     }

@@ -27,25 +27,53 @@ class PsgcImport implements ToModel, WithBatchInserts, WithHeadingRow, WithMulti
 
     public function batchSize(): int
     {
-        return 1000;
+        return 4000;
     }
 
     public function chunkSize(): int
     {
-        return 1000;
+        return 4000;
     }
 
-    public function model(array $row): Barangay|City|Province|Region
+    public function model(array $row): Barangay|City|Province|Region|null
     {
         $psgc = $row['10-digit PSGC'];
         $name = $row['Name'];
         $geoLevel = $row['Geographic Level'];
 
         return match ($geoLevel) {
-            'Reg' => Region::make(['code' => $psgc, 'name' => $name]),
-            'Prov' => Province::make(['code' => $psgc, 'name' => $name]),
-            'Mun', 'SubMun', 'City' => City::make(['code' => $psgc, 'name' => $name]),
-            'Bgy' => Barangay::make(['code' => $psgc, 'name' => $name])
+            'Reg' => new Region([
+                'code' => $psgc,
+                'name' => $name,
+                'region_code' => substr($psgc, 0, 2),
+            ]),
+
+            'Prov' => new Province([
+                'code' => $psgc,
+                'name' => $name,
+                'province_code' => substr($psgc, 0, 5),
+                'region_code' => substr($psgc, 0, 2),
+            ]),
+
+            'Mun',
+            'SubMun',
+            'City' => new City([
+                'code' => $psgc,
+                'name' => $name,
+                'city_code' => substr($psgc, 0, 7),
+                'province_code' => substr($psgc, 0, 5),
+                'region_code' => substr($psgc, 0, 2),
+            ]),
+
+            'Bgy' => new Barangay([
+                'code' => $psgc,
+                'name' => $name,
+                'city_code' => substr($psgc, 0, 7),
+                'province_code' => substr($psgc, 0, 5),
+                'region_code' => substr($psgc, 0, 2),
+            ]),
+
+            default => null,
         };
     }
 }

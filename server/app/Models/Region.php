@@ -10,4 +10,19 @@ class Region extends Model
     public $timestamps = false;
 
     protected $fillable = [];
+
+    public function provinces(): HasMany
+    {
+        return $this->hasMany(Province::class, 'region_code', 'region_code');
+    }
+
+    public function cities(): HasMany
+    {
+        return $this->hasMany(City::class, 'region_code', 'region_code');
+    }
+
+    public function barangays(): HasMany
+    {
+        return $this->hasMany(Barangay::class, 'region_code', 'region_code');
+    }
 }

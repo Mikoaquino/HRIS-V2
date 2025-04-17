@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PsgcSeeder::class,
             UserSeeder::class,
+            EmployeeSeeder::class,
             EmployeeEducationSeeder::class,
             EmployeeWorkExperienceSeeder::class,
             EmployeeAttachmentSeeder::class,
@@ -27,5 +28,10 @@ class DatabaseSeeder extends Seeder
         $this->command->info("<fg=yellow;options=bold>  Seeding regions, provinces, cities, and barangays table. This may take a while, you can leave this terminal open.</>");
         Artisan::call('queue:work --queue=seed-psgc-address --stop-when-empty');
         $this->command->info("\n\n<fg=green;options=bold>  Finished seeding. :)</>");
+
+        $this->call([
+            EmployeePresentAddressSeeder::class,
+            EmployeePermanentAddressSeeder::class,
+        ]);
     }
 }
