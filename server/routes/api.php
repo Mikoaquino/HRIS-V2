@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\EmployeeController;
 use App\Http\Controllers\Api\V1\AccessTokenController;
 use App\Http\Controllers\Api\V1\BarangayController;
 use App\Http\Controllers\Api\V1\CityController;
+use App\Http\Controllers\Api\V1\EmployeeAttachmentController;
 use App\Http\Controllers\Api\V1\ProvinceController;
 use App\Http\Controllers\Api\V1\RegionController;
 
@@ -19,6 +20,8 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function ()
         Route::apiResource('provinces', ProvinceController::class);
         Route::apiResource('cities', CityController::class);
         Route::apiResource('barangays', BarangayController::class);
+        Route::apiResource('attachments', EmployeeAttachmentController::class)
+            ->withTrashed(['show', 'destroy']);
     });
 
     Route::prefix('auth')->group(function () {
