@@ -43,13 +43,15 @@ class AppServiceProvider extends ServiceProvider
                 ->uncompromised()
                 ->rules(['not_regex:/\s/'])
         );
-        
-        if (App::isProduction()) {
-            RateLimiter::for('api', fn (Request $request) =>
-                $request->user()
+
+        RateLimiter::for('api', function (Request $request) {
+            if (App::isProduction()) {
+                return $request->user()
                     ? Limit::perMinute(100)->by($request->user()->id)
-                    : Limit::perMinute(60)->by($request->ip())
-            );
-        }
+                    : Limit::perMinute(60)->by($request->ip());
+            }
+            
+            return Limit::none();
+        });
     }
 }
