@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -79,6 +80,11 @@ class Employee extends Model
     public function permanentAddress(): HasOne
     {
         return $this->hasOne(EmployeePermanentAddress::class);
+    }
+
+    public function employmentType(): BelongsTo
+    {
+        return $this->belongsTo(EmploymentType::class);
     }
 
     public function getActivityLogOptions(): LogOptions
