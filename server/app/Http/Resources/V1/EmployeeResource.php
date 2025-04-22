@@ -21,6 +21,11 @@ class EmployeeResource extends JsonResource
             'nationality' => $this->nationality,
             'religion' => $this->religion,
             'contact_number' => $this->contact_number,
+            'sss_id' => $this->sss_id,
+            'tin_id' => $this->tin_id,
+            'philhealth_id' => $this->philhealth_id,
+            'pagibig_id' => $this->pagibig_id,
+            'employment_type_id' => $this->employment_type_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'account' => UserResource::make($this->whenLoaded('account'))
