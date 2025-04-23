@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\BarangayController;
 use App\Http\Controllers\Api\V1\CityController;
 use App\Http\Controllers\Api\V1\ProvinceController;
 use App\Http\Controllers\Api\V1\RegionController;
+use App\Http\Controllers\Api\V1\EmploymentTypeController;
 
 Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
@@ -19,6 +20,7 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function ()
         Route::apiResource('provinces', ProvinceController::class);
         Route::apiResource('cities', CityController::class);
         Route::apiResource('barangays', BarangayController::class);
+        Route::apiResource('employment-types', EmploymentTypeController::class);
     });
 
     Route::prefix('auth')->group(function () {
