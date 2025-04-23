@@ -18,11 +18,6 @@ class EmploymentType extends Model
         'updated_at',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
     public function employees(): HasMany
     {
         return $this->hasMany(Employee::class);

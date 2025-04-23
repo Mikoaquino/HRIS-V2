@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         
         $this->call([
             PsgcSeeder::class,
+            EmploymentTypeSeeder::class,
             UserSeeder::class,
             EmployeeSeeder::class,
             EmployeeEducationSeeder::class,

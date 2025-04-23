@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\EmploymentType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,7 +28,11 @@ class EmployeeFactory extends Factory
             'nationality' => fake()->country(),
             'religion' => fake()->randomElement(['Christianity', 'Islam', 'Hinduism', 'Buddhism']),
             'contact_number' => $this->faker->regexify('09\d{9}'),
-            'employment_type_id' => fake()->randomElement([1, 2, 3, 4]), // Assuming you have employment types with IDs 1 to 4
+            'sss_id' => fake()->numerify('###########'),
+            'tin_id' => fake()->numerify('###########'),
+            'philhealth_id' => fake()->numerify('###########'),
+            'pagibig_id' => fake()->numerify('###########'),
+            'employment_type_id' => EmploymentType::inRandomOrder()->first()->id, 
         ];
     }
 }

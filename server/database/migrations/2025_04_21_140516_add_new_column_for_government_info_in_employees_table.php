@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::table('employees', function (Blueprint $table) {
             $table->after('contact_number', function ($table) {
-                $table->bigInteger('sss_id');
-                $table->bigInteger('tin_id');
-                $table->bigInteger('philhealth_id');
-                $table->bigInteger('pagibig_id');
+                $table->unsignedBigInteger('sss_id');
+                $table->unsignedBigInteger('tin_id');
+                $table->unsignedBigInteger('philhealth_id');
+                $table->unsignedBigInteger('pagibig_id');
             });
         });
     }
