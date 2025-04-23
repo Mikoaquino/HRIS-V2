@@ -8,11 +8,11 @@ const HrSidebar = () => {
   };
 
   return (
-    <aside className=" top-0 bottom-0 left-0 text-[#14112d] max-h-full z-[1024] bg-white shadow-[0px_8px_14.72px_1.28px_rgba(154,154,204,0.1)] border-r border-[#ededf5] transition-[left,width] duration-[320ms] ease-[ease]">
-      <div className="h-16 px-5 py-3 w-[240px] bg-white border-b border-r border-[#ededf5]  z-[999] top-0 left-0 right-0 transition-[left,width] duration-[320ms] ease-[ease] outline-none">
-        <h2 className="text-2xl font-bold text-blue-600">NOWA</h2>
+    <aside className=" w-[240px] top-0 bottom-0 left-0 text-[#14112d] max-h-full z-[1024] bg-white shadow-[0px_8px_14.72px_1.28px_rgba(154,154,204,0.1)] border-r border-[#ededf5] transition-[left,width] duration-[320ms] ease-[ease]">
+      <div className="h-16 px-5 py-3  bg-white border-b border-r border-[#ededf5]  z-[999] top-0 left-0 right-0 transition-[left,width] duration-[320ms] ease-[ease] outline-none">
+        <h2 className="text-2xl font-bold text-blue-600 text-center">NOWA</h2>
       </div>
-      <div className="p-4">
+      <div className="">
         <nav className="mt-6">
           {/* Main Category */}
           <div className="pb-2">
@@ -24,13 +24,14 @@ const HrSidebar = () => {
               <div>
                 <button
                   onClick={() => toggleSubmenu("dashboard")}
-                  className={`w-full flex items-center justify-between px-[30px] pr-[91px] py-[10px] text-[14px] font-semibold whitespace-nowrap 
-          ${
-            activeCategory === "dashboard"
-              ? "bg-white border-r-[3px] border-r-primary text-primary"
-              : "text-gray-700"
-          } hover:text-primary focus:text-primary`}
+                  className={`w-full flex items-center justify-between px-[30px]  py-[10px] text-[14px] font-semibold whitespace-nowrap 
+    ${
+      activeCategory === "dashboard"
+        ? "bg-white border-r-[3px] border-r-primary text-primary"
+        : "text-gray-700"
+    } hover:text-primary focus:text-primary`}
                 >
+                  {/* Left content: icon + text */}
                   <div className="flex items-center">
                     <svg
                       className="w-5 h-5 mr-3 text-gray-600"
@@ -44,10 +45,11 @@ const HrSidebar = () => {
                         strokeLinejoin="round"
                         strokeWidth="2"
                         d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                      ></path>
+                      />
                     </svg>
                     <span>Dashboards</span>
                   </div>
+
                   <svg
                     className={`w-4 h-4 transform ${
                       activeCategory === "dashboard" ? "rotate-90" : ""
@@ -62,7 +64,7 @@ const HrSidebar = () => {
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M9 5l7 7-7 7"
-                    ></path>
+                    />
                   </svg>
                 </button>
 
