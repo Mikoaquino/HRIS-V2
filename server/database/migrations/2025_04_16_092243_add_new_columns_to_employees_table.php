@@ -35,15 +35,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->dropColumn('suffix');
-            $table->dropColumn('birth_date');
-            $table->dropColumn('gender');
-            $table->dropColumn('civil_status');
-            $table->dropColumn('nationality');
-            $table->dropColumn('religion');
-            $table->dropColumn('contact_number');
-            $table->dropForeign(['employment_type_id']);
-            $table->dropColumn('employment_type_id'); 
+            $table->dropColumn(['suffix', 'birth_date', 'gender', 'civil_status', 'naturality', 'religion', 'contact_number', 'employment_type_id']);
+            $table->dropForeign('employment_type_id');
         });
     }
 };
