@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('client_name');
             $table->string('hashed_name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
