@@ -20,8 +20,6 @@ class EmployeeEducation extends Model
 
     protected $casts = [
         'graduated_at' => 'date',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
     ];
 
     public function employee(): BelongsTo
