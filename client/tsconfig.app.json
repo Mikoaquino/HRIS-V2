@@ -20,7 +20,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Add this line to explicitly include React types */
+    "types": ["react", "react-dom", "vite/client"]  // "vite/client" for Vite projects
   },
   "include": ["src"]
 }
