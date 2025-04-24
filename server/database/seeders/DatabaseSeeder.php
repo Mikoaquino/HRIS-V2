@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PsgcSeeder::class,
             EmploymentTypeSeeder::class,
+            DepartmentSeeder::class,
+            JobPositionSeeder::class,
             EmployeeSeeder::class,
             UserSeeder::class,
             EmployeeEducationSeeder::class,
@@ -24,8 +26,7 @@ class DatabaseSeeder extends Seeder
             EmployeeAttachmentSeeder::class,
             EmployeeLifecycleSeeder::class,
             TerminatedEmployeeSeeder::class,
-            DepartmentsSeeder::class,
-            JobPositionsSeeder::class,
+            
         ]);
 
         $this->command->info("<fg=yellow;options=bold>  Seeding regions, provinces, cities, and barangays table. This may take a while, you can leave this terminal open.</>");

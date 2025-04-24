@@ -87,6 +87,11 @@ class Employee extends Model
         return $this->belongsTo(EmploymentType::class);
     }
 
+    public function jobPosition(): BelongsTo
+    {
+        return $this->belongsTo(JobPosition::class);
+    }
+
     public function getActivityLogOptions(): LogOptions
     {
         return LogOptions::defaults()

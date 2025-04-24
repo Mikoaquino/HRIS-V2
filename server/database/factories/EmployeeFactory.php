@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\EmploymentType;
+use App\Models\JobPosition;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -33,6 +34,7 @@ class EmployeeFactory extends Factory
             'philhealth_id' => fake()->numerify('###########'),
             'pagibig_id' => fake()->numerify('###########'),
             'employment_type_id' => EmploymentType::inRandomOrder()->first()->id, 
+            'job_position_id' => JobPosition::inRandomOrder()->first()
         ];
     }
 }
