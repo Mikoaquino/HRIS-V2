@@ -1,14 +1,16 @@
 <?php
 
+use App\Models\JobPosition;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\UserController;
-use App\Http\Controllers\Api\V1\ActivityController;
-use App\Http\Controllers\Api\V1\EmployeeController;
-use App\Http\Controllers\Api\V1\AccessTokenController;
-use App\Http\Controllers\Api\V1\BarangayController;
 use App\Http\Controllers\Api\V1\CityController;
-use App\Http\Controllers\Api\V1\ProvinceController;
+use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\RegionController;
+use App\Http\Controllers\Api\V1\ActivityController;
+use App\Http\Controllers\Api\V1\BarangayController;
+use App\Http\Controllers\Api\V1\EmployeeController;
+use App\Http\Controllers\Api\V1\ProvinceController;
+use App\Http\Controllers\Api\V1\AccessTokenController;
+use App\Http\Controllers\Api\V1\JobPositionController;
 use App\Http\Controllers\Api\V1\EmploymentTypeController;
 
 Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function () {
@@ -21,6 +23,7 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function ()
         Route::apiResource('cities', CityController::class);
         Route::apiResource('barangays', BarangayController::class);
         Route::apiResource('employment-types', EmploymentTypeController::class);
+        Route::apiResource('job-positions', JobPositionController::class);
     });
 
     Route::prefix('auth')->group(function () {
