@@ -19,8 +19,6 @@ class EmployeeLifecycle extends Model
     protected $casts = [
         'hired_at' => 'datetime',
         'separated_at' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
     ];
 
     public function employee(): BelongsTo

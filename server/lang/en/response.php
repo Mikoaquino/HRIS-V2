@@ -16,4 +16,19 @@ return [
     'error' => [
         'show' => 'No result found for :resource',
     ],
+    'attachment' => [
+        'upload' => [
+            'success' => 'Attachment(s) successfully uploaded.',
+        ],
+        'delete' => [
+            'temporary' => [
+                'error' => 'Error archiving :attachment.',
+                'success' => ':attachment moved to trash bin.',
+            ],
+            'permanent' => [
+                'error' => 'Error permanently deleting :attachment.', 
+                'success' => ':attachment permanently deleted.',
+            ],
+        ],
+    ],
 ];

@@ -38,9 +38,6 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'deleted_at' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'status' => UserStatus::class,

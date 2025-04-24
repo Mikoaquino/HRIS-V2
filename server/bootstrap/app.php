@@ -7,6 +7,7 @@ use App\Http\Middleware\ForceAcceptJsonHeader;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -34,7 +35,16 @@ return Application::configure(basePath: dirname(__DIR__))
 
                 return response()->json([
                     'message' => __('response.error.show', ['resource' => end($strs)]),
-                    'status' => Response::HTTP_NOT_FOUND,
-                ], Response::HTTP_NOT_FOUND);
+                    'status' => $e->getStatusCode(),
+                ], $e->getStatusCode());
+            })
+            ->render(function (ThrottleRequestsException $e, Request $request) {
+                return response()->json([
+                    'message' => $e->getMessage(),
+                    'status' => $e->getStatusCode(),
+                ],
+                    $e->getStatusCode(),
+                    $e->getHeaders()
+                );
             });
     })->create();
