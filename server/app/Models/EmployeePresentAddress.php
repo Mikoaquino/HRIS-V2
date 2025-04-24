@@ -13,6 +13,19 @@ class EmployeePresentAddress extends Model
         'updated_at',
     ];
 
+    protected function getFullAddressAttribute(): string
+    {
+        return sprintf(
+            '%s, %s, %s, %s, %s, %s',
+            $this->additional_details,
+            $this->barangay->name,
+            $this->barangay->city->name,
+            $this->zip_code,
+            $this->barangay?->province?->name,
+            $this->barangay->region->name,
+        );
+    }
+
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
