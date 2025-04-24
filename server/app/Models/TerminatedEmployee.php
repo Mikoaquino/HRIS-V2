@@ -16,11 +16,6 @@ class TerminatedEmployee extends Model
         'updated_at',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);

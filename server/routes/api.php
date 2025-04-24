@@ -15,7 +15,7 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function ()
     Route::middleware('throttle:api')->group(function () {
         Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('employees', EmployeeController::class);
-            Route::apiResource('users', UserController::class);
+            Route::apiResource('users', UserController::class)->withTrashed();
             Route::apiResource('activities', ActivityController::class);
             Route::apiResource('regions', RegionController::class);
             Route::apiResource('provinces', ProvinceController::class);

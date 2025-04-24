@@ -19,8 +19,6 @@ class EmployeeWorkExperience extends Model
     protected $casts = [
         'from' => 'date',
         'to' => 'date',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
     ];
 
     public function employee(): BelongsTo
