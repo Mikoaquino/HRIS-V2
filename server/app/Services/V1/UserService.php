@@ -2,15 +2,18 @@
 
 namespace App\Services\V1;
 
-use App\Enums\UserStatus;
 use App\Models\User;
+use App\Enums\UserStatus;
 use Illuminate\Http\Request;
 use App\Filters\V1\UserFilter;
+use App\Traits\LoadsRequestQueryRelationship;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserService
 {
+    use LoadsRequestQueryRelationship;
+
     public function __construct(protected User $user) {}
 
     public function getUsers(Request $request): LengthAwarePaginator
@@ -20,11 +23,16 @@ class UserService
 
         $users = $this->user->where($queryClause);
 
-        if ($request->query('includeEmployee')) {
-            $users = $users->with('employee');
+        if ($request->boolean('trashed')) {
+            $users = $users->withTrashed();
         }
 
-        return $users->paginate()->appends($request->query());
+        if ($request->filled('load')) {
+            $users = $this->applyRequestedRelations($users, $request);
+        }
+
+        return $users->paginate(fn () => $request->filled('per_page') ? $request->per_page : 10)
+            ->appends($request->query());
     }
 
     public function createUser(array $validatedRequest): User
@@ -34,8 +42,8 @@ class UserService
 
     public function getUser(Request $request, User $user): User
     {
-        if ($request->query('includeEmployee')) {
-            return $user->loadMissing('employee');
+        if ($request->filled('load')) {
+            $user = $this->applyRequestedRelations($user, $request);
         }
 
         return $user;
