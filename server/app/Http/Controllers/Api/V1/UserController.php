@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\User;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use App\Services\V1\UserService;
@@ -37,30 +38,19 @@ class UserController extends Controller
         );
     }
 
-    public function show(Request $request, string $id): JsonResponse|UserResource
+    public function show(Request $request, User $user): JsonResponse|UserResource
     {
-        $user = $this->service->getUser($request, $id);
-
-        if (! $user) {
-            return $this->error(
-                message: __('response.error.show', ['resource' => $id]),
-                status: Response::HTTP_NOT_FOUND,
-            );
-        }
+        $user = $this->service->getUser($request, $user);
         
-        return $this->success(data: UserResource::make($user));
+        return $this->success(
+            data: UserResource::make($user),
+            status: Response::HTTP_FOUND,
+        );
     }
 
-    public function update(UpdateUserRequest $request, string $id): JsonResponse|UserResource
+    public function update(UpdateUserRequest $request, User $user): JsonResponse|UserResource
     {
-        $updatedUser = $this->service->updateUser($request->validated(), $id);
-        
-        if (! $updatedUser) {
-            return $this->error(
-                message: __('response.error.show', ['resource' => $id]),
-                status: Response::HTTP_NOT_FOUND,
-            );
-        }
+        $updatedUser = $this->service->updateUser($request->validated(), $user);
 
         return $this->success(
             data: UserResource::make($updatedUser),
@@ -68,16 +58,9 @@ class UserController extends Controller
         );
     }
 
-    public function destroy(string $id): JsonResponse
+    public function destroy(User $user): JsonResponse
     {
-        $response = $this->service->deleteUser($id);
-
-        if (! $response) {
-            $this->error(
-                message: __('response.error.show', ['resource' => $id]),
-                status: Response::HTTP_NOT_FOUND,
-            );
-        }
+        $this->service->deleteUser($user);
 
         return $this->success(message: __('response.success.delete', ['resource' => 'user']));
     }

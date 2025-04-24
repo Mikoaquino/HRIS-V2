@@ -32,14 +32,8 @@ class UserService
         return DB::transaction(fn () => $this->user->create($validatedRequest));
     }
 
-    public function getUser(Request $request, string $id): ?User
+    public function getUser(Request $request, User $user): User
     {
-        $user = $this->user->find($id);
-        
-        if (! $user) {
-            return null;
-        }
-
         if ($request->query('includeEmployee')) {
             return $user->loadMissing('employee');
         }
@@ -47,25 +41,13 @@ class UserService
         return $user;
     }
 
-    public function updateUser(array $validatedRequest, string $id): ?User
+    public function updateUser(array $validatedRequest, User $user): User
     {
-        $user = $this->user->find($id);
-
-        if (! $user) {
-            return null;
-        }
-
-        return DB::transaction(fn () => tap($user)->update($validatedRequest));
+        return tap($user)->update($validatedRequest);
     }
 
-    public function deleteUser(string $id)
+    public function deleteUser(User $user)
     {
-        $user = $this->user->withTrashed()->find($id);
-
-        if (! $user) {
-            return null;
-        }
-
         if ($user->trashed()) {
             return $this->permanentlyDeleteUser($user);
         }
