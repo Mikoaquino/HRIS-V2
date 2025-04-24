@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\ActivityController;
 use App\Http\Controllers\Api\V1\BarangayController;
 use App\Http\Controllers\Api\V1\EmployeeController;
 use App\Http\Controllers\Api\V1\ProvinceController;
+use App\Http\Controllers\Api\V1\DepartmentController;
 use App\Http\Controllers\Api\V1\AccessTokenController;
 use App\Http\Controllers\Api\V1\JobPositionController;
 use App\Http\Controllers\Api\V1\EmploymentTypeController;
@@ -24,6 +25,7 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function ()
         Route::apiResource('barangays', BarangayController::class);
         Route::apiResource('employment-types', EmploymentTypeController::class);
         Route::apiResource('job-positions', JobPositionController::class);
+        Route::apiResource('departments', DepartmentController::class);
     });
 
     Route::prefix('auth')->group(function () {
