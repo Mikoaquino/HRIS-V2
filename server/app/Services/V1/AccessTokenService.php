@@ -2,6 +2,7 @@
 
 namespace App\Services\V1;
 
+use App\Enums\ActivityLog;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,11 +17,23 @@ class AccessTokenService
             return null;
         }
 
+        activity()
+            ->useLog(ActivityLog::AUTH->value)
+            ->by($user->employee)
+            ->event('created')
+            ->log(__('activity.create.access_token'));
+
         return $user->createToken('access-token')->plainTextToken;
     }
 
     public function revokeTokens(Request $request): bool
     {
+        activity()
+            ->useLog(ActivityLog::AUTH->value)
+            ->by($request->user()->employee)
+            ->event('deleted')
+            ->log(__('activity.revoke.access_tokens'));
+
         return $request->user()->tokens()->delete();
     }
 }
