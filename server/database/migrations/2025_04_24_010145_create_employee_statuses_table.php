@@ -1,7 +1,5 @@
 <?php
 
-
-use App\Models\Employee;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employee_status', function (Blueprint $table) {
+        Schema::create('employee_statuses', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Employee::class)
-                ->nullable()
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
             $table->string('name');
-            $table->string('status'); 
+            $table->longText('description')->nullable(); 
             $table->timestamps();
         });
     }
@@ -31,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employee_status');
+        Schema::dropIfExists('employee_statuses');
     }
 };

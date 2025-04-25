@@ -11,6 +11,12 @@ class JobPosition extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
+
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);

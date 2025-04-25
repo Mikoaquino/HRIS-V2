@@ -26,11 +26,7 @@ class DatabaseSeeder extends Seeder
             EmployeeAttachmentSeeder::class,
             EmployeeLifecycleSeeder::class,
             TerminatedEmployeeSeeder::class,
-<<<<<<< HEAD
-            
-=======
-            EmployeeStatusSeeder::class
->>>>>>> 7120192b (feat: EmployeeStatusController)
+            EmployeeStatusSeeder::class,
         ]);
 
         $this->command->info("<fg=yellow;options=bold>  Seeding regions, provinces, cities, and barangays table. This may take a while, you can leave this terminal open.</>");

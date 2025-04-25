@@ -17,11 +17,11 @@ return new class extends Migration
         Schema::create('job_positions', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Department::class)
-            ->constrained()
-            ->cascadeOnUpdate()
-            ->cascadeOnDelete();
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string('name');
-            $table->text('description');
+            $table->longText('description');
             $table->timestamps();
         });
     }

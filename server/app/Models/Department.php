@@ -10,6 +10,11 @@ class Department extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+    ];
+
     public function jobPositions(): HasMany
     {
         return $this->hasMany(JobPosition::class);

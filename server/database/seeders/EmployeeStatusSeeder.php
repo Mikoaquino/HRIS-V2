@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Employee;
 use App\Models\EmployeeStatus;
 
 class EmployeeStatusSeeder extends Seeder
@@ -13,18 +12,13 @@ class EmployeeStatusSeeder extends Seeder
      */
     public function run(): void
     {
-        $statuses = ['Active', 'Inactive', 'Resigned', 'Terminated','On Leave', 'Paid Vacation'];
+        $statuses = ['Active', 'Resigned', 'Terminated'];
 
-        $employees = Employee::all();
-
-        foreach ($employees as $employee) {
+        foreach ($statuses as $status) {
             EmployeeStatus::create([
-                'employee_id' => $employee->id,
-                'name' => 'Default Status',
-                'status' => $statuses[array_rand($statuses)],
+                'name' => $status,
+                'description' => fake()->paragraph(),
             ]);
         }
-
-        
     }
 }

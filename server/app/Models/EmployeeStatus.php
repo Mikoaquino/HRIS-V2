@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmployeeStatus extends Model
 {
-    protected $table = 'employee_status'; 
-
     protected $guarded = [
         'id',
         'created_at',
@@ -16,15 +14,8 @@ class EmployeeStatus extends Model
 
     protected $fillable = [
         'name',
-        'status',
+        'description',
     ];
-    
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
 
     public function employee(): BelongsTo
     {
