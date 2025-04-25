@@ -16,7 +16,7 @@ class AccessTokenService
             return null;
         }
 
-        return $user->createToken('basic')->plainTextToken;
+        return $user->createToken('access-token')->plainTextToken;
     }
 
     public function revokeTokens(Request $request): bool
