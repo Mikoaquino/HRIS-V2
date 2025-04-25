@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\CityController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\RegionController;
+<<<<<<< HEAD
 use App\Http\Controllers\Api\V1\ActivityController;
 use App\Http\Controllers\Api\V1\BarangayController;
 use App\Http\Controllers\Api\V1\EmployeeController;
@@ -30,6 +31,20 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function ()
             Route::apiResource('employment-types', EmploymentTypeController::class);
         Route::apiResource('job-positions', JobPositionController::class);
         Route::apiResource('departments', DepartmentController::class);
+=======
+use App\Http\Controllers\API\EmployeeStatusController;
+
+Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::apiResource('employees', EmployeeController::class);
+        Route::apiResource('users', UserController::class);
+        Route::apiResource('activities', ActivityController::class);
+        Route::apiResource('regions', RegionController::class);
+        Route::apiResource('provinces', ProvinceController::class);
+        Route::apiResource('cities', CityController::class);
+        Route::apiResource('barangays', BarangayController::class);
+        Route::apiResource('employee_status', EmployeeStatusController::class);
+>>>>>>> 7120192b (feat: EmployeeStatusController)
     });
     
         Route::prefix('auth')->group(function () {
