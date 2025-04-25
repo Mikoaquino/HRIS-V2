@@ -51,11 +51,11 @@ class User extends Authenticatable
             ->setDescriptionForEvent(function (string $event) {
                 $causer = request()->user()->employee->first_name ?? 'System';
                 return match ($event) {
-                    'created' => __('activity.create.user', ['causer' => $causer]),
+                    'created' => __('activity.create.user'),
                     'updated' => $this->deleted_at
-                        ? __('activity.temporary_delete.user.single', ['causer' => $causer])
-                        : __('activity.update.user', ['causer' => $causer]),
-                    'deleted' => __('activity.force_delete.user.single', ['causer' => $causer]),
+                        ? __('activity.temporary_delete.user.single')
+                        : __('activity.update.user'),
+                    'deleted' => __('activity.force_delete.user.single'),
                 };
             });
     }

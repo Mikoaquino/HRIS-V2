@@ -3,24 +3,26 @@
 return [
     'create' => [
         'employee' => ':causer created a new employee record.',
-        'user' => ':causer created a new user account.',
-        'access_token' => ':causer generate an access token.',
+        'user' => 'Created a new user account.',
+        'access_token' => 'Logged in to the system.',
     ],
     'update' => [
         'employee' => ':causer updated an existing employee record.',
-        'user' => ':causer updated user credential(s).',
-        'access_tokens' => ':causer revoke :pronoun access tokens.',
+        'user' => 'Updated a user credential(s).',
     ],
     'temporary_delete' => [
         'user' => [
-            'single' => ':causer temporarily deleted a user.',
+            'single' => 'Temporarily deleted a user.',
             'batch' => ':causer temporarily deleted :count users.'
         ]
     ],
     'force_delete' => [
         'user' => [
-            'single' => ':causer permanently deleted a user.',
+            'single' => 'Permanently deleted a user.',
             'batch' => ':causer permanently deleted :count users.',
         ]
+    ],
+    'revoke' => [
+        'access_tokens' => 'Logged out of the system.',
     ]
 ];
