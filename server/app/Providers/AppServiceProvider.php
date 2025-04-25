@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\PersonalAccessToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
@@ -11,7 +10,6 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\RateLimiter;
 use Laravel\Telescope\TelescopeServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Laravel\Sanctum\Sanctum;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,7 +32,6 @@ class AppServiceProvider extends ServiceProvider
         Relation::enforceMorphMap([
             'employee' => 'App\Models\Employee',
             'user' => 'App\Models\User',
-            'personal_access_token' => 'App\Models\PersonalAccessToken',
         ]);
 
         Password::defaults(fn () =>
@@ -56,7 +53,5 @@ class AppServiceProvider extends ServiceProvider
             
             return Limit::none();
         });
-
-        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
     }
 }
