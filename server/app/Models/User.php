@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\ActivityLog;
 use App\Enums\UserStatus;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\LogOptions;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,14 +16,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, LogsActivity, SoftDeletes;
-
-    protected const LOG_NAME = 'user';
-
-    protected static $recordEvents = [
-        'created',
-        'updated',
-        'deleted',
-    ];
 
     protected $fillable = [
         'email',
@@ -54,16 +46,16 @@ class User extends Authenticatable
             ->logFillable()
             ->logExcept(['password', 'remember_token'])
             ->logOnlyDirty()
-            ->useLogName(self::LOG_NAME)
+            ->useLogName(ActivityLog::USER->value)
             ->dontSubmitEmptyLogs()
             ->setDescriptionForEvent(function (string $event) {
-                $causer = Auth::user()->employee->full_name ?? 'System';
+                $causer = request()->user()->employee->first_name ?? 'System';
                 return match ($event) {
-                    'created' => __('activity.create.user', ['causer' => $causer]),
+                    'created' => __('activity.create.user'),
                     'updated' => $this->deleted_at
-                        ? __('activity.temporary_delete.user.single', ['causer' => $causer])
-                        : __('activity.update.user', ['causer' => $causer]),
-                    'deleted' => __('activity.force_delete.user.single', ['causer' => $causer]),
+                        ? __('activity.temporary_delete.user.single')
+                        : __('activity.update.user'),
+                    'deleted' => __('activity.force_delete.user.single'),
                 };
             });
     }
