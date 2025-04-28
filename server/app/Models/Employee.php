@@ -4,10 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Activitylog\LogOptions;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,19 +26,6 @@ class Employee extends Model
         'created_at',
         'updated_at',
     ];
-
-    protected function fullName(): Attribute
-    {
-        return Attribute::make(
-            get: fn (mixed $value, array $attributes) => implode(" ",
-                array_filter([
-                    $attributes['first_name'],
-                    $attributes['middle_name'],
-                    $attributes['last_name'],
-                ])
-            )
-        );
-    }
     
     public function account(): HasOne
     {
@@ -99,7 +84,7 @@ class Employee extends Model
             ->useLogName(self::LOG_NAME)
             ->dontSubmitEmptyLogs()
             ->setDescriptionForEvent(function (string $event) {
-                $causer = Auth::user()->employee->full_name ?? 'System';
+                $causer = request()->user()->employee->first_name ?? 'System';
                 return match ($event) {
                     'created' => __('activity.create.employee', ['causer' => $causer]),
                     'updated' => __('activity.update.employee', ['causer' => $causer]),

@@ -29,7 +29,14 @@ class EmployeeResource extends JsonResource
             'updated_at' => $this->updated_at,
             'employment_type_id' => EmploymentTypeResource::make($this->whenLoaded('employmentType')),
             'job_position' => JobPositionResource::make($this->whenLoaded('jobPosition')),
-            'account' => UserResource::make($this->whenLoaded('account'))
+            'account' => UserResource::make($this->whenLoaded('account')),
+            'educations' => EmployeeEducationCollection::make($this->whenLoaded('educations')),
+            'work_experiences' => EmployeeWorkExperienceCollection::make($this->whenLoaded('workExperiences')),
+            'attachments' => EmployeeAttachmentCollection::make($this->whenLoaded('attachments')),
+            'lifecycle' => EmployeeLifecycleResource::make($this->whenLoaded('lifecycle')),
+            'termination' => TerminatedEmployeeResource::make($this->whenLoaded('termination')),
+            'present_address' => EmployeePresentAddressResource::make($this->whenLoaded('presentAddress')),
+            'permanent_address' => EmployeePermanentAddressResource::make($this->whenLoaded('permanentAddress')),
         ];
     }
 }
