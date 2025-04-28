@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Resources\V1\JobPositionCollection;
 use App\Models\JobPosition;
 use App\Http\Controllers\Controller;
 
 class JobPositionController extends Controller
 {
-    public function index()
+    public function index(): JobPositionCollection
     {
-        return response()->json(JobPosition::with('department')->get());
+        return JobPositionCollection::make(
+            JobPosition::with('department')->get()
+        );
     }
 }
+

@@ -28,6 +28,7 @@ class EmployeeResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'employment_type_id' => EmploymentTypeResource::make($this->whenLoaded('employmentType')),
+            'job_position' => JobPositionResource::make($this->whenLoaded('jobPosition')),
             'account' => UserResource::make($this->whenLoaded('account'))
         ];
     }
