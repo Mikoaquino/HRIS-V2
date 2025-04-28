@@ -25,9 +25,9 @@ class EmployeeResource extends JsonResource
             'tin_id' => $this->tin_id,
             'philhealth_id' => $this->philhealth_id,
             'pagibig_id' => $this->pagibig_id,
-            'employment_type_id' => $this->employment_type_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'employment_type_id' => EmploymentTypeResource::make($this->whenLoaded('employmentType')),
             'account' => UserResource::make($this->whenLoaded('account'))
         ];
     }
