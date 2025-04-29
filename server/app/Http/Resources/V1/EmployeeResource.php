@@ -27,7 +27,7 @@ class EmployeeResource extends JsonResource
             'pagibig_id' => $this->pagibig_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'employment_type_id' => EmploymentTypeResource::make($this->whenLoaded('employmentType')),
+            'employment_type' => EmploymentTypeResource::make($this->whenLoaded('employmentType')),
             'job_position' => JobPositionResource::make($this->whenLoaded('jobPosition')),
             'account' => UserResource::make($this->whenLoaded('account')),
             'educations' => EmployeeEducationCollection::make($this->whenLoaded('educations')),
