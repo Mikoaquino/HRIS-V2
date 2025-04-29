@@ -20,7 +20,7 @@ class AccessTokenService
         activity()
             ->useLog(ActivityLog::AUTH->value)
             ->by($user->employee)
-            ->event('created')
+            ->event('log in')
             ->log(__('activity.create.access_token'));
 
         return $user->createToken('access-token')->plainTextToken;
@@ -31,7 +31,7 @@ class AccessTokenService
         activity()
             ->useLog(ActivityLog::AUTH->value)
             ->by($request->user()->employee)
-            ->event('deleted')
+            ->event('log out')
             ->log(__('activity.revoke.access_tokens'));
 
         return $request->user()->tokens()->delete();
