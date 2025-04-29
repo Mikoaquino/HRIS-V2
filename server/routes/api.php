@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\V1\BarangayController;
 use App\Http\Controllers\Api\V1\EmployeeController;
 use App\Http\Controllers\Api\V1\ProvinceController;
 use App\Http\Controllers\Api\V1\DepartmentController;
-use App\Http\Controllers\API\EmployeeStatusController;
+use App\Http\Controllers\Api\V1\EmployeeStatusController;
 use App\Http\Controllers\Api\V1\AccessTokenController;
 use App\Http\Controllers\Api\V1\JobPositionController;
 use App\Http\Controllers\Api\V1\EmploymentTypeController;
@@ -30,7 +30,7 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function ()
             Route::apiResource('employment-types', EmploymentTypeController::class);
             Route::apiResource('job-positions', JobPositionController::class);
             Route::apiResource('departments', DepartmentController::class);
-            // Route::apiResource('employee-statuses', EmployeeStatusController::class);
+            Route::apiResource('employee-statuses', EmployeeStatusController::class);
     });
     
         Route::prefix('auth')->group(function () {
