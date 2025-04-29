@@ -2,41 +2,53 @@
 
 namespace App\Services\V1;
 
-use App\Enums\UserStatus;
 use App\Models\User;
+use App\Enums\UserStatus;
 use Illuminate\Http\Request;
-use App\Filters\V1\UserFilter;
+use App\Filters\V1\User\SortUser;
 use Illuminate\Support\Facades\DB;
+use App\Filters\V1\User\FilterUser;
+use App\Filters\V1\User\SearchUser;
+use App\Http\Requests\V1\UserRequest;
+use App\Filters\V1\LoadModelRelations;
+use App\Filters\V1\PaginateQueryBuilder;
+use Illuminate\Support\Facades\Pipeline;
+use App\Filters\V1\IncludeSoftDeletedModels;
+use App\Traits\LoadsRequestQueryRelationship;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserService
 {
+    use LoadsRequestQueryRelationship;
+
     public function __construct(protected User $user) {}
 
-    public function getUsers(Request $request): LengthAwarePaginator
+    public function getUsers(UserRequest $request): LengthAwarePaginator
     {
-        $userFilter = new UserFilter;
-        $queryClause = $userFilter->transform($request);
-
-        $users = $this->user->where($queryClause);
-
-        if ($request->query('includeEmployee')) {
-            $users = $users->with('employee');
-        }
-
-        return $users->paginate()->appends($request->query());
+        return Pipeline::send($this->user->query())
+            ->through([
+                FilterUser::class,
+                SearchUser::class,
+                SortUser::class,
+                IncludeSoftDeletedModels::class,
+                LoadModelRelations::class,
+                PaginateQueryBuilder::class,
+            ])
+            ->then(fn (LengthAwarePaginator $paginator) => 
+                $paginator->appends($request->query())
+            );
     }
 
     public function createUser(array $validatedRequest): User
     {
-        return DB::transaction(fn () => $this->user->create($validatedRequest));
+        return $this->user->create($validatedRequest);
     }
 
     public function getUser(Request $request, User $user): User
     {
-        if ($request->query('includeEmployee')) {
-            return $user->loadMissing('employee');
-        }
+        $user->when($request->filled('load'),
+            fn () => $this->applyRequestedRelations($user, $request)
+        );
 
         return $user;
     }

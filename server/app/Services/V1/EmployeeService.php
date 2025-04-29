@@ -3,6 +3,7 @@
 namespace App\Services\V1;
 
 use App\Models\Employee;
+use App\Traits\LoadsRequestQueryRelationship;
 use Illuminate\Http\Request;
 use App\Filters\V1\EmployeeFilter;
 use Illuminate\Support\Facades\DB;
@@ -10,12 +11,14 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class EmployeeService
 {
+    use LoadsRequestQueryRelationship;
+
     public function __construct(protected Employee $employee) {}
 
     public function getEmployees(Request $request): LengthAwarePaginator
     {
         $employeeFilter = new EmployeeFilter;
-        $queryClause = $employeeFilter->transform($request);
+        $queryClause = $employeeFilter->apply($request->filter);
 
         $employees = $this->employee->where($queryClause);
 
@@ -24,20 +27,19 @@ class EmployeeService
         }
 
         return $employees->paginate()->appends($request->query());
-    } 
+    }
     
     public function createEmployee(array $validatedRequest): Employee
     {
         return DB::transaction(fn () => $this->employee->create($validatedRequest));
-    
     }
     
     public function getEmployee(Request $request, string $id): Employee
     {
         $employee = $this->employee->findOrFail($id);
 
-        if ($request->query('includeAccount')) {
-            return $employee->loadMissing('account');
+        if ($request->has('load')) {
+            $employee = $this->applyRequestedRelations($employee, $request);
         }
 
         return $employee;

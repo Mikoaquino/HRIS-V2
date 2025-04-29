@@ -25,17 +25,14 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $status = fake()->randomElement(UserStatus::cases());
-        $deleted = $status === UserStatus::INACTIVE ? now() : null;
-        
         return [
             'email' => fake()->unique()->safeEmail(),
             'employee_id' => Employee::factory(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'status' => $status,
+            'status' => fake()->randomElement(UserStatus::cases()),
             'remember_token' => Str::random(10),
-            'deleted_at' => $deleted,
+            'deleted_at' => null,
         ];
     }
 

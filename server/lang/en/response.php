@@ -31,4 +31,9 @@ return [
             ],
         ],
     ],
+    'req_query' => [
+        'relation' => [
+            'error' => 'Resource relation [:relation] was not found.',
+        ],
+    ],
 ];
