@@ -1,22 +1,40 @@
-import { Routes, Route } from "react-router-dom";
-import Login from "../features/auth/pages/Login";
-import AuditTrailPage from "../features/auditTrail/pages/AuditTrailPage";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import HrDashboard from "../features/hrDashboard/pages/HrDashboard";
-import HrLayout from "../layout/HrLayout";
+import Login from '../features/auth/pages/Login';
+import AuditTrailPage from '../features/auditTrail/pages/AuditTrailPage';
+import HrLayout from '../layout/HrLayout';
 
-const AppRoutes = () => {
-  return (
-    <Routes>
-      {/* Public route */}
-      <Route path="/" element={<Login />} />
+interface PrivateRouteProps {
+  children?: React.ReactNode;
+}
 
-      {/* HR routes */}
-      <Route element={<HrLayout />}>
-        <Route path="/audit-trail" element={<AuditTrailPage />} />
-        <Route path="/hr-dashboard" element={<HrDashboard />} />
-      </Route>
-    </Routes>
-  );
+const isAuthenticated = () => {
+  return Boolean(sessionStorage.getItem('token'));
 };
 
-export default AppRoutes;
+const PrivateRoute = () => {
+  return isAuthenticated() ? <Outlet /> : <Navigate to="/login" replace />;
+};
+
+export const AppRoutes = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Public Route */}
+        <Route path="/login" element={<Login />} />
+
+        {/* Private Routes wrapper */}
+        <Route element={<PrivateRoute />}>
+          <Route element={<HrLayout />}>
+            <Route path="/audit-trail" element={<AuditTrailPage />} />
+            <Route path="/hr-dashboard" element={<HrDashboard />} />
+          </Route>
+        </Route>
+
+        {/* Redirects */}
+        <Route path="/" element={<Navigate to="/audit-trail" replace />} />
+        <Route path="*" element={<Navigate to="/audit-trail" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};

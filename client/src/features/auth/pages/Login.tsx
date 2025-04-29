@@ -1,68 +1,143 @@
-import { FC } from "react";
-import { FaGoogle, FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { useState, FormEvent } from 'react';
+import { FaUserShield, FaUser } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
-const LoginPage: FC = () => {
+const LoginPage = () => {
+  const [role, setRole] = useState<'admin' | 'employee'>('employee');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate(); // Step 1: Initialized navigate
+
+  const handleLogin = async (e: FormEvent) => {
+    e.preventDefault(); // Step 2: Prevent default form submission to stop page refresh
+    setIsLoading(true);
+    setError('');
+
+    try {
+      console.log('Login attempt with email:', email); // Log the login attempt
+
+      // Send login request
+      const response = await fetch('http://localhost:8000/api/v1/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      console.log('Login response:', data); // Log the server response
+
+      // Handle response status
+      if (response.status !== 201) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      const token = data?.data?.token;
+      if (!token) {
+        throw new Error('Access token missing from response');
+      }
+
+      // Save token in localStorage
+      sessionStorage.setItem('token', token);
+
+      // Optionally store user info
+      if (data.data.user) {
+        localStorage.setItem('user', JSON.stringify(data.data.user));
+      }
+
+      console.log('Token saved to localStorage:', token); // Log the saved token
+
+      // Step 3: Add a delay before redirecting to the audit-trail page
+      console.log('Navigating to audit-trail...');
+      setTimeout(() => {
+        navigate('/audit-trail', { replace: true });
+      }, 1000); // Delay navigation by 1 second
+
+    } catch (err: any) {
+      console.error('Login error:', err);
+      const msg = err?.message || 'Unknown error';
+      setError('Login failed: ' + msg);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-teal-400">
-      <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-xl">
+    <div className="flex items-center justify-center min-h-screen bg-teal-500 text-white">
+      <div className="bg-white text-black p-10 rounded-lg shadow-lg w-full max-w-xl">
         <div className="text-center mb-6">
-          <div className="flex items-center justify-center gap-2 text-teal-500 text-xl font-semibold">
+          <div className="flex items-center justify-center gap-2 text-teal-600 text-xl font-semibold">
             <span className="text-3xl">🌀</span>
-            <h2>Get Started</h2>
+            <h2>Welcome Back</h2>
           </div>
-          <p className="text-gray-500">Sign up as an employee.</p>
+          <p className="text-gray-600">
+            Sign in as {role === 'admin' ? 'an Admin' : 'an Employee'}.
+          </p>
         </div>
 
-        <div className="flex flex-col gap-3 mb-4">
-          <button className="flex items-center justify-center gap-2 border border-gray-400 py-2 rounded-md hover:bg-gray-100">
-            <FaGoogle />
-            Continue with Google
+        <div className="flex justify-center gap-4 mb-6">
+          <button
+            type="button"
+            onClick={() => setRole('admin')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition duration-200 ${
+              role === 'admin'
+                ? 'bg-teal-700 text-white hover:bg-teal-800'
+                : 'bg-teal-100 text-teal-700 border border-teal-500 hover:bg-teal-200'
+            }`}
+          >
+            <FaUserShield /> Admin
           </button>
-          <button className="flex items-center justify-center gap-2 border border-gray-400 py-2 rounded-md hover:bg-gray-100">
-            <FaFacebookF />
-            Continue with Facebook
+          <button
+            type="button"
+            onClick={() => setRole('employee')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition duration-200 ${
+              role === 'employee'
+                ? 'bg-teal-700 text-white hover:bg-teal-800'
+                : 'bg-teal-100 text-teal-700 border border-teal-500 hover:bg-teal-200'
+            }`}
+          >
+            <FaUser /> Employee
           </button>
         </div>
 
-        <div className="flex items-center my-4">
-          <hr className="flex-grow border-gray-300" />
-          <span className="mx-2 text-sm text-gray-500">or</span>
-          <hr className="flex-grow border-gray-300" />
-        </div>
+        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <form className="flex flex-col gap-4 mt-6" onSubmit={handleLogin}>
           <div>
-            <label className="text-sm font-medium">First Name</label>
-            <input type="text" placeholder="Enter your first name" className="w-full mt-1 border px-3 py-2 rounded-md" />
+            <label className="text-sm font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full mt-1 border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400 text-black"
+              required
+            />
           </div>
           <div>
-            <label className="text-sm font-medium">Last Name</label>
-            <input type="text" placeholder="Enter your last name" className="w-full mt-1 border px-3 py-2 rounded-md" />
+            <label className="text-sm font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full mt-1 border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400 text-black"
+              required
+            />
           </div>
-          <div>
-            <label className="text-sm font-medium">Email</label>
-            <input type="email" placeholder="Enter your email" className="w-full mt-1 border px-3 py-2 rounded-md" />
-          </div>
-          <div>
-            <label className="text-sm font-medium">Password</label>
-            <input type="password" placeholder="Enter your password" className="w-full mt-1 border px-3 py-2 rounded-md" />
-          </div>
+
+          <button
+            type="submit"
+            className="w-full mt-6 bg-teal-700 text-white py-2 rounded-md hover:bg-teal-800 transition duration-200"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Loading...' : 'Sign In'}
+          </button>
         </form>
-
-        <button className="w-full mt-6 bg-teal-400 text-white py-2 rounded-md hover:bg-teal-500 transition">
-          Create Account
-        </button>
-
-        <div className="flex justify-center gap-6 mt-6 text-teal-400">
-          <FaTwitter />
-          <FaFacebookF />
-          <FaLinkedinIn />
-          <FaInstagram />
-        </div>
-
-        <p className="text-center mt-4 text-sm text-gray-600">
-          Already have an account? <span className="text-black font-medium cursor-pointer">Sign In</span>
-        </p>
       </div>
     </div>
   );
