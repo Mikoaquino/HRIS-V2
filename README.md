@@ -1,14 +1,18 @@
 ## Dev (Feature, Patch, Breaking Change) Branch
 All patches, minors/features, breaking changes or any types of initial release should be merged into this branch. Follow [conventional commit messages](https://www.conventionalcommits.org/en/v1.0.0/) for reviewers to easily identify the type of a commit.
 
-### Installation
+---
 
-- Clone or branch out from here
+## Installation
+
+- Clone or branch out from here:
  ```
  git clone --single-branch --branch feature_compilation https://github.com/Mikoaquino/hris-v2.git
  ```
 
-#### Client / Frotend
+---
+
+### Client / Frontend
 
 - Navigate to [`client/`](https://github.com/Mikoaquino/HRIS-V2/tree/feature_compilation/client) directory:
 ```
@@ -23,9 +27,11 @@ npm install
 npm run dev
 ```
 
-#### Server / Backend
+---
 
-- Navigate to [`server/`](https://github.com/Mikoaquino/HRIS-V2/tree/feature_compilation/server) directory:
+### Server / Backend
+
+- Navigate to [`server/`](https://github.com/Mikoaquino/HRIS-V2/tree/1.x/api/server) directory:
 
 ```
 cd server
@@ -48,14 +54,19 @@ php artisan migrate:fresh --seed
 php artisan serve
 ```
 
+---
+
 ### Pull Request (PR) Guidelines
 
-- Make sure your head branch is up-to-date with this upstream branch by running `git pull origin feature_compilation`.
--Be as descriptive and elaborate as possible when describing the changes you made. Optional, but you may provide code snippets, test(manually, e2e, unit, integration, etc), or demos.
+- Make sure your head branch is up-to-date with this upstream branch by running `git pull origin <feature_compilation or 1.x/api>`.
+- Use `feature_compilation` as base branch for frontend changes and conversely, `1.x/api` for backend.
+- Be as descriptive and elaborate as possible when describing the changes you made. Optional, but you may provide code snippets, test(manually, e2e, unit, integration, etc), or demos.
 - Code reviews are **required** before merging so always add reviewers to notify them of your prs.
 - Keep your pr as focused as possible, separate bug fixes from introducing new features. If the scope of your changes is quite large, it would be difficult for anybody to read that abomination (speaking from experience, ain't nobody reviewing that bro).
 - Your pr might be addressed to provide solution for an issue you or somebody created in [Issues](https://github.com/Mikoaquino/hris-v2/issues) page, ensure that you link/reference it to your pr.
 - To finalize, remove any debugging statements `console.log, dd(), var_dump(), die()` in your code.
+
+---
 
 ### Test
 
