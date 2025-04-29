@@ -28,7 +28,7 @@ class Employee extends Model
     
     public function account(): HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class)->withTrashed();
     }
 
     public function educations(): HasMany
