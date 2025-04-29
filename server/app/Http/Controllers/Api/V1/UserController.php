@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Requests\V1\UserRequest;
 use App\Models\User;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class UserController extends Controller
 
     public function __construct(protected UserService $service) {}
 
-    public function index(Request $request): JsonResponse|UserCollection
+    public function index(UserRequest $request): JsonResponse|UserCollection
     {
         $users = $this->service->getUsers($request);
 
