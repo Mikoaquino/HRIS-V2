@@ -17,8 +17,8 @@ class ActivityResource extends JsonResource
             'batch_uuid' => $this->batch_uuid,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'causer' => $this->whenLoaded('causer', $this->causer?->toResource()),
-            'subject' => $this->whenLoaded('subject', $this->subject?->toResource()),
+            'causer' => $this->whenLoaded('causer', fn () => $this->causer->toResource()),
+            'subject' => $this->whenLoaded('subject', fn () => $this->subject->toResource()),
         ];
     }
 }
