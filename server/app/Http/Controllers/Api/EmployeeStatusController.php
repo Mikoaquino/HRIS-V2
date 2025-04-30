@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Models\EmployeeStatus;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\V1\EmployeeStatusCollection;
+use App\Http\Resources\EmployeeStatusCollection;
 
 class EmployeeStatusController extends Controller
 {
