@@ -12,6 +12,7 @@ use App\Filters\Employee\LoadEmployee;
 use Illuminate\Support\Facades\DB;
 use App\Filters\PaginateQueryBuilder;
 use App\Filters\Employee\SearchEmployee;
+use App\Filters\Employee\SortEmployee;
 use Illuminate\Support\Facades\Pipeline;
 use App\Filters\IncludeSoftDeletedModels;
 use App\Traits\LoadsRequestQueryRelationship;
@@ -37,6 +38,7 @@ class EmployeeService
         return Pipeline::send($this->employee->query())
         ->through([
             SearchEmployee::class,
+            SortEmployee::class,
             IncludeSoftDeletedModels::class,
             EmployeeFilters::class,
             LoadEmployee::class,

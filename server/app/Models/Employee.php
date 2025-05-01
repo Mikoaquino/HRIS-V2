@@ -89,6 +89,9 @@ class Employee extends Model
                 return match ($event) {
                     'created' => __('activity.create.employee', ['causer' => $causer]),
                     'updated' => __('activity.update.employee', ['causer' => $causer]),
+                    'deleted' => $this->deleted_at
+                        ? __('activity.temporary_delete.employee.single')
+                        : __('activity.force_delete.employee.single'),
                 };
             });
     }
