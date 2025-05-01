@@ -6,8 +6,8 @@ use App\Models\User;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use App\Http\Requests\ApiRequest;
 use Illuminate\Http\JsonResponse;
-use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function __construct(protected UserService $service) {}
 
-    public function index(UserRequest $request): JsonResponse|UserCollection
+    public function index(ApiRequest $request): JsonResponse|UserCollection
     {
         $users = $this->service->getUsers($request);
 

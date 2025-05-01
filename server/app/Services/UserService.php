@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Filters\User\SortUser;
 use App\Filters\User\FilterUser;
 use App\Filters\User\SearchUser;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\ApiRequest;
 use Illuminate\Support\Facades\DB;
 use App\Filters\LoadModelRelations;
 use App\Filters\PaginateQueryBuilder;
@@ -23,7 +23,7 @@ class UserService
 
     public function __construct(protected User $user) {}
 
-    public function getUsers(UserRequest $request): LengthAwarePaginator
+    public function getUsers(ApiRequest $request): LengthAwarePaginator
     {
         return Pipeline::send($this->user->query())
             ->through([
