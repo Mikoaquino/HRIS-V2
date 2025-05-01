@@ -4,14 +4,14 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Enums\UserStatus;
-use Illuminate\Http\Request;
 use App\Filters\User\SortUser;
 use App\Filters\User\FilterUser;
 use App\Filters\User\SearchUser;
-use App\Http\Requests\ApiRequest;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
 use App\Filters\LoadModelRelations;
 use App\Filters\PaginateQueryBuilder;
+use App\Http\Requests\ShowUserRequest;
 use Illuminate\Support\Facades\Pipeline;
 use App\Filters\IncludeSoftDeletedModels;
 use App\Traits\LoadsRequestQueryRelationship;
@@ -23,7 +23,7 @@ class UserService
 
     public function __construct(protected User $user) {}
 
-    public function getUsers(ApiRequest $request): LengthAwarePaginator
+    public function getUsers(UserRequest $request): LengthAwarePaginator
     {
         return Pipeline::send($this->user->query())
             ->through([
@@ -44,7 +44,7 @@ class UserService
         return $this->user->create($validatedRequest);
     }
 
-    public function getUser(Request $request, User $user): User
+    public function getUser(ShowUserRequest $request, User $user): User
     {
         $user->when($request->filled('load'),
             fn () => $this->applyRequestedRelations($user, $request)
