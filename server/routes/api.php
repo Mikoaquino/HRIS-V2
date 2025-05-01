@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\V1\JobPositionController;
 use App\Http\Controllers\Api\V1\EmploymentTypeController;
 use App\Http\Controllers\Api\V1\EmployeeAttachmentController;
 
+
 Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
     Route::middleware('throttle:api')->group(function () {
         Route::middleware('auth:sanctum')->group(function () {
