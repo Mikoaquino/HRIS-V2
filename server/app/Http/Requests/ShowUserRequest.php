@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class ShowUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,11 +15,6 @@ class UserRequest extends FormRequest
     {
         return [
             'load' => ['string'],
-            'only_trashed' => ['in:true,false'],
-            'with_trashed' => ['in:true,false'],
-            'filter' => ['array'],
-            'sort' => ['array'],
-            'q' => ['string'],
         ];
     }
 }
