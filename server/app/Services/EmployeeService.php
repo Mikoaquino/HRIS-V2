@@ -2,10 +2,14 @@
 
 namespace App\Services;
 
+
 use App\Models\Employee;
 use Illuminate\Http\Request;
-use App\Filters\EmployeeFilter;
 use Illuminate\Support\Facades\DB;
+use App\Filters\PaginateQueryBuilder;
+use App\Filters\Employee\SearchEmployee;
+use Illuminate\Support\Facades\Pipeline;
+use App\Filters\IncludeSoftDeletedModels;
 use App\Traits\LoadsRequestQueryRelationship;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -17,16 +21,15 @@ class EmployeeService
 
     public function getEmployees(Request $request): LengthAwarePaginator
     {
-        $employeeFilter = new EmployeeFilter;
-        $queryClause = $employeeFilter->apply($request->filter);
-
-        $employees = $this->employee->where($queryClause);
-
-        if ($request->query('includeAccount')) {
-            $employees = $employees->with('account');
-        }
-
-        return $employees->paginate()->appends($request->query());
+        return Pipeline::send($this->employee->query())
+        ->through([
+            SearchEmployee::class,
+            IncludeSoftDeletedModels::class,
+            PaginateQueryBuilder::class,
+        ])
+        ->then(fn (LengthAwarePaginator $paginator) => 
+            $paginator->appends($request->query())
+        );
     }
     
     public function createEmployee(array $validatedRequest): Employee
