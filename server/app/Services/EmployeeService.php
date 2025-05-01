@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Filters\EmployeeFilter;
 use Illuminate\Support\Facades\DB;
 use App\Filters\PaginateQueryBuilder;
 use App\Filters\Employee\SearchEmployee;
@@ -21,6 +22,15 @@ class EmployeeService
 
     public function getEmployees(Request $request): LengthAwarePaginator
     {
+        $employeeFilter = new EmployeeFilter;
+        $queryClause = $employeeFilter->apply($request->filter ?? []);
+
+        $employees = $this->employee->where($queryClause);
+
+        if ($request->query('includeAccount')) {
+            $employees = $employees->with('account');
+        }
+        
         return Pipeline::send($this->employee->query())
         ->through([
             SearchEmployee::class,
