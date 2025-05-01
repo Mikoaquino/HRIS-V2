@@ -36,7 +36,8 @@ class EmployeeFactory extends Factory
             'philhealth_id' => fake()->numerify('###########'),
             'pagibig_id' => fake()->numerify('###########'),
             'employment_type_id' => EmploymentType::inRandomOrder()->first(), 
-            'job_position_id' => JobPosition::inRandomOrder()->first()
+            'job_position_id' => JobPosition::inRandomOrder()->first(),
+            'deleted_at' => null,
         ];
     }
 }
