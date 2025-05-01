@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\EmployeeStatusCollection; 
 use App\Models\EmployeeStatus;
 use Illuminate\Http\Request;
-use App\Http\Resources\EmployeeStatusCollection;
 
 class EmployeeStatusController extends Controller
 {

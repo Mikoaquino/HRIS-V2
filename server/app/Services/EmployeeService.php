@@ -6,6 +6,9 @@ namespace App\Services;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Filters\EmployeeFilter;
+use App\Filters\Employee\EmployeeFilters;
+use App\Filters\Employee\EmployeePaginate;
+use App\Filters\Employee\LoadEmployee;
 use Illuminate\Support\Facades\DB;
 use App\Filters\PaginateQueryBuilder;
 use App\Filters\Employee\SearchEmployee;
@@ -35,7 +38,11 @@ class EmployeeService
         ->through([
             SearchEmployee::class,
             IncludeSoftDeletedModels::class,
-            PaginateQueryBuilder::class,
+            EmployeeFilters::class,
+            LoadEmployee::class,
+            EmployeePaginate::class,
+
+            
         ])
         ->then(fn (LengthAwarePaginator $paginator) => 
             $paginator->appends($request->query())
