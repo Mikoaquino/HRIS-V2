@@ -9,9 +9,9 @@ use App\Http\Controllers\Api\BarangayController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ProvinceController;
 use App\Http\Controllers\Api\DepartmentController;
-use App\Http\Controllers\Api\EmployeeStatusController;
 use App\Http\Controllers\Api\AccessTokenController;
 use App\Http\Controllers\Api\JobPositionController;
+use App\Http\Controllers\Api\EmployeeStatusController;
 use App\Http\Controllers\Api\EmploymentTypeController;
 use App\Http\Controllers\Api\EmployeeAttachmentController;
 
