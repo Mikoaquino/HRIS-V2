@@ -48,7 +48,10 @@ class EmployeeController extends Controller
     {
         try {
             $employee = $this->employeeService->getEmployee($request, $id);
-            return $this->success(data: EmployeeResource::make($employee));
+            return $this->success(
+                data: EmployeeResource::make($employee),
+                status: Response::HTTP_FOUND,
+            );
         } catch (Exception $e) {
             return $this->error(
                 message: $e->getMessage(), 
