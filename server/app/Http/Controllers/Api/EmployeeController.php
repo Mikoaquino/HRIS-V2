@@ -46,18 +46,12 @@ class EmployeeController extends Controller
 
     public function show(Request $request, string $id): JsonResponse|EmployeeResource
     {
-        try {
-            $employee = $this->employeeService->getEmployee($request, $id);
-            return $this->success(
-                data: EmployeeResource::make($employee),
-                status: Response::HTTP_FOUND,
-            );
-        } catch (Exception $e) {
-            return $this->error(
-                message: $e->getMessage(), 
-                status: Response::HTTP_NOT_FOUND
-            );
-        }
+        $employee = $this->employeeService->getEmployee($request, $id);
+        
+        return $this->success(
+            data: EmployeeResource::make($employee),
+            status: Response::HTTP_FOUND,
+        );
     }
     
     public function update(UpdateEmployeeRequest $request, string $id): JsonResponse|EmployeeResource
