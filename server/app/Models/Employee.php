@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -13,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Employee extends Model
 {
-    use HasFactory, LogsActivity, SoftDeletes;
+    use HasFactory, LogsActivity;
 
     protected const LOG_NAME = 'employee';
 
@@ -89,9 +88,6 @@ class Employee extends Model
                 return match ($event) {
                     'created' => __('activity.create.employee', ['causer' => $causer]),
                     'updated' => __('activity.update.employee', ['causer' => $causer]),
-                    'deleted' => $this->deleted_at
-                        ? __('activity.temporary_delete.employee.single')
-                        : __('activity.force_delete.employee.single'),
                 };
             });
     }
