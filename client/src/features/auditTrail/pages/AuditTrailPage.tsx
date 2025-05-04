@@ -3,6 +3,8 @@ import axios from "axios";
 import AuditTrailTable from "../components/AuditTrailTable";
 import BreadcrumbHeader from "../../../components/BreadcrumbHeader";
 
+const API_BASE_URL = "http://127.0.0.1:8000"; // Match the base URL with AuditTrailTable
+
 const AuditTrailPage: React.FC = () => {
   const [token, setToken] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
@@ -21,8 +23,9 @@ const AuditTrailPage: React.FC = () => {
 
   const loginUser = async () => {
     try {
-      const { data } = await axios.post("/api/v1/auth/login", {
-        email: "estefania.waters@example.org",
+      setLoading(true);
+      const { data } = await axios.post(`${API_BASE_URL}/api/v1/auth/login`, {
+        email: "kunze.eliezer@example.net",
         password: "password",
       });
 
@@ -46,9 +49,7 @@ const AuditTrailPage: React.FC = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="spinner-border text-primary" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
       </div>
     );
   }

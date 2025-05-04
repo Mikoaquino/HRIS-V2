@@ -13,18 +13,21 @@ import {
 const API_BASE_URL = "http://127.0.0.1:8000";
 
 interface AuditTrailTableProps {
-  token?: string;
+  token: string;
 }
-
+interface Causer {
+  id: number;
+  first_name: string;
+  last_name: string;
+}
 interface Activity {
   id: number;
   event: string;
+  log_name: string;
   description: string;
-  causer_id: string | null;
-  causer_type: string | null;
+  causer: Causer | null;
   created_at: string;
-  user_name?: string;
-  user_role?: string;
+  updated_at: string;
 }
 
 const formatDateTime = (dateString: string): { day: string; time: string } => {
@@ -54,63 +57,68 @@ const formatDate = (dateString: string): string => {
   return `March ${date.getDate()}, ${date.getFullYear()}`;
 };
 
-const getActionBadge = (
-  event: string
-): { color: string; text: string; icon: string } => {
-  switch (event.toLowerCase()) {
-    case "created":
-      return {
-        color: "bg-green-100 text-green-800",
-        text: "Add Account",
-        icon: "",
-      };
-    case "delete_account":
-      return {
-        color: "bg-red-100 text-red-800",
-        text: "Delete Account",
-        icon: "",
-      };
-    case "login":
-      return {
-        color: "bg-green-100 text-green-800",
-        text: "Log In",
-        icon: "",
-      };
-    case "login_failed":
-      return { color: "bg-red-100 text-red-800", text: "Log In", icon: "" };
-    case "logout":
-      return {
-        color: "bg-green-100 text-green-800",
-        text: "Log Out",
-        icon: "",
-      };
-    case "view_dashboard":
-      return {
-        color: "bg-blue-100 text-blue-800",
-        text: "View Dashboard",
-        icon: "",
-      };
-    case "view_audit_trail":
-      return {
-        color: "bg-blue-100 text-blue-800",
-        text: "View Audit Trail",
-        icon: "",
-      };
-    default:
-      return { color: "bg-gray-100 text-gray-800", text: event, icon: "" };
+const getActionBadge = (event: string, log_name: string) => {
+  if (log_name === "auth") {
+    switch (event.toLowerCase()) {
+      case "created":
+        return {
+          color: "bg-green-100 text-green-800",
+          text: "Log In",
+          icon: "🔑",
+        };
+      case "logout":
+        return {
+          color: "bg-green-100 text-green-800",
+          text: "Log Out",
+          icon: "🚪",
+        };
+      case "login_failed":
+        return {
+          color: "bg-red-100 text-red-800",
+          text: "Log In Failed",
+          icon: "❌",
+        };
+      default:
+        return { color: "bg-gray-100 text-gray-800", text: event, icon: "" };
+    }
   }
+
+  if (log_name === "employee") {
+    switch (event.toLowerCase()) {
+      case "created":
+      case "add_account":
+        return {
+          color: "bg-green-100 text-green-800",
+          text: "Add Employee",
+          icon: "👨‍💼",
+        };
+      default:
+        return { color: "bg-gray-100 text-gray-800", text: event, icon: "" };
+    }
+  }
+
+  if (log_name === "user") {
+    switch (event.toLowerCase()) {
+      case "created":
+      case "add_account":
+        return {
+          color: "bg-green-100 text-green-800",
+          text: "Add Account",
+          icon: "👤",
+        };
+      default:
+        return { color: "bg-gray-100 text-gray-800", text: event, icon: "" };
+    }
+  }
+
+  return { color: "bg-gray-100 text-gray-800", text: event, icon: "" };
 };
 
-const AuditTrailTable: React.FC<AuditTrailTableProps> = ({
-  token: propToken,
-}) => {
+const AuditTrailTable: React.FC<AuditTrailTableProps> = ({ token }) => {
   const [data, setData] = useState<Activity[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [token, setToken] = useState<string>(
-    propToken || localStorage.getItem("auth_token") || ""
-  );
-  const [totalRows, setTotalRows] = useState<number>(57);
+  const [totalRows, setTotalRows] = useState<number>(0);
   const [perPage, setPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [actionFilter, setActionFilter] = useState<string>("");
@@ -118,35 +126,11 @@ const AuditTrailTable: React.FC<AuditTrailTableProps> = ({
   const [searchText, setSearchText] = useState<string>("");
 
   useEffect(() => {
-    if (!token) {
-      login("telly68@example.org", "password");
-    } else {
+    // Only fetch activities when token is available
+    if (token) {
       fetchActivities();
     }
   }, [token, currentPage, perPage, actionFilter, dateFilter, searchText]);
-
-  const login = async (email: string, password: string) => {
-    try {
-      setLoading(true);
-      const { data } = await axios.post(`${API_BASE_URL}/api/v1/auth/login`, {
-        email,
-        password,
-      });
-
-      if (data?.data?.token) {
-        const newToken = data.data.token;
-        localStorage.setItem("auth_token", newToken);
-        setToken(newToken);
-      } else {
-        throw new Error("Invalid login response format");
-      }
-    } catch (error: any) {
-      console.error("Login failed:", error.response?.data || error.message);
-      setError("Authentication failed. Please refresh the page.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const fetchActivities = async () => {
     try {
@@ -169,7 +153,6 @@ const AuditTrailTable: React.FC<AuditTrailTableProps> = ({
       }
       if (searchText) params.search = searchText;
 
-      // Fetch activities
       const response = await axios.get(`${API_BASE_URL}/api/v1/activities`, {
         params,
         headers: {
@@ -178,146 +161,38 @@ const AuditTrailTable: React.FC<AuditTrailTableProps> = ({
         },
       });
 
-      // Enhance data with user information (normally would come from API)
-      const enhancedData = (response.data.data || []).map(
-        (activity: Activity) => {
-          // In a real implementation, this would come from the API
-          const userName =
-            activity.causer_id === "1" ? "John Doe" : "Juan Dela Cruz";
-          const userRole = activity.causer_id === "1" ? "Admin" : "Employee";
+      const activitiesData = response.data.data || [];
 
-          return {
-            ...activity,
-            user_name: userName,
-            user_role: userRole,
-          };
-        }
-      );
+      const enhancedData = activitiesData.map((activity: any) => {
+        // Assuming causer is an object with first_name and last_name fields
+        const userName =
+          activity.causer &&
+          activity.causer.first_name &&
+          activity.causer.last_name
+            ? `${activity.causer.first_name} ${activity.causer.last_name}`
+            : "Unknown User";
+
+        const userRole =
+          activity.causer && activity.causer.id === 1 ? "Admin" : "Employee";
+
+        return {
+          ...activity,
+          user_name: userName,
+          user_role: userRole,
+        };
+      });
 
       setData(enhancedData);
-      setTotalRows(response.data.meta?.total || 57);
+      setTotalRows(response.data.meta?.total || enhancedData.length);
       setError(null);
     } catch (error: any) {
       console.error("Failed to fetch activities:", error);
-      if (error.response?.status === 401) {
-        setError("Session expired. Please refresh to login again.");
-        localStorage.removeItem("auth_token");
-        setToken("");
-      } else {
-        setError("Failed to load activities. Please try again.");
-
-        // Mock data for development when API is not available
-        const mockData = [
-          {
-            id: 10,
-            event: "add_account",
-            description: "Added an account for Juan Dela Cruz (ACC-00010)",
-            causer_id: "1",
-            causer_type: "App\\Models\\User",
-            created_at: "2025-03-26T21:15:00",
-            user_name: "John Doe",
-            user_role: "Admin",
-          },
-          {
-            id: 9,
-            event: "delete_account",
-            description: "Deleted the account of Michael Jordan (ACC-00016)",
-            causer_id: "2",
-            causer_type: "App\\Models\\User",
-            created_at: "2025-03-27T23:18:00",
-            user_name: "Juan Dela Cruz",
-            user_role: "Employee",
-          },
-          {
-            id: 8,
-            event: "login",
-            description: "Logged in successfully",
-            causer_id: "2",
-            causer_type: "App\\Models\\User",
-            created_at: "2025-03-27T23:06:00",
-            user_name: "Juan Dela Cruz",
-            user_role: "Employee",
-          },
-          {
-            id: 7,
-            event: "login_failed",
-            description: "Attempted log in with invalid credentials",
-            causer_id: "2",
-            causer_type: "App\\Models\\User",
-            created_at: "2025-03-27T21:56:00",
-            user_name: "Juan Dela Cruz",
-            user_role: "Employee",
-          },
-          {
-            id: 6,
-            event: "logout",
-            description: "Logged out successfully",
-            causer_id: "2",
-            causer_type: "App\\Models\\User",
-            created_at: "2025-03-27T20:30:00",
-            user_name: "Juan Dela Cruz",
-            user_role: "Employee",
-          },
-          {
-            id: 5,
-            event: "view_dashboard",
-            description: "Accessed the Dashboard",
-            causer_id: "2",
-            causer_type: "App\\Models\\User",
-            created_at: "2025-03-26T23:59:00",
-            user_name: "Juan Dela Cruz",
-            user_role: "Employee",
-          },
-          {
-            id: 4,
-            event: "view_audit_trail",
-            description: "Accessed the Audit Trail",
-            causer_id: "1",
-            causer_type: "App\\Models\\User",
-            created_at: "2025-03-26T14:32:00",
-            user_name: "John Doe",
-            user_role: "Employee",
-          },
-          {
-            id: 3,
-            event: "add_account",
-            description: "Added an account for Juan Dela Cruz (ACC-00010)",
-            causer_id: "1",
-            causer_type: "App\\Models\\User",
-            created_at: "2025-03-26T09:15:00",
-            user_name: "John Doe",
-            user_role: "Employee",
-          },
-          {
-            id: 2,
-            event: "delete_account",
-            description: "Deleted the account of Michael Jordan (ACC-00016)",
-            causer_id: "2",
-            causer_type: "App\\Models\\User",
-            created_at: "2025-03-25T21:38:00",
-            user_name: "Juan Dela Cruz",
-            user_role: "Employee",
-          },
-          {
-            id: 1,
-            event: "login_failed",
-            description: "Attempted log in with invalid credentials",
-            causer_id: "2",
-            causer_type: "App\\Models\\User",
-            created_at: "2025-03-25T04:18:00",
-            user_name: "Juan Dela Cruz",
-            user_role: "Employee",
-          },
-        ];
-
-        setData(mockData);
-        setTotalRows(57);
-      }
+      setError("Failed to load activities. Please try again.");
+      setData([]);
     } finally {
       setLoading(false);
     }
   };
-
   const handlePageChange = (pageIndex: number) => {
     setCurrentPage(pageIndex);
   };
@@ -411,12 +286,19 @@ const AuditTrailTable: React.FC<AuditTrailTableProps> = ({
       id: "action",
       header: "Action",
       cell: ({ row }) => {
-        const badge = getActionBadge(row.original.event);
+        const { event, log_name } = row.original; // Extract both event and log_name
+        const badge = getActionBadge(event, log_name); // Pass both to getActionBadge
+
+        // Fallback if badge is undefined or doesn't return a valid color
+        const badgeColor = badge?.color || "bg-gray-100 text-gray-800";
+        const badgeText = badge?.text || event;
+        const badgeIcon = badge?.icon || "";
+
         return (
           <div
-            className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium ${badge.color}`}
+            className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium ${badgeColor}`}
           >
-            <span className="mr-1">{badge.icon}</span> {badge.text}
+            <span className="mr-1">{badgeIcon}</span> {badgeText}
           </div>
         );
       },
@@ -483,12 +365,6 @@ const AuditTrailTable: React.FC<AuditTrailTableProps> = ({
       <div className="bg-red-100 text-red-700 p-4 rounded m-4">
         <h5 className="font-bold">Error</h5>
         <p>{error}</p>
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
-          onClick={() => window.location.reload()}
-        >
-          Refresh Page
-        </button>
       </div>
     );
   }
@@ -499,7 +375,7 @@ const AuditTrailTable: React.FC<AuditTrailTableProps> = ({
         <div className="flex items-center mb-2 sm:mb-0">
           <span className="text-gray-500 mr-2">Show</span>
           <select
-            className="border rounded  py-1 text-sm"
+            className="border rounded py-1 text-sm"
             value={perPage}
             onChange={(e) => handlePerRowsChange(Number(e.target.value))}
           >
@@ -583,7 +459,7 @@ const AuditTrailTable: React.FC<AuditTrailTableProps> = ({
 
           <div className="flex justify-between items-center mt-6">
             <div className="text-sm text-gray-500">
-              Showing 1 to {Math.min(perPage, data.length)} of {totalRows}
+              Showing 1 to {Math.min(perPage, data.length)} of {totalRows} {""}
               activity logs
             </div>
 

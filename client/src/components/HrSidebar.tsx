@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const HrSidebar = () => {
   const [activeCategory, setActiveCategory] = useState("dashboard");
@@ -70,12 +71,12 @@ const HrSidebar = () => {
 
                 {activeCategory === "dashboard" && (
                   <div className="pl-12 pr-4 py-2 space-y-1">
-                    <a
-                      href="#"
+                    <Link
+                      to="/hr-dashboard"
                       className="block py-2 text-sm text-gray-600 hover:text-blue-600"
                     >
-                      Dashboard-1
-                    </a>
+                      HR Dashboard{" "}
+                    </Link>
                     <a
                       href="#"
                       className="block py-2 text-sm text-gray-600 hover:text-blue-600"
@@ -308,12 +309,12 @@ const HrSidebar = () => {
                     >
                       Settings
                     </a>
-                    <a
-                      href="#"
+                    <Link
+                      to="/audit-trail"
                       className="block py-2 text-sm text-gray-600 hover:text-blue-600"
                     >
-                      Invoice
-                    </a>
+                      Audit Trail
+                    </Link>
                     <a
                       href="#"
                       className="block py-2 text-sm text-gray-600 hover:text-blue-600"
