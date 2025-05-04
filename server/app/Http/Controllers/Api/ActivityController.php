@@ -27,8 +27,8 @@ class ActivityController extends Controller
                     LoadModelRelations::class,
                     PaginateQueryBuilder::class,
                 ])
-                ->then(fn (LengthAwarePaginator $paginator) => 
-                    $paginator->appends($request->query())
+                ->then(fn (LengthAwarePaginator $paginator) =>
+                    $paginator->withQueryString()
                 );
         
         return ActivityCollection::make($activities);

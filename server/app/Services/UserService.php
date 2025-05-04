@@ -34,9 +34,7 @@ class UserService
                 LoadModelRelations::class,
                 PaginateQueryBuilder::class,
             ])
-            ->then(fn (LengthAwarePaginator $paginator) => 
-                $paginator->appends($request->query())
-            );
+            ->thenReturn();
     }
 
     public function createUser(array $validatedRequest): User

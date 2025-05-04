@@ -23,15 +23,13 @@ class EmployeeService
     public function getEmployees(Request $request): LengthAwarePaginator
     {
         return Pipeline::send($this->employee->query())
-        ->through([
-            SearchEmployee::class,
-            SortEmployee::class,
-            LoadModelRelations::class,
-            PaginateQueryBuilder::class,
-        ])
-        ->then(fn (LengthAwarePaginator $paginator) => 
-            $paginator->appends($request->query())
-        );
+            ->through([
+                SearchEmployee::class,
+                SortEmployee::class,
+                LoadModelRelations::class,
+                PaginateQueryBuilder::class,
+            ])
+            ->thenReturn();
     }
     
     public function createEmployee(array $validatedRequest): Employee
