@@ -39,6 +39,7 @@ class EmployeeResource extends JsonResource
             'termination' => TerminatedEmployeeResource::make($this->whenLoaded('termination')),
             'present_address' => EmployeePresentAddressResource::make($this->whenLoaded('presentAddress')),
             'permanent_address' => EmployeePermanentAddressResource::make($this->whenLoaded('permanentAddress')),
+            'employee_statuses'=> EmployeeStatusResource::make($this->whenLoaded('employeeStatus'))
         ];
     }
 }

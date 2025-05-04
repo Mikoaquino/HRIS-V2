@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Traits\HttpResponse;
-use Illuminate\Http\Request;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Http\Requests\ShowUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -39,7 +39,7 @@ class UserController extends Controller
         );
     }
 
-    public function show(Request $request, User $user): JsonResponse|UserResource
+    public function show(ShowUserRequest $request, User $user): JsonResponse|UserResource
     {
         $user = $this->service->getUser($request, $user);
         

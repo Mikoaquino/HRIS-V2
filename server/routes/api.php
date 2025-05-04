@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\ProvinceController;
 use App\Http\Controllers\Api\DepartmentController;
 use App\Http\Controllers\Api\AccessTokenController;
 use App\Http\Controllers\Api\JobPositionController;
+use App\Http\Controllers\Api\EmployeeStatusController;
 use App\Http\Controllers\Api\EmploymentTypeController;
 use App\Http\Controllers\Api\EmployeeAttachmentController;
 
@@ -29,7 +30,7 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
             Route::apiResource('employment-types', EmploymentTypeController::class);
             Route::apiResource('job-positions', JobPositionController::class);
             Route::apiResource('departments', DepartmentController::class);
-            // Route::apiResource('employee-statuses', EmployeeStatusController::class);
+            Route::apiResource('employee-statuses', EmployeeStatusController::class);
     });
     
         Route::prefix('auth')->group(function () {

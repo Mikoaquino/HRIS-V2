@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Filters;
+namespace App\Filters\Employee;
 
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
 
-class PaginateQueryBuilder
+class EmployeePaginate
 {
     const PER_PAGE = 10;
 
@@ -13,6 +13,6 @@ class PaginateQueryBuilder
     {
         $perPage = request()->input('per_page', self::PER_PAGE);
 
-        return $next($builder->paginate($perPage)->withQueryString());
+        return $next($builder->paginate($perPage));
     }
 }

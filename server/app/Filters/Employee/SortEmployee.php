@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filters\User;
+namespace App\Filters\Employee;
 
 use Closure;
 use App\Filters\ApiSortFilter;
 use Illuminate\Database\Eloquent\Builder;
 
-class SortUser extends ApiSortFilter
+class SortEmployee extends ApiSortFilter
 {
-    protected $params = UserFields::SORTABLE;
+    protected $params = EmployeeFields::SORTABLE;
 
     public function handle(Builder $builder, Closure $next)
     {
