@@ -3,18 +3,23 @@
 namespace App\Filters\Activity;
 
 use Closure;
+use App\Filters\ApiSortFilter;
 use Illuminate\Database\Eloquent\Builder;
 
-class SortActivity
+class SortActivity extends ApiSortFilter
 {
+    protected $params = ActivityFields::SORTABLE;
+
     public function handle(Builder $builder, Closure $next)
     {
         if (! request()->has('sort')) {
             return $next($builder);
         }
         
-        foreach (request()->sort as $sort => $order) {
-            $builder->orderBy($sort, $order);
+        $validSortables = $this->apply(request()->sort);
+        
+        foreach ($validSortables as $field => $order) {
+            $builder->orderBy($field, $order);
         }
 
         return $next($builder);
