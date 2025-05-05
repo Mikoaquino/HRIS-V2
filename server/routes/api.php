@@ -19,7 +19,8 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
     Route::middleware('throttle:api')->group(function () {
         Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('employees', EmployeeController::class);
-            Route::apiResource('users', UserController::class)->withTrashed();
+            Route::apiResource('users', UserController::class)
+                ->withTrashed();
             Route::apiResource('activities', ActivityController::class);
             Route::apiResource('regions', RegionController::class);
             Route::apiResource('provinces', ProvinceController::class);
@@ -31,13 +32,12 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
             Route::apiResource('job-positions', JobPositionController::class);
             Route::apiResource('departments', DepartmentController::class);
             Route::apiResource('employee-statuses', EmployeeStatusController::class);
-    });
+            Route::post('logout', [AccessTokenController::class, 'destroy']);
+        });
     
         Route::prefix('auth')->group(function () {
             Route::post('login', [AccessTokenController::class, 'store'])
                 ->middleware('guest');
-            Route::post('logout', [AccessTokenController::class, 'destroy'])
-                ->middleware('auth:sanctum');
         });
     });
 });
