@@ -21,14 +21,14 @@ class UserController extends Controller
 
     public function __construct(protected UserService $service) {}
 
-    public function index(UserRequest $request): JsonResponse|UserCollection
+    public function index(UserRequest $request): UserCollection
     {
         $users = $this->service->getUsers($request);
 
         return UserCollection::make($users);
     }
 
-    public function store(StoreUserRequest $request): JsonResponse|UserResource
+    public function store(StoreUserRequest $request): JsonResponse
     {
         $newUser = $this->service->createUser($request->validated());
 
@@ -39,7 +39,7 @@ class UserController extends Controller
         );
     }
 
-    public function show(ShowUserRequest $request, User $user): JsonResponse|UserResource
+    public function show(ShowUserRequest $request, User $user): JsonResponse
     {
         $user = $this->service->getUser($request, $user);
         
@@ -49,7 +49,7 @@ class UserController extends Controller
         );
     }
 
-    public function update(UpdateUserRequest $request, User $user): JsonResponse|UserResource
+    public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
         $updatedUser = $this->service->updateUser($request->validated(), $user);
 
