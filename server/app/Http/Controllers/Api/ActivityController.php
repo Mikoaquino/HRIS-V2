@@ -12,7 +12,6 @@ use App\Filters\Activity\FilterActivity;
 use App\Filters\Activity\SearchActivity;
 use Illuminate\Support\Facades\Pipeline;
 use App\Http\Resources\ActivityCollection;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class ActivityController extends Controller
 {
@@ -27,9 +26,7 @@ class ActivityController extends Controller
                     LoadModelRelations::class,
                     PaginateQueryBuilder::class,
                 ])
-                ->then(fn (LengthAwarePaginator $paginator) =>
-                    $paginator->withQueryString()
-                );
+                ->thenReturn();
         
         return ActivityCollection::make($activities);
     }
