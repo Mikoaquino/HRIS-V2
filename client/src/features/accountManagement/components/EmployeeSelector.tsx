@@ -59,7 +59,6 @@ const EmployeeSelector: React.FC<EmployeeSelectorProps> = ({ onSelect, onClose }
 
       setEmployees((prev) => (reset ? newEmployees : [...prev, ...newEmployees]));
 
-      // Update the page number
       setPage(reset ? 2 : page + 1);
 
       if (meta.current_page && meta.last_page) {
@@ -68,7 +67,6 @@ const EmployeeSelector: React.FC<EmployeeSelectorProps> = ({ onSelect, onClose }
         setHasMore(newEmployees.length === 15);
       }
     } catch (err) {
-      console.error('Error fetching employees:', err);
       setError('Failed to load employees. Please try again.');
     } finally {
       setLoading(false);

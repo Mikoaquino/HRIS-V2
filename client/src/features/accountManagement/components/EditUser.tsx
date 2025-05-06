@@ -54,14 +54,11 @@ const EditUser: React.FC<EditUserProps> = ({
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          validateStatus: (status) => status < 500, // Allow handling of 302 responses
+          validateStatus: (status) => status < 500,
         });
 
-        // Handle the 302 status code
         if (response.status === 302) {
-          console.warn('Redirect detected:', response);
 
-          // Extract employee data from the response
           const employee = response.data.data;
           if (employee) {
             const name = employee.first_name && employee.last_name
@@ -74,7 +71,6 @@ const EditUser: React.FC<EditUserProps> = ({
           return;
         }
 
-        // Handle normal 200 responses
         const employee = response.data.data;
         if (employee) {
           const name = employee.first_name && employee.last_name
@@ -85,7 +81,6 @@ const EditUser: React.FC<EditUserProps> = ({
           setSelectedEmployeeName(`Employee ID: ${user.employee_id} (not found)`);
         }
       } catch (error) {
-        console.error('Failed to fetch employee:', error);
         setSelectedEmployeeName(`Employee ID: ${user.employee_id}`);
       } finally {
         setLoadingEmployeeName(false);
@@ -128,7 +123,6 @@ const EditUser: React.FC<EditUserProps> = ({
     try {
       onSubmit(dataToSend, user);
     } catch (err) {
-      console.error('Failed to submit:', err);
       alert('Failed to update user ❌');
     }
   };
