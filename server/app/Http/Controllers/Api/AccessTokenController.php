@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAccessTokenRequest;
+use App\Http\Resources\UserResource;
 use App\Services\AccessTokenService;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
@@ -18,9 +19,9 @@ class AccessTokenController extends Controller
 
     public function store(StoreAccessTokenRequest $request): JsonResponse
     {
-        $token = $this->service->createToken($request->validated());
+        $response = $this->service->createToken($request->validated());
 
-        if (! $token) {
+        if (! $response) {
             return $this->error(
                 message: __('auth.failed'),
                 status: Response::HTTP_UNAUTHORIZED
@@ -28,7 +29,10 @@ class AccessTokenController extends Controller
         }
 
         return $this->success(
-            data: ['token' => $token],
+            data: [
+                'token' => $response->token,
+                'user'  => UserResource::make($response->user),
+            ],
             status: Response::HTTP_CREATED,
         );
     }
