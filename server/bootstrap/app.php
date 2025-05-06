@@ -3,10 +3,10 @@
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Auth\AuthenticationException;
 use App\Http\Middleware\ForceAcceptJsonHeader;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\ThrottleUnauthorizedRequest;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
@@ -28,26 +28,16 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions
             ->render(function (AuthenticationException $e, Request $request) {
-                $key = 'api'.$request->ip();
-
-                if (RateLimiter::tooManyAttempts($key, 5)) {
-                    $cooldown = RateLimiter::availableIn($key);
-
-                    throw new ThrottleRequestsException(
-                        message: __('auth.throttle', ['seconds' => $cooldown]), 
-                        headers: [
-                            'X-RateLimit-Limit' => RateLimiter::attempts($key),
-                            'Retry-After' => $cooldown,
-                            'X-RateLimit-Reset' => time() + $cooldown,
-                    ]);
-                }
-
-                RateLimiter::increment($key);
+                $request = new ThrottleUnauthorizedRequest;
+                $request->increment();
 
                 return response()->json([
-                    'message' => __('auth.token.invalid'),
+                    'message' => __('auth.tokens.invalid'),
                     'status' => Response::HTTP_UNAUTHORIZED,
-                ], Response::HTTP_UNAUTHORIZED);
+                ], Response::HTTP_UNAUTHORIZED, [
+                    'X-RateLimit-Limit' => $request::MAX_ATTEMPTS,
+                    'X-RateLimit-Remaining' => $request->getRemainingAttempts(),
+                ]);
             })
             ->render(function (NotFoundHttpException $e, Request $request) {
                 $strs = explode(' ', $e->getMessage());
