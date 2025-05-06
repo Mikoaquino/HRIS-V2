@@ -16,7 +16,7 @@ use Maatwebsite\Excel\Imports\HeadingRowFormatter;
 
 HeadingRowFormatter::default('none');
 
-class PsgcImport implements ToModel, WithBatchInserts, WithHeadingRow, WithMultipleSheets, WithChunkReading, ShouldQueue
+class PsgcImport implements ShouldQueue, ToModel, WithBatchInserts, WithChunkReading, WithHeadingRow, WithMultipleSheets
 {
     public function sheets(): array
     {
@@ -37,40 +37,40 @@ class PsgcImport implements ToModel, WithBatchInserts, WithHeadingRow, WithMulti
 
     public function model(array $row): Barangay|City|Province|Region|null
     {
-        $psgc = $row['10-digit PSGC'];
-        $name = $row['Name'];
+        $psgc     = $row['10-digit PSGC'];
+        $name     = $row['Name'];
         $geoLevel = $row['Geographic Level'];
 
         return match ($geoLevel) {
             'Reg' => new Region([
-                'code' => $psgc,
-                'name' => $name,
+                'code'        => $psgc,
+                'name'        => $name,
                 'region_code' => substr($psgc, 0, 2),
             ]),
 
             'Prov' => new Province([
-                'code' => $psgc,
-                'name' => $name,
+                'code'          => $psgc,
+                'name'          => $name,
                 'province_code' => substr($psgc, 0, 5),
-                'region_code' => substr($psgc, 0, 2),
+                'region_code'   => substr($psgc, 0, 2),
             ]),
 
             'Mun',
             'SubMun',
             'City' => new City([
-                'code' => $psgc,
-                'name' => $name,
-                'city_code' => substr($psgc, 0, 7),
+                'code'          => $psgc,
+                'name'          => $name,
+                'city_code'     => substr($psgc, 0, 7),
                 'province_code' => substr($psgc, 0, 5),
-                'region_code' => substr($psgc, 0, 2),
+                'region_code'   => substr($psgc, 0, 2),
             ]),
 
             'Bgy' => new Barangay([
-                'code' => $psgc,
-                'name' => $name,
-                'city_code' => substr($psgc, 0, 7),
+                'code'          => $psgc,
+                'name'          => $name,
+                'city_code'     => substr($psgc, 0, 7),
                 'province_code' => substr($psgc, 0, 5),
-                'region_code' => substr($psgc, 0, 2),
+                'region_code'   => substr($psgc, 0, 2),
             ]),
 
             default => null,

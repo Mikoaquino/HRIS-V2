@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class EmployeeWorkExperience extends Model
 {
@@ -18,7 +18,7 @@ class EmployeeWorkExperience extends Model
 
     protected $casts = [
         'from' => 'date',
-        'to' => 'date',
+        'to'   => 'date',
     ];
 
     public function employee(): BelongsTo

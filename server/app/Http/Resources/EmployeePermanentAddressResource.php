@@ -10,14 +10,14 @@ class EmployeePermanentAddressResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'id'                 => $this->id,
             'additional_details' => $this->additional_details,
-            'zip_code' => $this->zip_code,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'employee' => EmployeeResource::make($this->whenLoaded('employee')),
-            'barangay' => BarangayResource::make($this->whenLoaded('barangay')),
-            'full_address' => $this->full_address,
+            'zip_code'           => $this->zip_code,
+            'created_at'         => $this->created_at,
+            'updated_at'         => $this->updated_at,
+            'employee'           => EmployeeResource::make($this->whenLoaded('employee')),
+            'barangay'           => BarangayResource::make($this->whenLoaded('barangay')),
+            'full_address'       => $this->full_address,
         ];
     }
 }

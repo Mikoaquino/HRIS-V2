@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreEmployeeAttachmentRequest;
+use App\Models\EmployeeAttachment;
+use App\Services\EmployeeAttachmentService;
 use App\Traits\HttpResponse;
 use Illuminate\Http\JsonResponse;
-use App\Models\EmployeeAttachment;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
-use App\Services\EmployeeAttachmentService;
-use Symfony\Component\HttpFoundation\Response;
-use App\Http\Requests\StoreEmployeeAttachmentRequest;
 use Illuminate\Http\Response as IlluminateHttpResponse;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 
 class EmployeeAttachmentController extends Controller
 {

@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Filters\LoadModelRelations;
-use App\Http\Controllers\Controller;
-use App\Filters\PaginateQueryBuilder;
-use App\Filters\Activity\SortActivity;
-use Spatie\Activitylog\Models\Activity;
 use App\Filters\Activity\FilterActivity;
 use App\Filters\Activity\SearchActivity;
-use Illuminate\Support\Facades\Pipeline;
+use App\Filters\Activity\SortActivity;
+use App\Filters\LoadModelRelations;
+use App\Filters\PaginateQueryBuilder;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\ActivityCollection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Pipeline;
+use Spatie\Activitylog\Models\Activity;
 
 class ActivityController extends Controller
 {
     public function index(Request $request): ActivityCollection
     {
-        $activities = 
+        $activities =
             Pipeline::send(Activity::query())
                 ->through([
                     FilterActivity::class,
@@ -27,7 +27,7 @@ class ActivityController extends Controller
                     PaginateQueryBuilder::class,
                 ])
                 ->thenReturn();
-        
+
         return ActivityCollection::make($activities);
     }
 }

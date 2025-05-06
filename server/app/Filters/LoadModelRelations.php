@@ -2,9 +2,9 @@
 
 namespace App\Filters;
 
+use App\Traits\LoadsRequestQueryRelationship;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
-use App\Traits\LoadsRequestQueryRelationship;
 
 class LoadModelRelations
 {

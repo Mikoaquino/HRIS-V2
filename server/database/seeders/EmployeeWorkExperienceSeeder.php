@@ -17,7 +17,7 @@ class EmployeeWorkExperienceSeeder extends Seeder
     {
         Employee::all()->each(function ($employee) {
             EmployeeWorkExperience::factory()->create([
-                'employee_id' => $employee->id
+                'employee_id' => $employee->id,
             ]);
         });
     }
