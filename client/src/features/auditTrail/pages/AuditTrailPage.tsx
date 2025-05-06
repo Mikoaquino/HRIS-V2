@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import AuditTrailTable from "../components/AuditTrailTable";
 import BreadcrumbHeader from "../../../components/BreadcrumbHeader";
-
-const API_BASE_URL = "http://127.0.0.1:8000"; // Match the base URL with AuditTrailTable
 
 const AuditTrailPage: React.FC = () => {
   const [token, setToken] = useState<string>("");
@@ -11,40 +8,13 @@ const AuditTrailPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("auth_token");
+    const storedToken = sessionStorage.getItem("token");
     if (storedToken) {
       setToken(storedToken);
       setLoading(false);
       return;
     }
-
-    loginUser();
   }, []);
-
-  const loginUser = async () => {
-    try {
-      setLoading(true);
-      const { data } = await axios.post(`${API_BASE_URL}/api/v1/auth/login`, {
-        email: "kunze.eliezer@example.net",
-        password: "password",
-      });
-
-      if (data?.data?.token) {
-        const newToken = data.data.token;
-        setToken(newToken);
-        localStorage.setItem("auth_token", newToken);
-      } else {
-        throw new Error("Invalid login response format");
-      }
-    } catch (error) {
-      console.error("Login failed:", error);
-      setError(
-        error instanceof Error ? error.message : "Authentication failed"
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (
