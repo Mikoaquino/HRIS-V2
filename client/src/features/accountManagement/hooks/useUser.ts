@@ -53,10 +53,13 @@ export const useUsers = (
       setUsers(response.data.data);
       setMeta(response.data.meta);
     } catch (err) {
+      console.error('Failed to fetch users:', err);
       
       if (axios.isAxiosError(err) && (err.response?.status === 401 || err.response?.status === 403)) {
+        // Clear authentication
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('user_id');
+        // Redirect to login
         window.location.href = '/login';
       }
     } finally {
@@ -87,9 +90,10 @@ export const useUsers = (
           },
         }
       );
-      await fetchUsers();
+      await fetchUsers(); // Refresh user list after creation
       return response.data;
     } catch (error) {
+      console.error('Failed to create user:', error);
       throw error;
     }
   };
@@ -114,6 +118,7 @@ export const deleteUser = async (id: number, token: string | null) => {
       },
     });
   } catch (error) {
+    console.error('Failed to delete user:', error);
     throw error;
   }
 };
@@ -140,6 +145,10 @@ export const updateUser = async (
     );
     return response.data;
   } catch (error: any) {
+    console.error(
+      'Failed to update user:',
+      error.response?.data || error.message
+    );
     throw error;
   }
 };

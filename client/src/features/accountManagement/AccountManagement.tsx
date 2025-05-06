@@ -20,6 +20,8 @@ const AccountManagement: React.FC = () => {
   const token = sessionStorage.getItem('token');
   const authenticatedUserId = Number(sessionStorage.getItem('user_id') || '0');
 
+  console.log(sessionStorage.getItem('user_id'));
+
   const { users, meta, loading, refetchUsers, createUser } = useUsers(currentPage, token, perPage);
 
   useEffect(() => {
@@ -73,7 +75,8 @@ const AccountManagement: React.FC = () => {
       }, 2000);
       await refetchUsers();
     } catch (err) {
-      alert('Failed to update user');
+      console.error('Failed to update user:', err);
+      alert('Failed to update user. Please check console for details.');
     } finally {
       setIsSubmitting(false);
     }
@@ -94,6 +97,7 @@ const AccountManagement: React.FC = () => {
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
     } catch (error) {
+      console.error("Failed to delete user:", error);
       setShowSuccess(false);
       setSuccessAction(null);
     }
@@ -130,6 +134,7 @@ const AccountManagement: React.FC = () => {
                 setSuccessAction(null);
               }, 3000);
             } catch (err) {
+              console.error("Failed to create user:", err);
             }
           }}
         />

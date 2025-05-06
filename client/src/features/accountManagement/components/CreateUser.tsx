@@ -50,6 +50,7 @@ const CreateUser: React.FC<CreateUserProps> = ({ isOpen, onClose, users, onSubmi
       await onSubmit(formData);
       onClose();
     } catch (err: any) {
+      console.error('Create error:', err.response?.data ?? err);
       setError('Failed to create user. Please try again.');
     } finally {
       setIsSubmitting(false);
