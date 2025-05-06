@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\City;
-use Illuminate\Http\Request;
 use App\Filters\LoadModelRelations;
 use App\Filters\PaginateQueryBuilder;
-use Illuminate\Support\Facades\Pipeline;
+use App\Models\City;
 use App\Traits\LoadsRequestQueryRelationship;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Pipeline;
 
 class CityService
 {

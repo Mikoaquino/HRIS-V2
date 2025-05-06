@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Http\Exceptions\ThrottleRequestsException;
 
 class ThrottleUnauthorizedRequest extends Request
 {
@@ -25,13 +25,13 @@ class ThrottleUnauthorizedRequest extends Request
             $cooldown = RateLimiter::availableIn($this->key);
 
             throw new ThrottleRequestsException(
-                message: __('auth.throttle', ['seconds' => $cooldown]), 
+                message: __('auth.throttle', ['seconds' => $cooldown]),
                 headers: [
-                    'X-RateLimit-Limit' => self::MAX_ATTEMPTS,
+                    'X-RateLimit-Limit'     => self::MAX_ATTEMPTS,
                     'X-RateLimit-Remaining' => $this->getRemainingAttempts(),
-                    'Retry-After' => $cooldown,
-                    'X-RateLimit-Reset' => time() + $cooldown,
-            ]);
+                    'Retry-After'           => $cooldown,
+                    'X-RateLimit-Reset'     => time() + $cooldown,
+                ]);
         }
 
         RateLimiter::increment($this->key);
@@ -41,4 +41,4 @@ class ThrottleUnauthorizedRequest extends Request
     {
         return RateLimiter::remaining($this->key, self::MAX_ATTEMPTS);
     }
-};
+}

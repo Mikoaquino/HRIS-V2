@@ -2,8 +2,8 @@
 
 namespace App\Filters\Activity;
 
-use Closure;
 use App\Filters\ApiFilter;
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
 
 class FilterActivity extends ApiFilter

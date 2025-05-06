@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
-use App\Traits\HttpResponse;
-use App\Services\UserService;
-use Illuminate\Http\JsonResponse;
-use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
 use App\Http\Requests\ShowUserRequest;
-use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use App\Services\UserService;
+use App\Traits\HttpResponse;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -42,7 +42,7 @@ class UserController extends Controller
     public function show(ShowUserRequest $request, User $user): JsonResponse
     {
         $user = $this->service->getUser($request, $user);
-        
+
         return $this->success(
             data: UserResource::make($user),
             status: Response::HTTP_FOUND,

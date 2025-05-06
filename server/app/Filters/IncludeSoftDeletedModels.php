@@ -17,6 +17,6 @@ class IncludeSoftDeletedModels
             return $next($builder->onlyTrashed());
         }
 
-        return $next($builder);  
+        return $next($builder);
     }
 }

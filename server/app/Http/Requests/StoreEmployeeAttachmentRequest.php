@@ -14,8 +14,8 @@ class StoreEmployeeAttachmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'employee_id' => ['required', 'exists:employees,id'],
-            'attachments' => ['required', 'array', 'max:15'],
+            'employee_id'   => ['required', 'exists:employees,id'],
+            'attachments'   => ['required', 'array', 'max:15'],
             'attachments.*' => ['required', 'file', 'mimes:pdf', 'max:5000'],
         ];
     }

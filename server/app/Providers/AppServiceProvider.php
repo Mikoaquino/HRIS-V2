@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 use Laravel\Telescope\TelescopeServiceProvider;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,17 +31,16 @@ class AppServiceProvider extends ServiceProvider
     {
         Relation::enforceMorphMap([
             'employee' => 'App\Models\Employee',
-            'user' => 'App\Models\User',
+            'user'     => 'App\Models\User',
         ]);
 
-        Password::defaults(fn () =>
-            Password::min(8)
-                ->letters()
-                ->mixedCase()
-                ->numbers()
-                ->symbols()
-                ->uncompromised()
-                ->rules(['not_regex:/\s/'])
+        Password::defaults(fn () => Password::min(8)
+            ->letters()
+            ->mixedCase()
+            ->numbers()
+            ->symbols()
+            ->uncompromised()
+            ->rules(['not_regex:/\s/'])
         );
 
         RateLimiter::for('api', function (Request $request) {
@@ -50,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
                     ? Limit::perMinute(100)->by($request->user()->id)
                     : Limit::perMinute(60)->by($request->ip());
             }
-            
+
             return Limit::none();
         });
     }

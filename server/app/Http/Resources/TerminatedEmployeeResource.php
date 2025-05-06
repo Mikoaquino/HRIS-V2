@@ -10,11 +10,11 @@ class TerminatedEmployeeResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'reason' => $this->reason,
+            'id'         => $this->id,
+            'reason'     => $this->reason,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'employee' => EmployeeResource::make($this->whenLoaded('employee')),
+            'employee'   => EmployeeResource::make($this->whenLoaded('employee')),
         ];
     }
 }

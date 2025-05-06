@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('employee_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('description')->nullable(); 
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

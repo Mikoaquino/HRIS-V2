@@ -5,9 +5,9 @@ namespace App\Filters\Activity;
 readonly class ActivityFields
 {
     public const FILTERABLE = [
-        'log_name' => ['eq'],
+        'log_name'   => ['eq'],
         'batch_uuid' => ['eq'],
-        'event' => ['eq'],
+        'event'      => ['eq'],
         'created_at' => ['eq', 'gt', 'gte', 'lt', 'lte'],
         'updated_at' => ['eq', 'gt', 'gte', 'lt', 'lte'],
     ];
@@ -15,6 +15,6 @@ readonly class ActivityFields
     public const SORTABLE = [
         'log_name',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 }

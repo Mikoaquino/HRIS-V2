@@ -2,8 +2,8 @@
 
 namespace App\Filters\User;
 
-use Closure;
 use App\Filters\ApiSortFilter;
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
 
 class SortUser extends ApiSortFilter

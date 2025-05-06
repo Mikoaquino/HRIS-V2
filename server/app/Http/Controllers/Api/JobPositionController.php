@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\JobPosition;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\JobPositionCollection;
+use App\Models\JobPosition;
 
 class JobPositionController extends Controller
 {
@@ -15,4 +15,3 @@ class JobPositionController extends Controller
         );
     }
 }
-

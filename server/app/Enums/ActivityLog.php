@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum ActivityLog: string
 {
-    case AUTH = 'auth';
+    case AUTH     = 'auth';
     case EMPLOYEE = 'employee';
-    case USER = 'user';
+    case USER     = 'user';
 }

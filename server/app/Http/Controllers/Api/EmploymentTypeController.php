@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\EmploymentType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EmploymentTypeCollection;
+use App\Models\EmploymentType;
 
 class EmploymentTypeController extends Controller
 {

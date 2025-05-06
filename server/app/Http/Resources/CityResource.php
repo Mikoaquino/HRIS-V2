@@ -10,8 +10,8 @@ class CityResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'code' => $this->code,
-            'name' => $this->name,
+            'code'      => $this->code,
+            'name'      => $this->name,
             'barangays' => BarangayCollection::make($this->whenLoaded('barangays')),
         ];
     }

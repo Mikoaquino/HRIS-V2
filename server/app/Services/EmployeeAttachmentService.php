@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
+use App\Http\Resources\EmployeeAttachmentCollection;
 use App\Models\EmployeeAttachment;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Resources\EmployeeAttachmentCollection;
 
 class EmployeeAttachmentService
 {
@@ -21,8 +21,8 @@ class EmployeeAttachmentService
                 'employee_id' => $validatedData->employee_id,
                 'client_name' => $attachment->getClientOriginalName(),
                 'hashed_name' => $attachment->hashName(),
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at'  => now(),
+                'updated_at'  => now(),
             ];
         }, $validatedData->attachments);
 
@@ -33,6 +33,6 @@ class EmployeeAttachmentService
 
     public function getAttachment(EmployeeAttachment $attachment): ?string
     {
-        return Storage::get(sprintf("%s/%s", 'employees', $attachment->hashed_name));
+        return Storage::get(sprintf('%s/%s', 'employees', $attachment->hashed_name));
     }
 }
