@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AccessTokenService
 {
-    public function createToken(array $request): ?string
+    public function createToken(array $request): ?object
     {
         $user = User::firstWhere('email', $request['email']);
 
@@ -23,7 +23,9 @@ class AccessTokenService
             ->event('log in')
             ->log(__('activity.create.access_token'));
 
-        return $user->createToken('access-token')->plainTextToken;
+        $token = $user->createToken('access-token')->plainTextToken;
+
+        return (object) compact('token', 'user');
     }
 
     public function revokeTokens(Request $request): bool
