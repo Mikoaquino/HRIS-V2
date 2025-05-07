@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\City;
-use App\Traits\HttpResponse;
-use Illuminate\Http\Request;
-use App\Services\CityService;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CityResource;
 use App\Http\Resources\CityCollection;
+use App\Http\Resources\CityResource;
+use App\Models\City;
+use App\Services\CityService;
+use App\Traits\HttpResponse;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CityController extends Controller

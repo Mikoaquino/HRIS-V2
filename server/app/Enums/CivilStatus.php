@@ -4,21 +4,19 @@ namespace App\Enums;
 
 enum CivilStatus: string
 {
-
-    case SINGLE = 'single';
-    case MARRIED = 'married';
+    case SINGLE   = 'single';
+    case MARRIED  = 'married';
     case DIVORCED = 'divorced';
-    case WIDOWED = 'widowed';
-
+    case WIDOWED  = 'widowed';
 
     public function getCivilStatus(): string
     {
         return match ($this) {
-            
-            self::SINGLE => 'single',
-            self::MARRIED => 'married',
+
+            self::SINGLE   => 'single',
+            self::MARRIED  => 'married',
             self::DIVORCED => 'divorced',
-            self::WIDOWED => 'widowed',
+            self::WIDOWED  => 'widowed',
         };
     }
 

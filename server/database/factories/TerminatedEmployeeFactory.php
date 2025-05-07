@@ -19,7 +19,7 @@ class TerminatedEmployeeFactory extends Factory
     {
         return [
             'employee_id' => Employee::inRandomOrder()->first() ?? Employee::factory(),
-            'reason' => fake()->paragraph(),
+            'reason'      => fake()->paragraph(),
         ];
     }
 }

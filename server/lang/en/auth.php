@@ -13,12 +13,11 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
+    'failed'   => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'tokens' => [
+    'tokens'   => [
         'deleted' => 'Access tokens deleted.',
-        'missing' => 'Missing a bearer token.',
+        'invalid' => 'Invalid or missing a bearer token.',
     ],
-    'unauthenticated' => 'Invalid access tokens.',
 ];

@@ -2,20 +2,20 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use App\Enums\UserStatus;
-use App\Filters\User\SortUser;
-use App\Filters\User\FilterUser;
-use App\Filters\User\SearchUser;
-use App\Http\Requests\UserRequest;
-use Illuminate\Support\Facades\DB;
+use App\Filters\IncludeSoftDeletedModels;
 use App\Filters\LoadModelRelations;
 use App\Filters\PaginateQueryBuilder;
+use App\Filters\User\FilterUser;
+use App\Filters\User\SearchUser;
+use App\Filters\User\SortUser;
 use App\Http\Requests\ShowUserRequest;
-use Illuminate\Support\Facades\Pipeline;
-use App\Filters\IncludeSoftDeletedModels;
+use App\Http\Requests\UserRequest;
+use App\Models\User;
 use App\Traits\LoadsRequestQueryRelationship;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Pipeline;
 
 class UserService
 {
@@ -34,9 +34,7 @@ class UserService
                 LoadModelRelations::class,
                 PaginateQueryBuilder::class,
             ])
-            ->then(fn (LengthAwarePaginator $paginator) => 
-                $paginator->appends($request->query())
-            );
+            ->thenReturn();
     }
 
     public function createUser(array $validatedRequest): User
@@ -71,7 +69,7 @@ class UserService
     {
         return DB::transaction(function () use ($user) {
             $user->deleted_at = now();
-            $user->status = UserStatus::INACTIVE;
+            $user->status     = UserStatus::INACTIVE;
             $user->save();
         });
     }

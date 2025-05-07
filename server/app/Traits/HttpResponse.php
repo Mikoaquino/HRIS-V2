@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 trait HttpResponse
 {
-    public function createResponse($data = null, $message = null, $status): JsonResponse
+    public function createResponse($data, $message, $status): JsonResponse
     {
         $payload = ['status' => $status];
 
@@ -27,7 +27,7 @@ trait HttpResponse
         return $this->createResponse($data, $message, $status);
     }
 
-    public function error($data = null, $message = null, $status = Response::HTTP_INTERNAL_SERVER_ERROR): JsonResponse 
+    public function error($data = null, $message = null, $status = Response::HTTP_INTERNAL_SERVER_ERROR): JsonResponse
     {
         return $this->createResponse($data, $message, $status);
     }
