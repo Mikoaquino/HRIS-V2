@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+use App\Filters\IncludeSoftDeletedModels;
 use App\Filters\LoadModelRelations;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class EmployeeService
             SearchEmployee::class,
             SortEmployee::class,
             LoadModelRelations::class,
+            IncludeSoftDeletedModels::class,
             PaginateQueryBuilder::class,
         ])
         ->then(fn (LengthAwarePaginator $paginator) => 
