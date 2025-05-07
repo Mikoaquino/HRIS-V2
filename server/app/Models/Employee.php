@@ -30,11 +30,10 @@ class Employee extends Model
         'archived_at',
     ];
 
-    public function getDeletedAtColumn()
+    public function getDeletedAtColumn(): string
     {
         return 'archived_at';
     }
-    
 
     public function account(): HasOne
     {
