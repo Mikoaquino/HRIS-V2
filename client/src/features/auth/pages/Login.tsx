@@ -1,66 +1,66 @@
-import { useState, FormEvent } from 'react';
-import { FaUserShield, FaUser } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useState, FormEvent } from "react";
+import { FaUserShield, FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const [role, setRole] = useState<'admin' | 'employee'>('employee');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [role, setRole] = useState<"admin" | "employee">("employee");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate(); // Step 1: Initialized navigate
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault(); // Step 2: Prevent default form submission to stop page refresh
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
-      console.log('Login attempt with email:', email); // Log the login attempt
+      console.log("Login attempt with email:", email); // Log the login attempt
 
-      // Send login request
+
       const response = await fetch('http://127.0.0.1:8000/api/v1/auth/login', {
         method: 'POST',
+
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
 
-      console.log('Login response:', data); // Log the server response
+      console.log("Login response:", data); // Log the server response
 
       // Handle response status
       if (response.status !== 201) {
-        throw new Error(data.message || 'Login failed');
+        throw new Error(data.message || "Login failed");
       }
 
       const token = data?.data?.token;
       if (!token) {
-        throw new Error('Access token missing from response');
+        throw new Error("Access token missing from response");
       }
 
       // Save token in localStorage
-      sessionStorage.setItem('token', token);
+      sessionStorage.setItem("token", token);
 
       // Optionally store user info
       if (data.data.user) {
-        localStorage.setItem('user', JSON.stringify(data.data.user));
+        localStorage.setItem("user", JSON.stringify(data.data.user));
       }
 
-      console.log('Token saved to localStorage:', token); // Log the saved token
+      console.log("Token saved to localStorage:", token); // Log the saved token
 
       // Step 3: Add a delay before redirecting to the audit-trail page
-      console.log('Navigating to audit-trail...');
+      console.log("Navigating to audit-trail...");
       setTimeout(() => {
-        navigate('/audit-trail', { replace: true });
+        navigate("/hr-dashboard", { replace: true });
       }, 1000); // Delay navigation by 1 second
-
     } catch (err: any) {
-      console.error('Login error:', err);
-      const msg = err?.message || 'Unknown error';
-      setError('Login failed: ' + msg);
+      console.error("Login error:", err);
+      const msg = err?.message || "Unknown error";
+      setError("Login failed: " + msg);
     } finally {
       setIsLoading(false);
     }
@@ -75,29 +75,29 @@ const LoginPage = () => {
             <h2>Welcome Back</h2>
           </div>
           <p className="text-gray-600">
-            Sign in as {role === 'admin' ? 'an Admin' : 'an Employee'}.
+            Sign in as {role === "admin" ? "an Admin" : "an Employee"}.
           </p>
         </div>
 
         <div className="flex justify-center gap-4 mb-6">
           <button
             type="button"
-            onClick={() => setRole('admin')}
+            onClick={() => setRole("admin")}
             className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition duration-200 ${
-              role === 'admin'
-                ? 'bg-teal-700 text-white hover:bg-teal-800'
-                : 'bg-teal-100 text-teal-700 border border-teal-500 hover:bg-teal-200'
+              role === "admin"
+                ? "bg-teal-700 text-white hover:bg-teal-800"
+                : "bg-teal-100 text-teal-700 border border-teal-500 hover:bg-teal-200"
             }`}
           >
             <FaUserShield /> Admin
           </button>
           <button
             type="button"
-            onClick={() => setRole('employee')}
+            onClick={() => setRole("employee")}
             className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition duration-200 ${
-              role === 'employee'
-                ? 'bg-teal-700 text-white hover:bg-teal-800'
-                : 'bg-teal-100 text-teal-700 border border-teal-500 hover:bg-teal-200'
+              role === "employee"
+                ? "bg-teal-700 text-white hover:bg-teal-800"
+                : "bg-teal-100 text-teal-700 border border-teal-500 hover:bg-teal-200"
             }`}
           >
             <FaUser /> Employee
@@ -119,7 +119,9 @@ const LoginPage = () => {
             />
           </div>
           <div>
-            <label className="text-sm font-medium text-gray-700">Password</label>
+            <label className="text-sm font-medium text-gray-700">
+              Password
+            </label>
             <input
               type="password"
               placeholder="Enter your password"
@@ -135,7 +137,7 @@ const LoginPage = () => {
             className="w-full mt-6 bg-teal-700 text-white py-2 rounded-md hover:bg-teal-800 transition duration-200"
             disabled={isLoading}
           >
-            {isLoading ? 'Loading...' : 'Sign In'}
+            {isLoading ? "Loading..." : "Sign In"}
           </button>
         </form>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Menu } from "lucide-react";
-
+import { Link } from "react-router-dom";
 interface HeaderProps {
   toggleMobileMenu: () => void;
 }
@@ -14,6 +14,14 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
     setShowMessages(!showMessages);
     setShowNotifications(false);
     setShowUserDropdown(false);
+  };
+  const handleSignOut = () => {
+    sessionStorage.removeItem("token");
+    localStorage.removeItem("auth_token");
+
+    setTimeout(() => {
+      window.location.href = "/login";
+    }, 100);
   };
 
   const toggleNotifications = () => {
@@ -64,9 +72,14 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
                   ></path>
                 </svg>
               </button>
-              <a href="/" className="flex items-center">
+              <Link
+                to={{
+                  pathname: "/",
+                }}
+                className="flex items-center"
+              >
                 <Menu className="h-6 w-6 text-gray-800" />
-              </a>
+              </Link>
             </div>
 
             {/* Search Bar */}
@@ -402,13 +415,13 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
                   >
                     <i className="far fa-sun mr-2"></i>Settings
                   </a>
-                  <a
-                    href="/logout"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  <button
+                    onClick={handleSignOut}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     <i className="far fa-arrow-alt-circle-left mr-2"></i>Sign
                     Out
-                  </a>
+                  </button>
                 </div>
               )}
             </div>
