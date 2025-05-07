@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Employee;
 use App\Enums\UserStatus;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Employee;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -26,13 +26,13 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'email' => fake()->unique()->safeEmail(),
-            'employee_id' => Employee::factory(),
+            'email'             => fake()->unique()->safeEmail(),
+            'employee_id'       => Employee::factory(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'status' => fake()->randomElement(UserStatus::cases()),
-            'remember_token' => Str::random(10),
-            'deleted_at' => null,
+            'password'          => static::$password ??= Hash::make('password'),
+            'status'            => fake()->randomElement(UserStatus::cases()),
+            'remember_token'    => Str::random(10),
+            'deleted_at'        => null,
         ];
     }
 

@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Models\Region;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class RegionService
 {
@@ -19,6 +19,7 @@ class RegionService
 
             $query->with($relationships);
         }
+
         return $query->get();
     }
 

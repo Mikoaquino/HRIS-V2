@@ -21,11 +21,11 @@ class EmployeeLifecycleSeeder extends Seeder
             $dateHired = fake()->dateTimeBetween('-5 years', '-1 years');
 
             $data[] = [
-                'employee_id' => $employee->id,
-                'hired_at' => $dateHired,
+                'employee_id'  => $employee->id,
+                'hired_at'     => $dateHired,
                 'separated_at' => fake()->optional()->dateTimeBetween('-10 months', '-3 months'),
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at'   => now(),
+                'updated_at'   => now(),
             ];
         });
 

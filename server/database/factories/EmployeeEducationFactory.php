@@ -18,9 +18,9 @@ class EmployeeEducationFactory extends Factory
     public function definition(): array
     {
         return [
-            'employee_id' => Employee::inRandomOrder()->first() ?? Employee::factory(),
-            'school' => fake()->company(),
-            'degree' => fake()->sentence(),
+            'employee_id'  => Employee::inRandomOrder()->first() ?? Employee::factory(),
+            'school'       => fake()->company(),
+            'degree'       => fake()->sentence(),
             'graduated_at' => fake()->date(),
         ];
     }

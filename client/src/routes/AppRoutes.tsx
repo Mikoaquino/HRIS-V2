@@ -3,6 +3,8 @@ import HrDashboard from "../features/hrDashboard/pages/HrDashboard";
 import Login from '../features/auth/pages/Login';
 import AuditTrailPage from '../features/auditTrail/pages/AuditTrailPage';
 import HrLayout from '../layout/HrLayout';
+import AccountManagement from "../features/accountManagement/AccountManagement";
+import EmpDashboard from "../features/hrDashboard/pages/EmpDashboard/EmpDashboard";
 
 interface PrivateRouteProps {
   children?: React.ReactNode;
@@ -28,6 +30,9 @@ export const AppRoutes = () => {
           <Route element={<HrLayout />}>
             <Route path="/audit-trail" element={<AuditTrailPage />} />
             <Route path="/hr-dashboard" element={<HrDashboard />} />
+            <Route path="/acc-management" element={<AccountManagement />} />
+            {/* will change to the EmpLayout */}
+            <Route path="/emp-dashboard" element={<EmpDashboard />} /> 
           </Route>
         </Route>
 

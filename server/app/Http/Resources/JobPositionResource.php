@@ -10,13 +10,13 @@ class JobPositionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
+            'id'          => $this->id,
+            'name'        => $this->name,
             'description' => $this->description,
-            'department' => $this->whenLoaded('department', function () {
+            'department'  => $this->whenLoaded('department', function () {
                 return [
-                    'id' => $this->department->id,
-                    'name' => $this->department->name,
+                    'id'          => $this->department->id,
+                    'name'        => $this->department->name,
                     'description' => $this->description,
                 ];
             }),
