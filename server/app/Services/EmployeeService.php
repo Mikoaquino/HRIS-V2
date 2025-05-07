@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Filters\Employee\SearchEmployee;
 use App\Filters\Employee\SortEmployee;
+use App\Filters\IncludeSoftDeletedModels;
 use App\Filters\LoadModelRelations;
 use App\Filters\PaginateQueryBuilder;
 use App\Models\Employee;
