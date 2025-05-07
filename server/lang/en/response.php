@@ -13,6 +13,18 @@ return [
         'update' => 'Successfully updated :resource',
         'delete' => 'Successfully deleted :resource',
     ],
+    'user' => [
+        'delete' => [
+            'temporary' => ':user\'s account has been successfully archived.',
+            'permanent' => ':user\'s account has been permanently deleted.',
+        ],
+    ],
+    'employee' => [
+        'delete' => [
+            'temporary' => ':employee\'s information has been successfully archived.',
+            'permanent' => ':employee\'s information has been permanently deleted.',
+        ],
+    ],
     'error' => [
         'show' => 'No result found for :resource',
     ],

@@ -21,11 +21,9 @@ class UserService
 {
     use LoadsRequestQueryRelationship;
 
-    public function __construct(protected User $user) {}
-
     public function getUsers(UserRequest $request): LengthAwarePaginator
     {
-        return Pipeline::send($this->user->query())
+        return Pipeline::send(User::query())
             ->through([
                 FilterUser::class,
                 SearchUser::class,
@@ -39,7 +37,7 @@ class UserService
 
     public function createUser(array $validatedRequest): User
     {
-        return $this->user->create($validatedRequest);
+        return User::create($validatedRequest);
     }
 
     public function getUser(ShowUserRequest $request, User $user): User
@@ -59,7 +57,7 @@ class UserService
     public function deleteUser(User $user)
     {
         if ($user->trashed()) {
-            return $this->permanentlyDeleteUser($user);
+            return $user->forceDelete();
         }
 
         return $this->temporarilyDeleteUser($user);
@@ -71,14 +69,6 @@ class UserService
             $user->deleted_at = now();
             $user->status     = UserStatus::INACTIVE;
             $user->save();
-        });
-    }
-
-    public function permanentlyDeleteUser(User $user)
-    {
-        return DB::transaction(function () use ($user) {
-            $user->employee->forceDelete();
-            $user->forceDelete();
         });
     }
 }

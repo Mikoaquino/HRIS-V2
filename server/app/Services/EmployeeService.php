@@ -11,18 +11,15 @@ use App\Models\Employee;
 use App\Traits\LoadsRequestQueryRelationship;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Pipeline;
 
 class EmployeeService
 {
     use LoadsRequestQueryRelationship;
 
-    public function __construct(protected Employee $employee) {}
-
-    public function getEmployees(Request $request): LengthAwarePaginator
+    public function getEmployees(): LengthAwarePaginator
     {
-        return Pipeline::send($this->employee->query())
+        return Pipeline::send(Employee::query())
             ->through([
                 SearchEmployee::class,
                 SortEmployee::class,
@@ -33,27 +30,31 @@ class EmployeeService
             ->thenReturn();
     }
 
-    public function createEmployee(array $validatedRequest): Employee
+    public function createEmployee(array $validated): Employee
     {
-        return DB::transaction(fn () => $this->employee->create($validatedRequest));
+        return Employee::create($validated);
     }
 
-    public function getEmployee(Request $request, string $id): Employee
+    public function getEmployee(Request $request, Employee $employee): Employee
     {
-        $employee = $this->employee->findOrFail($id);
-
-        if ($request->has('load')) {
-            $employee = $this->applyRequestedRelations($employee, $request);
-        }
+        $employee->when($request->filled('load'),
+            fn () => $this->applyRequestedRelations($employee, $request)
+        );
 
         return $employee;
     }
 
-    public function updateEmployee(array $validatedRequest, string $id): Employee
+    public function updateEmployee(array $validated, Employee $employee): Employee
     {
-        $employee = $this->employee->findOrFail($id);
+        return tap($employee)->update($validated);
+    }
 
-        return DB::transaction(fn () => tap($employee)->update($validatedRequest));
+    public function handleEmployeeDelete(Employee $employee): Employee
+    {
+        if ($employee->trashed()) {
+            return tap($employee)->forceDelete();
+        }
 
+        return tap($employee)->delete();
     }
 }
