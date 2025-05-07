@@ -20,6 +20,7 @@ class StoreEmployeeRequest extends FormRequest
             'first_name'         => ['required', 'string'],
             'middle_name'        => ['nullable', 'string'],
             'last_name'          => ['required', 'string'],
+            'suffix'             => ['nullable', 'string'],
             'birth_date'         => ['required', 'date'],
             'gender'             => ['required', Rule::in(Gender::getValues())],
             'civil_status'       => ['required', Rule::in(CivilStatus::getValues())],
@@ -30,10 +31,8 @@ class StoreEmployeeRequest extends FormRequest
             'tin_id'             => ['required', 'numeric', 'digits:12'],
             'philhealth_id'      => ['required', 'numeric', 'digits:12'],
             'pagibig_id'         => ['required', 'numeric', 'digits:12'],
-            'employment_type_id' => [
-                'required',
-                'exists:employment_types,id',
-            ],
+            'employment_type_id' => ['required', 'exists:employment_types,id'],
+            'job_position_id'    => ['required', 'exists:job_positions,id'],
         ];
     }
 }
