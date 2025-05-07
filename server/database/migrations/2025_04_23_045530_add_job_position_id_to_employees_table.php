@@ -13,10 +13,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->foreignIdFor(JobPosition::class)
-            ->constrained()
-            ->cascadeOnUpdate()
-            ->cascadeOnDelete();
+            $table->after('employment_type_id', function ($table) {
+                $table->foreignIdFor(JobPosition::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            });
         });
     }
 
