@@ -10,7 +10,6 @@ use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\EmployeeStatusController;
 use App\Http\Controllers\Api\EmploymentTypeController;
 use App\Http\Controllers\Api\JobPositionController;
-use App\Http\Controllers\Api\OnboardingController;
 use App\Http\Controllers\Api\ProvinceController;
 use App\Http\Controllers\Api\RegionController;
 use App\Http\Controllers\Api\UserController;
@@ -45,8 +44,6 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
             Route::apiResource('departments', DepartmentController::class);
 
             Route::apiResource('employee-statuses', EmployeeStatusController::class);
-
-            Route::apiResource('onboardings', OnboardingController::class);
 
             Route::post('logout', [AccessTokenController::class, 'destroy']);
         });
