@@ -111,6 +111,10 @@ class EmployeeService
                 $this->attachmentService->handleUploads($validated);
             }
 
+            if (Arr::exists($validated, 'hired_at')) {
+                $this->lifecycleService->updateTenure($validated, $employee->lifecycle);
+            }
+
             return $employee;
         });
     }

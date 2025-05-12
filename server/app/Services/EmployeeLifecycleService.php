@@ -11,8 +11,8 @@ class EmployeeLifecycleService
         return EmployeeLifecycle::create($validated);
     }
 
-    public function updateTenure()
+    public function updateTenure(array $validated, EmployeeLifecycle $lifecycle): EmployeeLifecycle
     {
-        //
+        return tap($lifecycle)->update($validated);
     }
 }
