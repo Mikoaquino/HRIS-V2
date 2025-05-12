@@ -35,9 +35,9 @@ class UserService
             ->thenReturn();
     }
 
-    public function createUser(array $validatedRequest): User
+    public function createUser(array $validated): User
     {
-        return User::create($validatedRequest);
+        return User::create($validated);
     }
 
     public function getUser(ShowUserRequest $request, User $user): User
@@ -49,26 +49,22 @@ class UserService
         return $user;
     }
 
-    public function updateUser(array $validatedRequest, User $user): User
+    public function updateUser(array $validated, User $user): User
     {
-        return tap($user)->update($validatedRequest);
+        return tap($user)->update($validated);
     }
 
     public function deleteUser(User $user)
     {
         if ($user->trashed()) {
-            return $user->forceDelete();
+            return tap($user)->forceDelete();
         }
 
-        return $this->temporarilyDeleteUser($user);
-    }
-
-    public function temporarilyDeleteUser(User $user)
-    {
         return DB::transaction(function () use ($user) {
             $user->deleted_at = now();
             $user->status     = UserStatus::INACTIVE;
-            $user->save();
+
+            return tap($user)->save();
         });
     }
 }
