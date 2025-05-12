@@ -30,11 +30,10 @@ class Employee extends Model
         'archived_at',
     ];
 
-    public function getDeletedAtColumn()
+    public function getDeletedAtColumn(): string
     {
         return 'archived_at';
     }
-    
 
     public function account(): HasOne
     {
@@ -84,6 +83,11 @@ class Employee extends Model
     public function jobPosition(): BelongsTo
     {
         return $this->belongsTo(JobPosition::class);
+    }
+
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(EmployeeStatus::class);
     }
 
     public function getActivityLogOptions(): LogOptions

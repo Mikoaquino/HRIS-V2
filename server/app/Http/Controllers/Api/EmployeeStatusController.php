@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\V1\EmployeeStatusCollection;
+use App\Http\Resources\EmployeeStatusCollection;
 use App\Models\EmployeeStatus;
 use Illuminate\Http\Request;
 

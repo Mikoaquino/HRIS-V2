@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class EmployeeStatus extends Model
 {
@@ -18,8 +18,8 @@ class EmployeeStatus extends Model
         'description',
     ];
 
-    public function employee(): BelongsTo
+    public function employees(): HasMany
     {
-        return $this->belongsTo(Employee::class);
+        return $this->hasMany(Employee::class);
     }
 }

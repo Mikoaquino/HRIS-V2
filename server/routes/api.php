@@ -18,20 +18,33 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
     Route::middleware('throttle:api')->group(function () {
         Route::middleware('auth:sanctum')->group(function () {
-            Route::apiResource('employees', EmployeeController::class);
+            Route::apiResource('employees', EmployeeController::class)
+                ->withTrashed(['show', 'update', 'destroy']);
+
             Route::apiResource('users', UserController::class)
-                ->withTrashed();
+                ->withTrashed(['show', 'update', 'destroy']);
+
             Route::apiResource('activities', ActivityController::class);
+
             Route::apiResource('regions', RegionController::class);
+
             Route::apiResource('provinces', ProvinceController::class);
+
             Route::apiResource('cities', CityController::class);
+
             Route::apiResource('barangays', BarangayController::class);
+
             Route::apiResource('attachments', EmployeeAttachmentController::class)
-                ->withTrashed(['show']);
+                ->withTrashed(['show', 'destroy']);
+
             Route::apiResource('employment-types', EmploymentTypeController::class);
+
             Route::apiResource('job-positions', JobPositionController::class);
+
             Route::apiResource('departments', DepartmentController::class);
+
             Route::apiResource('employee-statuses', EmployeeStatusController::class);
+
             Route::post('logout', [AccessTokenController::class, 'destroy']);
         });
 
