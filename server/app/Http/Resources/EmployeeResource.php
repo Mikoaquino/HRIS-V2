@@ -29,6 +29,7 @@ class EmployeeResource extends JsonResource
             'pagibig_id'         => $this->pagibig_id,
             'employment_type_id' => $this->employment_type_id,
             'job_position_id'    => $this->job_position_id,
+            'employee_status_id' => $this->employee_status_id,
             'created_at'         => $this->created_at,
             'updated_at'         => $this->updated_at,
             'archived_at'        => $this->archived_at,
@@ -42,7 +43,7 @@ class EmployeeResource extends JsonResource
             'termination'        => TerminatedEmployeeResource::make($this->whenLoaded('termination')),
             'present_address'    => EmployeePresentAddressResource::make($this->whenLoaded('presentAddress')),
             'permanent_address'  => EmployeePermanentAddressResource::make($this->whenLoaded('permanentAddress')),
-            'employee_statuses'  => EmployeeStatusResource::make($this->whenLoaded('employeeStatus')),
+            'employee_status'    => EmployeeStatusResource::make($this->whenLoaded('employeeStatus')),
         ];
     }
 }
