@@ -11,6 +11,7 @@ use App\Models\Employee;
 use App\Traits\LoadsRequestQueryRelationship;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Pipeline;
 
@@ -56,7 +57,7 @@ class EmployeeService
 
             $validated = array_merge($validated, ['employee_id' => $employee->id]);
 
-            $this->educationService->createEducations($validated);
+            $this->educationService->createEducation($validated);
 
             $this->workExperienceService->createWorkExperiences($validated);
 
@@ -79,7 +80,39 @@ class EmployeeService
 
     public function updateEmployee(array $validated, Employee $employee): Employee
     {
-        return tap($employee)->update($validated);
+        return DB::transaction(function () use ($validated, $employee) {
+            $employee = tap($employee)->update($validated);
+
+            if (Arr::exists($validated, 'present_address')) {
+                $this->addressService->updatePresentAddress(
+                    $validated['present_address'],
+                    $employee->presentAddress
+                );
+            }
+
+            if (Arr::exists($validated, 'permanent_address')) {
+                $this->addressService->updatePermanentAddress(
+                    $validated['permanent_address'],
+                    $employee->permanentAddress
+                );
+            }
+
+            $validated = array_merge($validated, ['employee_id' => $employee->id]);
+
+            if (Arr::exists($validated, 'educations')) {
+                $this->educationService->updateEducation($validated);
+            }
+
+            if (Arr::exists($validated, 'work_experiences')) {
+                $this->workExperienceService->updateWorkExperiences($validated);
+            }
+
+            if (Arr::exists($validated, 'attachments')) {
+                $this->attachmentService->handleUploads($validated);
+            }
+
+            return $employee;
+        });
     }
 
     public function handleEmployeeDelete(Employee $employee): Employee
