@@ -16,4 +16,14 @@ class EmployeeAddressService
     {
         return EmployeePermanentAddress::create($validated);
     }
+
+    public function updatePresentAddress(array $validated, EmployeePresentAddress $presentAddress): EmployeePresentAddress
+    {
+        return tap($presentAddress)->update($validated);
+    }
+
+    public function updatePermanentAddress(array $validated, EmployeePermanentAddress $permanentAddress): EmployeePermanentAddress
+    {
+        return tap($permanentAddress)->update($validated);
+    }
 }
