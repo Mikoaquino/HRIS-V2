@@ -35,7 +35,7 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
             Route::apiResource('barangays', BarangayController::class);
 
             Route::apiResource('attachments', EmployeeAttachmentController::class)
-                ->withTrashed(['show']);
+                ->withTrashed(['show', 'destroy']);
 
             Route::apiResource('employment-types', EmploymentTypeController::class);
 
