@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEmployeeAttachmentRequest;
+use App\Http\Resources\EmployeeAttachmentCollection;
+use App\Http\Resources\EmployeeAttachmentResource;
 use App\Models\EmployeeAttachment;
 use App\Services\EmployeeAttachmentService;
 use App\Traits\HttpResponse;
@@ -23,9 +25,9 @@ class EmployeeAttachmentController extends Controller
         $responseData = $this->service->handleUploads($request->validated());
 
         return $this->success(
-            $responseData,
-            __('response.attachment.upload.success'),
-            Response::HTTP_CREATED
+            data: EmployeeAttachmentCollection::make($responseData),
+            message: __('response.attachment.upload.success'),
+            status: Response::HTTP_CREATED
         );
     }
 
@@ -43,5 +45,20 @@ class EmployeeAttachmentController extends Controller
         return response($content, Response::HTTP_FOUND, [
             'Content-Type' => Storage::mimeType($content),
         ]);
+    }
+
+    public function destroy(EmployeeAttachment $attachment): JsonResponse
+    {
+        $attachment = $this->service->handleDelete($attachment);
+
+        $message = $attachment->exists
+            ? 'response.attachment.delete.temporary.success'
+            : 'response.attachment.delete.permanent.success';
+
+        return $this->success(
+            data: EmployeeAttachmentResource::make($attachment),
+            status: Response::HTTP_OK,
+            message: __($message, ['attachment' => $attachment->client_name]),
+        );
     }
 }

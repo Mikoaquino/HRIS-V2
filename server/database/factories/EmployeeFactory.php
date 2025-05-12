@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\CivilStatus;
 use App\Enums\Gender;
+use App\Models\EmployeeStatus;
 use App\Models\EmploymentType;
 use App\Models\JobPosition;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -37,6 +38,8 @@ class EmployeeFactory extends Factory
             'pagibig_id'         => fake()->numerify('###########'),
             'employment_type_id' => EmploymentType::inRandomOrder()->first(),
             'job_position_id'    => JobPosition::inRandomOrder()->first(),
+            'employee_status_id' => EmployeeStatus::inRandomOrder()->first(),
+            'archived_at'        => fake()->optional()->date(time()),
         ];
     }
 }

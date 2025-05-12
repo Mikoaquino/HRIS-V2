@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,7 +27,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             EmployeeEducationSeeder::class,
             EmployeeWorkExperienceSeeder::class,
-            EmployeeAttachmentSeeder::class,
             EmployeeLifecycleSeeder::class,
             TerminatedEmployeeSeeder::class,
         ]);
@@ -35,7 +35,10 @@ class DatabaseSeeder extends Seeder
         Artisan::call('queue:work --queue=seed-psgc-address --stop-when-empty');
         $this->command->info("\n\n<fg=green;options=bold>  Finished seeding. :)</>");
 
+        Storage::deleteDirectory('employees');
+
         $this->call([
+            EmployeeAttachmentSeeder::class,
             EmployeePresentAddressSeeder::class,
             EmployeePermanentAddressSeeder::class,
         ]);

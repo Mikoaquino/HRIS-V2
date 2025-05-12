@@ -33,6 +33,6 @@ class EmployeePermanentAddress extends Model
 
     public function barangay(): BelongsTo
     {
-        return $this->belongsTo(Barangay::class);
+        return $this->belongsTo(Barangay::class, 'barangay_code');
     }
 }

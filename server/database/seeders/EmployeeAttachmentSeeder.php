@@ -33,7 +33,7 @@ class EmployeeAttachmentSeeder extends Seeder
         Employee::all()->each(function ($employee) use (&$attachments) {
             foreach (self::REQUIREMENTS as $requirement) {
                 $fileName     = "$employee->last_name-$requirement.pdf";
-                $fileContents = '<h1>'.$employee->full_name.' --- '.ucfirst($requirement).'</h1>';
+                $fileContents = '<h1>'.$employee->last_name.' --- '.ucfirst($requirement).'</h1>';
                 $file         = UploadedFile::fake()->createWithContent($fileName, Pdf::loadHTML($fileContents)->output());
                 $file->store('employees');
 

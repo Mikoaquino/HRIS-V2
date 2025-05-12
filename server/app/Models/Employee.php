@@ -7,25 +7,33 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Employee extends Model
 {
-    use HasFactory, LogsActivity;
+    use HasFactory, LogsActivity, SoftDeletes;
 
     protected const LOG_NAME = 'employee';
 
     protected static $recordEvents = [
         'created',
         'updated',
+        'deleted',
     ];
 
     protected $guarded = [
         'id',
         'created_at',
         'updated_at',
+        'archived_at',
     ];
+
+    public function getDeletedAtColumn(): string
+    {
+        return 'archived_at';
+    }
 
     public function account(): HasOne
     {
@@ -77,6 +85,11 @@ class Employee extends Model
         return $this->belongsTo(JobPosition::class);
     }
 
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(EmployeeStatus::class);
+    }
+
     public function getActivityLogOptions(): LogOptions
     {
         return LogOptions::defaults()
@@ -89,6 +102,9 @@ class Employee extends Model
                 return match ($event) {
                     'created' => __('activity.create.employee', ['causer' => $causer]),
                     'updated' => __('activity.update.employee', ['causer' => $causer]),
+                    'deleted' => $this->archived_at
+                        ? __('activity.temporary_delete.employee.single')
+                        : __('activity.force_delete.employee.single'),
                 };
             });
     }

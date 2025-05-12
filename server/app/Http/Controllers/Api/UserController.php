@@ -61,8 +61,14 @@ class UserController extends Controller
 
     public function destroy(User $user): JsonResponse
     {
-        $this->service->deleteUser($user);
+        $user = $this->service->deleteUser($user);
 
-        return $this->success(message: __('response.success.delete', ['resource' => 'user']));
+        $message = $user->exists
+            ? __('response.user.delete.temporary')
+            : __('response.user.delete.permanent');
+
+        return $this->success(message: __($message, [
+            'user' => $user->employee->first_name,
+        ]));
     }
 }

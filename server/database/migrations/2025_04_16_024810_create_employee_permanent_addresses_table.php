@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Barangay;
 use App\Models\Employee;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,11 +18,13 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignIdFor(Barangay::class)
-                ->constrained()
+            $table->string('barangay_code', 10);
+            $table->foreign('barangay_code')
+                ->references('code')
+                ->on('barangays')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->longText('additional_details');
+            $table->text('additional_details');
             $table->string('zip_code', 4);
             $table->timestamps();
         });

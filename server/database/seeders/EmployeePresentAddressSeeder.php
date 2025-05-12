@@ -16,7 +16,7 @@ class EmployeePresentAddressSeeder extends Seeder
     {
         $data = Employee::all()->map(fn ($employee) => [
             'employee_id'        => $employee->id,
-            'barangay_id'        => Barangay::inRandomOrder()->first()->id,
+            'barangay_code'      => Barangay::inRandomOrder()->first()->code,
             'additional_details' => fake()->streetAddress(),
             'zip_code'           => fake()->numerify('####'),
             'created_at'         => now(),
