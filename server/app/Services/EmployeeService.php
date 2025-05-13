@@ -44,7 +44,6 @@ class EmployeeService
             LoadEmployee::class,
             EmployeePaginate::class,
 
-            
         ])
         ->then(fn (LengthAwarePaginator $paginator) => 
             $paginator->appends($request->query())
