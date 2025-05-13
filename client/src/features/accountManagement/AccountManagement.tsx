@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useUsers, deleteUser, updateUser } from './hooks/useUser';
-import { ChevronDown, MoreHorizontal, CircleCheckBig } from 'lucide-react';
+import { ChevronDown, MoreHorizontal, CircleCheckBig, X } from 'lucide-react';
 import UserTable from './components/UserTable';
 import EditUser from './components/EditUser';
 import CreateUser from './components/CreateUser';
@@ -152,47 +152,57 @@ const AccountManagement: React.FC = () => {
       )}
 
       {showSuccess && (
-        <div className="fixed inset-0 bg-black/50 shadow flex justify-center items-center z-[1025]">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center w-80">
-            <div className="text-4xl justify-center items-center text-green-500 mb-2">
-              <CircleCheckBig />
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-[1025]">
+          <div className="bg-gray-100 border border-green-300 rounded-md shadow-md px-8 py-6 max-w-md text-center">
+            <div className="flex justify-center items-center mb-4">
+              <div className="w-12 h-12 rounded-full border-2 border-green-300 flex items-center justify-center">
+                <CircleCheckBig className="text-green-600 w-6 h-6" />
+              </div>
             </div>
-            <h3 className="text-lg font-medium justify-center items-center text-green-600 mb-2">Success!</h3>
+            <h2 className="text-green-700 text-2xl font-semibold mb-2">Success!</h2>
             <p className="text-gray-700 text-sm">
-              {successAction === 'create' && 'User account has been created.'}
-              {successAction === 'edit' && 'User account has been updated.'}
-              {successAction === 'delete' && 'User account has been deleted.'}
+              {successAction === 'create' && 'Account created successfully! Please check the entered email to proceed with login.'}
+              {successAction === 'edit' && 'User account has been updated successfully!'}
+              {successAction === 'delete' && 'User account has been deleted successfully!'}
             </p>
           </div>
         </div>
       )}
 
-      {showDeleteModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1025]">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center w-80">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Confirm Deletion</h3>
-            <p className="text-sm text-gray-600 mb-6">Are you sure you want to delete this user?</p>
-            <div className="flex justify-end space-x-3">
-              <button
-                onClick={() => {
-                  setShowDeleteModal(false);
-                  setUserToDelete(null);
-                }}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-1.5 rounded-md text-sm"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={confirmDelete}
-                disabled={isSubmitting}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-1.5 rounded-md text-sm disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? 'Deleting...' : 'Delete'}
-              </button>
+    {showDeleteModal && (
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1025]">
+        <div className="bg-white rounded-md shadow-lg px-8 py-6 max-w-sm w-full text-center">
+          <div className="flex justify-center items-center mb-4">
+            <div className="w-16 h-16 rounded-full border-3 border-red-500 flex items-center justify-center">
+              <X className="text-red-500 w-8 h-8" />
             </div>
           </div>
+          <h2 className="text-red-600 text-lg font-semibold mb-2">Delete Employee</h2>
+          <p className="text-gray-600 text-sm mb-6">
+            Are you sure you want to delete this Employee? This process cannot be undone.
+          </p>
+          <hr className="border-t border-gray-200 mb-6" />
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={() => {
+                setShowDeleteModal(false);
+                setUserToDelete(null);
+              }}
+              className="bg-gray-200 hover:bg-gray-400 text-gray-800 px-4 py-1.5 rounded-md text-sm"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={confirmDelete}
+              disabled={isSubmitting}
+              className="px-4 py-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded-md disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'Deleting...' : 'Delete'}
+            </button>
+          </div>
         </div>
-      )}
+      </div>
+    )}
 
       <div className="overflow-x-auto sm:flex mb-6 justify-between items-center">
         <div className="flex space-x-4 items-center">
@@ -226,7 +236,7 @@ const AccountManagement: React.FC = () => {
           </button>
           <button
             onClick={() => setCreatingUser(true)}
-            className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-1.5 rounded-md text-sm"
+            className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-1.5 rounded-md text-sm cursor-pointer"
           >
             Add Account
           </button>
