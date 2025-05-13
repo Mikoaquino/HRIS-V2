@@ -35,6 +35,7 @@ class EmployeeResource extends JsonResource
             'archived_at'        => $this->archived_at,
             'employment_type'    => EmploymentTypeResource::make($this->whenLoaded('employmentType')),
             'job_position'       => JobPositionResource::make($this->whenLoaded('jobPosition')),
+            'status'             => EmployeeStatusResource::make($this->whenLoaded('employeeStatus')),
             'account'            => UserResource::make($this->whenLoaded('account')),
             'educations'         => EmployeeEducationCollection::make($this->whenLoaded('educations')),
             'work_experiences'   => EmployeeWorkExperienceCollection::make($this->whenLoaded('workExperiences')),
@@ -43,7 +44,6 @@ class EmployeeResource extends JsonResource
             'termination'        => TerminatedEmployeeResource::make($this->whenLoaded('termination')),
             'present_address'    => EmployeePresentAddressResource::make($this->whenLoaded('presentAddress')),
             'permanent_address'  => EmployeePermanentAddressResource::make($this->whenLoaded('permanentAddress')),
-            'employee_status'    => EmployeeStatusResource::make($this->whenLoaded('employeeStatus')),
         ];
     }
 }
