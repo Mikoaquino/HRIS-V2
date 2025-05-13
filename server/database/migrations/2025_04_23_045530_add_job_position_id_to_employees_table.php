@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\JobPosition;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\JobPosition;
 
 return new class extends Migration
 {
@@ -13,10 +13,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->foreignIdFor(JobPosition::class)
-            ->constrained()
-            ->cascadeOnUpdate()
-            ->cascadeOnDelete();
+            $table->after('employment_type_id', function ($table) {
+                $table->foreignIdFor(JobPosition::class)
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->cascadeOnDelete();
+            });
         });
     }
 

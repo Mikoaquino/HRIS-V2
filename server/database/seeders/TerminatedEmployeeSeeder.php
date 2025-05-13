@@ -20,10 +20,10 @@ class TerminatedEmployeeSeeder extends Seeder
         $ids = $separatedEmployees->pluck('employee_id');
 
         $count = intval(floor($ids->count() / 2));
-        
+
         for ($i = 0; $i < $count; $i++) {
             TerminatedEmployee::factory()->create([
-                'employee_id' => $ids->shift()
+                'employee_id' => $ids->shift(),
             ]);
         }
     }

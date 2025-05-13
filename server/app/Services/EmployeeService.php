@@ -2,21 +2,18 @@
 
 namespace App\Services;
 
-
-use App\Models\Employee;
-use Illuminate\Http\Request;
-use App\Filters\EmployeeFilter;
-use App\Filters\Employee\EmployeeFilters;
-use App\Filters\Employee\EmployeePaginate;
-use App\Filters\Employee\LoadEmployee;
-use Illuminate\Support\Facades\DB;
-use App\Filters\PaginateQueryBuilder;
 use App\Filters\Employee\SearchEmployee;
 use App\Filters\Employee\SortEmployee;
-use Illuminate\Support\Facades\Pipeline;
 use App\Filters\IncludeSoftDeletedModels;
+use App\Filters\LoadModelRelations;
+use App\Filters\PaginateQueryBuilder;
+use App\Models\Employee;
 use App\Traits\LoadsRequestQueryRelationship;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Pipeline;
 
 class EmployeeService
 {
@@ -44,6 +41,7 @@ class EmployeeService
             LoadEmployee::class,
             EmployeePaginate::class,
 
+            
         ])
         ->then(fn (LengthAwarePaginator $paginator) => 
             $paginator->appends($request->query())
@@ -57,20 +55,60 @@ class EmployeeService
     
     public function getEmployee(Request $request, string $id): Employee
     {
-        $employee = $this->employee->findOrFail($id);
-
-        if ($request->has('load')) {
-            $employee = $this->applyRequestedRelations($employee, $request);
-        }
+        $employee->when($request->filled('load'),
+            fn () => $this->applyRequestedRelations($employee, $request)
+        );
 
         return $employee;
     }
 
-    public function updateEmployee(array $validatedRequest, string $id): Employee
+    public function updateEmployee(array $validated, Employee $employee): Employee
     {
-        $employee = $this->employee->findOrFail($id);
+        return DB::transaction(function () use ($validated, $employee) {
+            $employee = tap($employee)->update($validated);
 
-        return DB::transaction(fn () => tap($employee)->update($validatedRequest));
-        
+            if (Arr::exists($validated, 'present_address')) {
+                $this->addressService->updatePresentAddress(
+                    $validated['present_address'],
+                    $employee->presentAddress
+                );
+            }
+
+            if (Arr::exists($validated, 'permanent_address')) {
+                $this->addressService->updatePermanentAddress(
+                    $validated['permanent_address'],
+                    $employee->permanentAddress
+                );
+            }
+
+            $validated = array_merge($validated, ['employee_id' => $employee->id]);
+
+            if (Arr::exists($validated, 'educations')) {
+                $this->educationService->updateEducation($validated);
+            }
+
+            if (Arr::exists($validated, 'work_experiences')) {
+                $this->workExperienceService->updateWorkExperiences($validated);
+            }
+
+            if (Arr::exists($validated, 'attachments')) {
+                $this->attachmentService->handleUploads($validated);
+            }
+
+            if (Arr::exists($validated, 'hired_at')) {
+                $this->lifecycleService->updateTenure($validated, $employee->lifecycle);
+            }
+
+            return $employee;
+        });
+    }
+
+    public function handleEmployeeDelete(Employee $employee): Employee
+    {
+        if ($employee->trashed()) {
+            return tap($employee)->forceDelete();
+        }
+
+        return tap($employee)->delete();
     }
 }

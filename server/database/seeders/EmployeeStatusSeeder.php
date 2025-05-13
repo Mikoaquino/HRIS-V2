@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\EmployeeStatus;
+use Illuminate\Database\Seeder;
 
 class EmployeeStatusSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class EmployeeStatusSeeder extends Seeder
 
         foreach ($statuses as $status) {
             EmployeeStatus::create([
-                'name' => $status,
+                'name'        => $status,
                 'description' => fake()->paragraph(),
             ]);
         }

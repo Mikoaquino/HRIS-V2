@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Province;
-use App\Traits\HttpResponse;
-use Illuminate\Http\Request;
-use App\Services\ProvinceService;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProvinceResource;
 use App\Http\Resources\ProvinceCollection;
+use App\Http\Resources\ProvinceResource;
+use App\Models\Province;
+use App\Services\ProvinceService;
+use App\Traits\HttpResponse;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProvinceController extends Controller

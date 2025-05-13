@@ -19,10 +19,10 @@ class EmployeePermanentAddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'employee_id' => Employee::factory(),
-            'barangay_id' => Barangay::inRandomOrder()->first(),
+            'employee_id'        => Employee::factory(),
+            'barangay_id'        => Barangay::inRandomOrder()->first(),
             'additional_details' => fake()->streetAddress(),
-            'zip_code' => fake()->numerify('####'),
+            'zip_code'           => fake()->numerify('####'),
         ];
     }
 }

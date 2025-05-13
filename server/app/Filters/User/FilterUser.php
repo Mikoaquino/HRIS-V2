@@ -2,8 +2,8 @@
 
 namespace App\Filters\User;
 
-use Closure;
 use App\Filters\ApiFilter;
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
 
 class FilterUser extends ApiFilter
@@ -15,7 +15,7 @@ class FilterUser extends ApiFilter
         if (! request()->has('filter')) {
             return $next($builder);
         }
-        
+
         $filterQuery = $this->apply(request()->filter);
 
         return $next($builder->where($filterQuery));

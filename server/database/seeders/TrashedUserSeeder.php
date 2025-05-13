@@ -14,7 +14,7 @@ class TrashedUserSeeder extends Seeder
     public function run(): void
     {
         activity()->disableLogging();
-        
+
         User::factory(10)->trashed()->create(['status' => UserStatus::INACTIVE]);
     }
 }

@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\EmploymentType;
+use Illuminate\Database\Seeder;
 
 class EmploymentTypeSeeder extends Seeder
 {
@@ -21,7 +20,7 @@ class EmploymentTypeSeeder extends Seeder
         ];
         foreach ($jobs as $job) {
             EmploymentType::create([
-                'name' => $job,
+                'name'        => $job,
                 'description' => fake()->sentence(10),
             ]);
         }

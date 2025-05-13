@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Models\Province;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class ProvinceService
 {

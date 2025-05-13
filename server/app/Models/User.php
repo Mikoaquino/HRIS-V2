@@ -4,18 +4,18 @@ namespace App\Models;
 
 use App\Enums\ActivityLog;
 use App\Enums\UserStatus;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\LogOptions;
-use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, LogsActivity, SoftDeletes;
+    use HasApiTokens, HasFactory, LogsActivity, Notifiable, SoftDeletes;
 
     protected $fillable = [
         'email',
@@ -31,13 +31,13 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-        'status' => UserStatus::class,
+        'password'          => 'hashed',
+        'status'            => UserStatus::class,
     ];
 
     public function employee(): BelongsTo
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(Employee::class)->withTrashed();
     }
 
     public function getActivityLogOptions(): LogOptions
@@ -50,6 +50,7 @@ class User extends Authenticatable
             ->dontSubmitEmptyLogs()
             ->setDescriptionForEvent(function (string $event) {
                 $causer = request()->user()->employee->first_name ?? 'System';
+
                 return match ($event) {
                     'created' => __('activity.create.user'),
                     'updated' => $this->deleted_at

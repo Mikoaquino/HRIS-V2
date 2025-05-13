@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Region;
-use App\Traits\HttpResponse;
-use Illuminate\Http\Request;
-use App\Services\RegionService;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RegionResource;
 use App\Http\Resources\RegionCollection;
+use App\Http\Resources\RegionResource;
+use App\Models\Region;
+use App\Services\RegionService;
+use App\Traits\HttpResponse;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class RegionController extends Controller

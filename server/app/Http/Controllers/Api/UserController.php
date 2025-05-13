@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
-use App\Traits\HttpResponse;
-use App\Services\UserService;
-use Illuminate\Http\JsonResponse;
-use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
 use App\Http\Requests\ShowUserRequest;
-use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use App\Services\UserService;
+use App\Traits\HttpResponse;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -21,14 +21,14 @@ class UserController extends Controller
 
     public function __construct(protected UserService $service) {}
 
-    public function index(UserRequest $request): JsonResponse|UserCollection
+    public function index(UserRequest $request): UserCollection
     {
         $users = $this->service->getUsers($request);
 
         return UserCollection::make($users);
     }
 
-    public function store(StoreUserRequest $request): JsonResponse|UserResource
+    public function store(StoreUserRequest $request): JsonResponse
     {
         $newUser = $this->service->createUser($request->validated());
 
@@ -39,17 +39,17 @@ class UserController extends Controller
         );
     }
 
-    public function show(ShowUserRequest $request, User $user): JsonResponse|UserResource
+    public function show(ShowUserRequest $request, User $user): JsonResponse
     {
         $user = $this->service->getUser($request, $user);
-        
+
         return $this->success(
             data: UserResource::make($user),
             status: Response::HTTP_FOUND,
         );
     }
 
-    public function update(UpdateUserRequest $request, User $user): JsonResponse|UserResource
+    public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
         $updatedUser = $this->service->updateUser($request->validated(), $user);
 
@@ -61,8 +61,14 @@ class UserController extends Controller
 
     public function destroy(User $user): JsonResponse
     {
-        $this->service->deleteUser($user);
+        $user = $this->service->deleteUser($user);
 
-        return $this->success(message: __('response.success.delete', ['resource' => 'user']));
+        $message = $user->exists
+            ? __('response.user.delete.temporary')
+            : __('response.user.delete.permanent');
+
+        return $this->success(message: __($message, [
+            'user' => $user->employee->first_name,
+        ]));
     }
 }

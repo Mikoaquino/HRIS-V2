@@ -14,12 +14,12 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'load' => ['string'],
+            'load'         => ['string'],
             'only_trashed' => ['in:true,false'],
             'with_trashed' => ['in:true,false'],
-            'filter' => ['array'],
-            'sort' => ['array'],
-            'q' => ['string'],
+            'filter'       => ['array'],
+            'sort'         => ['array'],
+            'q'            => ['string'],
         ];
     }
 }

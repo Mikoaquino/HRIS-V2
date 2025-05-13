@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('middle_name')->nullable();
             $table->string('last_name');
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes('archived_at');
         });
     }
 

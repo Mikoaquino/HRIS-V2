@@ -2,12 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\UserStatus;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateUserRequest extends FormRequest
+class UpdateUserRequest extends UserFormRequest
 {
     public function authorize(): bool
     {
@@ -16,17 +11,12 @@ class UpdateUserRequest extends FormRequest
 
     public function rules(): array
     {
-        $baseRules = [
-            'email' => ['required', 'email:rfc,strict,dns,spoof,filter,filter_unicode', 'unique:users,email'],
-            'employee_id' => ['required', 'exists:employees,id', 'unique:users,employee_id'],
-            'password' => ['required', Password::defaults()],
-            'status' => ['required', 'string', Rule::in(UserStatus::getValues())],
-        ];
+        $baseRules = $this->baseRules();
 
         if ($this->method() === 'PUT') {
             return $baseRules;
         }
-        
+
         foreach ($baseRules as &$rule) {
             array_unshift($rule, 'sometimes');
         }

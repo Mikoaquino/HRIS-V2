@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\Gender;
-use App\Enums\CivilStatus;
+use App\Models\Barangay;
 use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\EmployeeEducation;
+use App\Models\EmployeeWorkExperience;
 
-class UpdateEmployeeRequest extends FormRequest
+class UpdateEmployeeRequest extends EmployeeFormRequest
 {
     public function authorize(): bool
     {
@@ -16,26 +16,45 @@ class UpdateEmployeeRequest extends FormRequest
 
     public function rules(): array
     {
-        $baseRules = [
-            'first_name' => ['required', 'string'],
-            'middle_name' => ['nullable', 'string'],
-            'last_name' => ['required', 'string'],
-            'birth_date' => ['required', 'date'],
-            'gender' => ['required', Rule::in(Gender::getValues())],
-            'civil_status' => ['required', Rule::in(CivilStatus::getValues())],
-            'nationality' => ['required', 'string'],
-            'religion' => ['required', 'string'],
-            'contact_number' => ['required', 'string', 'max:11', 'min:11', 'regex:/^09\d{9}$/'],
+        $requestMethod = $this->method();
+
+        $modelMap = [
+            'educations' => [
+                'table' => new EmployeeEducation()->getTable(),
+                'column' => 'id',
+            ],
+            'work_experiences' => [
+                'table' => new EmployeeWorkExperience()->getTable(),
+                'column' => 'id',
+            ],
+            'present_address' => [
+                'table' => new Barangay()->getTable(),
+                'column' => 'code',
+            ],
+            'permanent_address' => [
+                'table' => new Barangay()->getTable(),
+                'column' => 'code',
+            ],
         ];
 
-        if ($this->method() === 'PUT') {
-            return $baseRules;
-        }
-        
-        foreach ($baseRules as &$rule) {
-            array_unshift($rule, 'sometimes');
+        $modifiedRules = [];
+
+        foreach ($this->baseRules() as $key => $rule) {
+            $modifiedRules[$key] = $requestMethod === 'PATCH' ? ['sometimes', ...$rule] : $rule;
+
+            if (! isset($modelMap[$key])) {
+                continue;
+            }
+
+            ['table' => $table, 'column' => $column] = $modelMap[$key];
+
+            $isAddress = in_array($key, ['present_address', 'permanent_address'], true);
+
+            $index = $isAddress ? "{$key}.barangay_code" : "{$key}.*.{$column}";
+
+            $modifiedRules[$index] = ['sometimes', 'required', Rule::exists($table, $column)];
         }
 
-        return $baseRules;
+        return $modifiedRules;
     }
 }

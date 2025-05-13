@@ -12,13 +12,13 @@ class EmployeeAttachmentSeeder extends Seeder
 {
     const REQUIREMENTS = [
         'resume',
-        'employment_contract', 
-        'government_id', 
+        'employment_contract',
+        'government_id',
         'diploma',
-        'tor', 
+        'tor',
         'medical_exam_results',
         'nbi_clearance',
-        'police_clearance'
+        'police_clearance',
     ];
 
     /**
@@ -30,19 +30,19 @@ class EmployeeAttachmentSeeder extends Seeder
     {
         $attachments = [];
 
-        Employee::all()->each(function ($employee) use(&$attachments) {
+        Employee::all()->each(function ($employee) use (&$attachments) {
             foreach (self::REQUIREMENTS as $requirement) {
-                $fileName = "$employee->last_name-$requirement.pdf";
-                $fileContents = '<h1>'.$employee->full_name.' --- '.ucfirst($requirement).'</h1>';
-                $file = UploadedFile::fake()->createWithContent($fileName, Pdf::loadHTML($fileContents)->output());
+                $fileName     = "$employee->last_name-$requirement.pdf";
+                $fileContents = '<h1>'.$employee->last_name.' --- '.ucfirst($requirement).'</h1>';
+                $file         = UploadedFile::fake()->createWithContent($fileName, Pdf::loadHTML($fileContents)->output());
                 $file->store('employees');
 
                 $attachments[] = [
                     'employee_id' => $employee->id,
                     'client_name' => $file->getClientOriginalName(),
                     'hashed_name' => $file->hashName(),
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at'  => now(),
+                    'updated_at'  => now(),
                 ];
             }
         });

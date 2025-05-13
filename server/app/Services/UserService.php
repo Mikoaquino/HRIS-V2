@@ -2,30 +2,28 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use App\Enums\UserStatus;
-use App\Filters\User\SortUser;
-use App\Filters\User\FilterUser;
-use App\Filters\User\SearchUser;
-use App\Http\Requests\UserRequest;
-use Illuminate\Support\Facades\DB;
+use App\Filters\IncludeSoftDeletedModels;
 use App\Filters\LoadModelRelations;
 use App\Filters\PaginateQueryBuilder;
+use App\Filters\User\FilterUser;
+use App\Filters\User\SearchUser;
+use App\Filters\User\SortUser;
 use App\Http\Requests\ShowUserRequest;
-use Illuminate\Support\Facades\Pipeline;
-use App\Filters\IncludeSoftDeletedModels;
+use App\Http\Requests\UserRequest;
+use App\Models\User;
 use App\Traits\LoadsRequestQueryRelationship;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Pipeline;
 
 class UserService
 {
     use LoadsRequestQueryRelationship;
 
-    public function __construct(protected User $user) {}
-
     public function getUsers(UserRequest $request): LengthAwarePaginator
     {
-        return Pipeline::send($this->user->query())
+        return Pipeline::send(User::query())
             ->through([
                 FilterUser::class,
                 SearchUser::class,
@@ -34,14 +32,12 @@ class UserService
                 LoadModelRelations::class,
                 PaginateQueryBuilder::class,
             ])
-            ->then(fn (LengthAwarePaginator $paginator) => 
-                $paginator->appends($request->query())
-            );
+            ->thenReturn();
     }
 
-    public function createUser(array $validatedRequest): User
+    public function createUser(array $validated): User
     {
-        return $this->user->create($validatedRequest);
+        return User::create($validated);
     }
 
     public function getUser(ShowUserRequest $request, User $user): User
@@ -53,34 +49,22 @@ class UserService
         return $user;
     }
 
-    public function updateUser(array $validatedRequest, User $user): User
+    public function updateUser(array $validated, User $user): User
     {
-        return tap($user)->update($validatedRequest);
+        return tap($user)->update($validated);
     }
 
     public function deleteUser(User $user)
     {
         if ($user->trashed()) {
-            return $this->permanentlyDeleteUser($user);
+            return tap($user)->forceDelete();
         }
 
-        return $this->temporarilyDeleteUser($user);
-    }
-
-    public function temporarilyDeleteUser(User $user)
-    {
         return DB::transaction(function () use ($user) {
             $user->deleted_at = now();
-            $user->status = UserStatus::INACTIVE;
-            $user->save();
-        });
-    }
+            $user->status     = UserStatus::INACTIVE;
 
-    public function permanentlyDeleteUser(User $user)
-    {
-        return DB::transaction(function () use ($user) {
-            $user->employee->forceDelete();
-            $user->forceDelete();
+            return tap($user)->save();
         });
     }
 }

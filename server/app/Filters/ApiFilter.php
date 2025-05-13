@@ -7,11 +7,11 @@ abstract class ApiFilter
     protected $params = [];
 
     protected $operatorMap = [
-        'gt' => '>',
+        'gt'  => '>',
         'gte' => '>=',
-        'eq' => '=',
-        'ne' => '!=',
-        'lt' => '<',
+        'eq'  => '=',
+        'ne'  => '!=',
+        'lt'  => '<',
         'lte' => '<=',
     ];
 
@@ -19,19 +19,19 @@ abstract class ApiFilter
     {
         $clause = [];
 
-        foreach($this->params as $param => $operators) {
+        foreach ($this->params as $param => $operators) {
             if (! array_key_exists($param, $filters)) {
                 continue;
             }
 
             $query = $filters[$param];
 
-            foreach($operators as $operator) {
+            foreach ($operators as $operator) {
                 if (isset($query[$operator])) {
                     $clause[] = [
-                        $param, 
-                        $this->operatorMap[$operator], 
-                        $query[$operator]
+                        $param,
+                        $this->operatorMap[$operator],
+                        $query[$operator],
                     ];
                 }
             }

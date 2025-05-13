@@ -13,6 +13,6 @@ class PaginateQueryBuilder
     {
         $perPage = request()->input('per_page', self::PER_PAGE);
 
-        return $next($builder->paginate($perPage));
+        return $next($builder->paginate($perPage)->withQueryString());
     }
 }
