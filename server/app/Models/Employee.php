@@ -85,7 +85,7 @@ class Employee extends Model
         return $this->belongsTo(JobPosition::class);
     }
 
-    public function status(): BelongsTo
+    public function employeeStatus(): BelongsTo
     {
         return $this->belongsTo(EmployeeStatus::class);
     }
