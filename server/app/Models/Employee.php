@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\ActivityLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -14,8 +16,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Employee extends Model
 {
     use HasFactory, LogsActivity, SoftDeletes;
-
-    protected const LOG_NAME = 'employee';
 
     protected static $recordEvents = [
         'created',
@@ -90,11 +90,23 @@ class Employee extends Model
         return $this->belongsTo(EmployeeStatus::class);
     }
 
+    public function department(): HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Department::class,
+            JobPosition::class,
+            'id',
+            'id',
+            'job_position_id',
+            'department_id'
+        );
+    }
+
     public function getActivityLogOptions(): LogOptions
     {
         return LogOptions::defaults()
             ->logAll()
-            ->useLogName(self::LOG_NAME)
+            ->useLogName(ActivityLog::EMPLOYEE->value)
             ->dontSubmitEmptyLogs()
             ->setDescriptionForEvent(function (string $event) {
                 $causer = request()->user()->employee->first_name ?? 'System';
