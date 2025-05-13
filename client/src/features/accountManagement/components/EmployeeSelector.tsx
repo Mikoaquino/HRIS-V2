@@ -10,14 +10,21 @@ interface Employee {
   deleted_at: string | null;
 }
 
+interface User {
+  id: number;
+  employee_id: number;
+  status: string;
+  deleted_at: string | null;
+}
+
 interface EmployeeSelectorProps {
-  users: any[];
+  users: User[];
   onSelect: (id: number, name: string) => void;
   onClose: () => void;
   initialEmployeeId: number | null;
 }
 
-const EmployeeSelector: React.FC<EmployeeSelectorProps> = ({ onSelect, onClose }) => {
+const EmployeeSelector: React.FC<EmployeeSelectorProps> = ({ users, onSelect, onClose }) => {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -54,12 +61,18 @@ const EmployeeSelector: React.FC<EmployeeSelectorProps> = ({ onSelect, onClose }
       });
 
       const data = response.data;
-      const newEmployees = data.data || [];
+      const newEmployees: Employee[] = (data.data || []).filter((emp: Employee) => {
+        const isAssigned = users.some(
+          (user) =>
+            user.employee_id === emp.id &&
+            (user.status !== 'active' || user.deleted_at !== null)
+        );
+        return !isAssigned;
+      });
+
+      setEmployees(prev => (reset ? newEmployees : [...prev, ...newEmployees]));
+
       const meta = data.meta || {};
-
-      setEmployees((prev) => (reset ? newEmployees : [...prev, ...newEmployees]));
-
-      // Update the page number
       setPage(reset ? 2 : page + 1);
 
       if (meta.current_page && meta.last_page) {
@@ -108,7 +121,7 @@ const EmployeeSelector: React.FC<EmployeeSelectorProps> = ({ onSelect, onClose }
           autoFocus
         />
       </div>
-      <div className="max-h-25 overflow-y-auto bg-white border-t border-gray-200">
+      <div className="max-h-20 overflow-y-auto bg-white border-t border-gray-200">
         {error && (
           <div className="p-3 text-sm text-red-500 bg-red-50 text-center">
             {error}
