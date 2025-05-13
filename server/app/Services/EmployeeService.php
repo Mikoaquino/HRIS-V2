@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Filters\Employee\SearchEmployee;
 use App\Filters\Employee\SortEmployee;
+use App\Filters\Empolyee\FilterEmployee;
 use App\Filters\IncludeSoftDeletedModels;
 use App\Filters\LoadModelRelations;
 use App\Filters\PaginateQueryBuilder;
@@ -19,41 +20,58 @@ class EmployeeService
 {
     use LoadsRequestQueryRelationship;
 
-    public function __construct(protected Employee $employee) {}
+    public function __construct(
+        private EmployeeAddressService $addressService,
+        private EmployeeAttachmentService $attachmentService,
+        private EmployeeEducationService $educationService,
+        private EmployeeLifecycleService $lifecycleService,
+        private EmployeeWorkExperienceService $workExperienceService,
+    ) {}
 
-    public function getEmployees(Request $request): LengthAwarePaginator
+    public function getEmployees(): LengthAwarePaginator
     {
-        $employeeFilter = new EmployeeFilter;
-        $queryClause = $employeeFilter->apply($request->filter ?? []);
-
-        $employees = $this->employee->where($queryClause);
-
-        if ($request->query('includeAccount')) {
-            $employees = $employees->with('account');
-        }
-        
-        return Pipeline::send($this->employee->query())
-        ->through([
-            SearchEmployee::class,
-            SortEmployee::class,
-            IncludeSoftDeletedModels::class,
-            EmployeeFilters::class,
-            LoadEmployee::class,
-            EmployeePaginate::class,
-
-            
-        ])
-        ->then(fn (LengthAwarePaginator $paginator) => 
-            $paginator->appends($request->query())
-        );
+        return Pipeline::send(Employee::query())
+            ->through([
+                SearchEmployee::class,
+                SortEmployee::class,
+                FilterEmployee::class,
+                LoadModelRelations::class,
+                IncludeSoftDeletedModels::class,
+                PaginateQueryBuilder::class,
+            ])
+            ->thenReturn();
     }
-    
-    public function createEmployee(array $validatedRequest): Employee
+
+    public function createEmployee(array $validated): Employee
     {
-        return DB::transaction(fn () => $this->employee->create($validatedRequest));
+        return DB::transaction(function () use ($validated) {
+            $employee = Employee::create($validated);
+
+            $this->addressService->createPresentAddress(array_merge(
+                $validated['present_address'],
+                ['employee_id' => $employee->id]
+            ));
+
+            $this->addressService->createPermanentAddress(array_merge(
+                $validated['permanent_address'],
+                ['employee_id' => $employee->id]
+            ));
+
+            $validated = array_merge($validated, ['employee_id' => $employee->id]);
+
+            $this->educationService->createEducation($validated);
+
+            $this->workExperienceService->createWorkExperiences($validated);
+
+            $this->attachmentService->handleUploads($validated);
+
+            $this->lifecycleService->createNewHire($validated);
+
+            return $employee;
+        });
     }
-    
-    public function getEmployee(Request $request, string $id): Employee
+
+    public function getEmployee(Request $request, Employee $employee): Employee
     {
         $employee->when($request->filled('load'),
             fn () => $this->applyRequestedRelations($employee, $request)
