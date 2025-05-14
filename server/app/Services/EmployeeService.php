@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
+use App\Filters\Employee\FilterEmployee;
 use App\Filters\Employee\SearchEmployee;
 use App\Filters\Employee\SortEmployee;
-use App\Filters\Empolyee\FilterEmployee;
 use App\Filters\IncludeSoftDeletedModels;
 use App\Filters\LoadModelRelations;
 use App\Filters\PaginateQueryBuilder;
@@ -32,9 +32,9 @@ class EmployeeService
     {
         return Pipeline::send(Employee::query())
             ->through([
+                FilterEmployee::class,
                 SearchEmployee::class,
                 SortEmployee::class,
-                FilterEmployee::class,
                 LoadModelRelations::class,
                 IncludeSoftDeletedModels::class,
                 PaginateQueryBuilder::class,
