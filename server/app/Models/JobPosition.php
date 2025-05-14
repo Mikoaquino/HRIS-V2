@@ -17,11 +17,6 @@ class JobPosition extends Model
         'updated_at',
     ];
 
-    public function department(): BelongsTo
-    {
-        return $this->belongsTo(Department::class);
-    }
-
     public function employees(): HasMany
     {
         return $this->hasMany(Employee::class);

@@ -14,9 +14,4 @@ class Department extends Model
         'name',
         'description',
     ];
-
-    public function jobPositions(): HasMany
-    {
-        return $this->hasMany(JobPosition::class);
-    }
 }
