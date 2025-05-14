@@ -30,6 +30,7 @@ class EmployeeResource extends JsonResource
             'employment_type_id' => $this->employment_type_id,
             'job_position_id'    => $this->job_position_id,
             'employee_status_id' => $this->employee_status_id,
+            'department_id'      => $this->department_id,
             'created_at'         => $this->created_at,
             'updated_at'         => $this->updated_at,
             'archived_at'        => $this->whenNotNull($this->archived_at),
