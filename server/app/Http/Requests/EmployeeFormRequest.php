@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Enums\CivilStatus;
 use App\Enums\Gender;
 use App\Models\Barangay;
+use App\Models\Department;
 use App\Models\EmployeeStatus;
 use App\Models\EmploymentType;
 use App\Models\JobPosition;
@@ -22,7 +23,7 @@ class EmployeeFormRequest extends FormRequest
             'middle_name'        => ['nullable', 'string', 'max:255'],
             'last_name'          => ['required', 'string', 'max:255'],
             'suffix'             => ['nullable', 'string', 'max:255'],
-            'birth_date'         => ['required', 'date', 'before_or_equal:'.now()->subYears(18)],
+            'birth_date'         => ['required', 'date', 'before_or_equal:' . now()->subYears(18)],
             'gender'             => ['required', 'string', 'max:255', Rule::in(Gender::getValues())],
             'civil_status'       => ['required', 'string', 'max:255', Rule::in(CivilStatus::getValues())],
             'nationality'        => ['required', 'string', 'max:255'],
@@ -36,6 +37,7 @@ class EmployeeFormRequest extends FormRequest
             'employment_type_id' => ['required', Rule::exists(new EmploymentType()->getTable(), 'id')],
             'job_position_id'    => ['required', Rule::exists(new JobPosition()->getTable(), 'id')],
             'employee_status_id' => ['required', Rule::exists(new EmployeeStatus()->getTable(), 'id')],
+            'department_id'      => ['required', Rule::exists(new Department()->getTable(), 'id')],
 
             // Educations
             'educations'                => ['required', 'array'],

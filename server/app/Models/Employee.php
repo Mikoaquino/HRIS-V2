@@ -90,16 +90,9 @@ class Employee extends Model
         return $this->belongsTo(EmployeeStatus::class);
     }
 
-    public function department(): HasOneThrough
+    public function department(): BelongsTo
     {
-        return $this->hasOneThrough(
-            Department::class,
-            JobPosition::class,
-            'id',
-            'id',
-            'job_position_id',
-            'department_id'
-        );
+        return $this->belongsTo(Department::class);
     }
 
     public function getActivityLogOptions(): LogOptions
