@@ -1,5 +1,5 @@
 1380100000,City of Caloocan,City
-1380200000,City of Las Piñas,City
+1380200000,City of Las PiÃ±as,City
 1380300000,City of Makati,City
 1380400000,City of Malabon,City
 1380500000,City of Mandaluyong,City
@@ -21,7 +21,7 @@
 1380700000,City of Marikina,City
 1380800000,City of Muntinlupa,City
 1380900000,City of Navotas,City
-1381000000,City of Parañaque,City
+1381000000,City of ParaÃ±aque,City
 1381100000,Pasay City,City
 1381200000,City of Pasig,City
 1381300000,Quezon City,City
@@ -45,7 +45,7 @@
 1400114000,Luba,Mun
 1400115000,Malibcong,Mun
 1400116000,Manabo,Mun
-1400117000,Peñarrubia,Mun
+1400117000,PeÃ±arrubia,Mun
 1400118000,Pidigan,Mun
 1400119000,Pilar,Mun
 1400120000,Sallapadan,Mun
@@ -255,14 +255,14 @@
 0201516000,Lal-Lo,Mun
 0201517000,Lasam,Mun
 0201518000,Pamplona,Mun
-0201519000,Peñablanca,Mun
+0201519000,PeÃ±ablanca,Mun
 0201520000,Piat,Mun
 0201521000,Rizal,Mun
 0201522000,Sanchez-Mira,Mun
 0201523000,Santa Ana,Mun
 0201524000,Santa Praxedes,Mun
 0201525000,Santa Teresita,Mun
-0201526000,Santo Niño,Mun
+0201526000,Santo NiÃ±o,Mun
 0201527000,Solana,Mun
 0201528000,Tuao,Mun
 0201529000,Tuguegarao City ,City
@@ -359,7 +359,7 @@
 0301421000,San Miguel,Mun
 0301422000,San Rafael,Mun
 0301423000,Santa Maria,Mun
-0301424000,Doña Remedios Trinidad,Mun
+0301424000,DoÃ±a Remedios Trinidad,Mun
 0304901000,Aliaga,Mun
 0304902000,Bongabon,Mun
 0304903000,City of Cabanatuan,City
@@ -376,11 +376,11 @@
 0304914000,Licab,Mun
 0304915000,Llanera,Mun
 0304916000,Lupao,Mun
-0304917000,Science City of Muñoz,City
+0304917000,Science City of MuÃ±oz,City
 0304918000,Nampicuan,Mun
 0304919000,City of Palayan ,City
 0304920000,Pantabangan,Mun
-0304921000,Peñaranda,Mun
+0304921000,PeÃ±aranda,Mun
 0304922000,Quezon,Mun
 0304923000,Rizal,Mun
 0304924000,San Antonio,Mun
@@ -493,7 +493,7 @@
 0402103000,City of Bacoor,City
 0402104000,City of Carmona,City
 0402105000,City of Cavite,City
-0402106000,City of Dasmariñas,City
+0402106000,City of DasmariÃ±as,City
 0402107000,General Emilio Aguinaldo,Mun
 0402108000,City of General Trias,City
 0402109000,City of Imus,City
@@ -513,7 +513,7 @@
 0402123000,Gen. Mariano Alvarez,Mun
 0403401000,Alaminos,Mun
 0403402000,Bay,Mun
-0403403000,City of Biñan,City
+0403403000,City of BiÃ±an,City
 0403404000,City of Cabuyao,City
 0403405000,City of Calamba,City
 0403406000,Calauan,Mun
@@ -521,7 +521,7 @@
 0403408000,Famy,Mun
 0403409000,Kalayaan,Mun
 0403410000,Liliw,Mun
-0403411000,Los Baños,Mun
+0403411000,Los BaÃ±os,Mun
 0403412000,Luisiana,Mun
 0403413000,Lumban,Mun
 0403414000,Mabitac,Mun
@@ -650,7 +650,7 @@
 1705321000,Kalayaan,Mun
 1705322000,Culion,Mun
 1705323000,Rizal,Mun
-1705324000,Sofronio Española,Mun
+1705324000,Sofronio EspaÃ±ola,Mun
 1705901000,Alcantara,Mun
 1705902000,Banton,Mun
 1705903000,Cajidiocan,Mun
@@ -729,7 +729,7 @@
 0501728000,Pili ,Mun
 0501729000,Presentacion,Mun
 0501730000,Ragay,Mun
-0501731000,Sagñay,Mun
+0501731000,SagÃ±ay,Mun
 0501732000,San Fernando,Mun
 0501733000,San Jose,Mun
 0501734000,Sipocot,Mun
@@ -850,7 +850,7 @@
 0603014000,Carles,Mun
 0603015000,Concepcion,Mun
 0603016000,Dingle,Mun
-0603017000,Dueñas,Mun
+0603017000,DueÃ±as,Mun
 0603018000,Dumangas,Mun
 0603019000,Estancia,Mun
 0603020000,Guimbal,Mun
@@ -1154,7 +1154,7 @@
 0806015000,San Sebastian,Mun
 0806016000,Santa Margarita,Mun
 0806017000,Santa Rita,Mun
-0806018000,Santo Niño,Mun
+0806018000,Santo NiÃ±o,Mun
 0806019000,Talalora,Mun
 0806020000,Tarangnan,Mun
 0806021000,Villareal,Mun
@@ -1199,12 +1199,12 @@
 0907206000,Liloy,Mun
 0907207000,Manukan,Mun
 0907208000,Mutia,Mun
-0907209000,Piñan,Mun
+0907209000,PiÃ±an,Mun
 0907210000,Polanco,Mun
 0907211000,Pres. Manuel A. Roxas,Mun
 0907212000,Rizal,Mun
 0907213000,Salug,Mun
-0907214000,Sergio Osmeña Sr.,Mun
+0907214000,Sergio OsmeÃ±a Sr.,Mun
 0907215000,Siayan,Mun
 0907216000,Sibuco,Mun
 0907217000,Sibutad,Mun
@@ -1432,7 +1432,7 @@
 1206315000,Tantangan,Mun
 1206316000,T'Boli,Mun
 1206317000,Tupi,Mun
-1206318000,Santo Niño,Mun
+1206318000,Santo NiÃ±o,Mun
 1206319000,Lake Sebu,Mun
 1206501000,Bagumbayan,Mun
 1206502000,Columbio,Mun

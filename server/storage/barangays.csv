@@ -214,7 +214,7 @@
 1380300001,Bangkal,Bgy
 1380300002,Bel-Air,Bgy
 1380300005,Carmona,Bgy
-1380300006,Dasmariñas,Bgy
+1380300006,DasmariÃ±as,Bgy
 1380300008,Forbes Park,Bgy
 1380300009,Guadalupe Nuevo,Bgy
 1380300010,Guadalupe Viejo,Bgy
@@ -251,7 +251,7 @@
 1380400015,Potrero,Bgy
 1380400016,San Agustin,Bgy
 1380400017,Santolan,Bgy
-1380400018,Tañong ,Bgy
+1380400018,TaÃ±ong ,Bgy
 1380400019,Tinajeros,Bgy
 1380400020,Tonsuya,Bgy
 1380400021,Tugatog,Bgy
@@ -273,8 +273,8 @@
 1380500016,Malamig,Bgy
 1380500017,Mauway,Bgy
 1380500018,Namayan,Bgy
-1380500019,New Zañiga,Bgy
-1380500020,Old Zañiga,Bgy
+1380500019,New ZaÃ±iga,Bgy
+1380500020,Old ZaÃ±iga,Bgy
 1380500021,Pag-asa,Bgy
 1380500022,Plainview,Bgy
 1380500023,Pleasant Hills,Bgy
@@ -1182,14 +1182,14 @@
 1380700001,Barangka,Bgy
 1380700002,Calumpang,Bgy
 1380700003,Concepcion Uno,Bgy
-1380700004,Jesus De La Peña,Bgy
+1380700004,Jesus De La PeÃ±a,Bgy
 1380700005,Malanday,Bgy
 1380700006,Nangka,Bgy
 1380700007,Parang,Bgy
 1380700008,San Roque,Bgy
 1380700009,Santa Elena ,Bgy
-1380700010,Santo Niño,Bgy
-1380700011,Tañong,Bgy
+1380700010,Santo NiÃ±o,Bgy
+1380700011,TaÃ±ong,Bgy
 1380700012,Concepcion Dos,Bgy
 1380700013,Marikina Heights,Bgy
 1380700014,Industrial Valley,Bgy
@@ -1226,7 +1226,7 @@
 1381000002,Don Galo,Bgy
 1381000003,La Huerta,Bgy
 1381000004,San Dionisio,Bgy
-1381000005,Santo Niño,Bgy
+1381000005,Santo NiÃ±o,Bgy
 1381000006,Tambo,Bgy
 1381000007,B. F. Homes,Bgy
 1381000008,Don Bosco,Bgy
@@ -1499,8 +1499,8 @@
 1381300028,Damayang Lagi,Bgy
 1381300029,Del Monte,Bgy
 1381300030,Dioquino Zobel,Bgy
-1381300031,Doña Imelda,Bgy
-1381300032,Doña Josefa,Bgy
+1381300031,DoÃ±a Imelda,Bgy
+1381300032,DoÃ±a Josefa,Bgy
 1381300033,Don Manuel,Bgy
 1381300034,Duyan-duyan,Bgy
 1381300035,E. Rodriguez,Bgy
@@ -1577,7 +1577,7 @@
 1381300106,Santa Monica,Bgy
 1381300107,Santa Teresita,Bgy
 1381300108,Santo Cristo,Bgy
-1381300109,Santo Niño,Bgy
+1381300109,Santo NiÃ±o,Bgy
 1381300110,Santol,Bgy
 1381300111,Sauyo,Bgy
 1381300112,Sienna,Bgy
@@ -1615,14 +1615,14 @@
 1381400002,Balong-Bato,Bgy
 1381400003,Batis,Bgy
 1381400004,Corazon De Jesus,Bgy
-1381400005,Ermitaño,Bgy
+1381400005,ErmitaÃ±o,Bgy
 1381400006,Halo-halo,Bgy
 1381400007,Isabelita,Bgy
 1381400008,Kabayanan,Bgy
 1381400009,Little Baguio,Bgy
 1381400010,Maytunas,Bgy
 1381400011,Onse,Bgy
-1381400012,Pasadeña,Bgy
+1381400012,PasadeÃ±a,Bgy
 1381400013,Pedro Cruz,Bgy
 1381400014,Progreso,Bgy
 1381400015,Rivera,Bgy
@@ -1715,7 +1715,7 @@
 1381701010,Tabacalera,Bgy
 1400101001,Agtangao,Bgy
 1400101002,Angad,Bgy
-1400101003,Bañacao,Bgy
+1400101003,BaÃ±acao,Bgy
 1400101004,Bangbangar,Bgy
 1400101005,Cabuloan,Bgy
 1400101006,Calaba,Bgy
@@ -2741,7 +2741,7 @@
 1408106021,Upper Maton,Bgy
 1408106022,Amado,Bgy
 1408106023,Aurora,Bgy
-1408106024,Doña Loreta,Bgy
+1408106024,DoÃ±a Loreta,Bgy
 1408106025,Emilia,Bgy
 1408106026,Imelda,Bgy
 1408106027,Lt. Balag,Bgy
@@ -3217,7 +3217,7 @@
 0102814007,Garnaden,Bgy
 0102814008,Naguillan,Bgy
 0102814009,Poblacion,Bgy
-0102814010,Santo Niño,Bgy
+0102814010,Santo NiÃ±o,Bgy
 0102814011,Uguis,Bgy
 0102815001,Aggasi,Bgy
 0102815003,Baduang,Bgy
@@ -4113,7 +4113,7 @@
 0102930033,Quimmallogong,Bgy
 0102930034,Rang-ay ,Bgy
 0102930035,Ricudo,Bgy
-0102930036,Sabañgan,Bgy
+0102930036,SabaÃ±gan,Bgy
 0102930037,Sallacapo,Bgy
 0102930038,Santa Cruz,Bgy
 0102930039,Sapriana,Bgy
@@ -4164,7 +4164,7 @@
 0102933026,Libtong,Bgy
 0102933027,Lubnac,Bgy
 0102933028,Magsaysay ,Bgy
-0102933029,Malacañang,Bgy
+0102933029,MalacaÃ±ang,Bgy
 0102933030,Pacac,Bgy
 0102933031,Pallogan,Bgy
 0102933032,Pudoc East,Bgy
@@ -4818,7 +4818,7 @@
 0105502007,Bocboc West,Bgy
 0105502008,Buer,Bgy
 0105502009,Calsib,Bgy
-0105502010,Niñoy,Bgy
+0105502010,NiÃ±oy,Bgy
 0105502011,Poblacion,Bgy
 0105502012,Pogomboa,Bgy
 0105502013,Pogonsili,Bgy
@@ -5101,7 +5101,7 @@
 0105512020,Sta. Catalina,Bgy
 0105512021,Sta. Maria Norte,Bgy
 0105512022,Santiago,Bgy
-0105512023,Sto. Niño,Bgy
+0105512023,Sto. NiÃ±o,Bgy
 0105512024,Sumabnit,Bgy
 0105512025,Tabuyoc,Bgy
 0105512026,Vacante,Bgy
@@ -5204,7 +5204,7 @@
 0105516011,San Pascual,Bgy
 0105516012,San Vicente,Bgy
 0105516013,Sapa Grande,Bgy
-0105516014,Sapa Pequeña,Bgy
+0105516014,Sapa PequeÃ±a,Bgy
 0105516015,Tambacan,Bgy
 0105517001,Ambonao,Bgy
 0105517002,Ambuetel,Bgy
@@ -5271,7 +5271,7 @@
 0105519008,Magsaysay,Bgy
 0105519010,Malacapas,Bgy
 0105519011,Malimpin,Bgy
-0105519012,Osmeña,Bgy
+0105519012,OsmeÃ±a,Bgy
 0105519013,Petal,Bgy
 0105519014,Poblacion,Bgy
 0105519015,San Vicente,Bgy
@@ -5537,7 +5537,7 @@
 0105527057,Olo Cacamposan,Bgy
 0105527058,Olo Cafabrosan,Bgy
 0105527059,Olo Cagarlitan,Bgy
-0105527060,Osmeña ,Bgy
+0105527060,OsmeÃ±a ,Bgy
 0105527061,Pacalat,Bgy
 0105527062,Pampano,Bgy
 0105527063,Parian,Bgy
@@ -5603,7 +5603,7 @@
 0105530008,Bobonan,Bgy
 0105530009,Buneg,Bgy
 0105530010,Cablong,Bgy
-0105530011,Castaño,Bgy
+0105530011,CastaÃ±o,Bgy
 0105530012,Dilan,Bgy
 0105530013,Don Benito,Bgy
 0105530014,Haway,Bgy
@@ -5709,7 +5709,7 @@
 0105532045,Mabalbalino,Bgy
 0105532046,Mabini ,Bgy
 0105532047,Magtaking,Bgy
-0105532048,Malacañang,Bgy
+0105532048,MalacaÃ±ang,Bgy
 0105532050,Maliwara,Bgy
 0105532051,Mamarlao,Bgy
 0105532052,Manzon,Bgy
@@ -5933,7 +5933,7 @@
 0105540007,San Jose,Bgy
 0105540008,San Marcos,Bgy
 0105540009,Santo Domingo,Bgy
-0105540010,Santo Niño,Bgy
+0105540010,Santo NiÃ±o,Bgy
 0105541001,Agat,Bgy
 0105541002,Alibeng,Bgy
 0105541003,Amagbagan,Bgy
@@ -6173,7 +6173,7 @@
 0200903002,Salagao,Bgy
 0200903003,San Vicente,Bgy
 0200903004,Tuhel ,Bgy
-0200904001,Hañib,Bgy
+0200904001,HaÃ±ib,Bgy
 0200904002,Kaumbakan,Bgy
 0200904003,Panatayan,Bgy
 0200904004,Uvoy ,Bgy
@@ -6301,7 +6301,7 @@
 0201504040,Nangalasauan,Bgy
 0201504041,Nanuccauan,Bgy
 0201504042,Pacac-Grande,Bgy
-0201504043,Pacac-Pequeño,Bgy
+0201504043,Pacac-PequeÃ±o,Bgy
 0201504044,Palacu,Bgy
 0201504045,Palayag,Bgy
 0201504046,Tana,Bgy
@@ -6360,7 +6360,7 @@
 0201506011,Barsat East,Bgy
 0201506012,Barsat West,Bgy
 0201506013,Bitag Grande,Bgy
-0201506014,Bitag Pequeño,Bgy
+0201506014,Bitag PequeÃ±o,Bgy
 0201506015,Bunugan,Bgy
 0201506016,Canagatan,Bgy
 0201506017,Carupian,Bgy
@@ -6516,7 +6516,7 @@
 0201511029,Union,Bgy
 0201511030,Bacsay Cataraoan Sur,Bgy
 0201511031,Cadcadir West,Bgy
-0201511032,Camalaggoan/D Leaño,Bgy
+0201511032,Camalaggoan/D LeaÃ±o,Bgy
 0201511033,Centro III,Bgy
 0201511034,Centro V,Bgy
 0201511035,Centro VIII,Bgy
@@ -6524,7 +6524,7 @@
 0201511037,San Antonio,Bgy
 0201511038,San Isidro,Bgy
 0201511039,San Vicente,Bgy
-0201511040,Sto. Niño,Bgy
+0201511040,Sto. NiÃ±o,Bgy
 0201511041,Taggat Sur,Bgy
 0201512001,Alibago,Bgy
 0201512002,Barangay I ,Bgy
@@ -6583,8 +6583,8 @@
 0201513039,Newagac,Bgy
 0201513040,Palagao Norte,Bgy
 0201513041,Palagao Sur,Bgy
-0201513042,Piña Este,Bgy
-0201513043,Piña Weste,Bgy
+0201513042,PiÃ±a Este,Bgy
+0201513043,PiÃ±a Weste,Bgy
 0201513044,San Vicente,Bgy
 0201513045,Santa Maria,Bgy
 0201513046,Sidem,Bgy
@@ -7094,7 +7094,7 @@
 0203102051,San Marcelo,Bgy
 0203102052,San Roque,Bgy
 0203102053,San Vicente,Bgy
-0203102054,Santo Niño,Bgy
+0203102054,Santo NiÃ±o,Bgy
 0203102055,Saranay,Bgy
 0203102056,Sinabbaran,Bgy
 0203102058,Victory,Bgy
@@ -7469,7 +7469,7 @@
 0203114064,Namnama,Bgy
 0203114065,Nanaguan,Bgy
 0203114066,Cabeseria 7,Bgy
-0203114067,Osmeña,Bgy
+0203114067,OsmeÃ±a,Bgy
 0203114068,Paliueg,Bgy
 0203114070,Pasa,Bgy
 0203114071,Pilar,Bgy
@@ -7556,7 +7556,7 @@
 0203116008,Lalog 1,Bgy
 0203116009,Lalog 2,Bgy
 0203116010,Luyao,Bgy
-0203116011,Macañao,Bgy
+0203116011,MacaÃ±ao,Bgy
 0203116012,Macugay,Bgy
 0203116013,Mambabanga,Bgy
 0203116014,Pulay,Bgy
@@ -7722,16 +7722,16 @@
 0203125001,Banquero,Bgy
 0203125002,Binarsang,Bgy
 0203125003,Cutog Grande,Bgy
-0203125004,Cutog Pequeño,Bgy
+0203125004,Cutog PequeÃ±o,Bgy
 0203125005,Dangan,Bgy
 0203125006,District I ,Bgy
 0203125007,District II ,Bgy
 0203125008,Labinab Grande ,Bgy
-0203125009,Labinab Pequeño ,Bgy
+0203125009,Labinab PequeÃ±o ,Bgy
 0203125010,Mallalatang Grande,Bgy
 0203125011,Mallalatang Tunggui,Bgy
 0203125012,Nappaccu Grande,Bgy
-0203125013,Nappaccu Pequeño,Bgy
+0203125013,Nappaccu PequeÃ±o,Bgy
 0203125014,Sallucong,Bgy
 0203125015,Santor,Bgy
 0203125016,Sinippil,Bgy
@@ -7761,14 +7761,14 @@
 0203126025,Sotero Nuesa,Bgy
 0203126026,Villa Concepcion,Bgy
 0203126028,Matusalem,Bgy
-0203126029,Muñoz East,Bgy
-0203126030,Muñoz West,Bgy
-0203126031,Doña Concha,Bgy
+0203126029,MuÃ±oz East,Bgy
+0203126030,MuÃ±oz West,Bgy
+0203126031,DoÃ±a Concha,Bgy
 0203126032,San Luis,Bgy
 0203127001,Bautista,Bgy
 0203127002,Calaocan,Bgy
 0203127003,Dabubu Grande,Bgy
-0203127004,Dabubu Pequeño,Bgy
+0203127004,Dabubu PequeÃ±o,Bgy
 0203127005,Dappig,Bgy
 0203127006,Laoag,Bgy
 0203127007,Mapalad,Bgy
@@ -7783,7 +7783,7 @@
 0203127016,Rang-ay,Bgy
 0203127017,Salay,Bgy
 0203127018,San Antonio,Bgy
-0203127019,Santo Niño,Bgy
+0203127019,Santo NiÃ±o,Bgy
 0203127020,Santos,Bgy
 0203127021,Sinaoangan Norte,Bgy
 0203127022,Sinaoangan Sur,Bgy
@@ -7882,7 +7882,7 @@
 0203131035,Ueg,Bgy
 0203131038,Zamora,Bgy
 0203131039,Balagan,Bgy
-0203132001,Bacarreña,Bgy
+0203132001,BacarreÃ±a,Bgy
 0203132002,Bagong Sikat,Bgy
 0203132003,Bella Luz,Bgy
 0203132004,Daramuangan Sur,Bgy
@@ -7891,7 +7891,7 @@
 0203132009,Malasin,Bgy
 0203132010,Mapuroc,Bgy
 0203132011,Marasat Grande,Bgy
-0203132012,Marasat Pequeño,Bgy
+0203132012,Marasat PequeÃ±o,Bgy
 0203132013,Old Centro I,Bgy
 0203132014,Old Centro II,Bgy
 0203132017,Barangay I ,Bgy
@@ -7997,12 +7997,12 @@
 0203136006,Barumbong,Bgy
 0203136008,Bubug,Bgy
 0203136009,Bolinao-Culalabo,Bgy
-0203136010,Cañogan Abajo Norte,Bgy
+0203136010,CaÃ±ogan Abajo Norte,Bgy
 0203136013,Calinaoan Centro,Bgy
 0203136015,Calinaoan Malasin,Bgy
 0203136016,Calinaoan Norte,Bgy
-0203136017,Cañogan Abajo Sur,Bgy
-0203136018,Cañogan Alto,Bgy
+0203136017,CaÃ±ogan Abajo Sur,Bgy
+0203136018,CaÃ±ogan Alto,Bgy
 0203136019,Centro,Bgy
 0203136020,Colunguan,Bgy
 0203136021,Malapagay,Bgy
@@ -8055,7 +8055,7 @@
 0203137044,San Vicente,Bgy
 0203137045,Santa,Bgy
 0203137046,Sta. Catalina,Bgy
-0203137047,Sto. Niño,Bgy
+0203137047,Sto. NiÃ±o,Bgy
 0203137048,Sinippil,Bgy
 0203137050,Sisim Abajo,Bgy
 0203137051,Sisim Alto,Bgy
@@ -8307,7 +8307,7 @@
 0205013005,Curifang,Bgy
 0205013006,Dadap,Bgy
 0205013007,Lactawan,Bgy
-0205013008,Osmeña,Bgy
+0205013008,OsmeÃ±a,Bgy
 0205013009,Poblacion North,Bgy
 0205013010,Poblacion South,Bgy
 0205013011,Quezon,Bgy
@@ -8374,7 +8374,7 @@
 0205702010,Villamor,Bgy
 0205702011,Zamora,Bgy
 0205702012,Villarose,Bgy
-0205702013,Villa Peña,Bgy
+0205702013,Villa PeÃ±a,Bgy
 0205702014,Dingasan,Bgy
 0205702015,Tucod,Bgy
 0205702016,Gomez,Bgy
@@ -8389,7 +8389,7 @@
 0205703008,Campamento,Bgy
 0205703009,Diego Silang,Bgy
 0205703010,"Don Mariano Perez, Sr.",Bgy
-0205703011,Doña Imelda,Bgy
+0205703011,DoÃ±a Imelda,Bgy
 0205703012,Dumanisi,Bgy
 0205703013,Gabriela Silang,Bgy
 0205703014,Gulac,Bgy
@@ -8433,7 +8433,7 @@
 0205704023,San Martin,Bgy
 0205704024,San Pedro,Bgy
 0205704025,San Salvador,Bgy
-0205704026,Santo Niño,Bgy
+0205704026,Santo NiÃ±o,Bgy
 0205704027,Santo Tomas,Bgy
 0205704028,Villa Gracia,Bgy
 0205704029,Villa Hermosa Sur,Bgy
@@ -8515,7 +8515,7 @@
 0300803023,Tuyo,Bgy
 0300803024,Bagong Silang,Bgy
 0300803025,Cupang North,Bgy
-0300803026,Doña Francisca,Bgy
+0300803026,DoÃ±a Francisca,Bgy
 0300803027,Lote,Bgy
 0300804002,Bangal,Bgy
 0300804003,Bonifacio ,Bgy
@@ -8550,7 +8550,7 @@
 0300804035,San Pablo,Bgy
 0300804036,San Ramon,Bgy
 0300804037,San Simon,Bgy
-0300804038,Santo Niño,Bgy
+0300804038,Santo NiÃ±o,Bgy
 0300804039,Sapang Balas,Bgy
 0300804040,Santa Isabel,Bgy
 0300804041,Torres Bugauen ,Bgy
@@ -8749,7 +8749,7 @@
 0301403018,San Roque,Bgy
 0301403019,Santa Barbara,Bgy
 0301403020,Santo Cristo,Bgy
-0301403021,Santo Niño,Bgy
+0301403021,Santo NiÃ±o,Bgy
 0301403022,Subic,Bgy
 0301403023,Sulivan,Bgy
 0301403024,Tangos,Bgy
@@ -8762,8 +8762,8 @@
 0301404002,Bagumbayan,Bgy
 0301404003,Bambang,Bgy
 0301404004,Batia,Bgy
-0301404005,Biñang 1st,Bgy
-0301404006,Biñang 2nd,Bgy
+0301404005,BiÃ±ang 1st,Bgy
+0301404006,BiÃ±ang 2nd,Bgy
 0301404007,Bolacan,Bgy
 0301404008,Bundukan,Bgy
 0301404009,Bunlo,Bgy
@@ -8830,7 +8830,7 @@
 0301407024,San Marcos,Bgy
 0301407025,San Miguel,Bgy
 0301407026,Santa Lucia,Bgy
-0301407027,Santo Niño,Bgy
+0301407027,Santo NiÃ±o,Bgy
 0301407028,Sapang Bayan,Bgy
 0301407029,Sergio Bayan,Bgy
 0301407030,Sucol,Bgy
@@ -8869,7 +8869,7 @@
 0301409020,Santa Cruz,Bgy
 0301409021,Santa Elena,Bgy
 0301409022,Santa Monica,Bgy
-0301409023,Santo Niño ,Bgy
+0301409023,Santo NiÃ±o ,Bgy
 0301409024,Santo Rosario,Bgy
 0301409025,Tampok,Bgy
 0301409026,Tibaguin,Bgy
@@ -8917,7 +8917,7 @@
 0301410046,Santiago,Bgy
 0301410047,Santisima Trinidad,Bgy
 0301410048,Santo Cristo,Bgy
-0301410049,Santo Niño ,Bgy
+0301410049,Santo NiÃ±o ,Bgy
 0301410050,Santo Rosario ,Bgy
 0301410051,Santor,Bgy
 0301410052,Sumapang Bata,Bgy
@@ -9012,7 +9012,7 @@
 0301415019,Siling Bata,Bgy
 0301415020,Siling Matanda,Bgy
 0301415021,Baka-bakahan,Bgy
-0301415022,Santo Niño,Bgy
+0301415022,Santo NiÃ±o,Bgy
 0301416001,Binakod,Bgy
 0301416002,Kapitangan,Bgy
 0301416003,Malumot,Bgy
@@ -9025,7 +9025,7 @@
 0301416012,San Roque,Bgy
 0301416013,San Vicente,Bgy
 0301416014,Santa Cruz,Bgy
-0301416015,Santo Niño,Bgy
+0301416015,Santo NiÃ±o,Bgy
 0301416016,Santo Rosario,Bgy
 0301417001,Agnaya,Bgy
 0301417002,Bagong Silang,Bgy
@@ -9043,7 +9043,7 @@
 0301417016,Rueda,Bgy
 0301417017,San Jose,Bgy
 0301417018,Santa Ines,Bgy
-0301417019,Santo Niño,Bgy
+0301417019,Santo NiÃ±o,Bgy
 0301417020,Sipat,Bgy
 0301417021,Tabang,Bgy
 0301418001,Balatong A,Bgy
@@ -9118,7 +9118,7 @@
 0301420015,Fatima I,Bgy
 0301420016,San Pedro,Bgy
 0301420017,San Rafael II,Bgy
-0301420018,Santo Niño I,Bgy
+0301420018,Santo NiÃ±o I,Bgy
 0301420019,Assumption,Bgy
 0301420020,Bagong Buhay II,Bgy
 0301420021,Bagong Buhay III,Bgy
@@ -9158,7 +9158,7 @@
 0301420055,Santa Cruz III,Bgy
 0301420056,Santa Cruz IV,Bgy
 0301420057,Santa Cruz V,Bgy
-0301420058,Santo Niño II,Bgy
+0301420058,Santo NiÃ±o II,Bgy
 0301420059,San Martin de Porres,Bgy
 0301420060,Muzon East,Bgy
 0301420061,Muzon South,Bgy
@@ -9420,7 +9420,7 @@
 0304903097,Magsaysay South,Bgy
 0304903098,Maria Theresa,Bgy
 0304903099,Sangitan East,Bgy
-0304903100,Santo Niño,Bgy
+0304903100,Santo NiÃ±o,Bgy
 0304904001,Bagong Buhay,Bgy
 0304904002,Bagong Sikat,Bgy
 0304904003,Bagong Silang,Bgy
@@ -9544,7 +9544,7 @@
 0304908014,Santa Cruz,Bgy
 0304908015,Santo Cristo Norte,Bgy
 0304908016,Santo Cristo Sur,Bgy
-0304908017,Santo Niño,Bgy
+0304908017,Santo NiÃ±o,Bgy
 0304908018,Makabaclay,Bgy
 0304908019,Balante,Bgy
 0304908020,Bungo,Bgy
@@ -9820,7 +9820,7 @@
 0304919013,Atate,Bgy
 0304919014,Caballero,Bgy
 0304919015,Caimito,Bgy
-0304919016,Doña Josefa,Bgy
+0304919016,DoÃ±a Josefa,Bgy
 0304919017,Imelda Valley,Bgy
 0304919018,Langka,Bgy
 0304919020,Santolan,Bgy
@@ -9841,7 +9841,7 @@
 0304920016,Villarica,Bgy
 0304920017,Fatima,Bgy
 0304921001,Callos,Bgy
-0304921003,Las Piñas,Bgy
+0304921003,Las PiÃ±as,Bgy
 0304921006,Poblacion I,Bgy
 0304921007,Poblacion II,Bgy
 0304921008,Poblacion III,Bgy
@@ -9851,7 +9851,7 @@
 0304921014,San Josef,Bgy
 0304921015,San Mariano,Bgy
 0304922001,Bertese,Bgy
-0304922004,Doña Lucia,Bgy
+0304922004,DoÃ±a Lucia,Bgy
 0304922005,Dulong Bayan,Bgy
 0304922006,Ilog Baliwag,Bgy
 0304922010,Barangay I ,Bgy
@@ -9943,12 +9943,12 @@
 0304926027,San Agustin,Bgy
 0304926028,San Juan,Bgy
 0304926029,San Mauricio,Bgy
-0304926030,Santo Niño 1st,Bgy
-0304926031,Santo Niño 2nd,Bgy
+0304926030,Santo NiÃ±o 1st,Bgy
+0304926031,Santo NiÃ±o 2nd,Bgy
 0304926032,Santo Tomas,Bgy
 0304926033,Sibut,Bgy
 0304926034,Sinipit Bubon,Bgy
-0304926035,Santo Niño 3rd,Bgy
+0304926035,Santo NiÃ±o 3rd,Bgy
 0304926036,Tabulac,Bgy
 0304926037,Tayabo,Bgy
 0304926038,Tondod,Bgy
@@ -9973,7 +9973,7 @@
 0304928001,Cojuangco ,Bgy
 0304928002,La Fuente,Bgy
 0304928003,Liwayway,Bgy
-0304928004,Malacañang,Bgy
+0304928004,MalacaÃ±ang,Bgy
 0304928005,Maliolio,Bgy
 0304928007,Mapalad,Bgy
 0304928010,Rizal ,Bgy
@@ -10092,7 +10092,7 @@
 0304931011,Mayamot I,Bgy
 0304931012,Mayamot II,Bgy
 0304931013,Nangabulan,Bgy
-0304931014,Osmeña ,Bgy
+0304931014,OsmeÃ±a ,Bgy
 0304931015,Pangit,Bgy
 0304931016,Patola,Bgy
 0304931017,Quezon ,Bgy
@@ -10165,7 +10165,7 @@
 0305403029,San Roque Bitas,Bgy
 0305403030,Cupang,Bgy
 0305403031,Matamo,Bgy
-0305403032,Santo Niño Tabuan,Bgy
+0305403032,Santo NiÃ±o Tabuan,Bgy
 0305403034,Suclayin,Bgy
 0305403035,Telapayong,Bgy
 0305403036,Kaledian,Bgy
@@ -10222,7 +10222,7 @@
 0305405034,Tenejero,Bgy
 0305405035,Vizal San Pablo,Bgy
 0305405036,Vizal Santo Cristo,Bgy
-0305405037,Vizal Santo Niño,Bgy
+0305405037,Vizal Santo NiÃ±o,Bgy
 0305406001,Anon,Bgy
 0305406002,Apalit,Bgy
 0305406003,Basa Air Base,Bgy
@@ -10285,7 +10285,7 @@
 0305407029,Santa Ines,Bgy
 0305407030,Santa Ursula,Bgy
 0305407031,Santo Cristo,Bgy
-0305407033,Santo Niño ,Bgy
+0305407033,Santo NiÃ±o ,Bgy
 0305407034,Ascomo,Bgy
 0305408001,Balantacan,Bgy
 0305408002,Bancal Sinubli,Bgy
@@ -10328,7 +10328,7 @@
 0305408041,Santa Teresa 2nd,Bgy
 0305408042,Santiago,Bgy
 0305408043,Santo Domingo,Bgy
-0305408044,Santo Niño,Bgy
+0305408044,Santo NiÃ±o,Bgy
 0305408045,Santo Tomas ,Bgy
 0305408046,Santo Cristo,Bgy
 0305409001,Atlu-Bola,Bgy
@@ -10378,7 +10378,7 @@
 0305410018,Sta. Lutgarda,Bgy
 0305410019,Sta. Maria,Bgy
 0305410020,Sta. Rita ,Bgy
-0305410021,Sto. Niño,Bgy
+0305410021,Sto. NiÃ±o,Bgy
 0305410022,Sto. Rosario ,Bgy
 0305410023,Saplad David,Bgy
 0305410024,Tacasan,Bgy
@@ -10405,7 +10405,7 @@
 0305411020,Santa Cruz ,Bgy
 0305411021,Santa Lucia,Bgy
 0305411022,Santa Maria,Bgy
-0305411023,Santo Niño,Bgy
+0305411023,Santo NiÃ±o,Bgy
 0305411024,Santo Rosario,Bgy
 0305411025,Bucanan,Bgy
 0305411026,Turu,Bgy
@@ -10435,7 +10435,7 @@
 0305412026,Sta. Lucia Anac ,Bgy
 0305412027,Sapang Kawayan,Bgy
 0305412028,Sua,Bgy
-0305412029,Sto. Niño,Bgy
+0305412029,Sto. NiÃ±o,Bgy
 0305413001,Acli,Bgy
 0305413002,Anao,Bgy
 0305413003,Balas,Bgy
@@ -10554,7 +10554,7 @@
 0305416031,San Pedro,Bgy
 0305416032,Santa Lucia,Bgy
 0305416033,Santa Teresita,Bgy
-0305416034,Santo Niño,Bgy
+0305416034,Santo NiÃ±o,Bgy
 0305416036,Sindalan,Bgy
 0305416037,Telabastagan,Bgy
 0305416038,Pulung Bulu,Bgy
@@ -10572,7 +10572,7 @@
 0305417013,Santa Lucia,Bgy
 0305417014,Santa Monica,Bgy
 0305417015,Santa Rita,Bgy
-0305417016,Santo Niño,Bgy
+0305417016,Santo NiÃ±o,Bgy
 0305417017,Santo Rosario,Bgy
 0305417018,Santo Tomas,Bgy
 0305418001,Concepcion,Bgy
@@ -10588,7 +10588,7 @@
 0305418011,San Pedro,Bgy
 0305418012,Santa Cruz,Bgy
 0305418013,Santa Monica,Bgy
-0305418014,Santo Niño,Bgy
+0305418014,Santo NiÃ±o,Bgy
 0305419001,San Agustin,Bgy
 0305419002,San Bartolome,Bgy
 0305419003,San Isidro,Bgy
@@ -10664,7 +10664,7 @@
 0306902012,San Rafael,Bgy
 0306902013,San Roque,Bgy
 0306902014,San Vicente,Bgy
-0306902015,Santo Niño,Bgy
+0306902015,Santo NiÃ±o,Bgy
 0306903001,Anoling 1st,Bgy
 0306903002,Anoling 2nd,Bgy
 0306903003,Anoling 3rd,Bgy
@@ -10776,7 +10776,7 @@
 0306905034,San Martin,Bgy
 0306905035,San Nicolas ,Bgy
 0306905036,San Nicolas Balas,Bgy
-0306905037,Santo Niño,Bgy
+0306905037,Santo NiÃ±o,Bgy
 0306905040,Santa Cruz,Bgy
 0306905041,Santa Maria,Bgy
 0306905042,Santa Monica,Bgy
@@ -11089,7 +11089,7 @@
 0306916077,Santa Maria,Bgy
 0306916078,Santo Cristo,Bgy
 0306916079,Santo Domingo,Bgy
-0306916080,Santo Niño,Bgy
+0306916080,Santo NiÃ±o,Bgy
 0306916081,Sapang Maragul,Bgy
 0306916082,Sapang Tagalog,Bgy
 0306916083,Sepung Calzada,Bgy
@@ -11193,7 +11193,7 @@
 0307102020,San Juan ,Bgy
 0307102021,San Rafael,Bgy
 0307102023,Santa Rita,Bgy
-0307102024,Santo Niño,Bgy
+0307102024,Santo NiÃ±o,Bgy
 0307102025,Tondo,Bgy
 0307102026,Felmida-Diaz,Bgy
 0307103001,Babancal,Bgy
@@ -11269,7 +11269,7 @@
 0307108015,West Poblacion,Bgy
 0307108016,Salaza,Bgy
 0307108017,San Juan,Bgy
-0307108018,Sto. Niño,Bgy
+0307108018,Sto. NiÃ±o,Bgy
 0307108019,Sto. Tomas,Bgy
 0307108020,Tition,Bgy
 0307109001,Angeles,Bgy
@@ -11289,13 +11289,13 @@
 0307110001,Amagna ,Bgy
 0307110002,Apostol ,Bgy
 0307110003,Balincaguing,Bgy
-0307110004,Farañal ,Bgy
+0307110004,FaraÃ±al ,Bgy
 0307110005,Feria ,Bgy
 0307110006,Maloma,Bgy
 0307110007,Manglicmot ,Bgy
 0307110008,Rosete ,Bgy
 0307110009,San Rafael,Bgy
-0307110011,Sto. Niño,Bgy
+0307110011,Sto. NiÃ±o,Bgy
 0307110012,Sindol,Bgy
 0307111001,Aglao,Bgy
 0307111002,Buhawen,Bgy
@@ -11535,7 +11535,7 @@
 0330100010,Lourdes North West,Bgy
 0330100011,Lourdes Sur,Bgy
 0330100012,Lourdes Sur East,Bgy
-0330100013,Malabañas,Bgy
+0330100013,MalabaÃ±as,Bgy
 0330100014,Margot,Bgy
 0330100015,Mining,Bgy
 0330100017,Pampang,Bgy
@@ -11763,7 +11763,7 @@
 0401005096,Santa Rita Aplaya,Bgy
 0401005097,Santa Rita Karsada,Bgy
 0401005099,Santo Domingo,Bgy
-0401005100,Santo Niño,Bgy
+0401005100,Santo NiÃ±o,Bgy
 0401005101,Simlong,Bgy
 0401005102,Sirang Lupa,Bgy
 0401005103,Sorosoro Ibaba,Bgy
@@ -11928,7 +11928,7 @@
 0401010020,Salaban I,Bgy
 0401010022,San Agustin,Bgy
 0401010023,Sandalan,Bgy
-0401010024,Santo Niño,Bgy
+0401010024,Santo NiÃ±o,Bgy
 0401010025,Talaibon,Bgy
 0401010027,Tulay Na Patpat,Bgy
 0401010028,Salaban II,Bgy
@@ -12080,7 +12080,7 @@
 0401014063,San Salvador,Bgy
 0401014064,Sapac,Bgy
 0401014066,Sico,Bgy
-0401014068,Santo Niño,Bgy
+0401014068,Santo NiÃ±o,Bgy
 0401014069,Santo Toribio,Bgy
 0401014070,Talisay,Bgy
 0401014071,Tambo,Bgy
@@ -12145,7 +12145,7 @@
 0401016028,San Teodoro,Bgy
 0401016029,Santa Ana,Bgy
 0401016030,Santa Mesa,Bgy
-0401016031,Santo Niño,Bgy
+0401016031,Santo NiÃ±o,Bgy
 0401016032,Santo Tomas,Bgy
 0401016033,Solo,Bgy
 0401016034,Talaga Proper,Bgy
@@ -12402,7 +12402,7 @@
 0401025011,Munlawin,Bgy
 0401025012,Pansipit,Bgy
 0401025013,Poblacion,Bgy
-0401025014,Santo Niño,Bgy
+0401025014,Santo NiÃ±o,Bgy
 0401025015,Sinturisan,Bgy
 0401025016,Tagudtod,Bgy
 0401025017,Talang,Bgy
@@ -12436,7 +12436,7 @@
 0401026026,San Mariano,Bgy
 0401026027,San Mateo,Bgy
 0401026028,Santa Elena,Bgy
-0401026029,Santo Niño,Bgy
+0401026029,Santo NiÃ±o,Bgy
 0401027001,Antipolo,Bgy
 0401027002,Bihis,Bgy
 0401027003,Burol,Bgy
@@ -12572,7 +12572,7 @@
 0401031025,Malaking Pulo,Bgy
 0401031026,Maria Paz,Bgy
 0401031027,Maugat,Bgy
-0401031028,Montaña,Bgy
+0401031028,MontaÃ±a,Bgy
 0401031029,Natatas,Bgy
 0401031030,Pantay Matanda,Bgy
 0401031031,Pantay Bata,Bgy
@@ -12607,13 +12607,13 @@
 0401032010,Mataas Na Lupa,Bgy
 0401032011,Pag-Asa,Bgy
 0401032012,Panghayaan,Bgy
-0401032013,Piña,Bgy
+0401032013,PiÃ±a,Bgy
 0401032014,Pinagbayanan,Bgy
 0401032015,Poblacion East,Bgy
 0401032016,Poblacion West,Bgy
 0401032017,San Isidro,Bgy
 0401032018,San Marcelino,Bgy
-0401032019,Santo Niño,Bgy
+0401032019,Santo NiÃ±o,Bgy
 0401032020,Tilambo,Bgy
 0401033001,Corona,Bgy
 0401033003,Gamao,Bgy
@@ -12894,7 +12894,7 @@
 0402106043,Santa Lucia,Bgy
 0402106044,Santa Maria,Bgy
 0402106045,Santo Cristo,Bgy
-0402106046,Santo Niño I,Bgy
+0402106046,Santo NiÃ±o I,Bgy
 0402106047,Burol I,Bgy
 0402106048,Burol II,Bgy
 0402106049,Burol III,Bgy
@@ -12926,14 +12926,14 @@
 0402106075,San Nicolas II,Bgy
 0402106076,Santa Cristina II,Bgy
 0402106077,Santa Cruz II,Bgy
-0402106078,Santo Niño II,Bgy
+0402106078,Santo NiÃ±o II,Bgy
 0402106079,Zone I-B,Bgy
 0402106080,H-2,Bgy
 0402106081,Victoria Reyes,Bgy
 0402107001,A. Dalusag,Bgy
 0402107002,Batas Dao,Bgy
-0402107003,Castaños Cerca,Bgy
-0402107004,Castaños Lejos,Bgy
+0402107003,CastaÃ±os Cerca,Bgy
+0402107004,CastaÃ±os Lejos,Bgy
 0402107005,Kabulusan,Bgy
 0402107006,Kaymisas,Bgy
 0402107007,Kaypaaba,Bgy
@@ -13485,7 +13485,7 @@
 0403402015,Tranca,Bgy
 0403402016,San Agustin ,Bgy
 0403402017,San Nicolas ,Bgy
-0403403001,Biñan,Bgy
+0403403001,BiÃ±an,Bgy
 0403403002,Bungahan,Bgy
 0403403003,Santo Tomas,Bgy
 0403403004,Canlalay,Bgy
@@ -13500,7 +13500,7 @@
 0403403014,Mampalasan,Bgy
 0403403015,Platero,Bgy
 0403403016,Poblacion,Bgy
-0403403018,Santo Niño,Bgy
+0403403018,Santo NiÃ±o,Bgy
 0403403019,San Antonio,Bgy
 0403403020,San Jose,Bgy
 0403403021,San Vicente,Bgy
@@ -13724,7 +13724,7 @@
 0403413012,Salac ,Bgy
 0403413013,Segunda Parang ,Bgy
 0403413014,Segunda Pulo ,Bgy
-0403413015,Santo Niño ,Bgy
+0403413015,Santo NiÃ±o ,Bgy
 0403413016,Wawa,Bgy
 0403414001,Amuyong,Bgy
 0403414002,Lambac ,Bgy
@@ -13867,7 +13867,7 @@
 0403418008,Maytoong ,Bgy
 0403418009,Quinale ,Bgy
 0403419001,Anibong,Bgy
-0403419002,Biñan,Bgy
+0403419002,BiÃ±an,Bgy
 0403419003,Buboy,Bgy
 0403419004,Cabanbanan,Bgy
 0403419005,Calusiche,Bgy
@@ -13882,7 +13882,7 @@
 0403419014,Sabang,Bgy
 0403419015,Sampaloc,Bgy
 0403419016,San Isidro,Bgy
-0403420001,Baño ,Bgy
+0403420001,BaÃ±o ,Bgy
 0403420002,Banilan,Bgy
 0403420003,Burgos ,Bgy
 0403420004,Casa Real,Bgy
@@ -14005,7 +14005,7 @@
 0403424075,Santisimo Rosario,Bgy
 0403424076,Santo Angel,Bgy
 0403424077,Santo Cristo,Bgy
-0403424078,Santo Niño,Bgy
+0403424078,Santo NiÃ±o,Bgy
 0403424079,Soledad,Bgy
 0403424080,Atisan,Bgy
 0403424081,Santa Elena,Bgy
@@ -14025,7 +14025,7 @@
 0403425014,San Antonio,Bgy
 0403425015,San Roque,Bgy
 0403425016,San Vicente,Bgy
-0403425017,Santo Niño,Bgy
+0403425017,Santo NiÃ±o,Bgy
 0403425018,United Bayanihan,Bgy
 0403425019,United Better Living,Bgy
 0403425020,Sampaguita Village,Bgy
@@ -14283,7 +14283,7 @@
 0405607022,Buli,Bgy
 0405607023,Dapdap,Bgy
 0405607024,Dominlog,Bgy
-0405607026,Doña Aurora,Bgy
+0405607026,DoÃ±a Aurora,Bgy
 0405607027,Guinosayan,Bgy
 0405607029,Ipil,Bgy
 0405607032,Kalibo,Bgy
@@ -14338,7 +14338,7 @@
 0405607086,Tiniguiban,Bgy
 0405607087,Villa Magsino,Bgy
 0405607088,Villa San Isidro,Bgy
-0405607089,Viñas,Bgy
+0405607089,ViÃ±as,Bgy
 0405607090,Yaganak,Bgy
 0405608001,Poblacion,Bgy
 0405608002,Buenavista East,Bgy
@@ -14560,7 +14560,7 @@
 0405619032,Maunlad ,Bgy
 0405619033,Pagsabangan,Bgy
 0405619034,Panikihan,Bgy
-0405619035,Peñafrancia ,Bgy
+0405619035,PeÃ±afrancia ,Bgy
 0405619036,Pipisik ,Bgy
 0405619037,Progreso,Bgy
 0405619038,Rizal ,Bgy
@@ -14581,7 +14581,7 @@
 0405619053,Villa Padua,Bgy
 0405619054,Villa Perez,Bgy
 0405619055,Villa M. Principe,Bgy
-0405619056,Villa Tañada,Bgy
+0405619056,Villa TaÃ±ada,Bgy
 0405619057,Villa Victoria,Bgy
 0405619058,San Diego,Bgy
 0405619059,Villa Nava,Bgy
@@ -14681,7 +14681,7 @@
 0405622053,Monteclaro,Bgy
 0405622054,Pamampangin,Bgy
 0405622055,Pansol,Bgy
-0405622056,Peñafrancia,Bgy
+0405622056,PeÃ±afrancia,Bgy
 0405622057,Pisipis,Bgy
 0405622058,Rizal,Bgy
 0405622059,Roma,Bgy
@@ -14703,8 +14703,8 @@
 0405622075,Santa Lucia,Bgy
 0405622076,Santa Maria,Bgy
 0405622077,Santa Rosa,Bgy
-0405622078,Santo Niño Ibaba,Bgy
-0405622079,Santo Niño Ilaya,Bgy
+0405622078,Santo NiÃ±o Ibaba,Bgy
+0405622079,Santo NiÃ±o Ilaya,Bgy
 0405622080,Silang,Bgy
 0405622081,Sugod,Bgy
 0405622082,Sumalang,Bgy
@@ -14712,7 +14712,7 @@
 0405622084,Tan-ag Ilaya,Bgy
 0405622085,Tocalin,Bgy
 0405622086,Vegaflor,Bgy
-0405622087,Vergaña,Bgy
+0405622087,VergaÃ±a,Bgy
 0405622088,Veronica,Bgy
 0405622089,Villa Aurora,Bgy
 0405622090,Villa Espina,Bgy
@@ -14819,7 +14819,7 @@
 0405627035,San Vicente,Bgy
 0405627036,Santa Lucia,Bgy
 0405627037,Santo Angel,Bgy
-0405627038,Santo Niño,Bgy
+0405627038,Santo NiÃ±o,Bgy
 0405627039,Santol,Bgy
 0405627040,Soledad,Bgy
 0405627041,Tapucan,Bgy
@@ -14875,7 +14875,7 @@
 0405629021,Walay,Bgy
 0405629022,Yawe,Bgy
 0405630001,Alupaye,Bgy
-0405630002,Añato,Bgy
+0405630002,AÃ±ato,Bgy
 0405630003,Antipolo,Bgy
 0405630004,Bantigue,Bgy
 0405630005,Bigo,Bgy
@@ -14943,14 +14943,14 @@
 0405634008,Gangahin,Bgy
 0405634009,Ibabang Burgos,Bgy
 0405634010,Ibabang Pacatin,Bgy
-0405634011,Ibabang Piña,Bgy
+0405634011,Ibabang PiÃ±a,Bgy
 0405634012,Ibabang Soliyao,Bgy
 0405634013,Ilayang Burgos,Bgy
 0405634014,Ilayang Pacatin,Bgy
-0405634015,Ilayang Piña,Bgy
+0405634015,Ilayang PiÃ±a,Bgy
 0405634016,Ilayang Soliyao,Bgy
 0405634017,Nag-Cruz,Bgy
-0405634018,Osmeña,Bgy
+0405634018,OsmeÃ±a,Bgy
 0405634019,Payte,Bgy
 0405634020,Pinagbayanan,Bgy
 0405634021,Masaya ,Bgy
@@ -14985,7 +14985,7 @@
 0405636001,Anawan,Bgy
 0405636002,Atulayan,Bgy
 0405636003,Balesin,Bgy
-0405636004,Bañadero,Bgy
+0405636004,BaÃ±adero,Bgy
 0405636005,Binibitinan,Bgy
 0405636006,Bislian,Bgy
 0405636007,Bucao,Bgy
@@ -15011,8 +15011,8 @@
 0405637007,Guinhawa,Bgy
 0405637008,Gumubat,Bgy
 0405637009,Magsino,Bgy
-0405637010,Mascariña,Bgy
-0405637011,Montaña,Bgy
+0405637010,MascariÃ±a,Bgy
+0405637011,MontaÃ±a,Bgy
 0405637012,Barangay I ,Bgy
 0405637013,Barangay II ,Bgy
 0405637014,Barangay III ,Bgy
@@ -15098,8 +15098,8 @@
 0405642013,Pugon,Bgy
 0405642014,Silongin,Bgy
 0405642015,Don Juan Vercelos,Bgy
-0405642016,Mabuñga,Bgy
-0405642017,Santo Niño,Bgy
+0405642016,MabuÃ±ga,Bgy
+0405642017,Santo NiÃ±o,Bgy
 0405644001,Abuyon,Bgy
 0405644002,Andres Bonifacio,Bgy
 0405644003,Bani,Bgy
@@ -15131,7 +15131,7 @@
 0405645007,Bignay 2,Bgy
 0405645009,Bucal,Bgy
 0405645010,Canda,Bgy
-0405645011,Castañas,Bgy
+0405645011,CastaÃ±as,Bgy
 0405645012,Concepcion Banahaw,Bgy
 0405645013,Concepcion No. 1,Bgy
 0405645014,Concepcion Palasan,Bgy
@@ -15205,8 +15205,8 @@
 0405646036,San Vicente,Bgy
 0405646037,Santa Cecilia,Bgy
 0405646038,Santa Monica,Bgy
-0405646039,Santo Niño I,Bgy
-0405646040,Santo Niño II,Bgy
+0405646039,Santo NiÃ±o I,Bgy
+0405646040,Santo NiÃ±o II,Bgy
 0405646041,Santo Tomas,Bgy
 0405646042,Seguiwan,Bgy
 0405646043,Tabason,Bgy
@@ -15353,7 +15353,7 @@
 0405801010,San Pedro,Bgy
 0405801011,San Roque,Bgy
 0405801012,San Vicente,Bgy
-0405801013,Santo Niño,Bgy
+0405801013,Santo NiÃ±o,Bgy
 0405801014,Mahabang Parang,Bgy
 0405802001,Calawis,Bgy
 0405802002,Cupang,Bgy
@@ -15426,7 +15426,7 @@
 0405805016,San Juan,Bgy
 0405805017,San Roque,Bgy
 0405805018,Santa Rosa,Bgy
-0405805019,Santo Niño,Bgy
+0405805019,Santo NiÃ±o,Bgy
 0405805020,Santo Domingo,Bgy
 0405806002,Balibago,Bgy
 0405806005,Boor,Bgy
@@ -15498,7 +15498,7 @@
 0405811012,Banaba,Bgy
 0405811013,Gulod Malaya,Bgy
 0405811014,Pintong Bocawe,Bgy
-0405811015,Santo Niño,Bgy
+0405811015,Santo NiÃ±o,Bgy
 0405811016,Silangan,Bgy
 0405812001,Cayabu,Bgy
 0405812002,Cuyambay,Bgy
@@ -15514,7 +15514,7 @@
 0405812013,San Andres,Bgy
 0405812014,San Isidro ,Bgy
 0405812015,Santa Inez,Bgy
-0405812016,Santo Niño,Bgy
+0405812016,Santo NiÃ±o,Bgy
 0405812017,Tabing Ilog ,Bgy
 0405812018,Tandang Kutyo ,Bgy
 0405812019,Tinucan,Bgy
@@ -15875,7 +15875,7 @@
 1705108007,Rumbang,Bgy
 1705108008,Salvacion,Bgy
 1705108009,San Pedro,Bgy
-1705108010,Santo Niño,Bgy
+1705108010,Santo NiÃ±o,Bgy
 1705108012,Manoot,Bgy
 1705109001,Batong Buhay,Bgy
 1705109002,Buenavista,Bgy
@@ -15893,7 +15893,7 @@
 1705109016,San Nicolas,Bgy
 1705109017,San Vicente,Bgy
 1705109018,Santa Lucia,Bgy
-1705109019,Santo Niño,Bgy
+1705109019,Santo NiÃ±o,Bgy
 1705109020,Tagumpay,Bgy
 1705109021,Victoria,Bgy
 1705109022,Lagnas,Bgy
@@ -16092,7 +16092,7 @@
 1705205054,San Vicente West ,Bgy
 1705205055,Sta. Cruz,Bgy
 1705205056,Sta. Isabel,Bgy
-1705205057,Sto. Niño,Bgy
+1705205057,Sto. NiÃ±o,Bgy
 1705205058,Sapul,Bgy
 1705205059,Silonay,Bgy
 1705205061,Sta. Maria Village,Bgy
@@ -16188,7 +16188,7 @@
 1705208042,Paniquian,Bgy
 1705208043,Pinagsabangan I,Bgy
 1705208044,Pinagsabangan II,Bgy
-1705208045,Piñahan,Bgy
+1705208045,PiÃ±ahan,Bgy
 1705208046,Poblacion I,Bgy
 1705208047,Poblacion II,Bgy
 1705208048,Poblacion III,Bgy
@@ -16206,7 +16206,7 @@
 1705208060,Santa Isabel,Bgy
 1705208061,Santa Maria,Bgy
 1705208062,Santiago,Bgy
-1705208063,Santo Niño,Bgy
+1705208063,Santo NiÃ±o,Bgy
 1705208064,Tagumpay,Bgy
 1705208065,Tigkan,Bgy
 1705208066,Melgar B,Bgy
@@ -16251,7 +16251,7 @@
 1705209033,Sta. Rita,Bgy
 1705209034,Wawa,Bgy
 1705209035,Zone I ,Bgy
-1705209036,Sto. Niño,Bgy
+1705209036,Sto. NiÃ±o,Bgy
 1705209037,Guinhawa,Bgy
 1705210001,Bacawan,Bgy
 1705210002,Bacungan,Bgy
@@ -16283,7 +16283,7 @@
 1705211005,Sabang,Bgy
 1705211006,San Antonio,Bgy
 1705211007,San Isidro,Bgy
-1705211008,Santo Niño,Bgy
+1705211008,Santo NiÃ±o,Bgy
 1705211009,Sinandigan,Bgy
 1705211010,Tabinay,Bgy
 1705211011,Villaflor,Bgy
@@ -16410,9 +16410,9 @@
 1705303006,Lumacad,Bgy
 1705303007,Madoldolon,Bgy
 1705303008,Mauringuen,Bgy
-1705303009,Osmeña,Bgy
+1705303009,OsmeÃ±a,Bgy
 1705303010,San Jose De Oro,Bgy
-1705303011,Santo Niño,Bgy
+1705303011,Santo NiÃ±o,Bgy
 1705303012,Taloto,Bgy
 1705303013,Tinintinan,Bgy
 1705303014,Tudela,Bgy
@@ -16474,7 +16474,7 @@
 1705306017,Poblacion I,Bgy
 1705306018,Poblacion II,Bgy
 1705306023,Salogon,Bgy
-1705306024,Samareñana,Bgy
+1705306024,SamareÃ±ana,Bgy
 1705306025,Saraza,Bgy
 1705306026,Tubtub,Bgy
 1705307001,Bogtong,Bgy
@@ -16490,7 +16490,7 @@
 1705307012,Salvacion,Bgy
 1705307013,San Isidro,Bgy
 1705307014,San Rafael,Bgy
-1705307015,Santo Niño,Bgy
+1705307015,Santo NiÃ±o,Bgy
 1705308001,Bantayan ,Bgy
 1705308002,Calsada ,Bgy
 1705308003,Convento ,Bgy
@@ -16568,7 +16568,7 @@
 1705312007,Manlag,Bgy
 1705312008,Masagana Pob.,Bgy
 1705312009,New Ibajay,Bgy
-1705312010,Pasadeña,Bgy
+1705312010,PasadeÃ±a,Bgy
 1705312011,Maligaya Pob.,Bgy
 1705312012,San Fernando,Bgy
 1705312013,Sibaltan,Bgy
@@ -16605,7 +16605,7 @@
 1705315005,Burirao,Bgy
 1705315006,Caguisan,Bgy
 1705315007,Calategas,Bgy
-1705315008,Dumagueña,Bgy
+1705315008,DumagueÃ±a,Bgy
 1705315009,Elvita,Bgy
 1705315010,Estrella Village,Bgy
 1705315011,Ipilan,Bgy
@@ -16675,7 +16675,7 @@
 1705319007,Port Barton,Bgy
 1705319008,Poblacion,Bgy
 1705319009,San Isidro,Bgy
-1705319010,Santo Niño,Bgy
+1705319010,Santo NiÃ±o,Bgy
 1705320001,Abongan,Bgy
 1705320002,Banbanan,Bgy
 1705320003,Bantulan,Bgy
@@ -16717,7 +16717,7 @@
 1705322007,Libis,Bgy
 1705322008,Luac,Bgy
 1705322009,Malaking Patag,Bgy
-1705322010,Osmeña,Bgy
+1705322010,OsmeÃ±a,Bgy
 1705322011,Tiza,Bgy
 1705322012,Burabod,Bgy
 1705322013,Halsey,Bgy
@@ -16900,7 +16900,7 @@
 1705911006,Cagbo-aya,Bgy
 1705911007,Carmen,Bgy
 1705911008,Cawayan,Bgy
-1705911011,Doña Juana,Bgy
+1705911011,DoÃ±a Juana,Bgy
 1705911012,Dubduban,Bgy
 1705911013,Hinugusan,Bgy
 1705911015,Lusong,Bgy
@@ -16910,7 +16910,7 @@
 1705911019,Camantaya,Bgy
 1705912001,Agpudlos,Bgy
 1705912002,Calunacon,Bgy
-1705912003,Doña Trinidad,Bgy
+1705912003,DoÃ±a Trinidad,Bgy
 1705912004,Linawan,Bgy
 1705912005,Mabini,Bgy
 1705912006,Marigondon Norte,Bgy
@@ -16925,7 +16925,7 @@
 1705913002,Azarga,Bgy
 1705913003,Campalingo,Bgy
 1705913004,Canjalon,Bgy
-1705913005,España,Bgy
+1705913005,EspaÃ±a,Bgy
 1705913006,Mabini,Bgy
 1705913007,Mabulo,Bgy
 1705913008,Otod,Bgy
@@ -16959,7 +16959,7 @@
 1705917002,Concepcion Norte ,Bgy
 1705917003,Concepcion Sur,Bgy
 1705917004,Paroyhog,Bgy
-1705917005,Santo Niño,Bgy
+1705917005,Santo NiÃ±o,Bgy
 1705917006,San Isidro,Bgy
 1731500001,Babuyan,Bgy
 1731500002,Bacungan,Bgy
@@ -17090,8 +17090,8 @@
 0500502006,Binanderahan,Bgy
 0500502007,Binitayan,Bgy
 0500502009,Bongabong,Bgy
-0500502010,Cabagñan,Bgy
-0500502011,Cabraran Pequeño,Bgy
+0500502010,CabagÃ±an,Bgy
+0500502011,Cabraran PequeÃ±o,Bgy
 0500502012,Calabidongan,Bgy
 0500502013,Comun,Bgy
 0500502014,Cotmon,Bgy
@@ -17138,8 +17138,8 @@
 0500503003,Anislag,Bgy
 0500503004,Bagumbayan,Bgy
 0500503005,Balinad,Bgy
-0500503006,Bañadero,Bgy
-0500503007,Bañag,Bgy
+0500503006,BaÃ±adero,Bgy
+0500503007,BaÃ±ag,Bgy
 0500503008,Bascaran,Bgy
 0500503009,Bigao,Bgy
 0500503010,Binitayan,Bgy
@@ -17174,14 +17174,14 @@
 0500503039,Nabasan,Bgy
 0500503040,Namantao,Bgy
 0500503041,Pandan,Bgy
-0500503042,Peñafrancia,Bgy
+0500503042,PeÃ±afrancia,Bgy
 0500503044,Sagpon,Bgy
 0500503045,Salvacion,Bgy
 0500503046,San Rafael,Bgy
 0500503047,San Ramon,Bgy
 0500503048,San Roque,Bgy
 0500503049,San Vicente Grande,Bgy
-0500503050,San Vicente Pequeño,Bgy
+0500503050,San Vicente PequeÃ±o,Bgy
 0500503051,Sipi,Bgy
 0500503052,Tabon-tabon,Bgy
 0500503053,Tagas,Bgy
@@ -17194,13 +17194,13 @@
 0500504005,Binogsacan Lower,Bgy
 0500504006,Bololo,Bgy
 0500504007,Bubulusan,Bgy
-0500504008,Marcial O. Rañola,Bgy
+0500504008,Marcial O. RaÃ±ola,Bgy
 0500504009,Calzada,Bgy
 0500504010,Catomag,Bgy
-0500504011,Doña Mercedes,Bgy
-0500504012,Doña Tomasa,Bgy
+0500504011,DoÃ±a Mercedes,Bgy
+0500504012,DoÃ±a Tomasa,Bgy
 0500504013,Ilawod,Bgy
-0500504014,Inamnan Pequeño,Bgy
+0500504014,Inamnan PequeÃ±o,Bgy
 0500504015,Inamnan Grande,Bgy
 0500504016,Inascan,Bgy
 0500504017,Iraya,Bgy
@@ -17216,7 +17216,7 @@
 0500504030,Mauraro,Bgy
 0500504031,Minto,Bgy
 0500504032,Morera,Bgy
-0500504033,Muladbucad Pequeño,Bgy
+0500504033,Muladbucad PequeÃ±o,Bgy
 0500504034,Muladbucad Grande,Bgy
 0500504035,Ongo,Bgy
 0500504036,Palanas,Bgy
@@ -17266,13 +17266,13 @@
 0500506011,Bgy. 15 - Ilawod East Pob.,Bgy
 0500506012,Bgy. 16 - Kawit-East Washington Drive ,Bgy
 0500506013,"Bgy. 17 - Rizal Street., Ilawod ",Bgy
-0500506015,Bgy. 19 - Cabagñan,Bgy
+0500506015,Bgy. 19 - CabagÃ±an,Bgy
 0500506016,Bgy. 2 - Em's Barrio South ,Bgy
-0500506017,Bgy. 18 - Cabagñan West ,Bgy
+0500506017,Bgy. 18 - CabagÃ±an West ,Bgy
 0500506018,Bgy. 21 - Binanuahan West ,Bgy
 0500506019,Bgy. 22 - Binanuahan East ,Bgy
 0500506020,Bgy. 23 - Imperial Court Subd. ,Bgy
-0500506021,Bgy. 20 - Cabagñan East ,Bgy
+0500506021,Bgy. 20 - CabagÃ±an East ,Bgy
 0500506022,Bgy. 25 - Lapu-lapu ,Bgy
 0500506023,Bgy. 26 - Dinagaan ,Bgy
 0500506024,Bgy. 27 - Victory Village South ,Bgy
@@ -17282,15 +17282,15 @@
 0500506028,Bgy. 36 - Kapantawan ,Bgy
 0500506029,Bgy. 30 - Pigcale ,Bgy
 0500506030,Bgy. 31 - Centro-Baybay ,Bgy
-0500506032,Bgy. 33 - PNR-Peñaranda St.-Iraya ,Bgy
+0500506032,Bgy. 33 - PNR-PeÃ±aranda St.-Iraya ,Bgy
 0500506033,Bgy. 34 - Oro Site-Magallanes St. ,Bgy
 0500506034,Bgy. 35 - Tinago ,Bgy
 0500506035,Bgy. 37 - Bitano ,Bgy
 0500506037,Bgy. 39 - Bonot ,Bgy
 0500506038,Bgy. 4 - Sagpon Pob.,Bgy
 0500506039,Bgy. 5 - Sagmin Pob.,Bgy
-0500506040,Bgy. 6 - Bañadero Pob.,Bgy
-0500506041,Bgy. 7 - Baño ,Bgy
+0500506040,Bgy. 6 - BaÃ±adero Pob.,Bgy
+0500506041,Bgy. 7 - BaÃ±o ,Bgy
 0500506042,Bgy. 8 - Bagumbayan ,Bgy
 0500506043,Bgy. 9 - Pinaric ,Bgy
 0500506044,Bgy. 67 - Bariis,Bgy
@@ -17367,7 +17367,7 @@
 0500507042,San Ramon,Bgy
 0500507043,San Vicente,Bgy
 0500507044,Santa Cruz,Bgy
-0500507045,Niño Jesus,Bgy
+0500507045,NiÃ±o Jesus,Bgy
 0500507046,Talin-talin,Bgy
 0500507047,Tambo,Bgy
 0500507049,Villa Petrona,Bgy
@@ -17424,7 +17424,7 @@
 0500508052,Tomolin,Bgy
 0500508053,Tuburan,Bgy
 0500508054,Tula-tula Grande,Bgy
-0500508055,Tula-tula Pequeño,Bgy
+0500508055,Tula-tula PequeÃ±o,Bgy
 0500508056,Tupas,Bgy
 0500509001,Binitayan,Bgy
 0500509002,Calbayog,Bgy
@@ -17672,7 +17672,7 @@
 0500516021,San Isidro,Bgy
 0500516022,San Roque,Bgy
 0500516023,Santa Misericordia,Bgy
-0500516024,Santo Niño,Bgy
+0500516024,Santo NiÃ±o,Bgy
 0500516025,Market Site Pob.,Bgy
 0500516026,Pandayan Pob.,Bgy
 0500517001,Agnas,Bgy
@@ -17682,13 +17682,13 @@
 0500517005,Baranghawon,Bgy
 0500517006,Basagan,Bgy
 0500517007,Basud ,Bgy
-0500517008,Bogñabong,Bgy
+0500517008,BogÃ±abong,Bgy
 0500517009,Bombon ,Bgy
 0500517010,Bonot,Bgy
 0500517011,San Isidro,Bgy
 0500517012,Buang,Bgy
 0500517013,Buhian,Bgy
-0500517014,Cabagñan,Bgy
+0500517014,CabagÃ±an,Bgy
 0500517015,Cobo,Bgy
 0500517016,Comon,Bgy
 0500517017,Cormidal,Bgy
@@ -17844,7 +17844,7 @@
 0501605007,Luklukan Sur,Bgy
 0501605008,Motherlode,Bgy
 0501605009,Nakalaya,Bgy
-0501605010,Osmeña,Bgy
+0501605010,OsmeÃ±a,Bgy
 0501605011,Pag-Asa,Bgy
 0501605012,Parang,Bgy
 0501605013,Plaridel,Bgy
@@ -18009,7 +18009,7 @@
 0501611012,San Nicolas,Bgy
 0501611013,Santa Cruz,Bgy
 0501611014,Santa Elena,Bgy
-0501611015,Santo Niño,Bgy
+0501611015,Santo NiÃ±o,Bgy
 0501612001,Aguit-It,Bgy
 0501612002,Banocboc,Bgy
 0501612004,Cagbalogo,Bgy
@@ -18092,7 +18092,7 @@
 0501703014,Manga,Bgy
 0501703015,Masoli,Bgy
 0501703016,Neighborhood,Bgy
-0501703017,Niño Jesus,Bgy
+0501703017,NiÃ±o Jesus,Bgy
 0501703018,Pagatpatan,Bgy
 0501703019,Palo,Bgy
 0501703020,Payak,Bgy
@@ -18186,7 +18186,7 @@
 0501706030,San Roque Heights,Bgy
 0501706031,Santa Elena,Bgy
 0501706032,Santo Domingo,Bgy
-0501706033,Santo Niño,Bgy
+0501706033,Santo NiÃ±o,Bgy
 0501706034,Taisan,Bgy
 0501707001,Barcelonita,Bgy
 0501707002,Biong,Bgy
@@ -18203,7 +18203,7 @@
 0501708004,Belen,Bgy
 0501708005,Bigaas,Bgy
 0501708006,Binanuaanan Grande,Bgy
-0501708007,Binanuaanan Pequeño,Bgy
+0501708007,Binanuaanan PequeÃ±o,Bgy
 0501708008,Binaliw,Bgy
 0501708009,Bonot-Santa Rosa,Bgy
 0501708010,Burabod,Bgy
@@ -18240,7 +18240,7 @@
 0501708043,Santa Isabel ,Bgy
 0501708044,Santa Salud ,Bgy
 0501708045,Santo Domingo,Bgy
-0501708046,Santo Niño,Bgy
+0501708046,Santo NiÃ±o,Bgy
 0501708047,Siba-o,Bgy
 0501708048,Sibobo,Bgy
 0501708049,Sogod,Bgy
@@ -18396,7 +18396,7 @@
 0501714023,Toytoy,Bgy
 0501715001,Abucayan,Bgy
 0501715002,Bagumbayan Grande ,Bgy
-0501715003,Bagumbayan Pequeño ,Bgy
+0501715003,Bagumbayan PequeÃ±o ,Bgy
 0501715004,Balaynan,Bgy
 0501715005,Belen ,Bgy
 0501715006,Buyo,Bgy
@@ -18436,7 +18436,7 @@
 0501716006,La Medalla,Bgy
 0501716007,La Purisima,Bgy
 0501716008,La Trinidad,Bgy
-0501716009,Niño Jesus,Bgy
+0501716009,NiÃ±o Jesus,Bgy
 0501716010,Perpetual Help,Bgy
 0501716011,Sagrada,Bgy
 0501716012,Salvacion,Bgy
@@ -18463,7 +18463,7 @@
 0501716033,Santa Teresita,Bgy
 0501716034,Santiago,Bgy
 0501716035,Santo Domingo,Bgy
-0501716036,Santo Niño,Bgy
+0501716036,Santo NiÃ±o,Bgy
 0501717001,Agosais,Bgy
 0501717002,Agpo-Camagong-Tabog,Bgy
 0501717003,Amoguis,Bgy
@@ -18725,7 +18725,7 @@
 0501724007,Cararayan,Bgy
 0501724008,Carolina,Bgy
 0501724009,Concepcion Grande,Bgy
-0501724010,Concepcion Pequeña,Bgy
+0501724010,Concepcion PequeÃ±a,Bgy
 0501724011,Dayangdang,Bgy
 0501724012,Del Rosario,Bgy
 0501724013,Dinaga,Bgy
@@ -18735,7 +18735,7 @@
 0501724019,Mabolo,Bgy
 0501724020,Pacol,Bgy
 0501724023,Panicuason,Bgy
-0501724024,Peñafrancia,Bgy
+0501724024,PeÃ±afrancia,Bgy
 0501724025,Sabang,Bgy
 0501724026,San Felipe,Bgy
 0501724027,San Francisco ,Bgy
@@ -18767,7 +18767,7 @@
 0501725022,San Roque Commonal,Bgy
 0501725023,San Vicente,Bgy
 0501725024,Santa Cruz,Bgy
-0501725025,Santo Niño,Bgy
+0501725025,Santo NiÃ±o,Bgy
 0501725026,Villaflorida,Bgy
 0501726001,Batang,Bgy
 0501726002,Burabod,Bgy
@@ -18828,7 +18828,7 @@
 0501728021,San Juan ,Bgy
 0501728022,San Vicente ,Bgy
 0501728023,Santiago ,Bgy
-0501728024,Santo Niño,Bgy
+0501728024,Santo NiÃ±o,Bgy
 0501728025,Tagbong,Bgy
 0501728026,Tinangis,Bgy
 0501729001,Ayugao,Bgy
@@ -18902,7 +18902,7 @@
 0501731015,San Antonio ,Bgy
 0501731017,San Isidro ,Bgy
 0501731018,San Roque ,Bgy
-0501731019,Santo Niño,Bgy
+0501731019,Santo NiÃ±o,Bgy
 0501731020,Sibaguan,Bgy
 0501731022,Tinorongan,Bgy
 0501731023,Turague,Bgy
@@ -18916,10 +18916,10 @@
 0501732008,Cotmo,Bgy
 0501732009,Daculang Tubig,Bgy
 0501732010,Del Pilar ,Bgy
-0501732011,Gñaran,Bgy
+0501732011,GÃ±aran,Bgy
 0501732012,Grijalvo,Bgy
 0501732013,Lupi,Bgy
-0501732014,Maragñi,Bgy
+0501732014,MaragÃ±i,Bgy
 0501732015,Pamukid,Bgy
 0501732016,Pinamasagan,Bgy
 0501732017,Pipian,Bgy
@@ -19073,7 +19073,7 @@
 0501737023,La Medalla,Bgy
 0501737024,New Caaluan,Bgy
 0501737025,Olag Grande,Bgy
-0501737026,Olag Pequeño,Bgy
+0501737026,Olag PequeÃ±o,Bgy
 0501737027,Old Caaluan,Bgy
 0501737028,Pag-Asa,Bgy
 0501737029,Pantat,Bgy
@@ -19125,7 +19125,7 @@
 0502002013,Macutal,Bgy
 0502002014,Moning,Bgy
 0502002015,Nagbarorong,Bgy
-0502002016,Osmeña,Bgy
+0502002016,OsmeÃ±a,Bgy
 0502002017,P. Teston,Bgy
 0502002018,Paniquihan,Bgy
 0502002019,Eastern Poblacion,Bgy
@@ -19139,7 +19139,7 @@
 0502002027,Santa Maria,Bgy
 0502002028,Tilod,Bgy
 0502002029,Western Poblacion,Bgy
-0502003001,Aroyao Pequeño,Bgy
+0502003001,Aroyao PequeÃ±o,Bgy
 0502003002,Bagumbayan,Bgy
 0502003003,Banawang,Bgy
 0502003004,Batalay,Bgy
@@ -19203,7 +19203,7 @@
 0502005008,Sicmil,Bgy
 0502005009,Sioron,Bgy
 0502006001,Bagawang,Bgy
-0502006002,Balagñonan,Bgy
+0502006002,BalagÃ±onan,Bgy
 0502006003,Baldoc,Bgy
 0502006004,Canlubi,Bgy
 0502006005,Santa Cruz,Bgy
@@ -19325,9 +19325,9 @@
 0502010010,Mabini,Bgy
 0502010011,Magsaysay,Bgy
 0502010012,Ogbong,Bgy
-0502010013,Osmeña,Bgy
+0502010013,OsmeÃ±a,Bgy
 0502010014,Pedro Vera,Bgy
-0502010015,Peñafrancia ,Bgy
+0502010015,PeÃ±afrancia ,Bgy
 0502010016,Quezon,Bgy
 0502010017,Quirino,Bgy
 0502010018,Rizal,Bgy
@@ -19400,7 +19400,7 @@
 0502011055,Santa Elena ,Bgy
 0502011056,Santo Cristo,Bgy
 0502011057,Santo Domingo,Bgy
-0502011058,Santo Niño,Bgy
+0502011058,Santo NiÃ±o,Bgy
 0502011059,Simamla,Bgy
 0502011061,Sogod-Simamla,Bgy
 0502011062,Talisoy,Bgy
@@ -19506,7 +19506,7 @@
 0504103033,Villa Alvarez,Bgy
 0504104001,Burgos,Bgy
 0504104002,Canares,Bgy
-0504104003,Cambañez,Bgy
+0504104003,CambaÃ±ez,Bgy
 0504104004,Costa Rica,Bgy
 0504104005,Danao,Bgy
 0504104006,Gibraltar,Bgy
@@ -19540,7 +19540,7 @@
 0504105021,Matubinao,Bgy
 0504105022,Mintac,Bgy
 0504105023,Nadawisan,Bgy
-0504105024,Osmeña,Bgy
+0504105024,OsmeÃ±a,Bgy
 0504105025,Pawican,Bgy
 0504105026,Pitogo,Bgy
 0504105027,Poblacion,Bgy
@@ -19550,7 +19550,7 @@
 0504105031,San Pedro,Bgy
 0504105032,San Rafael,Bgy
 0504105033,Santa Teresita,Bgy
-0504105034,Santo Niño,Bgy
+0504105034,Santo NiÃ±o,Bgy
 0504105036,Tagboan,Bgy
 0504105037,Tuybo,Bgy
 0504105038,Villa Pogado,Bgy
@@ -19586,13 +19586,13 @@
 0504106031,Chico Island,Bgy
 0504106032,Lague-lague,Bgy
 0504106033,Palobandera,Bgy
-0504106034,Peña Island,Bgy
+0504106034,PeÃ±a Island,Bgy
 0504106035,Pin-As,Bgy
 0504106036,Iraya,Bgy
 0504106037,Punta Batsan,Bgy
 0504106038,Tubog,Bgy
 0504107001,Albasan,Bgy
-0504107002,Boca Engaño,Bgy
+0504107002,Boca EngaÃ±o,Bgy
 0504107003,Buyo,Bgy
 0504107004,Calpi,Bgy
 0504107005,Canomay,Bgy
@@ -19604,9 +19604,9 @@
 0504107011,Manapao,Bgy
 0504107012,Nabasagan,Bgy
 0504107013,Nonoc,Bgy
-0504107014,Osmeña,Bgy
+0504107014,OsmeÃ±a,Bgy
 0504107015,Pasig,Bgy
-0504107016,Peñafrancia,Bgy
+0504107016,PeÃ±afrancia,Bgy
 0504107017,Quezon,Bgy
 0504107018,San Isidro,Bgy
 0504107019,San Ramon,Bgy
@@ -19700,7 +19700,7 @@
 0504111019,Kalipay ,Bgy
 0504111020,Kinamaligan,Bgy
 0504111021,Malinta,Bgy
-0504111022,Mapiña,Bgy
+0504111022,MapiÃ±a,Bgy
 0504111023,Mayngaran,Bgy
 0504111024,Nursery,Bgy
 0504111025,Pating ,Bgy
@@ -19774,7 +19774,7 @@
 0504114007,Guinhadap,Bgy
 0504114008,Real,Bgy
 0504114009,Rizal,Bgy
-0504114010,Santo Niño,Bgy
+0504114010,Santo NiÃ±o,Bgy
 0504114011,Togoron,Bgy
 0504115001,Antipolo,Bgy
 0504115003,Banco,Bgy
@@ -19792,7 +19792,7 @@
 0504115015,Nabangig,Bgy
 0504115016,Nipa,Bgy
 0504115017,Parina,Bgy
-0504115018,Piña,Bgy
+0504115018,PiÃ±a,Bgy
 0504115019,Poblacion,Bgy
 0504115020,Salvacion,Bgy
 0504115021,San Antonio,Bgy
@@ -19859,7 +19859,7 @@
 0504118004,Buenavista,Bgy
 0504118005,Buenos Aires,Bgy
 0504118006,Buyo,Bgy
-0504118007,Cañelas,Bgy
+0504118007,CaÃ±elas,Bgy
 0504118008,Corbada,Bgy
 0504118009,Daplian,Bgy
 0504118010,Del Rosario,Bgy
@@ -19879,7 +19879,7 @@
 0504118024,Sowa,Bgy
 0504118025,Talisay,Bgy
 0504118026,Valparaiso,Bgy
-0504119001,Almiñe,Bgy
+0504119001,AlmiÃ±e,Bgy
 0504119002,Bagacay,Bgy
 0504119003,Bagahanglad,Bgy
 0504119004,Bartolabac,Bgy
@@ -19891,7 +19891,7 @@
 0504119010,Jagna-an,Bgy
 0504119011,Luna,Bgy
 0504119012,Mabini,Bgy
-0504119013,Piña,Bgy
+0504119013,PiÃ±a,Bgy
 0504119014,District I ,Bgy
 0504119015,District II ,Bgy
 0504119016,District III ,Bgy
@@ -20020,7 +20020,7 @@
 0506203036,N. Roque,Bgy
 0506203037,Namo,Bgy
 0506203038,Obrero,Bgy
-0506203039,Osmeña,Bgy
+0506203039,OsmeÃ±a,Bgy
 0506203040,Otavi,Bgy
 0506203041,Padre Diaz,Bgy
 0506203042,Palale,Bgy
@@ -20421,7 +20421,7 @@
 0506214023,Tupaz,Bgy
 0506214024,Ulag,Bgy
 0506215001,La Esperanza,Bgy
-0506215002,Peñafrancia,Bgy
+0506215002,PeÃ±afrancia,Bgy
 0506215003,Barangay Poblacion I,Bgy
 0506215004,Barangay Poblacion II,Bgy
 0506215005,Barangay Poblacion III,Bgy
@@ -20456,7 +20456,7 @@
 0506216021,Pamurayan,Bgy
 0506216022,Pangpang,Bgy
 0506216023,Panlayaan,Bgy
-0506216024,Peñafrancia,Bgy
+0506216024,PeÃ±afrancia,Bgy
 0506216025,Piot ,Bgy
 0506216026,Polvorista ,Bgy
 0506216027,Rizal,Bgy
@@ -20474,7 +20474,7 @@
 0506216039,Balogo,Bgy
 0506216040,Bato,Bgy
 0506216041,Bon-Ot,Bgy
-0506216042,Bogña,Bgy
+0506216042,BogÃ±a,Bgy
 0506216043,Buenavista,Bgy
 0506216044,Cabarbuhan,Bgy
 0506216045,Caricaran,Bgy
@@ -20495,7 +20495,7 @@
 0506216060,Santa Cruz,Bgy
 0506216061,Santa Lucia,Bgy
 0506216062,Santo Domingo,Bgy
-0506216063,Santo Niño,Bgy
+0506216063,Santo NiÃ±o,Bgy
 0506216064,Sawanga,Bgy
 0506216065,Sugod,Bgy
 0600401001,Cabangila,Bgy
@@ -20826,7 +20826,7 @@
 0600417014,Tondog,Bgy
 0600417015,Vivo,Bgy
 0600601001,Bayo Grande,Bgy
-0600601002,Bayo Pequeño,Bgy
+0600601002,Bayo PequeÃ±o,Bgy
 0600601004,Butuan,Bgy
 0600601005,Casay,Bgy
 0600601006,Casay Viejo,Bgy
@@ -20966,7 +20966,7 @@
 0600606022,Janlagasi,Bgy
 0600606023,Lamputong,Bgy
 0600606024,Lipata,Bgy
-0600606025,Malacañang,Bgy
+0600606025,MalacaÃ±ang,Bgy
 0600606026,Malalison Island,Bgy
 0600606027,Maniguin,Bgy
 0600606028,Naba,Bgy
@@ -21177,7 +21177,7 @@
 0600611033,Talisay,Bgy
 0600611034,Tingib,Bgy
 0600611035,Zaldivar,Bgy
-0600612001,Alvañiz,Bgy
+0600612001,AlvaÃ±iz,Bgy
 0600612002,Amparo,Bgy
 0600612003,Apgahan,Bgy
 0600612004,Aureliana,Bgy
@@ -21318,7 +21318,7 @@
 0600616021,Catungan III,Bgy
 0600616022,Catungan IV,Bgy
 0600616023,Cubay-Sermon,Bgy
-0600616024,Egaña,Bgy
+0600616024,EgaÃ±a,Bgy
 0600616025,Esperanza I,Bgy
 0600616026,Esperanza II,Bgy
 0600616027,Esperanza III,Bgy
@@ -21473,7 +21473,7 @@
 0601903016,Santa Rita,Bgy
 0601903017,Santa Teresa,Bgy
 0601903018,Santo Angel,Bgy
-0601903019,Santo Niño,Bgy
+0601903019,Santo NiÃ±o,Bgy
 0601903020,Santo Rosario,Bgy
 0601903021,Poblacion,Bgy
 0601904001,Agbatuan,Bgy
@@ -21576,7 +21576,7 @@
 0601907020,Old Guia,Bgy
 0601907021,Palaguian,Bgy
 0601907022,Parallan,Bgy
-0601907023,Piña,Bgy
+0601907023,PiÃ±a,Bgy
 0601907024,Poblacion Ilawod,Bgy
 0601907025,Poblacion Ilaya,Bgy
 0601907026,Poblacion Tabuc,Bgy
@@ -21750,7 +21750,7 @@
 0601913018,Pondol,Bgy
 0601913019,Quiajo,Bgy
 0601913020,Sangkal,Bgy
-0601913021,Santo Niño,Bgy
+0601913021,Santo NiÃ±o,Bgy
 0601913022,Vizcaya,Bgy
 0601914001,Adlawan,Bgy
 0601914002,Bago,Bgy
@@ -21831,7 +21831,7 @@
 0601916020,Poblacion Sur,Bgy
 0601916021,Tawog,Bgy
 0601917001,Abangay,Bgy
-0601917002,Acuña,Bgy
+0601917002,AcuÃ±a,Bgy
 0601917003,Agcococ,Bgy
 0601917004,Aglinab,Bgy
 0601917005,Aglupacan,Bgy
@@ -22098,7 +22098,7 @@
 0603008002,Bugnay,Bgy
 0603008004,California,Bgy
 0603008005,Del Pilar,Bgy
-0603008006,De la Peña,Bgy
+0603008006,De la PeÃ±a,Bgy
 0603008007,General Luna,Bgy
 0603008009,La Fortuna,Bgy
 0603008010,Lipata,Bgy
@@ -22232,13 +22232,13 @@
 0603013004,Aglonok,Bgy
 0603013006,Alibunan,Bgy
 0603013007,Badlan Grande,Bgy
-0603013008,Badlan Pequeño,Bgy
+0603013008,Badlan PequeÃ±o,Bgy
 0603013009,Badu,Bgy
 0603013011,Balaticon,Bgy
 0603013012,Banban Grande,Bgy
-0603013013,Banban Pequeño,Bgy
+0603013013,Banban PequeÃ±o,Bgy
 0603013015,Binolosan Grande,Bgy
-0603013016,Binolosan Pequeño,Bgy
+0603013016,Binolosan PequeÃ±o,Bgy
 0603013017,Cabagiao,Bgy
 0603013019,Cabugao,Bgy
 0603013020,Cahigon,Bgy
@@ -22250,7 +22250,7 @@
 0603013027,Dalid,Bgy
 0603013028,Datagan,Bgy
 0603013030,Gama Grande,Bgy
-0603013031,Gama Pequeño,Bgy
+0603013031,Gama PequeÃ±o,Bgy
 0603013032,Garangan,Bgy
 0603013034,Guinbonyugan,Bgy
 0603013036,Guiso,Bgy
@@ -22300,7 +22300,7 @@
 0603014013,Buenavista,Bgy
 0603014014,Isla De Cana,Bgy
 0603014016,Cabilao Grande,Bgy
-0603014017,Cabilao Pequeño,Bgy
+0603014017,Cabilao PequeÃ±o,Bgy
 0603014018,Cabuguana,Bgy
 0603014019,Cawayan,Bgy
 0603014020,Dayhagan,Bgy
@@ -22335,7 +22335,7 @@
 0603015015,Macatunao,Bgy
 0603015016,Malangabang,Bgy
 0603015017,Maliogliog,Bgy
-0603015018,Niño,Bgy
+0603015018,NiÃ±o,Bgy
 0603015019,Nipa,Bgy
 0603015021,Plandico,Bgy
 0603015022,Poblacion,Bgy
@@ -22411,11 +22411,11 @@
 0603017032,Pader,Bgy
 0603017033,Pandan,Bgy
 0603017038,Ponong Grande,Bgy
-0603017039,Ponong Pequeño,Bgy
+0603017039,Ponong PequeÃ±o,Bgy
 0603017040,Purog,Bgy
 0603017041,Romblon,Bgy
 0603017042,San Isidro,Bgy
-0603017043,Santo Niño,Bgy
+0603017043,Santo NiÃ±o,Bgy
 0603017044,Sawe,Bgy
 0603017045,Taminla,Bgy
 0603017046,Tinocuan,Bgy
@@ -22473,7 +22473,7 @@
 0603019002,Bayas,Bgy
 0603019003,Bayuyan,Bgy
 0603019004,Botongon,Bgy
-0603019005,Bulaqueña,Bgy
+0603019005,BulaqueÃ±a,Bgy
 0603019006,Calapdan,Bgy
 0603019007,Cano-an,Bgy
 0603019008,Daan Banua,Bgy
@@ -22671,13 +22671,13 @@
 0603025036,Jayubo,Bgy
 0603025037,Jorog,Bgy
 0603025038,Lanot Grande,Bgy
-0603025039,Lanot Pequeño,Bgy
+0603025039,Lanot PequeÃ±o,Bgy
 0603025040,Legayada,Bgy
 0603025041,Lumanay,Bgy
 0603025042,Madarag,Bgy
 0603025043,Magbato,Bgy
 0603025044,Maite Grande,Bgy
-0603025045,Maite Pequeño,Bgy
+0603025045,Maite PequeÃ±o,Bgy
 0603025046,Malag-it,Bgy
 0603025047,Manaulan,Bgy
 0603025048,Maribong,Bgy
@@ -22726,12 +22726,12 @@
 0603026020,San Vicente,Bgy
 0603027001,Agpipili,Bgy
 0603027002,Alcantara,Bgy
-0603027003,Almeñana,Bgy
+0603027003,AlmeÃ±ana,Bgy
 0603027004,Anabo,Bgy
 0603027005,Bankal,Bgy
 0603027006,Buenavista,Bgy
 0603027007,Cabantohan,Bgy
-0603027008,Capiñahan,Bgy
+0603027008,CapiÃ±ahan,Bgy
 0603027009,Dalipe,Bgy
 0603027010,Dapdapan,Bgy
 0603027011,Gerongan,Bgy
@@ -22862,8 +22862,8 @@
 0603029023,DELCAR Pob.,Bgy
 0603029025,Inabasan,Bgy
 0603029026,Layog,Bgy
-0603029027,Liñagan Calsada,Bgy
-0603029028,Liñagan Tacas,Bgy
+0603029027,LiÃ±agan Calsada,Bgy
+0603029028,LiÃ±agan Tacas,Bgy
 0603029029,Linab,Bgy
 0603029030,MARI Pob.,Bgy
 0603029031,Magsaysay,Bgy
@@ -23026,7 +23026,7 @@
 0603031015,Naumuan,Bgy
 0603031016,Singay,Bgy
 0603031018,Talibong Grande,Bgy
-0603031019,Talibong Pequeño,Bgy
+0603031019,Talibong PequeÃ±o,Bgy
 0603031020,Tipolo,Bgy
 0603031021,Tolarucan,Bgy
 0603031022,Tumay,Bgy
@@ -23118,9 +23118,9 @@
 0603035027,Maasin,Bgy
 0603035028,Magdungao,Bgy
 0603035029,Malag-it Grande,Bgy
-0603035030,Malag-it Pequeño,Bgy
+0603035030,Malag-it PequeÃ±o,Bgy
 0603035031,Mambiranan Grande,Bgy
-0603035032,Mambiranan Pequeño,Bgy
+0603035032,Mambiranan PequeÃ±o,Bgy
 0603035033,Man-it,Bgy
 0603035034,Mantulang,Bgy
 0603035035,Mulapula,Bgy
@@ -23131,7 +23131,7 @@
 0603035040,Poblacion Ilaya,Bgy
 0603035041,Punong,Bgy
 0603035042,Quinagaringan Grande,Bgy
-0603035043,Quinagaringan Pequeño,Bgy
+0603035043,Quinagaringan PequeÃ±o,Bgy
 0603035044,Sablogon,Bgy
 0603035045,Salngan,Bgy
 0603035046,Santo Tomas,Bgy
@@ -23213,7 +23213,7 @@
 0603038003,Bagacay,Bgy
 0603038004,Batuan,Bgy
 0603038005,Bondulan,Bgy
-0603038006,Boroñgon,Bgy
+0603038006,BoroÃ±gon,Bgy
 0603038007,Canas,Bgy
 0603038008,Capinang,Bgy
 0603038009,Cubay,Bgy
@@ -23251,7 +23251,7 @@
 0603039012,Dumiles,Bgy
 0603039013,Garita,Bgy
 0603039014,Gines Nuevo,Bgy
-0603039015,Imbang Pequeño,Bgy
+0603039015,Imbang PequeÃ±o,Bgy
 0603039016,Imbesad-an,Bgy
 0603039017,Iprog,Bgy
 0603039018,Lip-ac,Bgy
@@ -23373,7 +23373,7 @@
 0603041021,Santa Cruz,Bgy
 0603041022,Santa Teresa,Bgy
 0603041023,Santo Angel,Bgy
-0603041024,Santo Niño,Bgy
+0603041024,Santo NiÃ±o,Bgy
 0603042001,Aripdip,Bgy
 0603042002,Bagacay,Bgy
 0603042003,Calaigang,Bgy
@@ -23626,7 +23626,7 @@
 0607901019,Nazaret,Bgy
 0607901020,New Poblacion ,Bgy
 0607901021,Old Poblacion,Bgy
-0607901022,Piña,Bgy
+0607901022,PiÃ±a,Bgy
 0607901023,Rizal,Bgy
 0607901024,Salvacion,Bgy
 0607901025,San Fernando,Bgy
@@ -23713,7 +23713,7 @@
 0631000005,Alalasan Lapuz,Bgy
 0631000006,Arguelles,Bgy
 0631000007,Arsenal Aduana,Bgy
-0631000008,North Avanceña,Bgy
+0631000008,North AvanceÃ±a,Bgy
 0631000009,Bakhaw,Bgy
 0631000010,Balabago,Bgy
 0631000011,Balantang,Bgy
@@ -23815,10 +23815,10 @@
 0631000117,North Fundidor,Bgy
 0631000118,North Baluarte,Bgy
 0631000119,North San Jose,Bgy
-0631000120,Oñate de Leon,Bgy
+0631000120,OÃ±ate de Leon,Bgy
 0631000121,Obrero-Lapuz,Bgy
 0631000122,Ortiz,Bgy
-0631000123,Osmeña,Bgy
+0631000123,OsmeÃ±a,Bgy
 0631000124,Our Lady Of Lourdes,Bgy
 0631000125,Rizal Palapala I,Bgy
 0631000126,Rizal Palapala II,Bgy
@@ -23854,8 +23854,8 @@
 0631000164,Santa Filomena,Bgy
 0631000165,Santa Rosa,Bgy
 0631000166,Santo Domingo,Bgy
-0631000167,Santo Niño Norte,Bgy
-0631000168,Santo Niño Sur,Bgy
+0631000167,Santo NiÃ±o Norte,Bgy
+0631000168,Santo NiÃ±o Sur,Bgy
 0631000169,Santo Rosario-Duran,Bgy
 0631000170,Simon Ledesma,Bgy
 0631000171,So-oc,Bgy
@@ -24041,7 +24041,7 @@
 1804508016,Pasil,Bgy
 1804508017,San Isidro,Bgy
 1804508018,San Jose,Bgy
-1804508019,Santo Niño,Bgy
+1804508019,Santo NiÃ±o,Bgy
 1804508020,Tabigue,Bgy
 1804508021,Tanza,Bgy
 1804508022,Tuburan,Bgy
@@ -24545,7 +24545,7 @@
 1804604001,Barangay I ,Bgy
 1804604002,Barangay II ,Bgy
 1804604003,Basak,Bgy
-1804604004,Biñohon,Bgy
+1804604004,BiÃ±ohon,Bgy
 1804604005,Cabanlutan,Bgy
 1804604006,Calasga-an,Bgy
 1804604007,Cambagahan,Bgy
@@ -24553,7 +24553,7 @@
 1804604009,Cambanjao,Bgy
 1804604010,Cambuilao,Bgy
 1804604011,Canlargo,Bgy
-1804604012,Capiñahan,Bgy
+1804604012,CapiÃ±ahan,Bgy
 1804604013,Consolacion,Bgy
 1804604014,Dansulan,Bgy
 1804604015,Hangyad,Bgy
@@ -24631,7 +24631,7 @@
 1804607014,Nagcasunog,Bgy
 1804607015,Nalundan,Bgy
 1804607016,Pangalaycayan,Bgy
-1804607017,Peñahan,Bgy
+1804607017,PeÃ±ahan,Bgy
 1804607018,Poblacion,Bgy
 1804607019,Salong,Bgy
 1804607020,Tagaytay,Bgy
@@ -24876,8 +24876,8 @@
 1804617008,Naiba,Bgy
 1804617009,Poblacion,Bgy
 1804617010,San Roque,Bgy
-1804617011,Santo Niño,Bgy
-1804617012,Señora Ascion,Bgy
+1804617011,Santo NiÃ±o,Bgy
+1804617012,SeÃ±ora Ascion,Bgy
 1804617013,Siapo,Bgy
 1804617014,Tampi,Bgy
 1804617015,Tapon Norte,Bgy
@@ -24966,7 +24966,7 @@
 1804621020,San Miguel,Bgy
 1804621021,Santa Cruz Nuevo,Bgy
 1804621022,Santa Cruz Viejo,Bgy
-1804621023,Santo Niño,Bgy
+1804621023,Santo NiÃ±o,Bgy
 1804621025,Tugas,Bgy
 1804622001,Bacong,Bgy
 1804622002,Bago,Bgy
@@ -25349,7 +25349,7 @@
 0701206027,Sal-ing,Bgy
 0701206028,San Isidro,Bgy
 0701206029,San Roque,Bgy
-0701206030,Santo Niño,Bgy
+0701206030,Santo NiÃ±o,Bgy
 0701206031,Tagustusan,Bgy
 0701207001,Aloja,Bgy
 0701207002,Cabacnitan,Bgy
@@ -25599,7 +25599,7 @@
 0701218011,San Carlos,Bgy
 0701218012,San Miguel,Bgy
 0701218013,Santa Fe,Bgy
-0701218014,Santo Niño,Bgy
+0701218014,Santo NiÃ±o,Bgy
 0701218015,Tabok,Bgy
 0701218016,Taming,Bgy
 0701218017,Villa Anunciado,Bgy
@@ -25763,7 +25763,7 @@
 0701224044,Saa,Bgy
 0701224045,San Isidro,Bgy
 0701224046,San Jose,Bgy
-0701224047,Santo Niño,Bgy
+0701224047,Santo NiÃ±o,Bgy
 0701224048,Santo Rosario,Bgy
 0701224049,Sua,Bgy
 0701224050,Tambook,Bgy
@@ -25823,7 +25823,7 @@
 0701226019,Saguise,Bgy
 0701226020,Salog,Bgy
 0701226021,San Jose,Bgy
-0701226022,Santo Niño,Bgy
+0701226022,Santo NiÃ±o,Bgy
 0701226023,Taytay,Bgy
 0701226024,Tugas,Bgy
 0701226025,Tulang,Bgy
@@ -26114,7 +26114,7 @@
 0701238015,San Isidro,Bgy
 0701238016,San Jose,Bgy
 0701238017,San Vicente,Bgy
-0701238018,Santo Niño,Bgy
+0701238018,Santo NiÃ±o,Bgy
 0701238019,Tomoc,Bgy
 0701239001,Bayawahan,Bgy
 0701239002,Cabancalan,Bgy
@@ -26196,7 +26196,7 @@
 0701243030,San Jose,Bgy
 0701243031,San Pedro,Bgy
 0701243032,San Roque,Bgy
-0701243033,Santo Niño,Bgy
+0701243033,Santo NiÃ±o,Bgy
 0701243034,Sikatuna,Bgy
 0701243035,Suba,Bgy
 0701243036,Tanghaligue,Bgy
@@ -26518,7 +26518,7 @@
 0702208025,Sunog,Bgy
 0702208026,Vito,Bgy
 0702208027,Baliwagan ,Bgy
-0702208028,Santa Cruz-Santo Niño ,Bgy
+0702208028,Santa Cruz-Santo NiÃ±o ,Bgy
 0702209001,Atop-atop,Bgy
 0702209002,Baigad,Bgy
 0702209003,Baod,Bgy
@@ -26610,7 +26610,7 @@
 0702211022,Polambato,Bgy
 0702211023,Sambag ,Bgy
 0702211024,San Vicente ,Bgy
-0702211025,Santo Niño,Bgy
+0702211025,Santo NiÃ±o,Bgy
 0702211026,Santo Rosario ,Bgy
 0702211027,Siocon,Bgy
 0702211028,Taytayan,Bgy
@@ -26926,17 +26926,17 @@
 0702228012,Talangnan,Bgy
 0702228013,Tarong,Bgy
 0702228014,Tugas,Bgy
-0702229001,Armeña,Bgy
+0702229001,ArmeÃ±a,Bgy
 0702229004,Tolosa,Bgy
-0702229005,Cerdeña,Bgy
+0702229005,CerdeÃ±a,Bgy
 0702229006,Labrador,Bgy
 0702229007,Looc,Bgy
 0702229008,Lombo,Bgy
 0702229009,Mahanlud,Bgy
 0702229010,Mindanao,Bgy
-0702229011,Montañeza,Bgy
+0702229011,MontaÃ±eza,Bgy
 0702229012,Salmeron,Bgy
-0702229013,Santo Niño,Bgy
+0702229013,Santo NiÃ±o,Bgy
 0702229014,Sorsogon,Bgy
 0702229015,Barangay I ,Bgy
 0702229016,Barangay II ,Bgy
@@ -27026,7 +27026,7 @@
 0702235003,Bonbon,Bgy
 0702235004,Calumpang,Bgy
 0702235005,Canangca-an,Bgy
-0702235006,Cañang,Bgy
+0702235006,CaÃ±ang,Bgy
 0702235007,Can-ukban,Bgy
 0702235009,Cansalo-ay,Bgy
 0702235010,Daanlungsod,Bgy
@@ -27181,7 +27181,7 @@
 0702243016,Libaong,Bgy
 0702243017,Looc,Bgy
 0702243018,Luyang,Bgy
-0702243019,Maño,Bgy
+0702243019,MaÃ±o,Bgy
 0702243020,Poblacion,Bgy
 0702243021,Punta,Bgy
 0702243022,Sab-a,Bgy
@@ -27345,7 +27345,7 @@
 0702251031,Sagay,Bgy
 0702251032,Sam-ang,Bgy
 0702251033,Sangi,Bgy
-0702251034,Santo Niño,Bgy
+0702251034,Santo NiÃ±o,Bgy
 0702251035,Subayon,Bgy
 0702251037,Talavera,Bgy
 0702251038,Tungkay,Bgy
@@ -27391,7 +27391,7 @@
 0702252040,Putat,Bgy
 0702252041,San Juan,Bgy
 0702252042,Sandayong,Bgy
-0702252043,Santo Niño,Bgy
+0702252043,Santo NiÃ±o,Bgy
 0702252044,Siotes,Bgy
 0702252045,Sumon,Bgy
 0702252046,Tominjao,Bgy
@@ -27516,7 +27516,7 @@
 0731100019,Pajo,Bgy
 0731100020,Pangan-an,Bgy
 0731100021,Poblacion,Bgy
-0731100022,Punta Engaño,Bgy
+0731100022,Punta EngaÃ±o,Bgy
 0731100024,Pusok,Bgy
 0731100025,Sabang,Bgy
 0731100026,Santa Rosa,Bgy
@@ -27707,7 +27707,7 @@
 0802606016,Libertad,Bgy
 0802606018,Magsaysay,Bgy
 0802606019,Malobago,Bgy
-0802606020,Osmeña,Bgy
+0802606020,OsmeÃ±a,Bgy
 0802606022,Barangay 1 ,Bgy
 0802606023,Barangay 10 ,Bgy
 0802606024,Barangay 11 ,Bgy
@@ -27729,7 +27729,7 @@
 0802606040,San Roque,Bgy
 0802606041,San Vicente,Bgy
 0802606042,Santa Cruz,Bgy
-0802606043,Santo Niño,Bgy
+0802606043,Santo NiÃ±o,Bgy
 0802606044,Tanauan,Bgy
 0802606046,Villahermosa,Bgy
 0802606047,Bonghon,Bgy
@@ -27742,7 +27742,7 @@
 0802607005,Domrog,Bgy
 0802607006,Limbujan,Bgy
 0802607007,Magsaysay,Bgy
-0802607008,Osmeña,Bgy
+0802607008,OsmeÃ±a,Bgy
 0802607009,Pingan,Bgy
 0802607010,Poblacion Barangay 1,Bgy
 0802607011,Poblacion Barangay 2,Bgy
@@ -27841,7 +27841,7 @@
 0802609060,Hagna,Bgy
 0802609061,Hollywood,Bgy
 0802609062,San Juan,Bgy
-0802609063,Santo Niño,Bgy
+0802609063,Santo NiÃ±o,Bgy
 0802609064,Tagporo,Bgy
 0802610001,Batang,Bgy
 0802610002,Cacatmonan,Bgy
@@ -28027,7 +28027,7 @@
 0802618018,San Vicente,Bgy
 0802618019,Santa Cruz,Bgy
 0802618020,Santa Margarita,Bgy
-0802618021,Santo Niño,Bgy
+0802618021,Santo NiÃ±o,Bgy
 0802618022,Palactad,Bgy
 0802618023,Alang-alang,Bgy
 0802618024,Barangay No. 6 ,Bgy
@@ -28121,7 +28121,7 @@
 0802622012,San Juan,Bgy
 0802622013,San Mateo,Bgy
 0802622014,San Vicente,Bgy
-0802622015,Santo Niño,Bgy
+0802622015,Santo NiÃ±o,Bgy
 0802622016,Santo Tomas,Bgy
 0802622017,Tabi ,Bgy
 0802622018,Abucay ,Bgy
@@ -28202,7 +28202,7 @@
 0803701051,San Roque,Bgy
 0803701052,Santa Fe ,Bgy
 0803701053,Santa Lucia ,Bgy
-0803701054,Santo Niño ,Bgy
+0803701054,Santo NiÃ±o ,Bgy
 0803701055,Tabigue,Bgy
 0803701056,Tadoc,Bgy
 0803701057,New Taligue,Bgy
@@ -28243,7 +28243,7 @@
 0803702030,Magsaysay,Bgy
 0803702031,Mudboron,Bgy
 0803702032,P. Barrantes,Bgy
-0803702033,Peñalosa,Bgy
+0803702033,PeÃ±alosa,Bgy
 0803702034,Pepita,Bgy
 0803702035,Salvacion Poblacion,Bgy
 0803702036,San Antonio,Bgy
@@ -28254,7 +28254,7 @@
 0803702041,San Pedro,Bgy
 0803702042,San Vicente,Bgy
 0803702043,Santiago,Bgy
-0803702044,Santo Niño ,Bgy
+0803702044,Santo NiÃ±o ,Bgy
 0803702045,Santol,Bgy
 0803702046,Tabangohay,Bgy
 0803702047,Tombo,Bgy
@@ -28271,7 +28271,7 @@
 0803703003,Benolho,Bgy
 0803703004,Cambalading,Bgy
 0803703005,Damula-an,Bgy
-0803703006,Doña Maria,Bgy
+0803703006,DoÃ±a Maria,Bgy
 0803703008,Mahayag,Bgy
 0803703009,Mahayahay,Bgy
 0803703010,Poblacion,Bgy
@@ -28363,12 +28363,12 @@
 0803707018,Liberty,Bgy
 0803707019,Mabini,Bgy
 0803707020,Naga,Bgy
-0803707021,Osmeña,Bgy
+0803707021,OsmeÃ±a,Bgy
 0803707022,Plaridel,Bgy
 0803707023,Kalanggaman District ,Bgy
 0803707026,Ponong,Bgy
 0803707027,San Agustin,Bgy
-0803707028,Santo Niño,Bgy
+0803707028,Santo NiÃ±o,Bgy
 0803707029,Tabunok,Bgy
 0803707030,Tagaytay,Bgy
 0803707031,Tinago District ,Bgy
@@ -28614,7 +28614,7 @@
 0803714016,Poblacion Zone II,Bgy
 0803714017,Potot,Bgy
 0803714018,San Joaquin,Bgy
-0803714019,Santo Niño,Bgy
+0803714019,Santo NiÃ±o,Bgy
 0803714020,Talairan,Bgy
 0803714021,Talisay,Bgy
 0803714022,Tolibao,Bgy
@@ -28816,7 +28816,7 @@
 0803719037,San Roque,Bgy
 0803719038,Santa Cruz,Bgy
 0803719039,Santa Margarita,Bgy
-0803719041,Santo Niño,Bgy
+0803719041,Santo NiÃ±o,Bgy
 0803719042,Tabunok,Bgy
 0803719043,Tagnate,Bgy
 0803719044,Talisay,Bgy
@@ -28888,7 +28888,7 @@
 0803722018,San Francisco,Bgy
 0803722019,San Roque,Bgy
 0803722020,Santa Cruz,Bgy
-0803722021,Santo Niño ,Bgy
+0803722021,Santo NiÃ±o ,Bgy
 0803722022,Santo Rosario,Bgy
 0803722023,Tabunok,Bgy
 0803722024,Tolingon,Bgy
@@ -28927,7 +28927,7 @@
 0803723033,San Pedro,Bgy
 0803723034,San Roque,Bgy
 0803723035,Santa Cruz,Bgy
-0803723036,Santo Niño,Bgy
+0803723036,Santo NiÃ±o,Bgy
 0803723037,Sari-sari,Bgy
 0803723038,Tinambacan,Bgy
 0803723039,Tuba,Bgy
@@ -28989,7 +28989,7 @@
 0803725022,San Andres,Bgy
 0803725023,San Pablo,Bgy
 0803725024,Sta. Cruz,Bgy
-0803725025,Sto. Niño,Bgy
+0803725025,Sto. NiÃ±o,Bgy
 0803725026,Tagkip,Bgy
 0803725027,Tolosahay,Bgy
 0803725028,Villa Hermosa,Bgy
@@ -29012,7 +29012,7 @@
 0803726017,San Ignacio,Bgy
 0803726018,San Isidro,Bgy
 0803726019,Santo Domingo,Bgy
-0803726020,Santo Niño,Bgy
+0803726020,Santo NiÃ±o,Bgy
 0803726021,Tagaytay,Bgy
 0803726022,Tongonan,Bgy
 0803726023,Tugbong,Bgy
@@ -29027,7 +29027,7 @@
 0803728009,Calabnian,Bgy
 0803728010,Calaghusan,Bgy
 0803728011,Caltayan,Bgy
-0803728012,Canbañez,Bgy
+0803728012,CanbaÃ±ez,Bgy
 0803728013,Cogon,Bgy
 0803728014,Duyog,Bgy
 0803728015,Gimiranat East,Bgy
@@ -29093,7 +29093,7 @@
 0803730011,Liwayway,Bgy
 0803730012,Maya,Bgy
 0803730013,Oguisan,Bgy
-0803730014,Osmeña,Bgy
+0803730014,OsmeÃ±a,Bgy
 0803730015,Palale 1,Bgy
 0803730016,Palale 2,Bgy
 0803730017,Poblacion District 1,Bgy
@@ -29110,7 +29110,7 @@
 0803730028,Santa Isabel,Bgy
 0803730029,Tinawan,Bgy
 0803730030,Tuyo,Bgy
-0803730031,Doña Josefa,Bgy
+0803730031,DoÃ±a Josefa,Bgy
 0803730032,Villa Imelda,Bgy
 0803731001,Campin,Bgy
 0803731002,Cuatro De Agosto,Bgy
@@ -29139,7 +29139,7 @@
 0803731025,Upper Mahaplag,Bgy
 0803731026,Hiluctogan,Bgy
 0803731027,Maligaya,Bgy
-0803731028,Sto. Niño,Bgy
+0803731028,Sto. NiÃ±o,Bgy
 0803733001,Balagtas,Bgy
 0803733002,Bulak,Bgy
 0803733003,Cambadbad,Bgy
@@ -29176,7 +29176,7 @@
 0803734014,Monte Alegre,Bgy
 0803734016,San Isidro ,Bgy
 0803734017,San Pedro ,Bgy
-0803734018,Santo Niño ,Bgy
+0803734018,Santo NiÃ±o ,Bgy
 0803734019,President Garcia,Bgy
 0803734020,Punong,Bgy
 0803734021,San Juan,Bgy
@@ -29284,7 +29284,7 @@
 0803738083,San Jose,Bgy
 0803738084,San Juan,Bgy
 0803738086,San Vicente,Bgy
-0803738087,Santo Niño,Bgy
+0803738087,Santo NiÃ±o,Bgy
 0803738088,San Pablo,Bgy
 0803738089,Sumangga,Bgy
 0803738090,Valencia,Bgy
@@ -29307,7 +29307,7 @@
 0803738108,Alta Vista,Bgy
 0803738109,Bagong Buhay,Bgy
 0803738110,Bayog,Bgy
-0803738111,Doña Feliza Z. Mejia,Bgy
+0803738111,DoÃ±a Feliza Z. Mejia,Bgy
 0803738112,Juaton,Bgy
 0803738113,Luna,Bgy
 0803738114,Mabato,Bgy
@@ -29432,7 +29432,7 @@
 0803742005,Biasong,Bgy
 0803742006,Bunacan,Bgy
 0803742008,Cabungaan,Bgy
-0803742009,Capiñahan ,Bgy
+0803742009,CapiÃ±ahan ,Bgy
 0803742010,Crossing ,Bgy
 0803742011,Daja-daku,Bgy
 0803742012,Daja-diot,Bgy
@@ -29563,7 +29563,7 @@
 0803748047,San Victor,Bgy
 0803748048,Santa Cruz,Bgy
 0803748049,Santa Elena,Bgy
-0803748050,Santo Niño Pob.,Bgy
+0803748050,Santo NiÃ±o Pob.,Bgy
 0803748051,Solano,Bgy
 0803748052,Talolora,Bgy
 0803748053,Tugop,Bgy
@@ -29582,7 +29582,7 @@
 0803749011,San Vicente,Bgy
 0803749012,Tanghas,Bgy
 0803749013,Telegrafo,Bgy
-0803749014,Doña Brigida,Bgy
+0803749014,DoÃ±a Brigida,Bgy
 0803749015,Imelda,Bgy
 0803750001,Astorga,Bgy
 0803750002,Balire,Bgy
@@ -29591,7 +29591,7 @@
 0803750005,San Pedro,Bgy
 0803750006,San Roque,Bgy
 0803750007,San Vicente ,Bgy
-0803750008,Santo Niño ,Bgy
+0803750008,Santo NiÃ±o ,Bgy
 0803751001,Abijao,Bgy
 0803751002,Balite,Bgy
 0803751003,Bugabuga,Bgy
@@ -29654,7 +29654,7 @@
 0804802007,Progresso,Bgy
 0804802008,San Antonio,Bgy
 0804802009,San Pedro,Bgy
-0804802010,Santo Niño,Bgy
+0804802010,Santo NiÃ±o,Bgy
 0804803001,Acerida,Bgy
 0804803002,Arellano,Bgy
 0804803003,Balat-balud,Bgy
@@ -29701,7 +29701,7 @@
 0804805020,Guba,Bgy
 0804805021,Gebalagnan,Bgy
 0804805022,Gebulwangan,Bgy
-0804805025,Doña Pulqueria,Bgy
+0804805025,DoÃ±a Pulqueria,Bgy
 0804805026,Hinatad,Bgy
 0804805027,Imelda,Bgy
 0804805028,Liberty,Bgy
@@ -29766,7 +29766,7 @@
 0804806028,Nahulid,Bgy
 0804806029,Opong,Bgy
 0804806030,Osang,Bgy
-0804806031,Osmeña,Bgy
+0804806031,OsmeÃ±a,Bgy
 0804806032,P. Rebadulla,Bgy
 0804806033,Roxas,Bgy
 0804806034,Sagudsuron,Bgy
@@ -29910,7 +29910,7 @@
 0804810024,Macarthur,Bgy
 0804810025,Magsaysay,Bgy
 0804810026,Matelarag,Bgy
-0804810027,Osmeña,Bgy
+0804810027,OsmeÃ±a,Bgy
 0804810028,Paco,Bgy
 0804810029,Palanas,Bgy
 0804810030,Perez,Bgy
@@ -29983,7 +29983,7 @@
 0804813005,Cahicsan,Bgy
 0804813006,Chitongco ,Bgy
 0804813007,De Maria,Bgy
-0804813008,Doña Lucia,Bgy
+0804813008,DoÃ±a Lucia,Bgy
 0804813009,Eco ,Bgy
 0804813010,Flormina,Bgy
 0804813011,Hinabangan,Bgy
@@ -30021,7 +30021,7 @@
 0804814019,Napo,Bgy
 0804814020,Natawo,Bgy
 0804814021,Nipa,Bgy
-0804814022,Osmeña,Bgy
+0804814022,OsmeÃ±a,Bgy
 0804814023,Pangpang,Bgy
 0804814024,Paysud,Bgy
 0804814026,Sangay,Bgy
@@ -30036,7 +30036,7 @@
 0804815004,Cabari-an,Bgy
 0804815005,Cagbigajo,Bgy
 0804815007,Canjumadal,Bgy
-0804815008,Doña Anecita,Bgy
+0804815008,DoÃ±a Anecita,Bgy
 0804815009,Camparanga,Bgy
 0804815010,Ge-adgawan,Bgy
 0804815011,Ginulgan,Bgy
@@ -30187,7 +30187,7 @@
 0804824011,Lower Caynaga,Bgy
 0804824012,Maghipid,Bgy
 0804824013,Magsaysay,Bgy
-0804824014,Osmeña,Bgy
+0804824014,OsmeÃ±a,Bgy
 0804824015,Paguite,Bgy
 0804824016,Roxas,Bgy
 0804824017,Sampaguita,Bgy
@@ -30215,7 +30215,7 @@
 0806001028,Mabuhay,Bgy
 0806001029,Magsaysay,Bgy
 0806001030,Panjobjoban II,Bgy
-0806001031,Roño,Bgy
+0806001031,RoÃ±o,Bgy
 0806001032,San Isidro,Bgy
 0806001033,San Jose,Bgy
 0806001034,Veloso,Bgy
@@ -30270,7 +30270,7 @@
 0806002050,Villa Aurora,Bgy
 0806002051,Binongtu-an,Bgy
 0806002052,Bulao,Bgy
-0806003001,Jose A. Roño,Bgy
+0806003001,Jose A. RoÃ±o,Bgy
 0806003002,Acedillo,Bgy
 0806003003,Alibaba,Bgy
 0806003004,Amampacang,Bgy
@@ -30372,14 +30372,14 @@
 0806003112,Obrero,Bgy
 0806003113,Olera,Bgy
 0806003114,Oquendo ,Bgy
-0806003115,Osmeña,Bgy
+0806003115,OsmeÃ±a,Bgy
 0806003116,Palanas,Bgy
 0806003117,Palanogan,Bgy
 0806003118,Panlayahan,Bgy
 0806003119,Panonongon,Bgy
 0806003120,Panoypoy,Bgy
 0806003121,Patong,Bgy
-0806003122,Peña,Bgy
+0806003122,PeÃ±a,Bgy
 0806003123,Pilar,Bgy
 0806003124,Pinamorotan,Bgy
 0806003126,Quezon,Bgy
@@ -30513,7 +30513,7 @@
 0806005044,Poblacion 11,Bgy
 0806005045,Poblacion 12,Bgy
 0806005046,Poblacion 13,Bgy
-0806005047,Muñoz,Bgy
+0806005047,MuÃ±oz,Bgy
 0806005048,Pupua,Bgy
 0806005049,Guindaponan,Bgy
 0806005050,Rama,Bgy
@@ -30617,7 +30617,7 @@
 0806007058,Ngoso,Bgy
 0806007059,Palambrag,Bgy
 0806007060,Palanas,Bgy
-0806007061,Piñaplata,Bgy
+0806007061,PiÃ±aplata,Bgy
 0806007062,Pizarro,Bgy
 0806007063,Pologon,Bgy
 0806007064,Purog,Bgy
@@ -30634,7 +30634,7 @@
 0806007080,San Pelayo,Bgy
 0806007081,San Ramon,Bgy
 0806007082,Santa Elena,Bgy
-0806007083,Santo Niño,Bgy
+0806007083,Santo NiÃ±o,Bgy
 0806007085,Senibaran,Bgy
 0806007087,Tagnao,Bgy
 0806007088,Tambongan,Bgy
@@ -30661,7 +30661,7 @@
 0806008007,Concord,Bgy
 0806008008,Dalosdoson,Bgy
 0806008009,Lim-ao,Bgy
-0806008010,Osmeña,Bgy
+0806008010,OsmeÃ±a,Bgy
 0806008012,Poblacion 1,Bgy
 0806008013,Poblacion 2,Bgy
 0806008014,Rawis,Bgy
@@ -30713,12 +30713,12 @@
 0806010004,Ferreras,Bgy
 0806010005,Legaspi,Bgy
 0806010006,Logero,Bgy
-0806010007,Osmeña,Bgy
+0806010007,OsmeÃ±a,Bgy
 0806010008,Pinalanga,Bgy
 0806010009,Pinamitinan ,Bgy
 0806010010,Catato Pob.,Bgy
 0806010011,San Roque,Bgy
-0806010012,Santo Niño Pob.,Bgy
+0806010012,Santo NiÃ±o Pob.,Bgy
 0806010013,Tagalag,Bgy
 0806010014,Tinabanan,Bgy
 0806010015,Amantillo,Bgy
@@ -30728,7 +30728,7 @@
 0806010019,Malobago,Bgy
 0806010020,Odoc,Bgy
 0806010021,Panan-awan,Bgy
-0806010022,Roño,Bgy
+0806010022,RoÃ±o,Bgy
 0806010023,Santa Rita,Bgy
 0806010024,Veloso,Bgy
 0806011001,Angyap,Bgy
@@ -30778,7 +30778,7 @@
 0806012026,Oyandic,Bgy
 0806012027,Pamamasan,Bgy
 0806012028,San Andres,Bgy
-0806012029,Santo Niño,Bgy
+0806012029,Santo NiÃ±o,Bgy
 0806012030,Sarao,Bgy
 0806012031,Pusongan,Bgy
 0806013001,Bangon,Bgy
@@ -31004,7 +31004,7 @@
 0806021036,San Rafael,Bgy
 0806021037,San Roque,Bgy
 0806021038,Santa Rosa,Bgy
-0806021039,Santo Niño,Bgy
+0806021039,Santo NiÃ±o,Bgy
 0806021040,Soledad ,Bgy
 0806021041,Tayud ,Bgy
 0806021042,Tomabe,Bgy
@@ -31021,7 +31021,7 @@
 0806022010,Cantato,Bgy
 0806022011,Casandig I,Bgy
 0806022012,Concepcion,Bgy
-0806022013,Jose Roño,Bgy
+0806022013,Jose RoÃ±o,Bgy
 0806022014,Cawayan,Bgy
 0806022015,Lawaan I,Bgy
 0806022016,Lipata,Bgy
@@ -31044,7 +31044,7 @@
 0806022033,Poblacion 6,Bgy
 0806022038,Salay,Bgy
 0806022039,San Isidro,Bgy
-0806022040,Santo Niño,Bgy
+0806022040,Santo NiÃ±o,Bgy
 0806022041,Sulopan,Bgy
 0806022042,Tabucan,Bgy
 0806022043,Tapul,Bgy
@@ -31139,12 +31139,12 @@
 0806026007,Calanyugan,Bgy
 0806026008,Caloloma,Bgy
 0806026009,Cambaye,Bgy
-0806026010,Pañge,Bgy
+0806026010,PaÃ±ge,Bgy
 0806026011,San Luis,Bgy
 0806026012,Villahermosa Occidental,Bgy
 0806026013,Canlapwas ,Bgy
 0806026014,Libertad,Bgy
-0806026015,Santo Niño,Bgy
+0806026015,Santo NiÃ±o,Bgy
 0806026016,Viejo,Bgy
 0806026017,Villahermosa Oriental,Bgy
 0806401001,Amagusan,Bgy
@@ -31200,7 +31200,7 @@
 0806402037,Anahao,Bgy
 0806402038,Pong-on,Bgy
 0806402039,San Ramon,Bgy
-0806402040,Santo Niño,Bgy
+0806402040,Santo NiÃ±o,Bgy
 0806403001,Ambacon,Bgy
 0806403002,Badiangon,Bgy
 0806403003,Bangcas A,Bgy
@@ -31231,8 +31231,8 @@
 0806403028,Salvacion,Bgy
 0806403029,San Pablo Island,Bgy
 0806403030,San Pedro Island,Bgy
-0806403031,Santo Niño I,Bgy
-0806403032,Santo Niño II,Bgy
+0806403031,Santo NiÃ±o I,Bgy
+0806403032,Santo NiÃ±o II,Bgy
 0806403033,Tahusan,Bgy
 0806403034,Talisay,Bgy
 0806403035,Tawog,Bgy
@@ -31351,7 +31351,7 @@
 0806407053,San Rafael,Bgy
 0806407054,Santa Cruz,Bgy
 0806407055,Santa Rosa,Bgy
-0806407056,Santo Niño,Bgy
+0806407056,Santo NiÃ±o,Bgy
 0806407057,Santo Rosario,Bgy
 0806407058,Soro-soro,Bgy
 0806407059,Tagnipa ,Bgy
@@ -31391,7 +31391,7 @@
 0806408025,Danao,Bgy
 0806408026,Guadalupe,Bgy
 0806408027,San Vicente Poblacion,Bgy
-0806408028,Santo Niño,Bgy
+0806408028,Santo NiÃ±o,Bgy
 0806408029,San Vicente,Bgy
 0806408030,Santa Cruz ,Bgy
 0806408031,Santo Rosario ,Bgy
@@ -31432,7 +31432,7 @@
 0806409035,New Katipunan,Bgy
 0806409036,Pancil,Bgy
 0806409037,San Isidro,Bgy
-0806409038,Santo Niño,Bgy
+0806409038,Santo NiÃ±o,Bgy
 0806410001,Buenavista,Bgy
 0806410002,Bunga,Bgy
 0806410003,Laca,Bgy
@@ -31530,7 +31530,7 @@
 0806414009,San Jose ,Bgy
 0806414010,San Vicente,Bgy
 0806414011,Santa Cruz ,Bgy
-0806414012,Santo Niño ,Bgy
+0806414012,Santo NiÃ±o ,Bgy
 0806414013,Somoje,Bgy
 0806414014,Sua,Bgy
 0806414015,Timba,Bgy
@@ -31757,7 +31757,7 @@
 0807808002,Anislagan,Bgy
 0807808003,Atipolo,Bgy
 0807808004,Calumpang,Bgy
-0807808005,Capiñahan,Bgy
+0807808005,CapiÃ±ahan,Bgy
 0807808006,Caraycaray,Bgy
 0807808007,Catmon,Bgy
 0807808008,Haguikhikan,Bgy
@@ -31767,7 +31767,7 @@
 0807808013,Lucsoon,Bgy
 0807808014,Mabini,Bgy
 0807808015,San Pablo,Bgy
-0807808016,Santo Niño,Bgy
+0807808016,Santo NiÃ±o,Bgy
 0807808017,Santissimo Rosario Pob.,Bgy
 0807808018,Talustusan,Bgy
 0807808019,Villa Caneja,Bgy
@@ -31953,7 +31953,7 @@
 0907201039,Sigayan,Bgy
 0907201040,Selinog,Bgy
 0907201041,Sinonoc,Bgy
-0907201042,Santo Niño,Bgy
+0907201042,Santo NiÃ±o,Bgy
 0907201043,Sulangon,Bgy
 0907201044,Tag-ulo,Bgy
 0907201045,Taguilon,Bgy
@@ -32017,7 +32017,7 @@
 0907203028,Patik,Bgy
 0907203029,Sanao,Bgy
 0907203030,San Vicente,Bgy
-0907203031,Santo Niño,Bgy
+0907203031,Santo NiÃ±o,Bgy
 0907204001,El Paraiso,Bgy
 0907204002,La Union,Bgy
 0907204003,La Victoria,Bgy
@@ -32071,7 +32071,7 @@
 0907206024,San Francisco,Bgy
 0907206025,San Miguel,Bgy
 0907206026,Santa Cruz,Bgy
-0907206027,Santo Niño,Bgy
+0907206027,Santo NiÃ±o,Bgy
 0907206028,Silucap,Bgy
 0907206031,Tapican,Bgy
 0907206032,Timan,Bgy
@@ -32173,7 +32173,7 @@
 0907210023,San Antonio,Bgy
 0907210024,San Miguel,Bgy
 0907210025,San Pedro,Bgy
-0907210026,Santo Niño,Bgy
+0907210026,Santo NiÃ±o,Bgy
 0907210027,Silawe,Bgy
 0907210028,Sianib,Bgy
 0907210029,Villahermosa,Bgy
@@ -32189,8 +32189,8 @@
 0907211009,Moliton,Bgy
 0907211010,Nabilid,Bgy
 0907211011,Pangologon,Bgy
-0907211012,Piñalan,Bgy
-0907211013,Piñamar,Bgy
+0907211012,PiÃ±alan,Bgy
+0907211013,PiÃ±amar,Bgy
 0907211014,Sebod,Bgy
 0907211015,Tanayan,Bgy
 0907211017,Villahermoso,Bgy
@@ -32251,7 +32251,7 @@
 0907213031,Ipilan,Bgy
 0907213032,Lanawan,Bgy
 0907213035,Pukay,Bgy
-0907213036,Santo Niño,Bgy
+0907213036,Santo NiÃ±o,Bgy
 0907213037,Pacuhan,Bgy
 0907213038,Poblacion East,Bgy
 0907214001,Antonino,Bgy
@@ -32313,7 +32313,7 @@
 0907215021,Seriac,Bgy
 0907215022,Siayan Proper ,Bgy
 0907215023,Balunokan,Bgy
-0907215024,Muñoz,Bgy
+0907215024,MuÃ±oz,Bgy
 0907215025,Suguilon,Bgy
 0907216001,Anongan,Bgy
 0907216002,Basak,Bgy
@@ -32334,7 +32334,7 @@
 0907216017,Paniran,Bgy
 0907216018,Poblacion,Bgy
 0907216019,Puliran,Bgy
-0907216020,Santo Niño,Bgy
+0907216020,Santo NiÃ±o,Bgy
 0907216021,Bongalao,Bgy
 0907216022,Cabbunan,Bgy
 0907216023,Culaguan,Bgy
@@ -32391,13 +32391,13 @@
 0907218037,Dagohoy,Bgy
 0907218038,Datagan,Bgy
 0907218039,Disud,Bgy
-0907218040,Doña Josefa,Bgy
+0907218040,DoÃ±a Josefa,Bgy
 0907218041,Gampis,Bgy
 0907218042,Goleo,Bgy
 0907218043,Imelda,Bgy
 0907218044,Joaquin Macias,Bgy
 0907218045,Labakid,Bgy
-0907218050,Santo Niño,Bgy
+0907218050,Santo NiÃ±o,Bgy
 0907218051,Santo Rosario,Bgy
 0907218054,Upper Nipaan,Bgy
 0907218055,Benigno Aquino Jr.,Bgy
@@ -32445,7 +32445,7 @@
 0907220007,Catuyan,Bgy
 0907220009,Culasian,Bgy
 0907220010,Danganon,Bgy
-0907220011,Doña Cecilia,Bgy
+0907220011,DoÃ±a Cecilia,Bgy
 0907220013,Guban,Bgy
 0907220014,Lagundi,Bgy
 0907220015,Libucon,Bgy
@@ -32456,7 +32456,7 @@
 0907220020,Napulan,Bgy
 0907220021,Panabutan,Bgy
 0907220022,Piacan,Bgy
-0907220024,Piña,Bgy
+0907220024,PiÃ±a,Bgy
 0907220025,Pisa Puti,Bgy
 0907220026,Pisa Itom,Bgy
 0907220028,Saint Mary ,Bgy
@@ -32486,7 +32486,7 @@
 0907221013,Lumbayao,Bgy
 0907221014,Malila-t,Bgy
 0907221015,Sandayong,Bgy
-0907221016,Santo Niño,Bgy
+0907221016,Santo NiÃ±o,Bgy
 0907221017,Tilubog,Bgy
 0907221018,Tininggaan,Bgy
 0907221019,Tubod,Bgy
@@ -32537,7 +32537,7 @@
 0907223026,San Juan,Bgy
 0907223027,San Roque,Bgy
 0907223028,San Vicente,Bgy
-0907223029,Santo Niño,Bgy
+0907223029,Santo NiÃ±o,Bgy
 0907223030,Sas,Bgy
 0907223031,Upper Gutalac,Bgy
 0907223032,Immaculada Concepcion,Bgy
@@ -32888,7 +32888,7 @@
 0907315009,Kabuhi,Bgy
 0907315011,Lourmah,Bgy
 0907315012,Lower Salug Daku,Bgy
-0907315013,Lower Santo Niño,Bgy
+0907315013,Lower Santo NiÃ±o,Bgy
 0907315014,Sicpao,Bgy
 0907315015,Malubo,Bgy
 0907315016,Manguiles,Bgy
@@ -32904,7 +32904,7 @@
 0907315027,Tuboran,Bgy
 0907315028,Tumapic,Bgy
 0907315029,Upper Salug Daku,Bgy
-0907315030,Upper Santo Niño,Bgy
+0907315030,Upper Santo NiÃ±o,Bgy
 0907315032,Tulan,Bgy
 0907317001,Balintawak,Bgy
 0907317003,Bularong,Bgy
@@ -33032,7 +33032,7 @@
 0907322052,Kawit,Bgy
 0907322053,Lumbia,Bgy
 0907322054,Santa Maria,Bgy
-0907322055,Santo Niño,Bgy
+0907322055,Santo NiÃ±o,Bgy
 0907322056,Dampalan,Bgy
 0907322057,Dumagoc,Bgy
 0907323001,Bagong Opon,Bgy
@@ -33122,7 +33122,7 @@
 0907327013,Poblacion,Bgy
 0907327014,San Francisco,Bgy
 0907327015,Tultolan,Bgy
-0907327016,Doña Josefina,Bgy
+0907327016,DoÃ±a Josefina,Bgy
 0907328001,Alang-alang,Bgy
 0907328002,Bag-ong Kauswagan,Bgy
 0907328004,Bag-ong Tabogon,Bgy
@@ -33172,7 +33172,7 @@
 0907330020,Sambulawan,Bgy
 0907330021,San Antonio,Bgy
 0907330022,San Carlos ,Bgy
-0907330023,Santo Niño ,Bgy
+0907330023,Santo NiÃ±o ,Bgy
 0907330024,Santo Rosario,Bgy
 0907330025,Sugod,Bgy
 0907330026,Tabuan,Bgy
@@ -33202,7 +33202,7 @@
 0907337007,Lower Bagong Tudela,Bgy
 0907337008,Mansanas,Bgy
 0907337009,Moradji,Bgy
-0907337010,Nemeño,Bgy
+0907337010,NemeÃ±o,Bgy
 0907337011,Nopulan,Bgy
 0907337012,Sebukang,Bgy
 0907337013,Tagaytay Hill,Bgy
@@ -33236,7 +33236,7 @@
 0907340012,Poblacion,Bgy
 0907340013,Rizal,Bgy
 0907340014,San Miguel,Bgy
-0907340015,Santo Niño,Bgy
+0907340015,Santo NiÃ±o,Bgy
 0907340016,Sawa,Bgy
 0907340017,Tungawan,Bgy
 0907340018,Upper Sicpao,Bgy
@@ -33308,7 +33308,7 @@
 0908301018,Payongan,Bgy
 0908301019,Poblacion,Bgy
 0908301020,Santa Maria,Bgy
-0908301021,Santo Niño,Bgy
+0908301021,Santo NiÃ±o,Bgy
 0908301022,Talaptap,Bgy
 0908301023,Tampalan,Bgy
 0908301024,Tandiong Muslim,Bgy
@@ -33409,7 +33409,7 @@
 0908305039,Makilas,Bgy
 0908305040,Caparan,Bgy
 0908305041,Domandan,Bgy
-0908305042,Doña Josefa,Bgy
+0908305042,DoÃ±a Josefa,Bgy
 0908305043,Logan,Bgy
 0908305044,Maasin,Bgy
 0908306002,Banker,Bgy
@@ -33428,7 +33428,7 @@
 0908306016,Timuay Danda,Bgy
 0908306017,Nazareth,Bgy
 0908306018,Palinta,Bgy
-0908306019,Peñaranda,Bgy
+0908306019,PeÃ±aranda,Bgy
 0908306020,Poblacion,Bgy
 0908306021,Riverside,Bgy
 0908306022,Sanghanan,Bgy
@@ -33455,7 +33455,7 @@
 0908307018,Pinalim,Bgy
 0908307019,Poblacion,Bgy
 0908307020,Punawan,Bgy
-0908307023,Santo Niño,Bgy
+0908307023,Santo NiÃ±o,Bgy
 0908307024,Sawa,Bgy
 0908307025,Sioton,Bgy
 0908307026,Taguisian,Bgy
@@ -33673,7 +33673,7 @@
 0908316019,Sisay,Bgy
 0908316020,Gaycon,Bgy
 0908316021,Little Margos,Bgy
-0908316022,Santo Niño,Bgy
+0908316022,Santo NiÃ±o,Bgy
 0908316023,Taglibas,Bgy
 0908316024,Tigpalay,Bgy
 0908316025,Masao,Bgy
@@ -33793,7 +33793,7 @@
 0931700074,Santa Barbara,Bgy
 0931700075,Santa Catalina,Bgy
 0931700076,Santa Maria,Bgy
-0931700077,Santo Niño,Bgy
+0931700077,Santo NiÃ±o,Bgy
 0931700078,Sibulao,Bgy
 0931700079,Sinubung,Bgy
 0931700080,Sinunoc,Bgy
@@ -33864,7 +33864,7 @@
 1001303008,Miaray,Bgy
 1001303009,Migcuya,Bgy
 1001303010,New Visayas,Bgy
-1001303011,Osmeña,Bgy
+1001303011,OsmeÃ±a,Bgy
 1001303012,Poblacion,Bgy
 1001303013,Sagbayan,Bgy
 1001303014,San Vicente,Bgy
@@ -33951,7 +33951,7 @@
 1001308015,Labuagon,Bgy
 1001308016,Magsaysay,Bgy
 1001308018,Marapangi,Bgy
-1001308019,Mascariñas,Bgy
+1001308019,MascariÃ±as,Bgy
 1001308020,Natulongan,Bgy
 1001308021,New Kidapawan,Bgy
 1001308023,Old Kibawe,Bgy
@@ -34066,7 +34066,7 @@
 1001312058,Saint Peter,Bgy
 1001312059,San Jose,Bgy
 1001312060,San Martin,Bgy
-1001312061,Santo Niño,Bgy
+1001312061,Santo NiÃ±o,Bgy
 1001312062,Silae,Bgy
 1001312063,Simaya,Bgy
 1001312064,Sinanglanan,Bgy
@@ -34104,7 +34104,7 @@
 1001314018,San Miguel,Bgy
 1001314019,Sankanan,Bgy
 1001314020,Santiago,Bgy
-1001314021,Santo Niño,Bgy
+1001314021,Santo NiÃ±o,Bgy
 1001314023,Ticala,Bgy
 1001315001,Anahawon,Bgy
 1001315002,Base Camp,Bgy
@@ -34224,7 +34224,7 @@
 1001320013,Liguron,Bgy
 1001320014,Lingi-on,Bgy
 1001320015,Lirongan,Bgy
-1001320016,Santo Niño,Bgy
+1001320016,Santo NiÃ±o,Bgy
 1001320018,Miarayon,Bgy
 1001320019,Barangay 1 ,Bgy
 1001320020,Barangay 2 ,Bgy
@@ -34297,7 +34297,7 @@
 1001801010,Manduao,Bgy
 1001801011,Panghiawan,Bgy
 1001801012,Poblacion,Bgy
-1001801013,Santo Niño,Bgy
+1001801013,Santo NiÃ±o,Bgy
 1001801014,Tangaro,Bgy
 1001802001,Butay,Bgy
 1001802002,Cabuan,Bgy
@@ -34318,7 +34318,7 @@
 1001803011,San Miguel,Bgy
 1001803012,San Roque,Bgy
 1001803013,Tubod,Bgy
-1001803014,Tupsan Pequeño,Bgy
+1001803014,Tupsan PequeÃ±o,Bgy
 1001804001,Agoho,Bgy
 1001804002,Anito,Bgy
 1001804003,Balbagon,Bgy
@@ -34506,7 +34506,7 @@
 1003508021,Rebucon,Bgy
 1003508022,Riverside,Bgy
 1003508023,San Roque,Bgy
-1003508024,Santo Niño,Bgy
+1003508024,Santo NiÃ±o,Bgy
 1003508025,Simbuco,Bgy
 1003508026,Small Banisilan,Bgy
 1003508027,Sucodan,Bgy
@@ -34779,7 +34779,7 @@
 1003522019,Poblacion,Bgy
 1003522020,Pualas,Bgy
 1003522021,San Antonio,Bgy
-1003522022,Santo Niño,Bgy
+1003522022,Santo NiÃ±o,Bgy
 1003522023,Taden,Bgy
 1003522024,Tangueguiron,Bgy
 1003522025,Taguranao,Bgy
@@ -35101,7 +35101,7 @@
 1004210048,Tinago,Bgy
 1004210049,Trigos,Bgy
 1004210051,50th District ,Bgy
-1004210052,Doña Consuelo,Bgy
+1004210052,DoÃ±a Consuelo,Bgy
 1004211001,Baga,Bgy
 1004211002,Bangko,Bgy
 1004211003,Camanucan,Bgy
@@ -35192,7 +35192,7 @@
 1004214014,San Isidro Alto,Bgy
 1004214015,San Isidro Bajo,Bgy
 1004214016,San Vicente,Bgy
-1004214017,Señor,Bgy
+1004214017,SeÃ±or,Bgy
 1004214018,Sinonoc,Bgy
 1004214019,San Lorenzo Ruiz,Bgy
 1004214020,Tipan,Bgy
@@ -35236,7 +35236,7 @@
 1004215038,San Apolinario,Bgy
 1004215039,San Vicente,Bgy
 1004215040,Santa Cruz,Bgy
-1004215041,Santo Niño,Bgy
+1004215041,Santo NiÃ±o,Bgy
 1004215042,Silangit,Bgy
 1004215043,Simasay,Bgy
 1004215044,Sumirap,Bgy
@@ -35560,7 +35560,7 @@
 1004315004,Lubluban,Bgy
 1004315005,Poblacion,Bgy
 1004315006,Retablo,Bgy
-1004315007,Santo Niño,Bgy
+1004315007,Santo NiÃ±o,Bgy
 1004315008,Tangcub,Bgy
 1004315009,Taytayan,Bgy
 1004316001,Aya-aya,Bgy
@@ -35851,7 +35851,7 @@
 1102301010,Camoning,Bgy
 1102301011,Canatan,Bgy
 1102301012,Concepcion,Bgy
-1102301013,Doña Andrea,Bgy
+1102301013,DoÃ±a Andrea,Bgy
 1102301026,Magatos,Bgy
 1102301028,Napungas,Bgy
 1102301029,New Bantayan,Bgy
@@ -35877,7 +35877,7 @@
 1102303015,Minda,Bgy
 1102303016,New Camiling,Bgy
 1102303018,San Isidro,Bgy
-1102303019,Sto. Niño,Bgy
+1102303019,Sto. NiÃ±o,Bgy
 1102303020,Tibulao,Bgy
 1102303021,Tubod,Bgy
 1102303022,Tuganay,Bgy
@@ -35914,7 +35914,7 @@
 1102314015,San Roque,Bgy
 1102314016,Sta. Cruz,Bgy
 1102314017,Sta. Fe,Bgy
-1102314018,Sto. Niño,Bgy
+1102314018,Sto. NiÃ±o,Bgy
 1102314019,Suawon,Bgy
 1102314020,San Jose,Bgy
 1102315001,A. O. Floirendo,Bgy
@@ -35949,7 +35949,7 @@
 1102315031,San Roque,Bgy
 1102315032,San Vicente,Bgy
 1102315033,Santa Cruz,Bgy
-1102315034,Santo Niño ,Bgy
+1102315034,Santo NiÃ±o ,Bgy
 1102315035,Sindaton,Bgy
 1102315036,Southern Davao,Bgy
 1102315037,Tagpore,Bgy
@@ -35984,7 +35984,7 @@
 1102317025,Miranda ,Bgy
 1102317026,Moncado ,Bgy
 1102317027,Pangubatan,Bgy
-1102317028,Peñaplata ,Bgy
+1102317028,PeÃ±aplata ,Bgy
 1102317029,Poblacion,Bgy
 1102317030,San Agustin,Bgy
 1102317031,San Antonio,Bgy
@@ -35994,7 +35994,7 @@
 1102317035,San Miguel,Bgy
 1102317036,San Remigio,Bgy
 1102317037,Santa Cruz,Bgy
-1102317038,Santo Niño,Bgy
+1102317038,Santo NiÃ±o,Bgy
 1102317039,Sion,Bgy
 1102317040,Tagbaobo,Bgy
 1102317041,Tagbay,Bgy
@@ -36047,7 +36047,7 @@
 1102319026,Magugpo West,Bgy
 1102322001,Dagohoy,Bgy
 1102322002,Palma Gil,Bgy
-1102322003,Santo Niño,Bgy
+1102322003,Santo NiÃ±o,Bgy
 1102323001,Cabayangan,Bgy
 1102323002,Dujali,Bgy
 1102323003,Magupising,Bgy
@@ -36064,7 +36064,7 @@
 1102324009,Pinamuno,Bgy
 1102324010,Sabangan,Bgy
 1102324011,San Miguel,Bgy
-1102324012,Santo Niño,Bgy
+1102324012,Santo NiÃ±o,Bgy
 1102324013,Sawata,Bgy
 1102401001,Alegre,Bgy
 1102401002,Alta Vista,Bgy
@@ -36085,7 +36085,7 @@
 1102401017,New Clarin,Bgy
 1102401018,Poblacion,Bgy
 1102401019,Rizal,Bgy
-1102401020,Santo Niño,Bgy
+1102401020,Santo NiÃ±o,Bgy
 1102401021,Sibayan,Bgy
 1102401022,Tinongtongan,Bgy
 1102401023,Tubod,Bgy
@@ -36163,7 +36163,7 @@
 1102406025,San Isidro,Bgy
 1102406026,San Jose,Bgy
 1102406027,San Pedro,Bgy
-1102406028,Santo Niño,Bgy
+1102406028,Santo NiÃ±o,Bgy
 1102406029,Tacub,Bgy
 1102406030,Tacul,Bgy
 1102406031,Waterfall,Bgy
@@ -36239,7 +36239,7 @@
 1102410035,Towak,Bgy
 1102410036,Tibongbong,Bgy
 1102411001,Almendras ,Bgy
-1102411002,"Don Sergio Osmeña, Sr.",Bgy
+1102411002,"Don Sergio OsmeÃ±a, Sr.",Bgy
 1102411003,Harada Butai,Bgy
 1102411004,Lower Katipunan,Bgy
 1102411005,Lower Limonzo,Bgy
@@ -36287,7 +36287,7 @@
 1102414012,Luparan,Bgy
 1102414013,Mckinley,Bgy
 1102414014,New Cebu,Bgy
-1102414015,Osmeña,Bgy
+1102414015,OsmeÃ±a,Bgy
 1102414016,Palili,Bgy
 1102414017,Parame,Bgy
 1102414018,Poblacion,Bgy
@@ -36382,7 +36382,7 @@
 1102506009,Oregon,Bgy
 1102506010,Poblacion,Bgy
 1102506011,Pundaguitan,Bgy
-1102506012,Sergio Osmeña,Bgy
+1102506012,Sergio OsmeÃ±a,Bgy
 1102506013,Surop,Bgy
 1102506014,Tagabebe,Bgy
 1102506015,Tamban,Bgy
@@ -36489,7 +36489,7 @@
 1108201006,Maparat,Bgy
 1108201007,New Alegria,Bgy
 1108201008,Ngan,Bgy
-1108201009,Osmeña,Bgy
+1108201009,OsmeÃ±a,Bgy
 1108201010,Panansalan,Bgy
 1108201011,Poblacion,Bgy
 1108201012,San Jose,Bgy
@@ -36522,7 +36522,7 @@
 1108202023,Concepcion,Bgy
 1108202024,Datu Ampunan,Bgy
 1108202025,Datu Davao,Bgy
-1108202026,Doña Josefa,Bgy
+1108202026,DoÃ±a Josefa,Bgy
 1108202027,El Katipunan,Bgy
 1108202028,Imelda,Bgy
 1108202029,Inacayan,Bgy
@@ -36535,7 +36535,7 @@
 1108202036,Panamoren,Bgy
 1108202037,Sabud,Bgy
 1108202038,Santa Emilia,Bgy
-1108202039,Santo Niño,Bgy
+1108202039,Santo NiÃ±o,Bgy
 1108202040,Sisimon,Bgy
 1108203002,Cadunan,Bgy
 1108203006,Pindasan,Bgy
@@ -36684,7 +36684,7 @@
 1108209021,San Roque,Bgy
 1108209022,San Vicente,Bgy
 1108209023,Santa Maria,Bgy
-1108209024,Santo Niño,Bgy
+1108209024,Santo NiÃ±o,Bgy
 1108209025,Sasa,Bgy
 1108209026,Tagnocon,Bgy
 1108209027,Bayabas,Bgy
@@ -36806,7 +36806,7 @@
 1108604015,San Pedro,Bgy
 1108604016,San Roque,Bgy
 1108604018,Tanglad,Bgy
-1108604019,Santo Niño,Bgy
+1108604019,Santo NiÃ±o,Bgy
 1108604020,Santo Rosario,Bgy
 1108604021,Datu Daligasao,Bgy
 1108604022,Datu Intan,Bgy
@@ -36850,7 +36850,7 @@
 1130700028,Camansi,Bgy
 1130700029,Carmen,Bgy
 1130700030,Catalunan Grande,Bgy
-1130700031,Catalunan Pequeño,Bgy
+1130700031,Catalunan PequeÃ±o,Bgy
 1130700032,Catigan,Bgy
 1130700033,Cawayan,Bgy
 1130700034,Colosas,Bgy
@@ -36999,7 +36999,7 @@
 1130700190,Rafael Castillo,Bgy
 1130700191,Saloy,Bgy
 1130700192,San Antonio,Bgy
-1130700193,Santo Niño,Bgy
+1130700193,Santo NiÃ±o,Bgy
 1130700194,Ubalde,Bgy
 1130700195,Waan,Bgy
 1130700196,Wilfredo Aquino,Bgy
@@ -37093,7 +37093,7 @@
 1204704032,Poblacion,Bgy
 1204704033,San Isidro,Bgy
 1204704034,San Roque,Bgy
-1204704035,Santo Niño,Bgy
+1204704035,Santo NiÃ±o,Bgy
 1204704036,Sibawan,Bgy
 1204704037,Sikitan,Bgy
 1204704038,Singao,Bgy
@@ -37185,7 +37185,7 @@
 1204707031,Saguing,Bgy
 1204707032,San Vicente,Bgy
 1204707033,Santa Felomina,Bgy
-1204707034,Santo Niño,Bgy
+1204707034,Santo NiÃ±o,Bgy
 1204707035,Sinkatulan,Bgy
 1204707036,Taluntalunan,Bgy
 1204707037,Villaflores,Bgy
@@ -37482,7 +37482,7 @@
 1204718023,Napalico,Bgy
 1204718024,Salasang,Bgy
 1204718025,San Miguel,Bgy
-1204718026,Santo Niño,Bgy
+1204718026,Santo NiÃ±o,Bgy
 1204718027,Sumalili,Bgy
 1204718028,Tumanding,Bgy
 1206302002,Benitez ,Bgy
@@ -37508,7 +37508,7 @@
 1206302022,San Vicente,Bgy
 1206302024,Yangco Poblacion,Bgy
 1206306001,Assumption,Bgy
-1206306002,Avanceña,Bgy
+1206306002,AvanceÃ±a,Bgy
 1206306003,Cacub,Bgy
 1206306004,Caloocan,Bgy
 1206306005,Carpenter Hill,Bgy
@@ -37531,7 +37531,7 @@
 1206306022,San Jose,Bgy
 1206306023,San Roque,Bgy
 1206306024,Santa Cruz,Bgy
-1206306025,Santo Niño,Bgy
+1206306025,Santo NiÃ±o,Bgy
 1206306026,Sarabia,Bgy
 1206306027,Zulueta,Bgy
 1206311002,Dumaguil,Bgy
@@ -37700,7 +37700,7 @@
 1206501014,Kabulanan,Bgy
 1206501015,Kanulay,Bgy
 1206501016,Monteverde,Bgy
-1206501017,Santo Niño,Bgy
+1206501017,Santo NiÃ±o,Bgy
 1206501018,Sumilil,Bgy
 1206501019,Titulok,Bgy
 1206501020,Sison,Bgy
@@ -37899,7 +37899,7 @@
 1206511003,Calean,Bgy
 1206511004,Carmen,Bgy
 1206511005,D'Ledesma,Bgy
-1206511006,Virginia Griño,Bgy
+1206511006,Virginia GriÃ±o,Bgy
 1206511007,Kalandagan,Bgy
 1206511008,Enrique J.C. Montilla,Bgy
 1206511010,New Isabela,Bgy
@@ -38180,7 +38180,7 @@
 1600205012,San Jose,Bgy
 1600205013,San Pablo,Bgy
 1600205014,San Vicente,Bgy
-1600205015,Santo Niño,Bgy
+1600205015,Santo NiÃ±o,Bgy
 1600206001,Bangayan,Bgy
 1600206002,Canaway,Bgy
 1600206003,Hinimbangan,Bgy
@@ -38218,7 +38218,7 @@
 1600208005,Poblacion,Bgy
 1600208008,Taod-oy,Bgy
 1600208009,Marcos,Bgy
-1600208010,Santo Niño,Bgy
+1600208010,Santo NiÃ±o,Bgy
 1600208011,Santo Rosario,Bgy
 1600209001,Aclan,Bgy
 1600209002,Amontay,Bgy
@@ -38250,7 +38250,7 @@
 1600210012,Pangaylan-IP,Bgy
 1600211001,Binuangan,Bgy
 1600211002,Cabayawa,Bgy
-1600211003,Doña Rosario,Bgy
+1600211003,DoÃ±a Rosario,Bgy
 1600211004,La Fraternidad,Bgy
 1600211005,Lawigan,Bgy
 1600211006,Poblacion 1,Bgy
@@ -38260,7 +38260,7 @@
 1600211010,Tagpangahoy,Bgy
 1600211011,Tinigbasan,Bgy
 1600211012,Victory,Bgy
-1600211013,Doña Telesfora,Bgy
+1600211013,DoÃ±a Telesfora,Bgy
 1600212001,Poblacion I,Bgy
 1600212002,Balangbalang,Bgy
 1600212003,Basilisa,Bgy
@@ -38278,7 +38278,7 @@
 1600301009,Marcelina,Bgy
 1600301010,Maygatasan,Bgy
 1600301011,Noli,Bgy
-1600301013,Osmeña,Bgy
+1600301013,OsmeÃ±a,Bgy
 1600301014,Panaytay,Bgy
 1600301016,Poblacion,Bgy
 1600301017,Sagmone,Bgy
@@ -38308,7 +38308,7 @@
 1600301044,San Agustin,Bgy
 1600301045,San Juan,Bgy
 1600301046,Santa Teresita,Bgy
-1600301047,Santo Niño,Bgy
+1600301047,Santo NiÃ±o,Bgy
 1600301048,Taglibas,Bgy
 1600301049,Tagubay,Bgy
 1600301050,Villa Undayon,Bgy
@@ -38373,7 +38373,7 @@
 1600304002,Comota,Bgy
 1600304003,Halapitan,Bgy
 1600304004,Langasian,Bgy
-1600304005,"Osmeña, Sr.",Bgy
+1600304005,"OsmeÃ±a, Sr.",Bgy
 1600304006,Poblacion,Bgy
 1600304007,Sagunto,Bgy
 1600304008,Villa Paz,Bgy
@@ -38399,7 +38399,7 @@
 1600305013,Kasapa,Bgy
 1600305014,Katipunan,Bgy
 1600305015,Kauswagan,Bgy
-1600305016,Santo Niño,Bgy
+1600305016,Santo NiÃ±o,Bgy
 1600305017,Sabud,Bgy
 1600306001,Aurora,Bgy
 1600306002,Awa,Bgy
@@ -38484,7 +38484,7 @@
 1600309011,Dimasalang,Bgy
 1600309012,Don Alejandro,Bgy
 1600309013,Don Pedro,Bgy
-1600309014,Doña Flavia,Bgy
+1600309014,DoÃ±a Flavia,Bgy
 1600309015,Mahagsay,Bgy
 1600309016,Mahapag,Bgy
 1600309017,Mahayahay,Bgy
@@ -38495,7 +38495,7 @@
 1600309022,Santa Rita,Bgy
 1600309023,Santiago,Bgy
 1600309024,Wegguam,Bgy
-1600309025,Doña Maxima,Bgy
+1600309025,DoÃ±a Maxima,Bgy
 1600310001,Angas,Bgy
 1600310002,Aurora,Bgy
 1600310003,Awao,Bgy
@@ -38636,7 +38636,7 @@
 1606707010,Don Paulino,Bgy
 1606707011,Jubang,Bgy
 1606707012,Montserrat,Bgy
-1606707013,Osmeña,Bgy
+1606707013,OsmeÃ±a,Bgy
 1606707014,Barangay 10 ,Bgy
 1606707015,Barangay 11 ,Bgy
 1606707016,Barangay 12 ,Bgy
@@ -38801,7 +38801,7 @@
 1606720008,Roxas,Bgy
 1606720009,San Miguel,Bgy
 1606720010,Santa Paz,Bgy
-1606720011,Santo Niño,Bgy
+1606720011,Santo NiÃ±o,Bgy
 1606720012,Tambacan,Bgy
 1606720013,Tigasao,Bgy
 1606721001,Abad Santos,Bgy
@@ -39139,7 +39139,7 @@
 1606815010,Pong-on,Bgy
 1606815011,Pongtod,Bgy
 1606815012,Salvacion,Bgy
-1606815013,Santo Niño,Bgy
+1606815013,Santo NiÃ±o,Bgy
 1606816001,Bagyang,Bgy
 1606816002,Baras,Bgy
 1606816003,Bitaugan,Bgy
@@ -39167,7 +39167,7 @@
 1606817008,Magsaysay,Bgy
 1606817009,Malixi,Bgy
 1606817010,Manambia,Bgy
-1606817011,Osmeña,Bgy
+1606817011,OsmeÃ±a,Bgy
 1606817012,Poblacion,Bgy
 1606817013,Quezon,Bgy
 1606817014,San Vicente,Bgy
@@ -39181,7 +39181,7 @@
 1606817022,Trinidad,Bgy
 1606817023,Ugoban,Bgy
 1606817024,Villaverde,Bgy
-1606817025,Doña Carmen,Bgy
+1606817025,DoÃ±a Carmen,Bgy
 1606817026,Hinagdanan,Bgy
 1606818001,Alba,Bgy
 1606818002,Anahao Bag-o,Bgy
@@ -39232,7 +39232,7 @@
 1608501003,Columbus,Bgy
 1608501004,Coring,Bgy
 1608501005,Cortes,Bgy
-1608501006,Doña Helene,Bgy
+1608501006,DoÃ±a Helene,Bgy
 1608501007,Ferdinand,Bgy
 1608501008,Geotina,Bgy
 1608501009,Imee,Bgy
@@ -39251,7 +39251,7 @@
 1608501022,New Nazareth,Bgy
 1608501023,Roma,Bgy
 1608501024,Santa Monica,Bgy
-1608501025,Santo Niño,Bgy
+1608501025,Santo NiÃ±o,Bgy
 1608501026,Sombrado,Bgy
 1608501027,Villa Ecleo,Bgy
 1608501028,Villa Pantinople,Bgy
@@ -39284,17 +39284,17 @@
 1608504001,Albor ,Bgy
 1608504002,Arellano,Bgy
 1608504003,Bayanihan,Bgy
-1608504004,Doña Helen,Bgy
+1608504004,DoÃ±a Helen,Bgy
 1608504005,Garcia,Bgy
 1608504006,General Aguinaldo,Bgy
 1608504007,Kanihaan,Bgy
 1608504008,Magsaysay,Bgy
-1608504009,Osmeña,Bgy
+1608504009,OsmeÃ±a,Bgy
 1608504010,Plaridel,Bgy
 1608504011,Quezon,Bgy
 1608504012,San Antonio ,Bgy
 1608504013,San Jose,Bgy
-1608504014,Santo Niño,Bgy
+1608504014,Santo NiÃ±o,Bgy
 1608504015,Llamera,Bgy
 1608504016,Rosita,Bgy
 1608505001,Carmen ,Bgy
@@ -39329,7 +39329,7 @@
 1608507008,San Vicente ,Bgy
 1608507009,Santa Cruz ,Bgy
 1630400002,Agao Pob.,Bgy
-1630400003,Agusan Pequeño,Bgy
+1630400003,Agusan PequeÃ±o,Bgy
 1630400004,Ambago,Bgy
 1630400006,Amparo,Bgy
 1630400007,Ampayon,Bgy
@@ -39410,7 +39410,7 @@
 1630400097,Pagatpatan,Bgy
 1630400098,Pangabugan,Bgy
 1630400099,Salvacion,Bgy
-1630400100,Santo Niño,Bgy
+1630400100,Santo NiÃ±o,Bgy
 1630400101,Sumile,Bgy
 1630400102,Don Francisco,Bgy
 1630400103,Pigdaulan,Bgy
@@ -39471,8 +39471,8 @@
 1900703018,Bagbagon,Bgy
 1900703019,Bulan-bulan,Bgy
 1900703021,Suba-an,Bgy
-1900703024,Lower Bañas,Bgy
-1900703025,Upper Bañas,Bgy
+1900703024,Lower BaÃ±as,Bgy
+1900703025,Upper BaÃ±as,Bgy
 1900703026,Calugusan,Bgy
 1900703027,Canibungan,Bgy
 1900703029,Landugan,Bgy
