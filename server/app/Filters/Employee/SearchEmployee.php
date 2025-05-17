@@ -13,11 +13,13 @@ class SearchEmployee
             return $next($builder);
         }
 
+        $q = request()->q;
+
         return $next($builder
-            ->whereLike('first_name', '%'.request()->q.'%')
-            ->orWhereLike('middle_name', '%'.request()->q.'%')
-            ->orWhereLike('last_name', '%'.request()->q.'%')
-            ->orWhereLike('suffix', '%'.request()->q.'%')
+            ->whereLike('first_name', "%$q%")
+            ->orWhereLike('middle_name', "%$q%")
+            ->orWhereLike('last_name', "%$q%")
+            ->orWhereLike('suffix', "%$q%")
         );
     }
 }
