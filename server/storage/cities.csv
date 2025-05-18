@@ -1,0 +1,1656 @@
+1380100000,City of Caloocan,City
+1380200000,City of Las Piñas,City
+1380300000,City of Makati,City
+1380400000,City of Malabon,City
+1380500000,City of Mandaluyong,City
+1380600000,City of Manila,City
+1380601000,Tondo I/II,SubMun
+1380602000,Binondo,SubMun
+1380603000,Quiapo,SubMun
+1380604000,San Nicolas,SubMun
+1380605000,Santa Cruz,SubMun
+1380606000,Sampaloc,SubMun
+1380607000,San Miguel,SubMun
+1380608000,Ermita,SubMun
+1380609000,Intramuros,SubMun
+1380610000,Malate,SubMun
+1380611000,Paco,SubMun
+1380612000,Pandacan,SubMun
+1380613000,Port Area,SubMun
+1380614000,Santa Ana,SubMun
+1380700000,City of Marikina,City
+1380800000,City of Muntinlupa,City
+1380900000,City of Navotas,City
+1381000000,City of Parañaque,City
+1381100000,Pasay City,City
+1381200000,City of Pasig,City
+1381300000,Quezon City,City
+1381400000,City of San Juan,City
+1381500000,City of Taguig,City
+1381600000,City of Valenzuela,City
+1381701000,Pateros,Mun
+1400101000,Bangued ,Mun
+1400102000,Boliney,Mun
+1400103000,Bucay,Mun
+1400104000,Bucloc,Mun
+1400105000,Daguioman,Mun
+1400106000,Danglas,Mun
+1400107000,Dolores,Mun
+1400108000,La Paz,Mun
+1400109000,Lacub,Mun
+1400110000,Lagangilang,Mun
+1400111000,Lagayan,Mun
+1400112000,Langiden,Mun
+1400113000,Licuan-Baay,Mun
+1400114000,Luba,Mun
+1400115000,Malibcong,Mun
+1400116000,Manabo,Mun
+1400117000,Peñarrubia,Mun
+1400118000,Pidigan,Mun
+1400119000,Pilar,Mun
+1400120000,Sallapadan,Mun
+1400121000,San Isidro,Mun
+1400122000,San Juan,Mun
+1400123000,San Quintin,Mun
+1400124000,Tayum,Mun
+1400125000,Tineg,Mun
+1400126000,Tubo,Mun
+1400127000,Villaviciosa,Mun
+1401101000,Atok,Mun
+1401103000,Bakun,Mun
+1401104000,Bokod,Mun
+1401105000,Buguias,Mun
+1401106000,Itogon,Mun
+1401107000,Kabayan,Mun
+1401108000,Kapangan,Mun
+1401109000,Kibungan,Mun
+1401110000,La Trinidad ,Mun
+1401111000,Mankayan,Mun
+1401112000,Sablan,Mun
+1401113000,Tuba,Mun
+1401114000,Tublay,Mun
+1402701000,Banaue,Mun
+1402702000,Hungduan,Mun
+1402703000,Kiangan,Mun
+1402704000,Lagawe ,Mun
+1402705000,Lamut,Mun
+1402706000,Mayoyao,Mun
+1402707000,Alfonso Lista,Mun
+1402708000,Aguinaldo,Mun
+1402709000,Hingyon,Mun
+1402710000,Tinoc,Mun
+1402711000,Asipulo,Mun
+1403201000,Balbalan,Mun
+1403206000,Lubuagan,Mun
+1403208000,Pasil,Mun
+1403209000,Pinukpuk,Mun
+1403211000,Rizal,Mun
+1403213000,City of Tabuk ,City
+1403214000,Tanudan,Mun
+1403215000,Tinglayan,Mun
+1404401000,Barlig,Mun
+1404402000,Bauko,Mun
+1404403000,Besao,Mun
+1404404000,Bontoc ,Mun
+1404405000,Natonin,Mun
+1404406000,Paracelis,Mun
+1404407000,Sabangan,Mun
+1404408000,Sadanga,Mun
+1404409000,Sagada,Mun
+1404410000,Tadian,Mun
+1408101000,Calanasan,Mun
+1408102000,Conner,Mun
+1408103000,Flora,Mun
+1408104000,Kabugao ,Mun
+1408105000,Luna,Mun
+1408106000,Pudtol,Mun
+1408107000,Santa Marcela,Mun
+1430300000,City of Baguio,City
+0102801000,Adams,Mun
+0102802000,Bacarra,Mun
+0102803000,Badoc,Mun
+0102804000,Bangui,Mun
+0102805000,City of Batac,City
+0102806000,Burgos,Mun
+0102807000,Carasi,Mun
+0102808000,Currimao,Mun
+0102809000,Dingras,Mun
+0102810000,Dumalneg,Mun
+0102811000,Banna,Mun
+0102812000,City of Laoag ,City
+0102813000,Marcos,Mun
+0102814000,Nueva Era,Mun
+0102815000,Pagudpud,Mun
+0102816000,Paoay,Mun
+0102817000,Pasuquin,Mun
+0102818000,Piddig,Mun
+0102819000,Pinili,Mun
+0102820000,San Nicolas,Mun
+0102821000,Sarrat,Mun
+0102822000,Solsona,Mun
+0102823000,Vintar,Mun
+0102901000,Alilem,Mun
+0102902000,Banayoyo,Mun
+0102903000,Bantay,Mun
+0102904000,Burgos,Mun
+0102905000,Cabugao,Mun
+0102906000,City of Candon,City
+0102907000,Caoayan,Mun
+0102908000,Cervantes,Mun
+0102909000,Galimuyod,Mun
+0102910000,Gregorio del Pilar,Mun
+0102911000,Lidlidda,Mun
+0102912000,Magsingal,Mun
+0102913000,Nagbukel,Mun
+0102914000,Narvacan,Mun
+0102915000,Quirino,Mun
+0102916000,Salcedo,Mun
+0102917000,San Emilio,Mun
+0102918000,San Esteban,Mun
+0102919000,San Ildefonso,Mun
+0102920000,San Juan,Mun
+0102921000,San Vicente,Mun
+0102922000,Santa,Mun
+0102923000,Santa Catalina,Mun
+0102924000,Santa Cruz,Mun
+0102925000,Santa Lucia,Mun
+0102926000,Santa Maria,Mun
+0102927000,Santiago,Mun
+0102928000,Santo Domingo,Mun
+0102929000,Sigay,Mun
+0102930000,Sinait,Mun
+0102931000,Sugpon,Mun
+0102932000,Suyo,Mun
+0102933000,Tagudin,Mun
+0102934000,City of Vigan ,City
+0103301000,Agoo,Mun
+0103302000,Aringay,Mun
+0103303000,Bacnotan,Mun
+0103304000,Bagulin,Mun
+0103305000,Balaoan,Mun
+0103306000,Bangar,Mun
+0103307000,Bauang,Mun
+0103308000,Burgos,Mun
+0103309000,Caba,Mun
+0103310000,Luna,Mun
+0103311000,Naguilian,Mun
+0103312000,Pugo,Mun
+0103313000,Rosario,Mun
+0103314000,City of San Fernando ,City
+0103315000,San Gabriel,Mun
+0103316000,San Juan,Mun
+0103317000,Santo Tomas,Mun
+0103318000,Santol,Mun
+0103319000,Sudipen,Mun
+0103320000,Tubao,Mun
+0105501000,Agno,Mun
+0105502000,Aguilar,Mun
+0105503000,City of Alaminos,City
+0105504000,Alcala,Mun
+0105505000,Anda,Mun
+0105506000,Asingan,Mun
+0105507000,Balungao,Mun
+0105508000,Bani,Mun
+0105509000,Basista,Mun
+0105510000,Bautista,Mun
+0105511000,Bayambang,Mun
+0105512000,Binalonan,Mun
+0105513000,Binmaley,Mun
+0105514000,Bolinao,Mun
+0105515000,Bugallon,Mun
+0105516000,Burgos,Mun
+0105517000,Calasiao,Mun
+0105518000,City of Dagupan,City
+0105519000,Dasol,Mun
+0105520000,Infanta,Mun
+0105521000,Labrador,Mun
+0105522000,Lingayen ,Mun
+0105523000,Mabini,Mun
+0105524000,Malasiqui,Mun
+0105525000,Manaoag,Mun
+0105526000,Mangaldan,Mun
+0105527000,Mangatarem,Mun
+0105528000,Mapandan,Mun
+0105529000,Natividad,Mun
+0105530000,Pozorrubio,Mun
+0105531000,Rosales,Mun
+0105532000,City of San Carlos,City
+0105533000,San Fabian,Mun
+0105534000,San Jacinto,Mun
+0105535000,San Manuel,Mun
+0105536000,San Nicolas,Mun
+0105537000,San Quintin,Mun
+0105538000,Santa Barbara,Mun
+0105539000,Santa Maria,Mun
+0105540000,Santo Tomas,Mun
+0105541000,Sison,Mun
+0105542000,Sual,Mun
+0105543000,Tayug,Mun
+0105544000,Umingan,Mun
+0105545000,Urbiztondo,Mun
+0105546000,City of Urdaneta,City
+0105547000,Villasis,Mun
+0105548000,Laoac,Mun
+0200901000,Basco ,Mun
+0200902000,Itbayat,Mun
+0200903000,Ivana,Mun
+0200904000,Mahatao,Mun
+0200905000,Sabtang,Mun
+0200906000,Uyugan,Mun
+0201501000,Abulug,Mun
+0201502000,Alcala,Mun
+0201503000,Allacapan,Mun
+0201504000,Amulung,Mun
+0201505000,Aparri,Mun
+0201506000,Baggao,Mun
+0201507000,Ballesteros,Mun
+0201508000,Buguey,Mun
+0201509000,Calayan,Mun
+0201510000,Camalaniugan,Mun
+0201511000,Claveria,Mun
+0201512000,Enrile,Mun
+0201513000,Gattaran,Mun
+0201514000,Gonzaga,Mun
+0201515000,Iguig,Mun
+0201516000,Lal-Lo,Mun
+0201517000,Lasam,Mun
+0201518000,Pamplona,Mun
+0201519000,Peñablanca,Mun
+0201520000,Piat,Mun
+0201521000,Rizal,Mun
+0201522000,Sanchez-Mira,Mun
+0201523000,Santa Ana,Mun
+0201524000,Santa Praxedes,Mun
+0201525000,Santa Teresita,Mun
+0201526000,Santo Niño,Mun
+0201527000,Solana,Mun
+0201528000,Tuao,Mun
+0201529000,Tuguegarao City ,City
+0203101000,Alicia,Mun
+0203102000,Angadanan,Mun
+0203103000,Aurora,Mun
+0203104000,Benito Soliven,Mun
+0203105000,Burgos,Mun
+0203106000,Cabagan,Mun
+0203107000,Cabatuan,Mun
+0203108000,City of Cauayan,City
+0203109000,Cordon,Mun
+0203110000,Dinapigue,Mun
+0203111000,Divilacan,Mun
+0203112000,Echague,Mun
+0203113000,Gamu,Mun
+0203114000,City of Ilagan ,City
+0203115000,Jones,Mun
+0203116000,Luna,Mun
+0203117000,Maconacon,Mun
+0203118000,Delfin Albano,Mun
+0203119000,Mallig,Mun
+0203120000,Naguilian,Mun
+0203121000,Palanan,Mun
+0203122000,Quezon,Mun
+0203123000,Quirino,Mun
+0203124000,Ramon,Mun
+0203125000,Reina Mercedes,Mun
+0203126000,Roxas,Mun
+0203127000,San Agustin,Mun
+0203128000,San Guillermo,Mun
+0203129000,San Isidro,Mun
+0203130000,San Manuel,Mun
+0203131000,San Mariano,Mun
+0203132000,San Mateo,Mun
+0203133000,San Pablo,Mun
+0203134000,Santa Maria,Mun
+0203135000,City of Santiago,City
+0203136000,Santo Tomas,Mun
+0203137000,Tumauini,Mun
+0205001000,Ambaguio,Mun
+0205002000,Aritao,Mun
+0205003000,Bagabag,Mun
+0205004000,Bambang,Mun
+0205005000,Bayombong ,Mun
+0205006000,Diadi,Mun
+0205007000,Dupax del Norte,Mun
+0205008000,Dupax del Sur,Mun
+0205009000,Kasibu,Mun
+0205010000,Kayapa,Mun
+0205011000,Quezon,Mun
+0205012000,Santa Fe,Mun
+0205013000,Solano,Mun
+0205014000,Villaverde,Mun
+0205015000,Alfonso Castaneda,Mun
+0205701000,Aglipay,Mun
+0205702000,Cabarroguis ,Mun
+0205703000,Diffun,Mun
+0205704000,Maddela,Mun
+0205705000,Saguday,Mun
+0205706000,Nagtipunan,Mun
+0300801000,Abucay,Mun
+0300802000,Bagac,Mun
+0300803000,City of Balanga ,City
+0300804000,Dinalupihan,Mun
+0300805000,Hermosa,Mun
+0300806000,Limay,Mun
+0300807000,Mariveles,Mun
+0300808000,Morong,Mun
+0300809000,Orani,Mun
+0300810000,Orion,Mun
+0300811000,Pilar,Mun
+0300812000,Samal,Mun
+0301401000,Angat,Mun
+0301402000,Balagtas,Mun
+0301403000,City of Baliwag,City
+0301404000,Bocaue,Mun
+0301405000,Bulacan,Mun
+0301406000,Bustos,Mun
+0301407000,Calumpit,Mun
+0301408000,Guiguinto,Mun
+0301409000,Hagonoy,Mun
+0301410000,City of Malolos ,City
+0301411000,Marilao,Mun
+0301412000,City of Meycauayan,City
+0301413000,Norzagaray,Mun
+0301414000,Obando,Mun
+0301415000,Pandi,Mun
+0301416000,Paombong,Mun
+0301417000,Plaridel,Mun
+0301418000,Pulilan,Mun
+0301419000,San Ildefonso,Mun
+0301420000,City of San Jose Del Monte,City
+0301421000,San Miguel,Mun
+0301422000,San Rafael,Mun
+0301423000,Santa Maria,Mun
+0301424000,Doña Remedios Trinidad,Mun
+0304901000,Aliaga,Mun
+0304902000,Bongabon,Mun
+0304903000,City of Cabanatuan,City
+0304904000,Cabiao,Mun
+0304905000,Carranglan,Mun
+0304906000,Cuyapo,Mun
+0304907000,Gabaldon,Mun
+0304908000,City of Gapan,City
+0304909000,General Mamerto Natividad,Mun
+0304910000,General Tinio,Mun
+0304911000,Guimba,Mun
+0304912000,Jaen,Mun
+0304913000,Laur,Mun
+0304914000,Licab,Mun
+0304915000,Llanera,Mun
+0304916000,Lupao,Mun
+0304917000,Science City of Muñoz,City
+0304918000,Nampicuan,Mun
+0304919000,City of Palayan ,City
+0304920000,Pantabangan,Mun
+0304921000,Peñaranda,Mun
+0304922000,Quezon,Mun
+0304923000,Rizal,Mun
+0304924000,San Antonio,Mun
+0304925000,San Isidro,Mun
+0304926000,San Jose City,City
+0304927000,San Leonardo,Mun
+0304928000,Santa Rosa,Mun
+0304929000,Santo Domingo,Mun
+0304930000,Talavera,Mun
+0304931000,Talugtug,Mun
+0304932000,Zaragoza,Mun
+0305402000,Apalit,Mun
+0305403000,Arayat,Mun
+0305404000,Bacolor,Mun
+0305405000,Candaba,Mun
+0305406000,Floridablanca,Mun
+0305407000,Guagua,Mun
+0305408000,Lubao,Mun
+0305409000,Mabalacat City,City
+0305410000,Macabebe,Mun
+0305411000,Magalang,Mun
+0305412000,Masantol,Mun
+0305413000,Mexico,Mun
+0305414000,Minalin,Mun
+0305415000,Porac,Mun
+0305416000,City of San Fernando ,City
+0305417000,San Luis,Mun
+0305418000,San Simon,Mun
+0305419000,Santa Ana,Mun
+0305420000,Santa Rita,Mun
+0305421000,Sto. Tomas,Mun
+0305422000,Sasmuan,Mun
+0306901000,Anao,Mun
+0306902000,Bamban,Mun
+0306903000,Camiling,Mun
+0306904000,Capas,Mun
+0306905000,Concepcion,Mun
+0306906000,Gerona,Mun
+0306907000,La Paz,Mun
+0306908000,Mayantoc,Mun
+0306909000,Moncada,Mun
+0306910000,Paniqui,Mun
+0306911000,Pura,Mun
+0306912000,Ramos,Mun
+0306913000,San Clemente,Mun
+0306914000,San Manuel,Mun
+0306915000,Santa Ignacia,Mun
+0306916000,City of Tarlac ,City
+0306917000,Victoria,Mun
+0306918000,San Jose,Mun
+0307101000,Botolan,Mun
+0307102000,Cabangan,Mun
+0307103000,Candelaria,Mun
+0307104000,Castillejos,Mun
+0307105000,Iba ,Mun
+0307106000,Masinloc,Mun
+0307108000,Palauig,Mun
+0307109000,San Antonio,Mun
+0307110000,San Felipe,Mun
+0307111000,San Marcelino,Mun
+0307112000,San Narciso,Mun
+0307113000,Santa Cruz,Mun
+0307114000,Subic,Mun
+0307701000,Baler ,Mun
+0307702000,Casiguran,Mun
+0307703000,Dilasag,Mun
+0307704000,Dinalungan,Mun
+0307705000,Dingalan,Mun
+0307706000,Dipaculao,Mun
+0307707000,Maria Aurora,Mun
+0307708000,San Luis,Mun
+0330100000,City of Angeles,City
+0331400000,City of Olongapo,City
+0401001000,Agoncillo,Mun
+0401002000,Alitagtag,Mun
+0401003000,Balayan,Mun
+0401004000,Balete,Mun
+0401005000,Batangas City ,City
+0401006000,Bauan,Mun
+0401007000,City of Calaca,City
+0401008000,Calatagan,Mun
+0401009000,Cuenca,Mun
+0401010000,Ibaan,Mun
+0401011000,Laurel,Mun
+0401012000,Lemery,Mun
+0401013000,Lian,Mun
+0401014000,City of Lipa,City
+0401015000,Lobo,Mun
+0401016000,Mabini,Mun
+0401017000,Malvar,Mun
+0401018000,Mataasnakahoy,Mun
+0401019000,Nasugbu,Mun
+0401020000,Padre Garcia,Mun
+0401021000,Rosario,Mun
+0401022000,San Jose,Mun
+0401023000,San Juan,Mun
+0401024000,San Luis,Mun
+0401025000,San Nicolas,Mun
+0401026000,San Pascual,Mun
+0401027000,Santa Teresita,Mun
+0401028000,City of Sto. Tomas,City
+0401029000,Taal,Mun
+0401030000,Talisay,Mun
+0401031000,City of Tanauan,City
+0401032000,Taysan,Mun
+0401033000,Tingloy,Mun
+0401034000,Tuy,Mun
+0402101000,Alfonso,Mun
+0402102000,Amadeo,Mun
+0402103000,City of Bacoor,City
+0402104000,City of Carmona,City
+0402105000,City of Cavite,City
+0402106000,City of Dasmariñas,City
+0402107000,General Emilio Aguinaldo,Mun
+0402108000,City of General Trias,City
+0402109000,City of Imus,City
+0402110000,Indang,Mun
+0402111000,Kawit,Mun
+0402112000,Magallanes,Mun
+0402113000,Maragondon,Mun
+0402114000,Mendez,Mun
+0402115000,Naic,Mun
+0402116000,Noveleta,Mun
+0402117000,Rosario,Mun
+0402118000,Silang,Mun
+0402119000,City of Tagaytay,City
+0402120000,Tanza,Mun
+0402121000,Ternate,Mun
+0402122000,City of Trece Martires ,City
+0402123000,Gen. Mariano Alvarez,Mun
+0403401000,Alaminos,Mun
+0403402000,Bay,Mun
+0403403000,City of Biñan,City
+0403404000,City of Cabuyao,City
+0403405000,City of Calamba,City
+0403406000,Calauan,Mun
+0403407000,Cavinti,Mun
+0403408000,Famy,Mun
+0403409000,Kalayaan,Mun
+0403410000,Liliw,Mun
+0403411000,Los Baños,Mun
+0403412000,Luisiana,Mun
+0403413000,Lumban,Mun
+0403414000,Mabitac,Mun
+0403415000,Magdalena,Mun
+0403416000,Majayjay,Mun
+0403417000,Nagcarlan,Mun
+0403418000,Paete,Mun
+0403419000,Pagsanjan,Mun
+0403420000,Pakil,Mun
+0403421000,Pangil,Mun
+0403422000,Pila,Mun
+0403423000,Rizal,Mun
+0403424000,City of San Pablo,City
+0403425000,City of San Pedro,City
+0403426000,Santa Cruz ,Mun
+0403427000,Santa Maria,Mun
+0403428000,City of Santa Rosa,City
+0403429000,Siniloan,Mun
+0403430000,Victoria,Mun
+0405601000,Agdangan,Mun
+0405602000,Alabat,Mun
+0405603000,Atimonan,Mun
+0405605000,Buenavista,Mun
+0405606000,Burdeos,Mun
+0405607000,Calauag,Mun
+0405608000,Candelaria,Mun
+0405610000,Catanauan,Mun
+0405615000,Dolores,Mun
+0405616000,General Luna,Mun
+0405617000,General Nakar,Mun
+0405618000,Guinayangan,Mun
+0405619000,Gumaca,Mun
+0405620000,Infanta,Mun
+0405621000,Jomalig,Mun
+0405622000,Lopez,Mun
+0405623000,Lucban,Mun
+0405625000,Macalelon,Mun
+0405627000,Mauban,Mun
+0405628000,Mulanay,Mun
+0405629000,Padre Burgos,Mun
+0405630000,Pagbilao,Mun
+0405631000,Panukulan,Mun
+0405632000,Patnanungan,Mun
+0405633000,Perez,Mun
+0405634000,Pitogo,Mun
+0405635000,Plaridel,Mun
+0405636000,Polillo,Mun
+0405637000,Quezon,Mun
+0405638000,Real,Mun
+0405639000,Sampaloc,Mun
+0405640000,San Andres,Mun
+0405641000,San Antonio,Mun
+0405642000,San Francisco,Mun
+0405644000,San Narciso,Mun
+0405645000,Sariaya,Mun
+0405646000,Tagkawayan,Mun
+0405647000,City of Tayabas,City
+0405648000,Tiaong,Mun
+0405649000,Unisan,Mun
+0405801000,Angono,Mun
+0405802000,City of Antipolo ,City
+0405803000,Baras,Mun
+0405804000,Binangonan,Mun
+0405805000,Cainta,Mun
+0405806000,Cardona,Mun
+0405807000,Jala-Jala,Mun
+0405808000,Rodriguez,Mun
+0405809000,Morong,Mun
+0405810000,Pililla,Mun
+0405811000,San Mateo,Mun
+0405812000,Tanay,Mun
+0405813000,Taytay,Mun
+0405814000,Teresa,Mun
+0431200000,City of Lucena ,City
+1704001000,Boac ,Mun
+1704002000,Buenavista,Mun
+1704003000,Gasan,Mun
+1704004000,Mogpog,Mun
+1704005000,Santa Cruz,Mun
+1704006000,Torrijos,Mun
+1705101000,Abra De Ilog,Mun
+1705102000,Calintaan,Mun
+1705103000,Looc,Mun
+1705104000,Lubang,Mun
+1705105000,Magsaysay,Mun
+1705106000,Mamburao ,Mun
+1705107000,Paluan,Mun
+1705108000,Rizal,Mun
+1705109000,Sablayan,Mun
+1705110000,San Jose,Mun
+1705111000,Santa Cruz,Mun
+1705201000,Baco,Mun
+1705202000,Bansud,Mun
+1705203000,Bongabong,Mun
+1705204000,Bulalacao,Mun
+1705205000,City of Calapan ,City
+1705206000,Gloria,Mun
+1705207000,Mansalay,Mun
+1705208000,Naujan,Mun
+1705209000,Pinamalayan,Mun
+1705210000,Pola,Mun
+1705211000,Puerto Galera,Mun
+1705212000,Roxas,Mun
+1705213000,San Teodoro,Mun
+1705214000,Socorro,Mun
+1705215000,Victoria,Mun
+1705301000,Aborlan,Mun
+1705302000,Agutaya,Mun
+1705303000,Araceli,Mun
+1705304000,Balabac,Mun
+1705305000,Bataraza,Mun
+1705306000,Brooke's Point,Mun
+1705307000,Busuanga,Mun
+1705308000,Cagayancillo,Mun
+1705309000,Coron,Mun
+1705310000,Cuyo,Mun
+1705311000,Dumaran,Mun
+1705312000,El Nido,Mun
+1705313000,Linapacan,Mun
+1705314000,Magsaysay,Mun
+1705315000,Narra,Mun
+1705317000,Quezon,Mun
+1705318000,Roxas,Mun
+1705319000,San Vicente,Mun
+1705320000,Taytay,Mun
+1705321000,Kalayaan,Mun
+1705322000,Culion,Mun
+1705323000,Rizal,Mun
+1705324000,Sofronio Española,Mun
+1705901000,Alcantara,Mun
+1705902000,Banton,Mun
+1705903000,Cajidiocan,Mun
+1705904000,Calatrava,Mun
+1705905000,Concepcion,Mun
+1705906000,Corcuera,Mun
+1705907000,Looc,Mun
+1705908000,Magdiwang,Mun
+1705909000,Odiongan,Mun
+1705910000,Romblon ,Mun
+1705911000,San Agustin,Mun
+1705912000,San Andres,Mun
+1705913000,San Fernando,Mun
+1705914000,San Jose,Mun
+1705915000,Santa Fe,Mun
+1705916000,Ferrol,Mun
+1705917000,Santa Maria,Mun
+1731500000,City of Puerto Princesa ,City
+0500501000,Bacacay,Mun
+0500502000,Camalig,Mun
+0500503000,Daraga,Mun
+0500504000,Guinobatan,Mun
+0500505000,Jovellar,Mun
+0500506000,City of Legazpi ,City
+0500507000,Libon,Mun
+0500508000,City of Ligao,City
+0500509000,Malilipot,Mun
+0500510000,Malinao,Mun
+0500511000,Manito,Mun
+0500512000,Oas,Mun
+0500513000,Pio Duran,Mun
+0500514000,Polangui,Mun
+0500515000,Rapu-Rapu,Mun
+0500516000,Santo Domingo,Mun
+0500517000,City of Tabaco,City
+0500518000,Tiwi,Mun
+0501601000,Basud,Mun
+0501602000,Capalonga,Mun
+0501603000,Daet ,Mun
+0501604000,San Lorenzo Ruiz,Mun
+0501605000,Jose Panganiban,Mun
+0501606000,Labo,Mun
+0501607000,Mercedes,Mun
+0501608000,Paracale,Mun
+0501609000,San Vicente,Mun
+0501610000,Santa Elena,Mun
+0501611000,Talisay,Mun
+0501612000,Vinzons,Mun
+0501701000,Baao,Mun
+0501702000,Balatan,Mun
+0501703000,Bato,Mun
+0501704000,Bombon,Mun
+0501705000,Buhi,Mun
+0501706000,Bula,Mun
+0501707000,Cabusao,Mun
+0501708000,Calabanga,Mun
+0501709000,Camaligan,Mun
+0501710000,Canaman,Mun
+0501711000,Caramoan,Mun
+0501712000,Del Gallego,Mun
+0501713000,Gainza,Mun
+0501714000,Garchitorena,Mun
+0501715000,Goa,Mun
+0501716000,City of Iriga,City
+0501717000,Lagonoy,Mun
+0501718000,Libmanan,Mun
+0501719000,Lupi,Mun
+0501720000,Magarao,Mun
+0501721000,Milaor,Mun
+0501722000,Minalabac,Mun
+0501723000,Nabua,Mun
+0501724000,City of Naga,City
+0501725000,Ocampo,Mun
+0501726000,Pamplona,Mun
+0501727000,Pasacao,Mun
+0501728000,Pili ,Mun
+0501729000,Presentacion,Mun
+0501730000,Ragay,Mun
+0501731000,Sagñay,Mun
+0501732000,San Fernando,Mun
+0501733000,San Jose,Mun
+0501734000,Sipocot,Mun
+0501735000,Siruma,Mun
+0501736000,Tigaon,Mun
+0501737000,Tinambac,Mun
+0502001000,Bagamanoc,Mun
+0502002000,Baras,Mun
+0502003000,Bato,Mun
+0502004000,Caramoran,Mun
+0502005000,Gigmoto,Mun
+0502006000,Pandan,Mun
+0502007000,Panganiban,Mun
+0502008000,San Andres,Mun
+0502009000,San Miguel,Mun
+0502010000,Viga,Mun
+0502011000,Virac ,Mun
+0504101000,Aroroy,Mun
+0504102000,Baleno,Mun
+0504103000,Balud,Mun
+0504104000,Batuan,Mun
+0504105000,Cataingan,Mun
+0504106000,Cawayan,Mun
+0504107000,Claveria,Mun
+0504108000,Dimasalang,Mun
+0504109000,Esperanza,Mun
+0504110000,Mandaon,Mun
+0504111000,City of Masbate ,City
+0504112000,Milagros,Mun
+0504113000,Mobo,Mun
+0504114000,Monreal,Mun
+0504115000,Palanas,Mun
+0504116000,Pio V. Corpus,Mun
+0504117000,Placer,Mun
+0504118000,San Fernando,Mun
+0504119000,San Jacinto,Mun
+0504120000,San Pascual,Mun
+0504121000,Uson,Mun
+0506202000,Barcelona,Mun
+0506203000,Bulan,Mun
+0506204000,Bulusan,Mun
+0506205000,Casiguran,Mun
+0506206000,Castilla,Mun
+0506207000,Donsol,Mun
+0506208000,Gubat,Mun
+0506209000,Irosin,Mun
+0506210000,Juban,Mun
+0506211000,Magallanes,Mun
+0506212000,Matnog,Mun
+0506213000,Pilar,Mun
+0506214000,Prieto Diaz,Mun
+0506215000,Santa Magdalena,Mun
+0506216000,City of Sorsogon ,City
+0600401000,Altavas,Mun
+0600402000,Balete,Mun
+0600403000,Banga,Mun
+0600404000,Batan,Mun
+0600405000,Buruanga,Mun
+0600406000,Ibajay,Mun
+0600407000,Kalibo ,Mun
+0600408000,Lezo,Mun
+0600409000,Libacao,Mun
+0600410000,Madalag,Mun
+0600411000,Makato,Mun
+0600412000,Malay,Mun
+0600413000,Malinao,Mun
+0600414000,Nabas,Mun
+0600415000,New Washington,Mun
+0600416000,Numancia,Mun
+0600417000,Tangalan,Mun
+0600601000,Anini-Y,Mun
+0600602000,Barbaza,Mun
+0600603000,Belison,Mun
+0600604000,Bugasong,Mun
+0600605000,Caluya,Mun
+0600606000,Culasi,Mun
+0600607000,Tobias Fornier,Mun
+0600608000,Hamtic,Mun
+0600609000,Laua-An,Mun
+0600610000,Libertad,Mun
+0600611000,Pandan,Mun
+0600612000,Patnongon,Mun
+0600613000,San Jose ,Mun
+0600614000,San Remigio,Mun
+0600615000,Sebaste,Mun
+0600616000,Sibalom,Mun
+0600617000,Tibiao,Mun
+0600618000,Valderrama,Mun
+0601901000,Cuartero,Mun
+0601902000,Dao,Mun
+0601903000,Dumalag,Mun
+0601904000,Dumarao,Mun
+0601905000,Ivisan,Mun
+0601906000,Jamindan,Mun
+0601907000,Ma-Ayon,Mun
+0601908000,Mambusao,Mun
+0601909000,Panay,Mun
+0601910000,Panitan,Mun
+0601911000,Pilar,Mun
+0601912000,Pontevedra,Mun
+0601913000,President Roxas,Mun
+0601914000,City of Roxas ,City
+0601915000,Sapi-An,Mun
+0601916000,Sigma,Mun
+0601917000,Tapaz,Mun
+0603001000,Ajuy,Mun
+0603002000,Alimodian,Mun
+0603003000,Anilao,Mun
+0603004000,Badiangan,Mun
+0603005000,Balasan,Mun
+0603006000,Banate,Mun
+0603007000,Barotac Nuevo,Mun
+0603008000,Barotac Viejo,Mun
+0603009000,Batad,Mun
+0603010000,Bingawan,Mun
+0603012000,Cabatuan,Mun
+0603013000,Calinog,Mun
+0603014000,Carles,Mun
+0603015000,Concepcion,Mun
+0603016000,Dingle,Mun
+0603017000,Dueñas,Mun
+0603018000,Dumangas,Mun
+0603019000,Estancia,Mun
+0603020000,Guimbal,Mun
+0603021000,Igbaras,Mun
+0603023000,Janiuay,Mun
+0603025000,Lambunao,Mun
+0603026000,Leganes,Mun
+0603027000,Lemery,Mun
+0603028000,Leon,Mun
+0603029000,Maasin,Mun
+0603030000,Miagao,Mun
+0603031000,Mina,Mun
+0603032000,New Lucena,Mun
+0603034000,Oton,Mun
+0603035000,City of Passi,City
+0603036000,Pavia,Mun
+0603037000,Pototan,Mun
+0603038000,San Dionisio,Mun
+0603039000,San Enrique,Mun
+0603040000,San Joaquin,Mun
+0603041000,San Miguel,Mun
+0603042000,San Rafael,Mun
+0603043000,Santa Barbara,Mun
+0603044000,Sara,Mun
+0603045000,Tigbauan,Mun
+0603046000,Tubungan,Mun
+0603047000,Zarraga,Mun
+0607901000,Buenavista,Mun
+0607902000,Jordan ,Mun
+0607903000,Nueva Valencia,Mun
+0607904000,San Lorenzo,Mun
+0607905000,Sibunag,Mun
+0631000000,City of Iloilo ,City
+1804502000,City of Bago,City
+1804503000,Binalbagan,Mun
+1804504000,City of Cadiz,City
+1804505000,Calatrava,Mun
+1804506000,Candoni,Mun
+1804507000,Cauayan,Mun
+1804508000,Enrique B. Magalona,Mun
+1804509000,City of Escalante,City
+1804510000,City of Himamaylan,City
+1804511000,Hinigaran,Mun
+1804512000,Hinoba-an,Mun
+1804513000,Ilog,Mun
+1804514000,Isabela,Mun
+1804515000,City of Kabankalan,City
+1804516000,City of La Carlota,City
+1804517000,La Castellana,Mun
+1804518000,Manapla,Mun
+1804519000,Moises Padilla,Mun
+1804520000,Murcia,Mun
+1804521000,Pontevedra,Mun
+1804522000,Pulupandan,Mun
+1804523000,City of Sagay,City
+1804524000,City of San Carlos,City
+1804525000,San Enrique,Mun
+1804526000,City of Silay,City
+1804527000,City of Sipalay,City
+1804528000,City of Talisay,City
+1804529000,Toboso,Mun
+1804530000,Valladolid,Mun
+1804531000,City of Victorias,City
+1804532000,Salvador Benedicto,Mun
+1804601000,Amlan,Mun
+1804602000,Ayungon,Mun
+1804603000,Bacong,Mun
+1804604000,City of Bais,City
+1804605000,Basay,Mun
+1804606000,City of Bayawan,City
+1804607000,Bindoy,Mun
+1804608000,City of Canlaon,City
+1804609000,Dauin,Mun
+1804610000,City of Dumaguete ,City
+1804611000,City of Guihulngan,City
+1804612000,Jimalalud,Mun
+1804613000,La Libertad,Mun
+1804614000,Mabinay,Mun
+1804615000,Manjuyod,Mun
+1804616000,Pamplona,Mun
+1804617000,San Jose,Mun
+1804618000,Santa Catalina,Mun
+1804619000,Siaton,Mun
+1804620000,Sibulan,Mun
+1804621000,City of Tanjay,City
+1804622000,Tayasan,Mun
+1804623000,Valencia,Mun
+1804624000,Vallehermoso,Mun
+1804625000,Zamboanguita,Mun
+1806101000,Enrique Villanueva,Mun
+1806102000,Larena,Mun
+1806103000,Lazi,Mun
+1806104000,Maria,Mun
+1806105000,San Juan,Mun
+1806106000,Siquijor ,Mun
+1830200000,City of Bacolod ,City
+0701201000,Alburquerque,Mun
+0701202000,Alicia,Mun
+0701203000,Anda,Mun
+0701204000,Antequera,Mun
+0701205000,Baclayon,Mun
+0701206000,Balilihan,Mun
+0701207000,Batuan,Mun
+0701208000,Bilar,Mun
+0701209000,Buenavista,Mun
+0701210000,Calape,Mun
+0701211000,Candijay,Mun
+0701212000,Carmen,Mun
+0701213000,Catigbian,Mun
+0701214000,Clarin,Mun
+0701215000,Corella,Mun
+0701216000,Cortes,Mun
+0701217000,Dagohoy,Mun
+0701218000,Danao,Mun
+0701219000,Dauis,Mun
+0701220000,Dimiao,Mun
+0701221000,Duero,Mun
+0701222000,Garcia Hernandez,Mun
+0701223000,Guindulman,Mun
+0701224000,Inabanga,Mun
+0701225000,Jagna,Mun
+0701226000,Getafe,Mun
+0701227000,Lila,Mun
+0701228000,Loay,Mun
+0701229000,Loboc,Mun
+0701230000,Loon,Mun
+0701231000,Mabini,Mun
+0701232000,Maribojoc,Mun
+0701233000,Panglao,Mun
+0701234000,Pilar,Mun
+0701235000,President Carlos P. Garcia,Mun
+0701236000,Sagbayan,Mun
+0701237000,San Isidro,Mun
+0701238000,San Miguel,Mun
+0701239000,Sevilla,Mun
+0701240000,Sierra Bullones,Mun
+0701241000,Sikatuna,Mun
+0701242000,City of Tagbilaran ,City
+0701243000,Talibon,Mun
+0701244000,Trinidad,Mun
+0701245000,Tubigon,Mun
+0701246000,Ubay,Mun
+0701247000,Valencia,Mun
+0701248000,Bien Unido,Mun
+0702201000,Alcantara,Mun
+0702202000,Alcoy,Mun
+0702203000,Alegria,Mun
+0702204000,Aloguinsan,Mun
+0702205000,Argao,Mun
+0702206000,Asturias,Mun
+0702207000,Badian,Mun
+0702208000,Balamban,Mun
+0702209000,Bantayan,Mun
+0702210000,Barili,Mun
+0702211000,City of Bogo,City
+0702212000,Boljoon,Mun
+0702213000,Borbon,Mun
+0702214000,City of Carcar,City
+0702215000,Carmen,Mun
+0702216000,Catmon,Mun
+0702218000,Compostela,Mun
+0702219000,Consolacion,Mun
+0702220000,Cordova,Mun
+0702221000,Daanbantayan,Mun
+0702222000,Dalaguete,Mun
+0702223000,Danao City,City
+0702224000,Dumanjug,Mun
+0702225000,Ginatilan,Mun
+0702227000,Liloan,Mun
+0702228000,Madridejos,Mun
+0702229000,Malabuyoc,Mun
+0702231000,Medellin,Mun
+0702232000,Minglanilla,Mun
+0702233000,Moalboal,Mun
+0702234000,City of Naga,City
+0702235000,Oslob,Mun
+0702236000,Pilar,Mun
+0702237000,Pinamungajan,Mun
+0702238000,Poro,Mun
+0702239000,Ronda,Mun
+0702240000,Samboan,Mun
+0702241000,San Fernando,Mun
+0702242000,San Francisco,Mun
+0702243000,San Remigio,Mun
+0702244000,Santa Fe,Mun
+0702245000,Santander,Mun
+0702246000,Sibonga,Mun
+0702247000,Sogod,Mun
+0702248000,Tabogon,Mun
+0702249000,Tabuelan,Mun
+0702250000,City of Talisay,City
+0702251000,City of Toledo,City
+0702252000,Tuburan,Mun
+0702253000,Tudela,Mun
+0730600000,City of Cebu ,City
+0731100000,City of Lapu-Lapu,City
+0731300000,City of Mandaue,City
+0802601000,Arteche,Mun
+0802602000,Balangiga,Mun
+0802603000,Balangkayan,Mun
+0802604000,City of Borongan ,City
+0802605000,Can-Avid,Mun
+0802606000,Dolores,Mun
+0802607000,General Macarthur,Mun
+0802608000,Giporlos,Mun
+0802609000,Guiuan,Mun
+0802610000,Hernani,Mun
+0802611000,Jipapad,Mun
+0802612000,Lawaan,Mun
+0802613000,Llorente,Mun
+0802614000,Maslog,Mun
+0802615000,Maydolong,Mun
+0802616000,Mercedes,Mun
+0802617000,Oras,Mun
+0802618000,Quinapondan,Mun
+0802619000,Salcedo,Mun
+0802620000,San Julian,Mun
+0802621000,San Policarpo,Mun
+0802622000,Sulat,Mun
+0802623000,Taft,Mun
+0803701000,Abuyog,Mun
+0803702000,Alangalang,Mun
+0803703000,Albuera,Mun
+0803705000,Babatngon,Mun
+0803706000,Barugo,Mun
+0803707000,Bato,Mun
+0803708000,City of Baybay,City
+0803710000,Burauen,Mun
+0803713000,Calubian,Mun
+0803714000,Capoocan,Mun
+0803715000,Carigara,Mun
+0803717000,Dagami,Mun
+0803718000,Dulag,Mun
+0803719000,Hilongos,Mun
+0803720000,Hindang,Mun
+0803721000,Inopacan,Mun
+0803722000,Isabel,Mun
+0803723000,Jaro,Mun
+0803724000,Javier,Mun
+0803725000,Julita,Mun
+0803726000,Kananga,Mun
+0803728000,La Paz,Mun
+0803729000,Leyte,Mun
+0803730000,Macarthur,Mun
+0803731000,Mahaplag,Mun
+0803733000,Matag-Ob,Mun
+0803734000,Matalom,Mun
+0803735000,Mayorga,Mun
+0803736000,Merida,Mun
+0803738000,Ormoc City,City
+0803739000,Palo,Mun
+0803740000,Palompon,Mun
+0803741000,Pastrana,Mun
+0803742000,San Isidro,Mun
+0803743000,San Miguel,Mun
+0803744000,Santa Fe,Mun
+0803745000,Tabango,Mun
+0803746000,Tabontabon,Mun
+0803748000,Tanauan,Mun
+0803749000,Tolosa,Mun
+0803750000,Tunga,Mun
+0803751000,Villaba,Mun
+0804801000,Allen,Mun
+0804802000,Biri,Mun
+0804803000,Bobon,Mun
+0804804000,Capul,Mun
+0804805000,Catarman ,Mun
+0804806000,Catubig,Mun
+0804807000,Gamay,Mun
+0804808000,Laoang,Mun
+0804809000,Lapinig,Mun
+0804810000,Las Navas,Mun
+0804811000,Lavezares,Mun
+0804812000,Mapanas,Mun
+0804813000,Mondragon,Mun
+0804814000,Palapag,Mun
+0804815000,Pambujan,Mun
+0804816000,Rosario,Mun
+0804817000,San Antonio,Mun
+0804818000,San Isidro,Mun
+0804819000,San Jose,Mun
+0804820000,San Roque,Mun
+0804821000,San Vicente,Mun
+0804822000,Silvino Lobos,Mun
+0804823000,Victoria,Mun
+0804824000,Lope De Vega,Mun
+0806001000,Almagro,Mun
+0806002000,Basey,Mun
+0806003000,City of Calbayog,City
+0806004000,Calbiga,Mun
+0806005000,City of Catbalogan ,City
+0806006000,Daram,Mun
+0806007000,Gandara,Mun
+0806008000,Hinabangan,Mun
+0806009000,Jiabong,Mun
+0806010000,Marabut,Mun
+0806011000,Matuguinao,Mun
+0806012000,Motiong,Mun
+0806013000,Pinabacdao,Mun
+0806014000,San Jose De Buan,Mun
+0806015000,San Sebastian,Mun
+0806016000,Santa Margarita,Mun
+0806017000,Santa Rita,Mun
+0806018000,Santo Niño,Mun
+0806019000,Talalora,Mun
+0806020000,Tarangnan,Mun
+0806021000,Villareal,Mun
+0806022000,Paranas,Mun
+0806023000,Zumarraga,Mun
+0806024000,Tagapul-An,Mun
+0806025000,San Jorge,Mun
+0806026000,Pagsanghan,Mun
+0806401000,Anahawan,Mun
+0806402000,Bontoc,Mun
+0806403000,Hinunangan,Mun
+0806404000,Hinundayan,Mun
+0806405000,Libagon,Mun
+0806406000,Liloan,Mun
+0806407000,City of Maasin ,City
+0806408000,Macrohon,Mun
+0806409000,Malitbog,Mun
+0806410000,Padre Burgos,Mun
+0806411000,Pintuyan,Mun
+0806412000,Saint Bernard,Mun
+0806413000,San Francisco,Mun
+0806414000,San Juan,Mun
+0806415000,San Ricardo,Mun
+0806416000,Silago,Mun
+0806417000,Sogod,Mun
+0806418000,Tomas Oppus,Mun
+0806419000,Limasawa,Mun
+0807801000,Almeria,Mun
+0807802000,Biliran,Mun
+0807803000,Cabucgayan,Mun
+0807804000,Caibiran,Mun
+0807805000,Culaba,Mun
+0807806000,Kawayan,Mun
+0807807000,Maripipi,Mun
+0807808000,Naval ,Mun
+0831600000,City of Tacloban ,City
+0907201000,City of Dapitan,City
+0907202000,City of Dipolog ,City
+0907203000,Katipunan,Mun
+0907204000,La Libertad,Mun
+0907205000,Labason,Mun
+0907206000,Liloy,Mun
+0907207000,Manukan,Mun
+0907208000,Mutia,Mun
+0907209000,Piñan,Mun
+0907210000,Polanco,Mun
+0907211000,Pres. Manuel A. Roxas,Mun
+0907212000,Rizal,Mun
+0907213000,Salug,Mun
+0907214000,Sergio Osmeña Sr.,Mun
+0907215000,Siayan,Mun
+0907216000,Sibuco,Mun
+0907217000,Sibutad,Mun
+0907218000,Sindangan,Mun
+0907219000,Siocon,Mun
+0907220000,Sirawai,Mun
+0907221000,Tampilisan,Mun
+0907222000,Jose Dalman,Mun
+0907223000,Gutalac,Mun
+0907224000,Baliguian,Mun
+0907225000,Godod,Mun
+0907226000,Leon T. Postigo,Mun
+0907227000,Kalawit,Mun
+0907302000,Aurora,Mun
+0907303000,Bayog,Mun
+0907305000,Dimataling,Mun
+0907306000,Dinas,Mun
+0907307000,Dumalinao,Mun
+0907308000,Dumingag,Mun
+0907311000,Kumalarang,Mun
+0907312000,Labangan,Mun
+0907313000,Lapuyan,Mun
+0907315000,Mahayag,Mun
+0907317000,Margosatubig,Mun
+0907318000,Midsalip,Mun
+0907319000,Molave,Mun
+0907322000,City of Pagadian ,City
+0907323000,Ramon Magsaysay,Mun
+0907324000,San Miguel,Mun
+0907325000,San Pablo,Mun
+0907327000,Tabina,Mun
+0907328000,Tambulig,Mun
+0907330000,Tukuran,Mun
+0907333000,Lakewood,Mun
+0907337000,Josefina,Mun
+0907338000,Pitogo,Mun
+0907340000,Sominot,Mun
+0907341000,Vincenzo A. Sagun,Mun
+0907343000,Guipos,Mun
+0907344000,Tigbao,Mun
+0908301000,Alicia,Mun
+0908302000,Buug,Mun
+0908303000,Diplahan,Mun
+0908304000,Imelda,Mun
+0908305000,Ipil ,Mun
+0908306000,Kabasalan,Mun
+0908307000,Mabuhay,Mun
+0908308000,Malangas,Mun
+0908309000,Naga,Mun
+0908310000,Olutanga,Mun
+0908311000,Payao,Mun
+0908312000,Roseller Lim,Mun
+0908313000,Siay,Mun
+0908314000,Talusan,Mun
+0908315000,Titay,Mun
+0908316000,Tungawan,Mun
+0990101000,City of Isabela,City
+0931700000,City of Zamboanga,City
+1001301000,Baungon,Mun
+1001302000,Damulog,Mun
+1001303000,Dangcagan,Mun
+1001304000,Don Carlos,Mun
+1001305000,Impasug-ong,Mun
+1001306000,Kadingilan,Mun
+1001307000,Kalilangan,Mun
+1001308000,Kibawe,Mun
+1001309000,Kitaotao,Mun
+1001310000,Lantapan,Mun
+1001311000,Libona,Mun
+1001312000,City of Malaybalay ,City
+1001313000,Malitbog,Mun
+1001314000,Manolo Fortich,Mun
+1001315000,Maramag,Mun
+1001316000,Pangantucan,Mun
+1001317000,Quezon,Mun
+1001318000,San Fernando,Mun
+1001319000,Sumilao,Mun
+1001320000,Talakag,Mun
+1001321000,City of Valencia,City
+1001322000,Cabanglasan,Mun
+1001801000,Catarman,Mun
+1001802000,Guinsiliban,Mun
+1001803000,Mahinog,Mun
+1001804000,Mambajao ,Mun
+1001805000,Sagay,Mun
+1003501000,Bacolod,Mun
+1003502000,Baloi,Mun
+1003503000,Baroy,Mun
+1003505000,Kapatagan,Mun
+1003506000,Sultan Naga Dimaporo,Mun
+1003507000,Kauswagan,Mun
+1003508000,Kolambugan,Mun
+1003509000,Lala,Mun
+1003510000,Linamon,Mun
+1003511000,Magsaysay,Mun
+1003512000,Maigo,Mun
+1003513000,Matungao,Mun
+1003514000,Munai,Mun
+1003515000,Nunungan,Mun
+1003516000,Pantao Ragat,Mun
+1003517000,Poona Piagapo,Mun
+1003518000,Salvador,Mun
+1003519000,Sapad,Mun
+1003520000,Tagoloan,Mun
+1003521000,Tangcal,Mun
+1003522000,Tubod ,Mun
+1003523000,Pantar,Mun
+1004201000,Aloran,Mun
+1004202000,Baliangao,Mun
+1004203000,Bonifacio,Mun
+1004204000,Calamba,Mun
+1004205000,Clarin,Mun
+1004206000,Concepcion,Mun
+1004207000,Jimenez,Mun
+1004208000,Lopez Jaena,Mun
+1004209000,City of Oroquieta ,City
+1004210000,City of Ozamiz,City
+1004211000,Panaon,Mun
+1004212000,Plaridel,Mun
+1004213000,Sapang Dalaga,Mun
+1004214000,Sinacaban,Mun
+1004215000,City of Tangub,City
+1004216000,Tudela,Mun
+1004217000,Don Victoriano Chiongbian,Mun
+1004301000,Alubijid,Mun
+1004302000,Balingasag,Mun
+1004303000,Balingoan,Mun
+1004304000,Binuangan,Mun
+1004306000,Claveria,Mun
+1004307000,City of El Salvador,City
+1004308000,City of Gingoog,City
+1004309000,Gitagum,Mun
+1004310000,Initao,Mun
+1004311000,Jasaan,Mun
+1004312000,Kinoguitan,Mun
+1004313000,Lagonglong,Mun
+1004314000,Laguindingan,Mun
+1004315000,Libertad,Mun
+1004316000,Lugait,Mun
+1004317000,Magsaysay,Mun
+1004318000,Manticao,Mun
+1004319000,Medina,Mun
+1004320000,Naawan,Mun
+1004321000,Opol,Mun
+1004322000,Salay,Mun
+1004323000,Sugbongcogon,Mun
+1004324000,Tagoloan,Mun
+1004325000,Talisayan,Mun
+1004326000,Villanueva,Mun
+1030500000,City of Cagayan De Oro ,City
+1030900000,City of Iligan,City
+1102301000,Asuncion,Mun
+1102303000,Carmen,Mun
+1102305000,Kapalong,Mun
+1102314000,New Corella,Mun
+1102315000,City of Panabo,City
+1102317000,Island Garden City of Samal,City
+1102318000,Santo Tomas,Mun
+1102319000,City of Tagum ,City
+1102322000,Talaingod,Mun
+1102323000,Braulio E. Dujali,Mun
+1102324000,San Isidro,Mun
+1102401000,Bansalan,Mun
+1102403000,City of Digos ,City
+1102404000,Hagonoy,Mun
+1102406000,Kiblawan,Mun
+1102407000,Magsaysay,Mun
+1102408000,Malalag,Mun
+1102410000,Matanao,Mun
+1102411000,Padada,Mun
+1102412000,Santa Cruz,Mun
+1102414000,Sulop,Mun
+1102501000,Baganga,Mun
+1102502000,Banaybanay,Mun
+1102503000,Boston,Mun
+1102504000,Caraga,Mun
+1102505000,Cateel,Mun
+1102506000,Governor Generoso,Mun
+1102507000,Lupon,Mun
+1102508000,Manay,Mun
+1102509000,City of Mati ,City
+1102510000,San Isidro,Mun
+1102511000,Tarragona,Mun
+1108201000,Compostela,Mun
+1108202000,Laak,Mun
+1108203000,Mabini,Mun
+1108204000,Maco,Mun
+1108205000,Maragusan,Mun
+1108206000,Mawab,Mun
+1108207000,Monkayo,Mun
+1108208000,Montevista,Mun
+1108209000,Nabunturan ,Mun
+1108210000,New Bataan,Mun
+1108211000,Pantukan,Mun
+1108601000,Don Marcelino,Mun
+1108602000,Jose Abad Santos,Mun
+1108603000,Malita ,Mun
+1108604000,Santa Maria,Mun
+1108605000,Sarangani,Mun
+1130700000,City of Davao,City
+1204701000,Alamada,Mun
+1204702000,Carmen,Mun
+1204703000,Kabacan,Mun
+1204704000,City of Kidapawan ,City
+1204705000,Libungan,Mun
+1204706000,Magpet,Mun
+1204707000,Makilala,Mun
+1204708000,Matalam,Mun
+1204709000,Midsayap,Mun
+1204710000,M'Lang,Mun
+1204711000,Pigkawayan,Mun
+1204712000,Pikit,Mun
+1204713000,President Roxas,Mun
+1204714000,Tulunan,Mun
+1204715000,Antipas,Mun
+1204716000,Banisilan,Mun
+1204717000,Aleosan,Mun
+1204718000,Arakan,Mun
+1206302000,Banga,Mun
+1206306000,City of Koronadal ,City
+1206311000,Norala,Mun
+1206312000,Polomolok,Mun
+1206313000,Surallah,Mun
+1206314000,Tampakan,Mun
+1206315000,Tantangan,Mun
+1206316000,T'Boli,Mun
+1206317000,Tupi,Mun
+1206318000,Santo Niño,Mun
+1206319000,Lake Sebu,Mun
+1206501000,Bagumbayan,Mun
+1206502000,Columbio,Mun
+1206503000,Esperanza,Mun
+1206504000,Isulan ,Mun
+1206505000,Kalamansig,Mun
+1206506000,Lebak,Mun
+1206507000,Lutayan,Mun
+1206508000,Lambayong,Mun
+1206509000,Palimbang,Mun
+1206510000,President Quirino,Mun
+1206511000,City of Tacurong,City
+1206512000,Sen. Ninoy Aquino,Mun
+1208001000,Alabel ,Mun
+1208002000,Glan,Mun
+1208003000,Kiamba,Mun
+1208004000,Maasim,Mun
+1208005000,Maitum,Mun
+1208006000,Malapatan,Mun
+1208007000,Malungon,Mun
+1230800000,City of General Santos,City
+1600201000,Buenavista,Mun
+1600203000,City of Cabadbaran,City
+1600204000,Carmen,Mun
+1600205000,Jabonga,Mun
+1600206000,Kitcharao,Mun
+1600207000,Las Nieves,Mun
+1600208000,Magallanes,Mun
+1600209000,Nasipit,Mun
+1600210000,Santiago,Mun
+1600211000,Tubay,Mun
+1600212000,Remedios T. Romualdez,Mun
+1600301000,City of Bayugan,City
+1600302000,Bunawan,Mun
+1600303000,Esperanza,Mun
+1600304000,La Paz,Mun
+1600305000,Loreto,Mun
+1600306000,Prosperidad ,Mun
+1600307000,Rosario,Mun
+1600308000,San Francisco,Mun
+1600309000,San Luis,Mun
+1600310000,Santa Josefa,Mun
+1600311000,Talacogon,Mun
+1600312000,Trento,Mun
+1600313000,Veruela,Mun
+1600314000,Sibagat,Mun
+1606701000,Alegria,Mun
+1606702000,Bacuag,Mun
+1606704000,Burgos,Mun
+1606706000,Claver,Mun
+1606707000,Dapa,Mun
+1606708000,Del Carmen,Mun
+1606710000,General Luna,Mun
+1606711000,Gigaquit,Mun
+1606714000,Mainit,Mun
+1606715000,Malimono,Mun
+1606716000,Pilar,Mun
+1606717000,Placer,Mun
+1606718000,San Benito,Mun
+1606719000,San Francisco,Mun
+1606720000,San Isidro,Mun
+1606721000,Santa Monica,Mun
+1606722000,Sison,Mun
+1606723000,Socorro,Mun
+1606724000,City of Surigao ,City
+1606725000,Tagana-An,Mun
+1606727000,Tubod,Mun
+1606801000,Barobo,Mun
+1606802000,Bayabas,Mun
+1606803000,City of Bislig,City
+1606804000,Cagwait,Mun
+1606805000,Cantilan,Mun
+1606806000,Carmen,Mun
+1606807000,Carrascal,Mun
+1606808000,Cortes,Mun
+1606809000,Hinatuan,Mun
+1606810000,Lanuza,Mun
+1606811000,Lianga,Mun
+1606812000,Lingig,Mun
+1606813000,Madrid,Mun
+1606814000,Marihatag,Mun
+1606815000,San Agustin,Mun
+1606816000,San Miguel,Mun
+1606817000,Tagbina,Mun
+1606818000,Tago,Mun
+1606819000,City of Tandag ,City
+1608501000,Basilisa,Mun
+1608502000,Cagdianao,Mun
+1608503000,Dinagat,Mun
+1608504000,Libjo,Mun
+1608505000,Loreto,Mun
+1608506000,San Jose ,Mun
+1608507000,Tubajon,Mun
+1630400000,City of Butuan ,City
+1900702000,City of Lamitan ,City
+1900703000,Lantawan,Mun
+1900704000,Maluso,Mun
+1900705000,Sumisip,Mun
+1900706000,Tipo-Tipo,Mun
+1900707000,Tuburan,Mun
+1900708000,Akbar,Mun
+1900709000,Al-Barka,Mun
+1900710000,Hadji Mohammad Ajul,Mun
+1900711000,Ungkaya Pukan,Mun
+1900712000,Hadji Muhtamad,Mun
+1900713000,Tabuan-Lasa,Mun
+1903601000,Bacolod-Kalawi,Mun
+1903602000,Balabagan,Mun
+1903603000,Balindong,Mun
+1903604000,Bayang,Mun
+1903605000,Binidayan,Mun
+1903606000,Bubong,Mun
+1903607000,Butig,Mun
+1903609000,Ganassi,Mun
+1903610000,Kapai,Mun
+1903611000,Lumba-Bayabao,Mun
+1903612000,Lumbatan,Mun
+1903613000,Madalum,Mun
+1903614000,Madamba,Mun
+1903615000,Malabang,Mun
+1903616000,Marantao,Mun
+1903617000,City of Marawi ,City
+1903618000,Masiu,Mun
+1903619000,Mulondo,Mun
+1903620000,Pagayawan,Mun
+1903621000,Piagapo,Mun
+1903622000,Poona Bayabao,Mun
+1903623000,Pualas,Mun
+1903624000,Ditsaan-Ramain,Mun
+1903625000,Saguiaran,Mun
+1903626000,Tamparan,Mun
+1903627000,Taraka,Mun
+1903628000,Tubaran,Mun
+1903629000,Tugaya,Mun
+1903630000,Wao,Mun
+1903631000,Marogong,Mun
+1903632000,Calanogas,Mun
+1903633000,Buadiposo-Buntong,Mun
+1903634000,Maguing,Mun
+1903635000,Picong,Mun
+1903636000,Lumbayanague,Mun
+1903637000,Amai Manabilang,Mun
+1903638000,Tagoloan Ii,Mun
+1903639000,Kapatagan,Mun
+1903640000,Sultan Dumalondong,Mun
+1903641000,Lumbaca-Unayan,Mun
+1906601000,Indanan,Mun
+1906602000,Jolo ,Mun
+1906603000,Kalingalan Caluang,Mun
+1906604000,Luuk,Mun
+1906605000,Maimbung,Mun
+1906606000,Hadji Panglima Tahil,Mun
+1906607000,Old Panamao,Mun
+1906608000,Pangutaran,Mun
+1906609000,Parang,Mun
+1906610000,Pata,Mun
+1906611000,Patikul,Mun
+1906612000,Siasi,Mun
+1906613000,Talipao,Mun
+1906614000,Tapul,Mun
+1906615000,Tongkil,Mun
+1906616000,Panglima Estino,Mun
+1906617000,Lugus,Mun
+1906618000,Pandami,Mun
+1906619000,Omar,Mun
+1907001000,Panglima Sugala,Mun
+1907002000,Bongao ,Mun
+1907003000,Mapun,Mun
+1907004000,Simunul,Mun
+1907005000,Sitangkai,Mun
+1907006000,South Ubian,Mun
+1907007000,Tandubas,Mun
+1907008000,Turtle Islands,Mun
+1907009000,Languyan,Mun
+1907010000,Sapa-Sapa,Mun
+1907011000,Sibutu,Mun
+1908701000,Barira,Mun
+1908702000,Buldon,Mun
+1908703000,City of Cotabato,City
+1908704000,Datu Blah T. Sinsuat,Mun
+1908705000,Datu Odin Sinsuat,Mun
+1908706000,Kabuntalan,Mun
+1908707000,Matanog,Mun
+1908708000,Northern Kabuntalan,Mun
+1908709000,Parang,Mun
+1908710000,Sultan Kudarat,Mun
+1908711000,Sultan Mastura,Mun
+1908712000,Talitay,Mun
+1908713000,Upi,Mun
+1908801000,Ampatuan,Mun
+1908802000,Buluan,Mun
+1908803000,Datu Abdullah Sangki,Mun
+1908804000,Datu Anggal Midtimbang,Mun
+1908805000,Datu Hoffer Ampatuan,Mun
+1908806000,Datu Paglas,Mun
+1908807000,Datu Piang,Mun
+1908808000,Datu Salibo,Mun
+1908809000,Datu Saudi Ampatuan,Mun
+1908810000,Datu Unsay,Mun
+1908811000,Gen. S.K. Pendatun,Mun
+1908812000,Guindulungan,Mun
+1908813000,Mamasapano,Mun
+1908814000,Mangudadatu,Mun
+1908815000,Pagagawan,Mun
+1908816000,Pagalungan,Mun
+1908817000,Paglat,Mun
+1908818000,Pandag,Mun
+1908819000,Rajah Buayan,Mun
+1908820000,Shariff Aguak,Mun
+1908821000,Shariff Saydona Mustapha,Mun
+1908822000,South Upi,Mun
+1908823000,Sultan Sa Barongis,Mun
+1908824000,Talayan,Mun
+1999901000,Kapalawan,Mun
+1999902000,Old Kaabakan,Mun
+1999903000,Kadayangan,Mun
+1999904000,Nabalawag,Mun
+1999905000,Pahamuddin,Mun
+1999906000,Malidegao,Mun
+1999907000,Ligawasan,Mun
+1999908000,Tugunan,Mun
