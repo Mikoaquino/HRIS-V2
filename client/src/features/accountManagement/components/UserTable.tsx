@@ -71,7 +71,7 @@ const UserTable: React.FC<Props> = ({
                   </td>
                   <td className="py-3 px-3 relative">
                     <button
-                      className="text-gray-400 hover:text-gray-600"
+                      className="text-gray-400 hover:text-gray-600 cursor-pointer"
                       onClick={() => toggleActionMenu(user.id)}
                     >
                       <MoreHorizontal size={16} />
@@ -80,7 +80,7 @@ const UserTable: React.FC<Props> = ({
                     {openActionMenu === user.id && (
                       <div className="absolute right-6 top-6 w-40 rounded-3xl shadow-xl bg-white z-10 py-2 border border-gray-100">
                         <button
-                          className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                          className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left cursor-pointer"
                           onClick={() => handleEdit(user.id)}
                         >
                           <div className="w-8 h-8 bg-teal-500 text-white rounded flex items-center justify-center mr-3">
@@ -89,7 +89,7 @@ const UserTable: React.FC<Props> = ({
                           Edit
                         </button>
                         <button
-                          className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                          className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left cursor-pointer"
                           onClick={() => handleDelete(user.id)}
                         >
                           <div className="w-8 h-8 bg-red-500 text-white rounded flex items-center justify-center mr-3">
