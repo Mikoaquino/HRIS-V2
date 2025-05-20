@@ -50,7 +50,8 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
             Route::post('login', [AccessTokenController::class, 'store'])
                 ->middleware('guest');
 
-            Route::post('logout', [AccessTokenController::class, 'destroy']);
+            Route::post('logout', [AccessTokenController::class, 'destroy'])
+                ->middleware('auth:sanctum');
         });
     });
 });
