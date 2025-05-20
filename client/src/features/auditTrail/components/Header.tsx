@@ -1,20 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { Link } from "react-router-dom";
+
 interface HeaderProps {
   toggleMobileMenu: () => void;
+}
+
+interface User {
+  id: number;
+  email: string;
+  employee_id: number;
+  status: string;
+  employee: {
+    first_name: string;
+    middle_name: string | null;
+    last_name: string;
+    suffix: string | null;
+  };
 }
 
 const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
   const [showMessages, setShowMessages] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [userData, setUserData] = useState<User | null>(null);
+  const [userFullName, setUserFullName] = useState("");
+
+  useEffect(() => {
+    // Load user data from session storage
+    const storedUserData = sessionStorage.getItem("user");
+    if (storedUserData) {
+      try {
+        const parsedUserData: User = JSON.parse(storedUserData);
+        setUserData(parsedUserData);
+
+        // Format the full name based on the employee data
+        const employee = parsedUserData.employee;
+        const fullName = `${employee.first_name} ${
+          employee.middle_name ? employee.middle_name + " " : ""
+        }${employee.last_name}${
+          employee.suffix ? " " + employee.suffix : ""
+        }`.trim();
+
+        setUserFullName(fullName);
+      } catch (err) {
+        console.error("Error parsing user data", err);
+      }
+    }
+  }, []);
 
   const toggleMessages = () => {
     setShowMessages(!showMessages);
     setShowNotifications(false);
     setShowUserDropdown(false);
   };
+
   const handleSignOut = () => {
     sessionStorage.removeItem("token");
     localStorage.removeItem("auth_token");
@@ -72,12 +112,7 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
                   ></path>
                 </svg>
               </button>
-              <Link
-                to={{
-                  pathname: "/",
-                }}
-                className="flex items-center"
-              >
+              <Link to="/" className="flex items-center">
                 <Menu className="h-6 w-6 text-gray-800" />
               </Link>
             </div>
@@ -199,12 +234,12 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
                   </div>
 
                   <div className="px-4 py-2 text-center border-t border-gray-200">
-                    <a
-                      href="/messages"
+                    <Link
+                      to="/messages"
                       className="text-sm text-blue-500 hover:text-blue-700"
                     >
                       View All
-                    </a>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -276,7 +311,7 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
                         className="flex px-4 py-3 hover:bg-gray-50 border-b border-gray-100"
                       >
                         <div
-                          className={`flex-shrink-0 bg-${item.color}-500 rounded-lg p-2 text-white`}
+                          className={`flex-shrink-0 bg-${item.color}-100 text-${item.color}-500 rounded-lg p-2`}
                         >
                           <svg
                             className="w-5 h-5"
@@ -322,12 +357,12 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
                   </div>
 
                   <div className="px-4 py-2 text-center border-t border-gray-200">
-                    <a
-                      href="/notifications"
+                    <Link
+                      to="/notifications"
                       className="text-sm text-blue-500 hover:text-blue-700"
                     >
                       View All
-                    </a>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -378,43 +413,43 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
                       />
                       <div className="ml-3">
                         <h6 className="text-sm font-medium text-gray-900">
-                          Teri Dactyl
+                          {userFullName || "Loading..."}
                         </h6>
                         <p className="text-xs text-gray-500">Premium Member</p>
                       </div>
                     </div>
                   </div>
 
-                  <a
-                    href="/profile"
+                  <Link
+                    to="/profile"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     <i className="far fa-user-circle mr-2"></i>Profile
-                  </a>
-                  <a
-                    href="/chat"
+                  </Link>
+                  <Link
+                    to="/chat"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     <i className="far fa-smile mr-2"></i>Chat
-                  </a>
-                  <a
-                    href="/inbox"
+                  </Link>
+                  <Link
+                    to="/inbox"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     <i className="far fa-envelope mr-2"></i>Inbox
-                  </a>
-                  <a
-                    href="/messages"
+                  </Link>
+                  <Link
+                    to="/messages"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     <i className="far fa-comment-dots mr-2"></i>Messages
-                  </a>
-                  <a
-                    href="/settings"
+                  </Link>
+                  <Link
+                    to="/settings"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     <i className="far fa-sun mr-2"></i>Settings
-                  </a>
+                  </Link>
                   <button
                     onClick={handleSignOut}
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

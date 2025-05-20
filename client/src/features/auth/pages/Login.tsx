@@ -16,11 +16,8 @@ const LoginPage = () => {
     setError("");
 
     try {
-      console.log("Login attempt with email:", email); // Log the login attempt
-
-
-      const response = await fetch('http://127.0.0.1:8000/api/v1/auth/login', {
-        method: 'POST',
+      const response = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
+        method: "POST",
 
         headers: {
           "Content-Type": "application/json",
@@ -30,9 +27,6 @@ const LoginPage = () => {
 
       const data = await response.json();
 
-      console.log("Login response:", data); // Log the server response
-
-      // Handle response status
       if (response.status !== 201) {
         throw new Error(data.message || "Login failed");
       }
@@ -42,21 +36,18 @@ const LoginPage = () => {
         throw new Error("Access token missing from response");
       }
 
-      // Save token in localStorage
       sessionStorage.setItem("token", token);
 
-      // Optionally store user info
       if (data.data.user) {
-        localStorage.setItem("user", JSON.stringify(data.data.user));
+        sessionStorage.setItem("user", JSON.stringify(data.data.user));
       }
 
-      console.log("Token saved to localStorage:", token); // Log the saved token
+      console.log("Token saved to localStorage:", token);
 
-      // Step 3: Add a delay before redirecting to the audit-trail page
       console.log("Navigating to audit-trail...");
       setTimeout(() => {
         navigate("/hr-dashboard", { replace: true });
-      }, 1000); // Delay navigation by 1 second
+      }, 1000);
     } catch (err: any) {
       console.error("Login error:", err);
       const msg = err?.message || "Unknown error";
