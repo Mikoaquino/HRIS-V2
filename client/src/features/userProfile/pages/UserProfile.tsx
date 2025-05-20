@@ -162,7 +162,6 @@ const UserProfilePage: React.FC = () => {
               detailsError
             );
 
-            // Fall back to using the data from session storage
             setUserData(parsedUserData);
 
             const employee = parsedUserData.employee;
