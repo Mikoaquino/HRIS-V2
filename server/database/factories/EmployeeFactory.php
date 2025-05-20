@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\CivilStatus;
 use App\Enums\Gender;
+use App\Models\Department;
 use App\Models\EmployeeStatus;
 use App\Models\EmploymentType;
 use App\Models\JobPosition;
@@ -39,6 +40,7 @@ class EmployeeFactory extends Factory
             'employment_type_id' => EmploymentType::inRandomOrder()->first(),
             'job_position_id'    => JobPosition::inRandomOrder()->first(),
             'employee_status_id' => EmployeeStatus::inRandomOrder()->first(),
+            'department_id'      => Department::inRandomOrder()->first(),
             'archived_at'        => fake()->optional()->date(time()),
         ];
     }

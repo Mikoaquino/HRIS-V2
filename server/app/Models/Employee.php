@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -90,16 +89,9 @@ class Employee extends Model
         return $this->belongsTo(EmployeeStatus::class);
     }
 
-    public function department(): HasOneThrough
+    public function department(): BelongsTo
     {
-        return $this->hasOneThrough(
-            Department::class,
-            JobPosition::class,
-            'id',
-            'id',
-            'job_position_id',
-            'department_id'
-        );
+        return $this->belongsTo(Department::class);
     }
 
     public function getActivityLogOptions(): LogOptions

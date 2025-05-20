@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Department;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -52,7 +51,6 @@ class JobPositionFactory extends Factory
         };
 
         return [
-            'department_id' => Department::inRandomOrder()->first()->id,
             'name'          => $name,
             'description'   => $description,
         ];

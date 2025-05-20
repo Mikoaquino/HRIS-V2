@@ -67,7 +67,7 @@ class EmployeeService
 
             $this->lifecycleService->createNewHire($validated);
 
-            return $employee;
+            return $employee->unsetRelations();
         });
     }
 
@@ -117,7 +117,7 @@ class EmployeeService
                 $this->lifecycleService->updateTenure($validated, $employee->lifecycle);
             }
 
-            return $employee;
+            return $employee->unsetRelations();
         });
     }
 
