@@ -71,7 +71,6 @@ const ChangePasswordPage: React.FC = () => {
     e.preventDefault();
     setFeedbackMessage(null);
 
-    // Validate password match
     if (formData.newPassword !== formData.confirmPassword) {
       setFeedbackMessage({
         type: "error",
@@ -80,7 +79,6 @@ const ChangePasswordPage: React.FC = () => {
       return;
     }
 
-    // Validate password strength
     if (formData.newPassword.length < 8) {
       setFeedbackMessage({
         type: "error",
@@ -92,7 +90,6 @@ const ChangePasswordPage: React.FC = () => {
     setIsSaving(true);
 
     try {
-      // Replace with your actual API endpoint
       const response = await fetch(
         "http://127.0.0.1:8000/api/v1/users/change-password",
         {

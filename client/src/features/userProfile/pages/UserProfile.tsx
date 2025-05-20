@@ -82,10 +82,8 @@ const UserProfilePage: React.FC = () => {
         }
       );
 
-      // Don't check response.ok since 302 is not considered "ok" by fetch but is valid for your API
       const employeeData = await response.json();
 
-      // Check if the response has data, regardless of status code
       if (!employeeData.data) {
         throw new Error(
           `Failed to fetch employee details: No data received from API`
@@ -115,7 +113,6 @@ const UserProfilePage: React.FC = () => {
           setToken(storedToken);
 
           try {
-            // Fetch employee details first
             const employeeDetails = await fetchEmployeeDetails(
               parsedUserData.employee_id,
               storedToken
@@ -126,7 +123,6 @@ const UserProfilePage: React.FC = () => {
               employeeDetails
             );
 
-            // Update the user data with the fetched details
             const updatedUserData = {
               ...parsedUserData,
               employee: {
@@ -136,13 +132,10 @@ const UserProfilePage: React.FC = () => {
               },
             };
 
-            // Update session storage with the complete data
             sessionStorage.setItem("user", JSON.stringify(updatedUserData));
 
-            // Update state with the complete data
             setUserData(updatedUserData);
 
-            // Prepare form data from the updated user data
             const employee = updatedUserData.employee;
             const fullName = `${employee.first_name} ${
               employee.middle_name ? employee.middle_name + " " : ""
