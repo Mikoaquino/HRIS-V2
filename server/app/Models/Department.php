@@ -15,8 +15,8 @@ class Department extends Model
         'description',
     ];
 
-    public function jobPositions(): HasMany
+    public function employees(): HasMany
     {
-        return $this->hasMany(JobPosition::class);
+        return $this->hasMany(Employee::class);
     }
 }
