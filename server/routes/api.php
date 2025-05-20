@@ -44,13 +44,13 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
             Route::apiResource('departments', DepartmentController::class);
 
             Route::apiResource('employee-statuses', EmployeeStatusController::class);
-
-            Route::post('logout', [AccessTokenController::class, 'destroy']);
         });
 
         Route::prefix('auth')->group(function () {
             Route::post('login', [AccessTokenController::class, 'store'])
                 ->middleware('guest');
+
+            Route::post('logout', [AccessTokenController::class, 'destroy']);
         });
     });
 });
