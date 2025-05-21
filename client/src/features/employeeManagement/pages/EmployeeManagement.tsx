@@ -159,7 +159,7 @@ const EmployeeManagement: React.FC = () => {
           <button className="mx-2">
             <MoreHorizontal size={20} className="text-gray-500" />
           </button>
-          <Link to="/education-background" className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-1.5 rounded-md text-sm"
+          <Link to="/employee-management/onboarding" className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-1.5 rounded-md text-sm"
           >
             Add Employee
           </Link>
