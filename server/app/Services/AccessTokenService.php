@@ -23,7 +23,7 @@ class AccessTokenService
             ->event('log in')
             ->log(__('activity.create.access_token'));
 
-        $user->unsetRelations();
+        // $user->unsetRelations();
 
         $token = $user->createToken('access-token')->plainTextToken;
 
