@@ -1,12 +1,15 @@
-import React from 'react';
-import { EmployeeInfo } from '../types/Onboarding';
+import React from "react";
+import { EmployeeInfo } from "../types/onboarding";
 
 interface Step1EmployeeInfoProps {
   data: EmployeeInfo;
   onUpdate: (data: EmployeeInfo) => void;
 }
 
-export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({ data, onUpdate }) => {
+export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
+  data,
+  onUpdate,
+}) => {
   const handleInputChange = (field: keyof EmployeeInfo, value: string) => {
     onUpdate({ ...data, [field]: value });
   };
@@ -16,7 +19,10 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({ data, onUp
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {/* Employee Number */}
         <div>
-          <label htmlFor="employeeNumber" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="employeeNumber"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Employee Number *
           </label>
           <input
@@ -24,14 +30,19 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({ data, onUp
             id="employeeNumber"
             placeholder="Enter employee number"
             value={data.employeeNumber}
-            onChange={(e) => handleInputChange('employeeNumber', e.target.value)}
+            onChange={(e) =>
+              handleInputChange("employeeNumber", e.target.value)
+            }
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
         {/* Date Hired */}
         <div>
-          <label htmlFor="dateHired" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="dateHired"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Date Hired *
           </label>
           <div className="relative">
@@ -40,12 +51,22 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({ data, onUp
               id="dateHired"
               placeholder="MM/DD/YYYY"
               value={data.dateHired}
-              onChange={(e) => handleInputChange('dateHired', e.target.value)}
+              onChange={(e) => handleInputChange("dateHired", e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              <svg
+                className="w-4 h-4 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
               </svg>
             </div>
           </div>
@@ -53,13 +74,18 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({ data, onUp
 
         {/* Employment Type */}
         <div>
-          <label htmlFor="employmentType" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="employmentType"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Employment Type *
           </label>
           <select
             id="employmentType"
             value={data.employmentType}
-            onChange={(e) => handleInputChange('employmentType', e.target.value)}
+            onChange={(e) =>
+              handleInputChange("employmentType", e.target.value)
+            }
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="Placeholder">Select</option>
@@ -71,13 +97,16 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({ data, onUp
 
         {/* Job Position */}
         <div>
-          <label htmlFor="jobPosition" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="jobPosition"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Job Position *
           </label>
           <select
             id="jobPosition"
             value={data.jobPosition}
-            onChange={(e) => handleInputChange('jobPosition', e.target.value)}
+            onChange={(e) => handleInputChange("jobPosition", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="Placeholder">Select</option>
@@ -89,13 +118,16 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({ data, onUp
 
         {/* Department */}
         <div>
-          <label htmlFor="department" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="department"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Department *
           </label>
           <select
             id="department"
             value={data.department}
-            onChange={(e) => handleInputChange('department', e.target.value)}
+            onChange={(e) => handleInputChange("department", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="Placeholder">Select</option>
@@ -107,13 +139,18 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({ data, onUp
 
         {/* Immediate Supervisor */}
         <div>
-          <label htmlFor="immediateSupervisor" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="immediateSupervisor"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Immediate Supervisor *
           </label>
           <select
             id="immediateSupervisor"
             value={data.immediateSupervisor}
-            onChange={(e) => handleInputChange('immediateSupervisor', e.target.value)}
+            onChange={(e) =>
+              handleInputChange("immediateSupervisor", e.target.value)
+            }
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="Placeholder">Select</option>
@@ -125,13 +162,18 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({ data, onUp
 
         {/* Employee Status */}
         <div>
-          <label htmlFor="employeeStatus" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="employeeStatus"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Employee Status *
           </label>
           <select
             id="employeeStatus"
             value={data.employeeStatus}
-            onChange={(e) => handleInputChange('employeeStatus', e.target.value)}
+            onChange={(e) =>
+              handleInputChange("employeeStatus", e.target.value)
+            }
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="Placeholder">Select</option>
@@ -143,7 +185,10 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({ data, onUp
 
         {/* Email Address */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Email Address *
           </label>
           <input
@@ -151,7 +196,7 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({ data, onUp
             id="email"
             placeholder="johndoe@gmail.com"
             value={data.email}
-            onChange={(e) => handleInputChange('email', e.target.value)}
+            onChange={(e) => handleInputChange("email", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>

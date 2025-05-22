@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EmployeeInfo, PersonalInfo, GovernmentID } from "../types/Onboarding";
+import { EmployeeInfo, PersonalInfo, GovernmentID } from "../types/onboarding";
 
 export const useOnboardingForm = () => {
   const [step, setStep] = useState(1);

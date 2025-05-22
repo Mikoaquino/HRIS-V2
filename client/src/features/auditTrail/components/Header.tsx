@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 
-
 interface HeaderProps {
   toggleMobileMenu: () => void;
 }
@@ -21,7 +20,6 @@ interface User {
 }
 
 const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
-  const navigate = useNavigate(); // For redirecting after logout
   const [showMessages, setShowMessages] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -86,24 +84,6 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
         document.exitFullscreen();
       }
     }
-  };
-
-  // New logout function
-  const handleLogout = (e: React.MouseEvent) => {
-    e.preventDefault();
-    
-    // Clear the authentication token from sessionStorage
-    sessionStorage.removeItem('token');
-    
-    // Clear any other user-related data you might have stored
-    sessionStorage.removeItem('user');
-    localStorage.removeItem('authToken'); // In case you used localStorage too
-    
-    // Redirect to login page
-    navigate('/login');
-    
-    // Optional: Show logout success message
-    // toast.success('Successfully logged out');
   };
 
   return (
@@ -471,14 +451,11 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     <i className="far fa-sun mr-2"></i>Settings
+                  </Link>
 
-                  </a>
-                  {/* Updated Sign Out link to use the handleLogout function */}
-                  <a
-                    href="#"
-                    onClick={handleLogout}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-
+                  <button
+                    onClick={handleSignOut}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     <i className="far fa-arrow-alt-circle-left mr-2"></i>Sign
                     Out

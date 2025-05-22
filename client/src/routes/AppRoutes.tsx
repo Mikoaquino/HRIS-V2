@@ -1,4 +1,3 @@
-
 import {
   BrowserRouter,
   Routes,
@@ -16,11 +15,8 @@ import OnboardingDetails from "../features/employeeManagement/pages/OnboardingDe
 import UserProfile from "../features/userProfile/pages/UserProfile";
 import ChangePasswordPage from "../features/userProfile/pages/ChangePassword";
 import EmployeeManagement from "../features/employeeManagement/pages/EmployeeManagement";
-import EducationalBackground from '../features/employeeManagement/components/EducationalBackground';
-import WorkExperience from '../features/employeeManagement/components/WorkExperience';
-
-// Import layout
-import HrLayout from '../layout/HrLayout';
+import EducationalBackground from "../features/employeeManagement/components/EducationalBackground";
+import WorkExperience from "../features/employeeManagement/components/WorkExperience";
 
 // Authentication check
 const isAuthenticated = () => {
@@ -51,8 +47,14 @@ export const AppRoutes = () => {
             <Route path="/hr-dashboard" element={<HrDashboard />} />
 
             <Route path="/account-management" element={<AccountManagement />} />
-            <Route path="/employee-management" element={<EmployeeManagement />} />
-            <Route path="/education-background" element={<EducationalBackground />} />
+            <Route
+              path="/employee-management"
+              element={<EmployeeManagement />}
+            />
+            <Route
+              path="/education-background"
+              element={<EducationalBackground />}
+            />
             <Route path="/work-experience" element={<WorkExperience />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route
@@ -62,7 +64,6 @@ export const AppRoutes = () => {
 
             {/* will change to the EmpLayout */}
             <Route path="/employee-dashboard" element={<EmpDashboard />} />
-
           </Route>
         </Route>
 
