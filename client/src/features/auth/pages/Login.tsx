@@ -19,7 +19,7 @@ const LoginPage = () => {
       console.log('Login attempt with email:', email); // Log the login attempt
 
       // Send login request
-      const response = await fetch('http://localhost:8000/api/v1/auth/login', {
+      const response = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,10 +51,10 @@ const LoginPage = () => {
 
       console.log('Token saved to localStorage:', token); // Log the saved token
 
-      // Step 3: Add a delay before redirecting to the audit-trail page
-      console.log('Navigating to audit-trail...');
+      // Step 3: Add a delay before redirecting to the hr dashboard page
+      console.log('Navigating to hr dashboard...');
       setTimeout(() => {
-        navigate('/audit-trail', { replace: true });
+        navigate('/hr-dashboard', { replace: true });
       }, 1000); // Delay navigation by 1 second
 
     } catch (err: any) {
