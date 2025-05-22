@@ -1,29 +1,34 @@
 
-// export interface EmployeeInformation {
- 
+export interface FormErrors<T> {
+  [key: string]: string;
+}
 
-//   }
-  
-//   export interface EmergencyContact {
- 
-//   }
-  
-//   export interface PersonalInformation {
+export interface EmployeeInfo {
+  employeeNumber: string;
+  employmentType: string;
+  department: string;
+  employeeStatus: string;
+  dateHired: string;
+  jobPosition: string;
+  immediateSupervisor: string;
+  email: string;
+}
 
-//     emergencyContact: EmergencyContact;
-//   }
-  
-//   export interface GovernmentID {
+export interface PersonalInfo {
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  gender: string;
+  contactNumber: string;
+  address: string;
+}
 
-//   }
-  
-//   export interface Education {
-
-//   }
-  
-//   export interface WorkExperience {
-
-//   }
+export interface GovernmentID {
+  sssNumber: string;
+  tinNumber: string;
+  pagibigNumber: string;
+  philhealthNumber: string;
+}
   
   export interface Document {
   id: number;
