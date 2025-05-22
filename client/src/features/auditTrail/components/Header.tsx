@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 
+
 interface HeaderProps {
   toggleMobileMenu: () => void;
 }
@@ -20,6 +21,7 @@ interface User {
 }
 
 const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
+  const navigate = useNavigate(); // For redirecting after logout
   const [showMessages, setShowMessages] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -84,6 +86,24 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
         document.exitFullscreen();
       }
     }
+  };
+
+  // New logout function
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    // Clear the authentication token from sessionStorage
+    sessionStorage.removeItem('token');
+    
+    // Clear any other user-related data you might have stored
+    sessionStorage.removeItem('user');
+    localStorage.removeItem('authToken'); // In case you used localStorage too
+    
+    // Redirect to login page
+    navigate('/login');
+    
+    // Optional: Show logout success message
+    // toast.success('Successfully logged out');
   };
 
   return (
@@ -190,6 +210,7 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
 
               {showMessages && (
                 <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                  {/* Messages dropdown content (unchanged) */}
                   <div className="px-4 py-2 border-b border-gray-200">
                     <div className="flex justify-between items-center">
                       <h6 className="text-sm font-medium">Messages</h6>
@@ -270,6 +291,7 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
 
               {showNotifications && (
                 <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                  {/* Notifications dropdown content (unchanged) */}
                   <div className="px-4 py-2 border-b border-gray-200">
                     <div className="flex justify-between items-center">
                       <h6 className="text-sm font-medium">Notifications</h6>
@@ -449,10 +471,14 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     <i className="far fa-sun mr-2"></i>Settings
-                  </Link>
-                  <button
-                    onClick={handleSignOut}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+
+                  </a>
+                  {/* Updated Sign Out link to use the handleLogout function */}
+                  <a
+                    href="#"
+                    onClick={handleLogout}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+
                   >
                     <i className="far fa-arrow-alt-circle-left mr-2"></i>Sign
                     Out

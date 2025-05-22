@@ -3,13 +3,17 @@ export interface LoginPayload {
   password: string;
 }
 
-export type Role = 'admin' | 'hr' | 'employee';
+export type Role = 'admin' | 'employee'; // Adjusted to reflect the simplified roles
 
 export interface User {
   id: number;
-  name: string;
   email: string;
-  role: Role;
+  employee_id: number;
+  status: 'active' | 'inactive';
+  remember_token?: string | null;
+  created_at: string;
+  updated_at: string;
+  deleted_at?: string | null;
 }
 
 export interface AuthResponse {
