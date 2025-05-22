@@ -1,14 +1,5 @@
-import React from 'react';
 
-interface StepNavigationProps {
-  onNext: () => void;
-  onBack: () => void;
-  isFirstStep?: boolean;
-  isLastStep?: boolean;
-  nextLabel?: string;
-  backLabel?: string;
-  disabled?: boolean;
-}
+import { StepNavigationProps } from "../types/onboarding";
 
 const StepNavigation: React.FC<StepNavigationProps> = ({
   onNext,
@@ -32,6 +23,7 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
       >
         {backLabel}
       </button>
+
       <button
         onClick={onNext}
         disabled={disabled}
@@ -45,4 +37,6 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
   );
 };
 
+
 export default StepNavigation;
+

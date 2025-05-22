@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,26 +13,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::disableQueryLog();
+
         activity()->disableLogging();
-        
+
+        Storage::deleteDirectory('employees');
+
         $this->call([
             PsgcSeeder::class,
+            EmployeeStatusSeeder::class,
+            EmploymentTypeSeeder::class,
+            DepartmentSeeder::class,
+            JobPositionSeeder::class,
             UserSeeder::class,
+            TrashedUserSeeder::class,
             EmployeeSeeder::class,
+            UserSeeder::class,
             EmployeeEducationSeeder::class,
             EmployeeWorkExperienceSeeder::class,
-            EmployeeAttachmentSeeder::class,
             EmployeeLifecycleSeeder::class,
             TerminatedEmployeeSeeder::class,
-        ]);
-
-        $this->command->info("<fg=yellow;options=bold>  Seeding regions, provinces, cities, and barangays table. This may take a while, you can leave this terminal open.</>");
-        Artisan::call('queue:work --queue=seed-psgc-address --stop-when-empty');
-        $this->command->info("\n\n<fg=green;options=bold>  Finished seeding. :)</>");
-
-        $this->call([
             EmployeePresentAddressSeeder::class,
             EmployeePermanentAddressSeeder::class,
+            EmployeeAttachmentSeeder::class,
         ]);
+
+        DB::enableQueryLog();
     }
 }

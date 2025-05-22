@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Employee;
 use App\Models\EmployeeEducation;
+use Illuminate\Database\Seeder;
 
 class EmployeeEducationSeeder extends Seeder
 {
@@ -17,7 +17,7 @@ class EmployeeEducationSeeder extends Seeder
     {
         Employee::all()->each(function ($employee) {
             EmployeeEducation::factory()->create([
-                'employee_id' => $employee->id
+                'employee_id' => $employee->id,
             ]);
         });
     }

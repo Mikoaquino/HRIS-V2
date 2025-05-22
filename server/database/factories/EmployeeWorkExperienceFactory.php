@@ -18,11 +18,11 @@ class EmployeeWorkExperienceFactory extends Factory
     public function definition(): array
     {
         return [
-            'employee_id' => Employee::inRandomOrder()->first() ?? Employee::factory(),
-            'previous_employer' => fake()->company(),
-            'job_position' => fake()->jobTitle(),
-            'from' => fake()->dateTimeBetween('-6 years', '-1 year'),
-            'to' => fake()->dateTimeBetween('-10 months', '-3 months'),
+            'employee_id'        => Employee::inRandomOrder()->first() ?? Employee::factory(),
+            'previous_employer'  => fake()->company(),
+            'job_position'       => fake()->jobTitle(),
+            'from'               => fake()->dateTimeBetween('-6 years', '-1 year'),
+            'to'                 => fake()->dateTimeBetween('-10 months', '-3 months'),
             'reason_for_leaving' => fake()->paragraph(),
         ];
     }

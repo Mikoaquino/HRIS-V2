@@ -1,19 +1,6 @@
-import React from 'react';
 
-interface Step {
-  id: number;
-  title: string;
-  subtitle: string;
-  completed: boolean;
-  active: boolean;
-  optional?: boolean;
-}
+import { StepHeaderProps } from "../types/onboarding";
 
-interface StepHeaderProps {
-  steps: Step[];
-  currentStep: number;
-  onStepClick: (stepId: number) => void;
-}
 
 const StepHeader: React.FC<StepHeaderProps> = ({
   steps,
@@ -86,4 +73,6 @@ const StepHeader: React.FC<StepHeaderProps> = ({
   );
 };
 
+
 export default StepHeader;
+
