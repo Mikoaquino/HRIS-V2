@@ -10,8 +10,6 @@ class JobPositionController extends Controller
 {
     public function index(): JobPositionCollection
     {
-        return JobPositionCollection::make(
-            JobPosition::with('department')->get()
-        );
+        return JobPositionCollection::make(JobPosition::all());
     }
 }
