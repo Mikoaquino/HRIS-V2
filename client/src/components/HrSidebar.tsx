@@ -103,7 +103,7 @@ const HrSidebar = () => {
                     </Link>
 
                     <Link
-                      to="/emp-dashboard"
+                      to="/employee-dashboard"
                       className="block py-2 text-sm text-gray-600 hover:text-blue-600"
                     >
                       Employee Dashboard
@@ -144,7 +144,8 @@ const HrSidebar = () => {
 
                 {activeCategory === "hrManagement" && (
                   <div className="pl-12 pr-4 pt-4 space-y-4">
-                    <div
+                    <Link
+                      to="/employee-management"
                       className="flex items-center cursor-pointer"
                       onClick={() => setActive("employeeList")}
                     >
@@ -166,7 +167,7 @@ const HrSidebar = () => {
                       >
                         Employee List
                       </span>
-                    </div>
+                    </Link>
 
                     <div>
                       <Link

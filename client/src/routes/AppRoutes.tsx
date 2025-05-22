@@ -14,6 +14,9 @@ import EmpDashboard from "../features/hrDashboard/pages/EmpDashboard/EmpDashboar
 import OnboardingDetails from "../features/employeeManagement/pages/OnboardingDetails";
 import UserProfile from "../features/userProfile/pages/UserProfile";
 import ChangePasswordPage from "../features/userProfile/pages/ChangePassword";
+import EmployeeManagement from "../features/employeeManagement/pages/EmployeeManagement";
+import EducationalBackground from '../features/employeeManagement/components/EducationalBackground';
+import WorkExperience from '../features/employeeManagement/components/WorkExperience';
 
 interface PrivateRouteProps {
   children?: React.ReactNode;
@@ -43,7 +46,10 @@ export const AppRoutes = () => {
             />
             <Route path="/audit-trail" element={<AuditTrailPage />} />
             <Route path="/hr-dashboard" element={<HrDashboard />} />
-            <Route path="/acc-management" element={<AccountManagement />} />
+            <Route path="/account-management" element={<AccountManagement />} />
+            <Route path="/employee-management" element={<EmployeeManagement />} />
+            <Route path="/education-background" element={<EducationalBackground />} />
+            <Route path="/work-experience" element={<WorkExperience />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route
               path="/profile/change-password"
@@ -51,7 +57,7 @@ export const AppRoutes = () => {
             />
 
             {/* will change to the EmpLayout */}
-            <Route path="/emp-dashboard" element={<EmpDashboard />} />
+            <Route path="/employee-dashboard" element={<EmpDashboard />} />
           </Route>
         </Route>
 
