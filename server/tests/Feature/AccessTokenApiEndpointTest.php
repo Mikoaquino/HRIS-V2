@@ -3,17 +3,19 @@
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
-test('`POST:` Generate an access token', function () {
-    $password = Str::password();
+beforeEach(function () {
+    $this->password = Str::password();
 
-    $user = User::factory()->create(['password' => $password]);
+    $this->user = User::factory()->create(['password' => $this->password]);
 
-    $requestPayload = [
-        'email'    => $user->email,
-        'password' => $password,
+    $this->requestPayload = [
+        'email'    => $this->user->email,
+        'password' => $this->password,
     ];
+});
 
-    $response = $this->postJson('/api/v1/auth/login', $requestPayload);
+test('`POST:` Generate an access token', function () {
+    $response = $this->postJson('/api/v1/auth/login', $this->requestPayload);
 
     $response->assertCreated()
         ->assertJsonStructure([
@@ -27,10 +29,10 @@ test('`POST:` Generate an access token', function () {
 });
 
 test('`POST:` Revoke access tokens', function () {
-    $token = User::factory()->create()->createToken('access-token')->plainTextToken;
+    $response = $this->postJson('/api/v1/auth/login', $this->requestPayload)->assertCreated();
 
     $response = $this->withHeaders([
-        'Authorization' => 'Bearer '.$token,
+        'Authorization' => 'Bearer '.$response->getData()->data->token,
     ])->postJson('/api/v1/auth/logout');
 
     $response->assertOk()
