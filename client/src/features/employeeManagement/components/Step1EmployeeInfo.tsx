@@ -1,21 +1,153 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { EmployeeInfo } from "../types/onboarding";
+import axios from "axios";
 
 interface Step1EmployeeInfoProps {
   data: EmployeeInfo;
   onUpdate: (data: EmployeeInfo) => void;
+  onValidationChange: (isValid: boolean) => void;
+}
+
+interface ApiOption {
+  id: string;
+  name: string;
+  first_name?: string;
+  last_name?: string;
+  department_id?: string;
 }
 
 export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
-  data,
+  data: initialData,
   onUpdate,
+  onValidationChange,
 }) => {
+  const [formData, setFormData] = useState<EmployeeInfo>(initialData);
+
+  useEffect(() => {
+    setFormData(initialData);
+  }, [initialData]);
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
+
+  const [departments, setDepartments] = useState<ApiOption[]>([]);
+  const [employmentTypes, setEmploymentTypes] = useState<ApiOption[]>([]);
+  const [jobPositions, setJobPositions] = useState<ApiOption[]>([]);
+  const [employeeStatuses, setEmployeeStatuses] = useState<ApiOption[]>([]);
+  const [supervisors, setSupervisors] = useState<ApiOption[]>([]);
+  const [loading, setLoading] = useState({
+    departments: true,
+    employmentTypes: true,
+    jobPositions: true,
+    employeeStatuses: true,
+    supervisors: true,
+  });
+  const [error, setError] = useState<string | null>(null);
+
+  const getAuthToken = (): string | null => {
+    return sessionStorage.getItem("token");
+  };
+
+  const api = axios.create({
+    baseURL: `${API_BASE_URL}/api/v1/`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getAuthToken()}`,
+    },
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = getAuthToken();
+      if (!token) {
+        setError("Authentication token not found");
+        return;
+      }
+
+      try {
+        const [
+          departmentsRes,
+          employmentTypesRes,
+          employeeStatusesRes,
+          supervisorsRes,
+          jobPositionsRes,
+        ] = await Promise.all([
+          api.get("/departments"),
+          api.get("/employment-types"),
+          api.get("/employee-statuses"),
+          api.get("/employees"),
+          api.get("/job-positions"),
+        ]);
+
+        setDepartments(departmentsRes.data.data || []);
+        setEmploymentTypes(employmentTypesRes.data.data || []);
+        setEmployeeStatuses(employeeStatusesRes.data.data || []);
+        setSupervisors(supervisorsRes.data.data || []);
+        setJobPositions(jobPositionsRes.data.data || []);
+
+        setLoading({
+          departments: false,
+          employmentTypes: false,
+          jobPositions: false,
+          employeeStatuses: false,
+          supervisors: false,
+        });
+      } catch (err) {
+        handleApiError(err);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      axios.CancelToken.source().cancel("Component unmounted");
+    };
+  }, []);
+
+  const handleApiError = (err: unknown) => {
+    if (axios.isAxiosError(err)) {
+      if (err.response?.status === 401) {
+        setError("Session expired. Please log in again.");
+      } else {
+        setError(
+          `Failed to load data: ${err.response?.data?.message || err.message}`
+        );
+      }
+    } else {
+      setError("Failed to load dropdown options");
+    }
+    console.error("Error fetching data:", err);
+  };
+
   const handleInputChange = (field: keyof EmployeeInfo, value: string) => {
-    onUpdate({ ...data, [field]: value });
+    const newData = { ...formData, [field]: value };
+    setFormData(newData);
+    onUpdate(newData);
+    sessionStorage.setItem("employeeInformation", JSON.stringify(newData));
+    validateForm(newData);
+  };
+
+  const validateForm = (formData: EmployeeInfo) => {
+    const isValid =
+      formData.employeeNumber.trim() !== "" &&
+      formData.dateHired.trim() !== "" &&
+      formData.employmentType !== "" &&
+      formData.jobPosition !== "" &&
+      formData.department !== "" &&
+      formData.immediateSupervisor !== "" &&
+      formData.employeeStatus !== "" &&
+      formData.email.trim() !== "" &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
+    onValidationChange(isValid);
   };
 
   return (
-    <div className="bg-white py-6">
+    <div className="bg-white py-6 px-4">
+      {error && (
+        <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+          {error}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {/* Employee Number */}
         <div>
@@ -29,7 +161,7 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
             type="text"
             id="employeeNumber"
             placeholder="Enter employee number"
-            value={data.employeeNumber}
+            value={formData.employeeNumber}
             onChange={(e) =>
               handleInputChange("employeeNumber", e.target.value)
             }
@@ -47,12 +179,11 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           </label>
           <div className="relative">
             <input
-              type="text"
+              type="date"
               id="dateHired"
-              placeholder="MM/DD/YYYY"
-              value={data.dateHired}
+              value={formData.dateHired}
               onChange={(e) => handleInputChange("dateHired", e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
               <svg
@@ -82,16 +213,21 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           </label>
           <select
             id="employmentType"
-            value={data.employmentType}
+            value={formData.employmentType}
             onChange={(e) =>
               handleInputChange("employmentType", e.target.value)
             }
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            disabled={loading.employmentTypes}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
           >
-            <option value="Placeholder">Select</option>
-            <option value="Probationary">Probationary</option>
-            <option value="Regular">Regular</option>
-            <option value="Contractual">Contractual</option>
+            <option value="">
+              {loading.employmentTypes ? "Loading..." : "Select"}
+            </option>
+            {employmentTypes.map((type) => (
+              <option key={type.id} value={type.id}>
+                {type.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -105,14 +241,19 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           </label>
           <select
             id="jobPosition"
-            value={data.jobPosition}
+            value={formData.jobPosition}
             onChange={(e) => handleInputChange("jobPosition", e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            disabled={loading.jobPositions}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
           >
-            <option value="Placeholder">Select</option>
-            <option value="Developer">Developer</option>
-            <option value="Manager">Manager</option>
-            <option value="Analyst">Analyst</option>
+            <option value="">
+              {loading.jobPositions ? "Loading..." : "Select"}
+            </option>
+            {jobPositions.map((position) => (
+              <option key={position.id} value={position.id}>
+                {position.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -126,14 +267,19 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           </label>
           <select
             id="department"
-            value={data.department}
+            value={formData.department}
             onChange={(e) => handleInputChange("department", e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            disabled={loading.departments}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
           >
-            <option value="Placeholder">Select</option>
-            <option value="IT">IT Department</option>
-            <option value="HR">HR Department</option>
-            <option value="Finance">Finance Department</option>
+            <option value="">
+              {loading.departments ? "Loading..." : "Select"}
+            </option>
+            {departments.map((dept) => (
+              <option key={dept.id} value={dept.id}>
+                {dept.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -147,16 +293,21 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           </label>
           <select
             id="immediateSupervisor"
-            value={data.immediateSupervisor}
+            value={formData.immediateSupervisor}
             onChange={(e) =>
               handleInputChange("immediateSupervisor", e.target.value)
             }
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            disabled={loading.supervisors}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
           >
-            <option value="Placeholder">Select</option>
-            <option value="John Doe">John Doe</option>
-            <option value="Jane Smith">Jane Smith</option>
-            <option value="Mike Johnson">Mike Johnson</option>
+            <option value="">
+              {loading.supervisors ? "Loading..." : "Select"}
+            </option>
+            {supervisors.map((supervisor) => (
+              <option key={supervisor.id} value={supervisor.id}>
+                {supervisor.first_name} {supervisor.last_name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -170,16 +321,21 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           </label>
           <select
             id="employeeStatus"
-            value={data.employeeStatus}
+            value={formData.employeeStatus}
             onChange={(e) =>
               handleInputChange("employeeStatus", e.target.value)
             }
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            disabled={loading.employeeStatuses}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
           >
-            <option value="Placeholder">Select</option>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-            <option value="On Leave">On Leave</option>
+            <option value="">
+              {loading.employeeStatuses ? "Loading..." : "Select"}
+            </option>
+            {employeeStatuses.map((status) => (
+              <option key={status.id} value={status.id}>
+                {status.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -195,7 +351,7 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
             type="email"
             id="email"
             placeholder="johndoe@gmail.com"
-            value={data.email}
+            value={formData.email}
             onChange={(e) => handleInputChange("email", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
