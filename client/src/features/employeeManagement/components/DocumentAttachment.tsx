@@ -1,65 +1,53 @@
 import { useState, useRef, useEffect } from "react";
 import { Document, FileUpload } from "../types/onboarding";
 
-interface DocumentFiles {
-  [key: string]: FileUpload[];
-}
-
 interface DocumentAttachmentProps {
   documents?: Document[];
   onDocumentUpdate: (document: Document) => void;
+  onValidationChange?: (isValid: boolean) => void;
 }
 
 const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
   documents = [],
   onDocumentUpdate,
+  onValidationChange = () => {},
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [localDocuments, setLocalDocuments] = useState<Document[]>(documents);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(
     null
   );
   const [fileUploads, setFileUploads] = useState<FileUpload[]>([]);
-  const [uploadError, setUploadError] = useState<string>("");
+  const [uploadError, setUploadError] = useState("");
   const [previewFile, setPreviewFile] = useState<FileUpload | null>(null);
-  const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false);
-
-  const [documentFiles, setDocumentFiles] = useState<DocumentFiles>(() => {
-    const initialFiles: DocumentFiles = {};
-    documents.forEach((doc) => {
-      initialFiles[doc.id] = [];
-    });
-    return initialFiles;
-  });
-
-  const [displayDocuments, setDisplayDocuments] = useState<Document[]>(() => {
-    return documents.map((doc) => ({
-      ...doc,
-      attachmentCount: doc.attachmentCount || 0,
-    }));
-  });
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const formatFileSize = (bytes: number): string => {
+    if (bytes < 1024) return bytes + " B";
+    else if (bytes > 1048576) return (bytes / 1024).toFixed(1) + " KB";
+    else return (bytes / 1048576).toFixed(1) + " MB";
+  };
 
   useEffect(() => {
-    setDisplayDocuments(
-      documents.map((doc) => ({
-        ...doc,
-        attachmentCount:
-          displayDocuments.find((d) => d.id === doc.id)?.attachmentCount ||
-          doc.attachmentCount ||
-          0,
-      }))
-    );
+    setLocalDocuments(documents);
   }, [documents]);
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const getFileExtension = (fileName: string | undefined) => {
+    if (!fileName) return "";
+    const parts = fileName.split(".");
+    return parts.length > 1 ? parts.pop()?.toUpperCase() || "" : "";
+  };
+  useEffect(() => {
+    const isValid = localDocuments.every(
+      (doc) =>
+        !doc.required ||
+        (doc.status === "uploaded" && (doc.attachments?.length || 0) > 0)
+    );
+    onValidationChange(isValid);
+  }, [localDocuments, onValidationChange]);
 
   const openModal = (document: Document) => {
-    console.log("Opening modal for document:", document);
     setSelectedDocument(document);
-    const currentDoc =
-      displayDocuments.find((d) => d.id === document.id) || document;
-
-    const existingFiles = documentFiles[currentDoc.id] || [];
-    setFileUploads(existingFiles);
+    setFileUploads(document.attachments || []);
     setUploadError("");
     setIsModalOpen(true);
   };
@@ -71,9 +59,10 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
+    processFiles(Array.from(e.target.files));
+  };
 
-    const files = Array.from(e.target.files);
-
+  const processFiles = (files: File[]) => {
     setUploadError("");
 
     const oversizedFiles = files.filter((file) => file.size > 30 * 1024 * 1024);
@@ -81,7 +70,6 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
       setUploadError("File too large! Maximum file size is 30MB.");
       return;
     }
-
     const newFiles: FileUpload[] = files.map((file) => ({
       id: Date.now() + Math.random().toString(36).substr(2, 9),
       file,
@@ -91,128 +79,60 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
       url: URL.createObjectURL(file),
     }));
 
-    setFileUploads((prevUploads) => [...prevUploads, ...newFiles]);
+    setFileUploads((prev) => [...prev, ...newFiles]);
   };
 
   const removeFile = (fileId: string) => {
     const fileToRemove = fileUploads.find((f) => f.id === fileId);
-    if (fileToRemove && fileToRemove.url) {
+    if (fileToRemove?.url) {
       URL.revokeObjectURL(fileToRemove.url);
     }
 
-    setFileUploads((prevUploads) => prevUploads.filter((f) => f.id !== fileId));
-
-    if (selectedDocument) {
-      const updatedFiles = fileUploads.filter((f) => f.id !== fileId);
-      const updatedCount = updatedFiles.length;
-
-      setDocumentFiles((prev) => ({
-        ...prev,
-        [selectedDocument.id]: updatedFiles,
-      }));
-
-      const updatedDoc: Document = {
-        ...selectedDocument,
-        attachmentCount: updatedCount,
-        status: updatedCount === 0 ? "pending" : selectedDocument.status,
-      };
-
-      setDisplayDocuments((prev) =>
-        prev.map((doc) => (doc.id === selectedDocument.id ? updatedDoc : doc))
-      );
-
-      if (selectedDocument.status === "uploaded") {
-        onDocumentUpdate(updatedDoc);
-      }
-    }
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const files = Array.from(e.dataTransfer.files);
-
-    setUploadError("");
-
-    const oversizedFiles = files.filter((file) => file.size > 30 * 1024 * 1024);
-    if (oversizedFiles.length > 0) {
-      setUploadError("File too large! Maximum file size is 30MB.");
-      return;
-    }
-
-    const newFiles: FileUpload[] = files.map((file) => ({
-      id: Date.now() + Math.random().toString(36).substr(2, 9),
-      file,
-      name: file.name,
-      size: file.size,
-      type: file.type,
-      url: URL.createObjectURL(file),
-    }));
-
-    setFileUploads((prevUploads) => [...prevUploads, ...newFiles]);
-  };
-
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
-
-  const formatFileSize = (bytes: number): string => {
-    if (bytes < 1024) return bytes + " B";
-    else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + " KB";
-    else return (bytes / 1048576).toFixed(1) + " MB";
+    setFileUploads((prev) => prev.filter((f) => f.id !== fileId));
   };
 
   const handleSubmit = () => {
-    if (selectedDocument) {
-      const updatedFiles = [...fileUploads];
-      const numFiles = updatedFiles.length;
+    if (!selectedDocument) return;
 
-      if (numFiles === 0) {
-        setDocumentFiles((prev) => ({
-          ...prev,
-          [selectedDocument.id]: [],
-        }));
+    const updatedDoc: Document = {
+      ...selectedDocument,
+      status: fileUploads.length > 0 ? "uploaded" : "pending",
+      attachments: [...fileUploads],
+      attachmentCount: fileUploads.length,
+    };
 
-        const updatedDoc: Document = {
-          ...selectedDocument,
-          status: "pending",
-          attachmentCount: 0,
-        };
+    onDocumentUpdate(updatedDoc);
 
-        setDisplayDocuments((prev) =>
-          prev.map((doc) => (doc.id === selectedDocument.id ? updatedDoc : doc))
-        );
+    setLocalDocuments((prev) =>
+      prev.map((doc) => (doc.id === selectedDocument.id ? updatedDoc : doc))
+    );
 
-        onDocumentUpdate(updatedDoc);
-        closeModal();
-        return;
-      }
-
-      setDocumentFiles((prev) => ({
-        ...prev,
-        [selectedDocument.id]: updatedFiles,
-      }));
-
-      const updatedDoc: Document = {
-        ...selectedDocument,
-        status: "uploaded",
-        attachmentCount: numFiles,
-      };
-
-      console.log(
-        "Updating document with attachment count:",
-        numFiles,
-        typeof numFiles
-      );
-      console.log("Updated document:", updatedDoc);
-
-      setDisplayDocuments((prev) =>
-        prev.map((doc) => (doc.id === selectedDocument.id ? updatedDoc : doc))
-      );
-
-      onDocumentUpdate(updatedDoc);
-      closeModal();
-    }
+    closeModal();
   };
+  useEffect(() => {
+    const loadFromSession = () => {
+      try {
+        const savedDocs = sessionStorage.getItem("documents");
+        if (savedDocs) {
+          const parsedDocs = JSON.parse(savedDocs) as Document[];
+          const docsWithAttachments = parsedDocs.map((doc) => ({
+            ...doc,
+            attachments:
+              doc.attachments?.map((attr) => ({
+                ...attr,
+                file: new File([], attr.name, { type: attr.type }),
+                url: "",
+              })) || [],
+          }));
+          setLocalDocuments(docsWithAttachments);
+        }
+      } catch (error) {
+        console.error("Failed to load documents", error);
+      }
+    };
+
+    loadFromSession();
+  }, []);
 
   const openPreview = (file: FileUpload) => {
     setPreviewFile(file);
@@ -224,34 +144,12 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
     setPreviewFile(null);
   };
 
-  const getStatusLabel = (status: string, count: number | undefined) => {
-    const fileCount = Number(count || 0);
+  const getStatusLabel = (doc: Document) => {
+    const fileCount = doc.attachments?.length || 0;
 
-    if (status === "uploaded") {
-      if (fileCount <= 0) {
-        return (
-          <div className="flex items-center bg-red-100 text-red-800 py-2 px-4 rounded">
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-            Not Yet Uploaded
-          </div>
-        );
-      }
-
+    if (doc.status === "uploaded" && fileCount > 0) {
       return (
-        <div className="flex items-center bg-green-700/30 justify-center text-green-800 py-2 px-4 rounded-xl">
+        <div className="flex items-center bg-green-100 text-green-800 py-2 px-4 rounded">
           <svg
             className="w-5 h-5 mr-2"
             fill="none"
@@ -264,15 +162,14 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
               strokeLinejoin="round"
               strokeWidth="2"
               d="M5 13l4 4L19 7"
-            ></path>
+            />
           </svg>
-          Uploaded with {fileCount}{" "}
-          {fileCount === 1 ? "attachment" : "attachments"}
+          Uploaded with {fileCount} {fileCount === 1 ? "file" : "files"}
         </div>
       );
     }
     return (
-      <div className="flex items-center justify-center bg-red-100 text-red-800 py-2 px-4 rounded-xl">
+      <div className="flex items-center bg-red-100 text-red-800 py-2 px-4 rounded">
         <svg
           className="w-5 h-5 mr-2"
           fill="none"
@@ -285,18 +182,14 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
             strokeLinejoin="round"
             strokeWidth="2"
             d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          ></path>
+          />
         </svg>
-        Not Yet Uploaded
+        {fileCount > 0 ? "Pending Submission" : "Not Uploaded"}
       </div>
     );
   };
 
-  interface FileTypeIconProps {
-    fileType: string;
-  }
-
-  const FileTypeIcon: React.FC<FileTypeIconProps> = ({ fileType }) => {
+  const FileTypeIcon: React.FC<{ fileType: string }> = ({ fileType }) => {
     let icon = (
       <svg
         className="w-6 h-6"
@@ -343,26 +236,6 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
           />
         </svg>
       );
-    } else if (
-      fileType.includes("word") ||
-      fileType.includes("document") ||
-      fileType.includes("excel") ||
-      fileType.includes("sheet")
-    ) {
-      icon = (
-        <svg
-          className="w-6 h-6"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fillRule="evenodd"
-            d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-            clipRule="evenodd"
-          />
-        </svg>
-      );
     }
 
     return <div className="text-gray-500">{icon}</div>;
@@ -395,7 +268,7 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
                   strokeLinejoin="round"
                   strokeWidth="2"
                   d="M6 18L18 6M6 6l12 12"
-                ></path>
+                />
               </svg>
             </button>
           </div>
@@ -449,28 +322,26 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
   const DocumentModal = () => {
     if (!selectedDocument) return null;
 
-    const currentDoc =
-      displayDocuments.find((d) => d.id === selectedDocument.id) ||
-      selectedDocument;
-
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1500]">
         <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
           <h3 className="text-xl font-semibold mb-4">
-            Upload {currentDoc.name}
+            Upload {selectedDocument.name}
           </h3>
 
           <p className="text-gray-600 mb-4">
-            {currentDoc.name === "Government ID Copies"
+            {selectedDocument.name === "Government ID Copies"
               ? "Please upload government ID copies (i.e. SSS, TIN, PhilHealth, Pag-ibig)"
-              : `Please upload your ${currentDoc.name.toLowerCase()}`}
+              : `Please upload your ${selectedDocument.name.toLowerCase()}`}
           </p>
 
-          {/* File drop area */}
           <div
             className="border-2 border-dashed border-teal-300 rounded-lg p-8 mb-4 text-center cursor-pointer hover:bg-teal-50"
-            onDrop={handleDrop}
-            onDragOver={handleDragOver}
+            onDrop={(e) => {
+              e.preventDefault();
+              processFiles(Array.from(e.dataTransfer.files));
+            }}
+            onDragOver={(e) => e.preventDefault()}
             onClick={() => fileInputRef.current?.click()}
           >
             <div className="flex justify-center mb-2">
@@ -487,14 +358,13 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
                     strokeLinejoin="round"
                     strokeWidth="2"
                     d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                  ></path>
+                  />
                 </svg>
               </div>
             </div>
             <p className="text-gray-700">Click or drag a file here to upload</p>
             <input
               ref={fileInputRef}
-              id="fileInput"
               type="file"
               className="hidden"
               onChange={handleFileChange}
@@ -502,12 +372,10 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
             />
           </div>
 
-          {/* Error message */}
           {uploadError && (
             <div className="text-red-500 mb-4">{uploadError}</div>
           )}
 
-          {/* File list */}
           {fileUploads.length > 0 ? (
             <div className="mb-4">
               <p className="font-semibold mb-2">
@@ -525,7 +393,7 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
                         className="w-10 h-10 bg-red-500 text-white rounded flex items-center justify-center mr-3 hover:bg-red-600"
                       >
                         <span className="text-xs font-bold">
-                          {file.name.split(".").pop()?.toUpperCase() || ""}
+                          {getFileExtension(file.name)}
                         </span>
                       </button>
                       <div className="truncate">
@@ -555,13 +423,13 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                          ></path>
+                          />
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                          ></path>
+                          />
                         </svg>
                       </button>
                       <button
@@ -581,7 +449,7 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          ></path>
+                          />
                         </svg>
                       </button>
                     </div>
@@ -595,7 +463,6 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
             </div>
           )}
 
-          {/* Action buttons */}
           <div className="flex justify-end space-x-2">
             <button
               onClick={closeModal}
@@ -606,14 +473,16 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
             <button
               onClick={handleSubmit}
               className={`px-4 py-2 text-white rounded ${
-                fileUploads.length === 0 && currentDoc.status === "uploaded"
-                  ? "bg-red-500 hover:bg-red-600" // Show red button when removing all files
+                fileUploads.length === 0 &&
+                selectedDocument.status === "uploaded"
+                  ? "bg-red-500 hover:bg-red-600"
                   : fileUploads.length === 0
                   ? "bg-gray-400 cursor-not-allowed"
                   : "bg-teal-500 hover:bg-teal-600"
               }`}
             >
-              {fileUploads.length === 0 && currentDoc.status === "uploaded"
+              {fileUploads.length === 0 &&
+              selectedDocument.status === "uploaded"
                 ? "Remove All Attachments"
                 : "Upload"}
             </button>
@@ -634,13 +503,10 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
         </div>
         <p className="text-gray-700 text-sm">
           Please ensure the documents you intend to upload are complete,
-          accurate, and properly named for easy identification, and verify that
-          the correct files have been selected and assigned to the appropriate
-          employee record.
+          accurate, and properly named for easy identification.
         </p>
       </div>
 
-      {/* Document List */}
       <div className="mb-8">
         <div className="grid grid-cols-12 gap-4 py-2 mb-2 font-semibold bg-gray-50 px-4">
           <div className="col-span-1">#</div>
@@ -651,7 +517,7 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
           <div className="col-span-3 justify-center flex">Action</div>
         </div>
 
-        {displayDocuments.map((doc) => (
+        {localDocuments.map((doc) => (
           <div
             key={doc.id}
             className="grid grid-cols-12 gap-4 py-4 border-b border-gray-200 px-4"
@@ -661,62 +527,59 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
               {doc.name}
               {doc.required && <span className="text-red-500 ml-1">*</span>}
             </div>
-            <div className="col-span-3">
-              {getStatusLabel(doc.status, doc.attachmentCount)}
-            </div>
+            <div className="col-span-3">{getStatusLabel(doc)}</div>
             <div className="col-span-3 flex justify-center">
-              {doc.status === "uploaded" ? (
-                <button
-                  className="text-teal-600 hover:text-teal-800 font-medium flex items-center"
-                  onClick={() => openModal(doc)}
-                >
-                  <svg
-                    className="w-5 h-5 mr-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    ></path>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    ></path>
-                  </svg>
-                  View{" "}
-                  {Number(doc.attachmentCount) > 1
-                    ? "Attachments"
-                    : "Attachment"}
-                </button>
-              ) : (
-                <button
-                  className="text-teal-600 hover:text-teal-800 font-medium flex items-center"
-                  onClick={() => openModal(doc)}
-                >
-                  <svg
-                    className="w-5 h-5 mr-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0l-4 4m4-4v12"
-                    ></path>
-                  </svg>
-                  Upload
-                </button>
-              )}
+              <button
+                className="text-teal-600 hover:text-teal-800 font-medium flex items-center"
+                onClick={() => openModal(doc)}
+              >
+                {doc.status === "uploaded" ? (
+                  <>
+                    <svg
+                      className="w-5 h-5 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                    </svg>
+                    View{" "}
+                    {(doc.attachmentCount || 0) > 1
+                      ? "Attachments"
+                      : "Attachment"}
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      className="w-5 h-5 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0l-4 4m4-4v12"
+                      />
+                    </svg>
+                    Upload
+                  </>
+                )}
+              </button>
             </div>
           </div>
         ))}

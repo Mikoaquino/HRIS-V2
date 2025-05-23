@@ -1,29 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Pencil, Trash, XCircle } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Pencil, Trash, XCircle } from "lucide-react";
+import { Education } from "../types/onboarding";
 
-type Education = {
-  attainment: string;
-  school: string;
-  degree: string;
-  from: string;
-  to: string;
-  isPresent: boolean;
-  isEditing?: boolean;
-};
-
-const token = sessionStorage.getItem('token');
-const EDUCATION_STORAGE_KEY = token ? `hris-educational-background-${token}` : 'hris-educational-background';
+const token = sessionStorage.getItem("token");
+const EDUCATION_STORAGE_KEY = "hris-educational-background";
 
 const schoolRegex = /^[A-Za-z0-9 .,\-'"&()]{3,100}$/;
 const degreeRegex = /^[A-Za-z .,\-'"&()]{2,100}$/;
 const currentMonth = new Date().toISOString().slice(0, 7);
-const minMonth = '1950-01';
+const minMonth = "1950-01";
 
 const isValidYearRange = (from: string, to: string, isPresent: boolean) => {
   if (!from || (!isPresent && !to)) return false;
 
   const currentMonth = new Date().toISOString().slice(0, 7);
-  const minMonth = '1950-01';
+  const minMonth = "1950-01";
 
   if (from < minMonth || from > currentMonth) return false;
 
@@ -41,29 +32,35 @@ const EducationalBackground: React.FC = () => {
       try {
         return JSON.parse(stored);
       } catch {
-        return [{
-          attainment: '',
-          school: '',
-          degree: '',
-          from: '',
-          to: '',
-          isPresent: false,
-          isEditing: true,
-        }];
+        return [
+          {
+            attainment: "",
+            school: "",
+            degree: "",
+            from: "",
+            to: "",
+            isPresent: false,
+            isEditing: true,
+          },
+        ];
       }
     }
-    return [{
-      attainment: '',
-      school: '',
-      degree: '',
-      from: '',
-      to: '',
-      isPresent: false,
-      isEditing: true,
-    }];
+    return [
+      {
+        attainment: "",
+        school: "",
+        degree: "",
+        from: "",
+        to: "",
+        isPresent: false,
+        isEditing: true,
+      },
+    ];
   });
 
-  const [originalEducation, setOriginalEducation] = useState<{ [key: number]: Education }>({});
+  const [originalEducation, setOriginalEducation] = useState<{
+    [key: number]: Education;
+  }>({});
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -74,7 +71,10 @@ const EducationalBackground: React.FC = () => {
 
   useEffect(() => {
     Object.keys(sessionStorage).forEach((key) => {
-      if (key.startsWith('hris-educational-background-') && key !== EDUCATION_STORAGE_KEY) {
+      if (
+        key.startsWith("hris-educational-background-") &&
+        key !== EDUCATION_STORAGE_KEY
+      ) {
         sessionStorage.removeItem(key);
       }
     });
@@ -88,8 +88,8 @@ const EducationalBackground: React.FC = () => {
     const newEducations = [...educations];
     const updatedEducation = {
       ...newEducations[index],
-      [name]: type === 'checkbox' ? checked : value,
-      ...(name === 'isPresent' && checked ? { to: '' } : {}),
+      [name]: type === "checkbox" ? checked : value,
+      ...(name === "isPresent" && checked ? { to: "" } : {}),
     };
 
     newEducations[index] = updatedEducation;
@@ -121,15 +121,17 @@ const EducationalBackground: React.FC = () => {
         const newEducations = educations.filter((_, i) => i !== index);
         setEducations(newEducations);
       } else {
-        setEducations([{
-          attainment: '',
-          school: '',
-          degree: '',
-          from: '',
-          to: '',
-          isPresent: false,
-          isEditing: true,
-        }]);
+        setEducations([
+          {
+            attainment: "",
+            school: "",
+            degree: "",
+            from: "",
+            to: "",
+            isPresent: false,
+            isEditing: true,
+          },
+        ]);
       }
       return;
     }
@@ -146,13 +148,14 @@ const EducationalBackground: React.FC = () => {
   };
 
   const areAllEducationsValid = () => {
-    return educations.every((edu) =>
-      edu.attainment &&
-      schoolRegex.test(edu.school) &&
-      degreeRegex.test(edu.degree) &&
-      edu.from &&
-      (edu.isPresent || edu.to) &&
-      isValidYearRange(edu.from, edu.to, edu.isPresent)
+    return educations.every(
+      (edu) =>
+        edu.attainment &&
+        schoolRegex.test(edu.school) &&
+        degreeRegex.test(edu.degree) &&
+        edu.from &&
+        (edu.isPresent || edu.to) &&
+        isValidYearRange(edu.from, edu.to, edu.isPresent)
     );
   };
 
@@ -165,11 +168,11 @@ const EducationalBackground: React.FC = () => {
     setEducations([
       ...updatedEducations,
       {
-        attainment: '',
-        school: '',
-        degree: '',
-        from: '',
-        to: '',
+        attainment: "",
+        school: "",
+        degree: "",
+        from: "",
+        to: "",
         isPresent: false,
         isEditing: true,
       },
@@ -184,7 +187,7 @@ const EducationalBackground: React.FC = () => {
   const toggleEdit = (index: number) => {
     setOriginalEducation((prev) => ({
       ...prev,
-      [index]: { ...educations[index] }
+      [index]: { ...educations[index] },
     }));
     const updated = [...educations];
     updated[index].isEditing = true;
@@ -192,11 +195,11 @@ const EducationalBackground: React.FC = () => {
   };
 
   const formatDate = (dateString: string) => {
-    if (!dateString) return '';
+    if (!dateString) return "";
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      year: 'numeric'
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
     });
   };
 
@@ -214,57 +217,55 @@ const EducationalBackground: React.FC = () => {
     );
   };
 
-  //sessionStorage.removeItem(EDUCATION_STORAGE_KEY); Paki add nalang to sa API POST mo pre @peter
-
   return (
     <div className="space-y-6 bg-white p-8 rounded-md shadow-sm">
       {educations.map((education, index) => (
-        <div
-          key={index}
-          className="border-b-3 border-gray-200 relative"
-        >
+        <div key={index} className="border-b-3 border-gray-200 relative">
           {/* summary cute*/}
           {!education.isEditing && (
-          <div className="flex flex-col">
-            <div className="px-2 md:px-5 pb-6 pt-2">
-              <div className="flex flex-col md:flex-row md:justify-between md:items-start md:space-x-8 space-y-4 md:space-y-0">
-                <div className="text-sm text-gray-500 min-w-[100px] md:min-w-[120px] pt-2 md:pt-8">
-                  {formatDate(education.from)} - {education.isPresent ? 'Present' : formatDate(education.to)}
-                </div>
-                <div className="flex-1 flex-col md:pt-2 md:ps-16">
-                  <h3 className="text-base font-semibold text-gray-900 mb-0.5">
-                    {education.attainment} Degree
-                  </h3>
-                  <p className="text-sm font-medium text-gray-700 mb-0.5">{education.school}</p>
-                  <p className="text-sm text-gray-500">{education.degree}</p>
-                </div>
-                <div className="flex-1 space-x-2 md:space-x-4 pt-2 md:pt-6 justify-end">
-                  {educations.length > 1 && (
+            <div className="flex flex-col">
+              <div className="px-2 md:px-5 pb-6 pt-2">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start md:space-x-8 space-y-4 md:space-y-0">
+                  <div className="text-sm text-gray-500 min-w-[100px] md:min-w-[120px] pt-2 md:pt-8">
+                    {formatDate(education.from)} -{" "}
+                    {education.isPresent ? "Present" : formatDate(education.to)}
+                  </div>
+                  <div className="flex-1 flex-col md:pt-2 md:ps-16">
+                    <h3 className="text-base font-semibold text-gray-900 mb-0.5">
+                      {education.attainment} Degree
+                    </h3>
+                    <p className="text-sm font-medium text-gray-700 mb-0.5">
+                      {education.school}
+                    </p>
+                    <p className="text-sm text-gray-500">{education.degree}</p>
+                  </div>
+                  <div className="flex-1 space-x-2 md:space-x-4 pt-2 md:pt-6 justify-end">
+                    {educations.length > 1 && (
+                      <button
+                        onClick={() => {
+                          setDeleteIndex(index);
+                          setShowDeleteModal(true);
+                        }}
+                        className="text-gray-400 hover:text-gray-600 transition cursor-pointer"
+                        type="button"
+                        aria-label="Delete"
+                      >
+                        <Trash size={22} />
+                      </button>
+                    )}
                     <button
-                      onClick={() => {
-                        setDeleteIndex(index);
-                        setShowDeleteModal(true);
-                      }}
+                      onClick={() => toggleEdit(index)}
                       className="text-gray-400 hover:text-gray-600 transition cursor-pointer"
                       type="button"
-                      aria-label="Delete"
+                      aria-label="Edit"
                     >
-                      <Trash size={22} />
+                      <Pencil size={22} />
                     </button>
-                  )}
-                  <button
-                    onClick={() => toggleEdit(index)}
-                    className="text-gray-400 hover:text-gray-600 transition cursor-pointer"
-                    type="button"
-                    aria-label="Edit"
-                  >
-                    <Pencil size={22} />
-                  </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
           {/* Krazy Education form */}
           {education.isEditing && (
@@ -273,7 +274,8 @@ const EducationalBackground: React.FC = () => {
                 {/* Attainment */}
                 <div className="flex flex-col">
                   <label className="text-sm font-medium text-gray-700 mb-1">
-                    Educational Attainment <span className="text-red-500">*</span>
+                    Educational Attainment{" "}
+                    <span className="text-red-500">*</span>
                   </label>
                   <select
                     name="attainment"
@@ -285,7 +287,9 @@ const EducationalBackground: React.FC = () => {
                     <option value="Doctorate">Doctoratal Degree</option>
                     <option value="Master's">Master's Degree</option>
                     <option value="Bachelor's">Bachelor's Degree</option>
-                    <option value="Vocational">Vocational / Associate Degree</option>
+                    <option value="Vocational">
+                      Vocational / Associate Degree
+                    </option>
                     <option value="High School">High School</option>
                   </select>
                 </div>
@@ -347,8 +351,12 @@ const EducationalBackground: React.FC = () => {
                         onChange={(e) => handleChange(index, e)}
                         className="mr-2"
                       />
-                      <label htmlFor={`isPresent-${index}`} className="text-sm text-gray-700">
-                        Present/Currently Pursuing <span className="text-red-500">*</span>
+                      <label
+                        htmlFor={`isPresent-${index}`}
+                        className="text-sm text-gray-700"
+                      >
+                        Present/Currently Pursuing{" "}
+                        <span className="text-red-500">*</span>
                       </label>
                     </div>
                   </div>
@@ -384,20 +392,27 @@ const EducationalBackground: React.FC = () => {
                         degreeRegex.test(education.degree) &&
                         education.from &&
                         (education.isPresent || education.to) &&
-                        isValidYearRange(education.from, education.to, education.isPresent)
+                        isValidYearRange(
+                          education.from,
+                          education.to,
+                          education.isPresent
+                        )
                       ) || !isEducationChanged(index)
                     }
                     className={`text-sm font-medium px-4 py-2 rounded transition-colors ${
-                      (
-                        education.attainment &&
-                        schoolRegex.test(education.school) &&
-                        degreeRegex.test(education.degree) &&
-                        education.from &&
-                        (education.isPresent || education.to) &&
-                        isValidYearRange(education.from, education.to, education.isPresent)
-                      ) && isEducationChanged(index)
-                        ? 'bg-teal-500 hover:bg-teal-600 text-white cursor-pointer'
-                        : 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                      education.attainment &&
+                      schoolRegex.test(education.school) &&
+                      degreeRegex.test(education.degree) &&
+                      education.from &&
+                      (education.isPresent || education.to) &&
+                      isValidYearRange(
+                        education.from,
+                        education.to,
+                        education.isPresent
+                      ) &&
+                      isEducationChanged(index)
+                        ? "bg-teal-500 hover:bg-teal-600 text-white cursor-pointer"
+                        : "bg-gray-300 text-gray-600 cursor-not-allowed"
                     }`}
                   >
                     Save
@@ -416,9 +431,12 @@ const EducationalBackground: React.FC = () => {
               <div className="text-red-500 mb-2">
                 <XCircle size={90} strokeWidth={1.5} className="mx-auto" />
               </div>
-              <h2 className="text-xl font-semibold text-red-600 mb-2">Delete Educational Attainment</h2>
+              <h2 className="text-xl font-semibold text-red-600 mb-2">
+                Delete Educational Attainment
+              </h2>
               <p className="text-gray-700 mb-6">
-                Are you sure you want to delete this educational attainment record? This process cannot be undone.
+                Are you sure you want to delete this educational attainment
+                record? This process cannot be undone.
               </p>
               <div className="flex justify-center gap-4">
                 <button
@@ -440,7 +458,7 @@ const EducationalBackground: React.FC = () => {
                   disabled={isDeleting}
                   className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 font-medium cursor-pointer"
                 >
-                  {isDeleting ? 'Deleting...' : 'Delete'}
+                  {isDeleting ? "Deleting..." : "Delete"}
                 </button>
               </div>
             </div>
@@ -453,8 +471,8 @@ const EducationalBackground: React.FC = () => {
         disabled={!areAllEducationsValid()}
         className={`text-sm font-medium px-4 py-2 rounded transition-colors ${
           areAllEducationsValid()
-            ? 'bg-teal-500 hover:bg-teal-600 text-white cursor-pointer'
-            : 'bg-gray-300 text-gray-600 cursor-not-allowed'
+            ? "bg-teal-500 hover:bg-teal-600 text-white cursor-pointer"
+            : "bg-gray-300 text-gray-600 cursor-not-allowed"
         }`}
       >
         Add Education

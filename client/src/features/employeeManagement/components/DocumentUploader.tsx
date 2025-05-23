@@ -1,21 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useOnboarding from "../hooks/useOnboarding";
 import { Document, FileUpload } from "../types/onboarding";
 
-const DocumentUploader = () => {
+interface DocumentUploaderProps {
+  onValidationChange?: (isValid: boolean) => void;
+}
+
+const DocumentUploader: React.FC<DocumentUploaderProps> = ({
+  onValidationChange = () => {},
+}) => {
   const { onboardingData, updateDocument } = useOnboarding();
   const { documents } = onboardingData;
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(
     null
   );
   const [fileUploads, setFileUploads] = useState<FileUpload[]>([]);
-  const [uploadError, setUploadError] = useState<string>("");
+  const [uploadError, setUploadError] = useState("");
+
+  const [documentFiles, setDocumentFiles] = useState<
+    Record<string, FileUpload[]>
+  >({});
 
   const openModal = (document: Document) => {
     setSelectedDocument(document);
-    setFileUploads([]);
+    setFileUploads(documentFiles[document.id] || []);
     setUploadError("");
     setIsModalOpen(true);
   };
@@ -25,11 +35,31 @@ const DocumentUploader = () => {
     setSelectedDocument(null);
   };
 
+  useEffect(() => {
+    return () => {
+      Object.values(documentFiles)
+        .flat()
+        .forEach((file) => {
+          if (file.url) URL.revokeObjectURL(file.url);
+        });
+    };
+  }, [documentFiles]);
+
+  useEffect(() => {
+    const isValid = documents.every(
+      (doc) =>
+        !doc.required ||
+        (doc.status === "uploaded" && (doc.attachmentCount || 0) > 0)
+    );
+    onValidationChange(isValid);
+  }, [documents, onValidationChange]);
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
+    processFiles(Array.from(e.target.files));
+  };
 
-    const files = Array.from(e.target.files);
-
+  const processFiles = (files: File[]) => {
     setUploadError("");
 
     const oversizedFiles = files.filter((file) => file.size > 30 * 1024 * 1024);
@@ -47,35 +77,19 @@ const DocumentUploader = () => {
       url: URL.createObjectURL(file),
     }));
 
-    setFileUploads([...fileUploads, ...newFiles]);
+    setFileUploads((prev) => [...prev, ...newFiles]);
   };
 
   const removeFile = (fileId: string) => {
-    setFileUploads(fileUploads.filter((f) => f.id !== fileId));
+    const fileToRemove = fileUploads.find((f) => f.id === fileId);
+    if (fileToRemove?.url) URL.revokeObjectURL(fileToRemove.url);
+
+    setFileUploads((prev) => prev.filter((f) => f.id !== fileId));
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    const files = Array.from(e.dataTransfer.files);
-
-    setUploadError("");
-
-    const oversizedFiles = files.filter((file) => file.size > 30 * 1024 * 1024);
-    if (oversizedFiles.length > 0) {
-      setUploadError("File too large! Maximum file size is 30MB.");
-      return;
-    }
-
-    const newFiles: FileUpload[] = files.map((file) => ({
-      id: Date.now() + Math.random().toString(36).substring(2, 9),
-      file,
-      name: file.name,
-      size: file.size,
-      type: file.type,
-      url: URL.createObjectURL(file),
-    }));
-
-    setFileUploads([...fileUploads, ...newFiles]);
+    processFiles(Array.from(e.dataTransfer.files));
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -83,17 +97,30 @@ const DocumentUploader = () => {
   };
 
   const formatFileSize = (bytes: number): string => {
-    if (bytes < 1024) return bytes + " B";
-    else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + " KB";
-    else return (bytes / 1048576).toFixed(1) + " MB";
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1048576) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / 1048576).toFixed(1)} MB`;
   };
 
   const handleSubmit = () => {
-    if (selectedDocument) {
-      const filesArray = fileUploads.map((fileUpload) => fileUpload.file);
-      updateDocument(selectedDocument.id, "uploaded", filesArray);
-      closeModal();
+    if (!selectedDocument) return;
+
+    const updatedFiles = { ...documentFiles };
+    if (fileUploads.length > 0) {
+      updatedFiles[selectedDocument.id] = fileUploads;
+    } else {
+      delete updatedFiles[selectedDocument.id];
     }
+
+    setDocumentFiles(updatedFiles);
+
+    updateDocument(
+      selectedDocument.id,
+      fileUploads.length > 0 ? "uploaded" : "pending",
+      fileUploads
+    );
+
+    closeModal();
   };
 
   const getStatusLabel = (status: string, count: number) => {

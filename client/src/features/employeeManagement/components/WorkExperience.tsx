@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Pencil, Trash, XCircle } from 'lucide-react';
-
-type Work = {
-  employer: string;
-  position: string;
-  from: string;
-  to: string;
-  reason: string;
-  isEditing?: boolean;
-};
+import React, { useState, useEffect } from "react";
+import { Pencil, Trash, XCircle } from "lucide-react";
+import { Work } from "../types/onboarding";
 
 const reasonRegex = /^[A-Za-z0-9 .,\-'"()]{0,200}$/;
 const employerRegex = /^[A-Za-z .,\-'"&()]{3,100}$/;
 const positionRegex = /^[A-Za-z .,\-'"()]{2,100}$/;
 const currentMonth = new Date().toISOString().slice(0, 7);
-const minMonth = '1950-01';
-const token = sessionStorage.getItem('token');
-const WORK_STORAGE_KEY = token ? `hris-work-experience-${token}` : 'hris-work-experience';
+const minMonth = "1950-01";
+const token = sessionStorage.getItem("token");
+const WORK_STORAGE_KEY = "hris-work-experience";
 
 const isValidYearRange = (from: string, to: string) => {
   if (!from || !to) return false;
@@ -34,14 +26,16 @@ const WorkExperience: React.FC = () => {
         // fallback
       }
     }
-    return [{
-      employer: '',
-      position: '',
-      from: '',
-      to: '',
-      reason: '',
-      isEditing: true,
-    }];
+    return [
+      {
+        employer: "",
+        position: "",
+        from: "",
+        to: "",
+        reason: "",
+        isEditing: true,
+      },
+    ];
   });
 
   const [originalWork, setOriginalWork] = useState<{ [key: number]: Work }>({});
@@ -56,7 +50,7 @@ const WorkExperience: React.FC = () => {
   useEffect(() => {
     // Remove all hris-work-experience-* keys except the current one
     Object.keys(sessionStorage).forEach((key) => {
-      if (key.startsWith('hris-work-experience-') && key !== WORK_STORAGE_KEY) {
+      if (key.startsWith("hris-work-experience-") && key !== WORK_STORAGE_KEY) {
         sessionStorage.removeItem(key);
       }
     });
@@ -87,7 +81,7 @@ const WorkExperience: React.FC = () => {
       updated[index].isEditing = false;
       setWorks(updated);
     } else {
-      alert('Please fill out all fields correctly before saving.');
+      alert("Please fill out all fields correctly before saving.");
     }
   };
 
@@ -99,11 +93,11 @@ const WorkExperience: React.FC = () => {
       } else {
         setWorks([
           {
-            employer: '',
-            position: '',
-            from: '',
-            to: '',
-            reason: '',
+            employer: "",
+            position: "",
+            from: "",
+            to: "",
+            reason: "",
             isEditing: true,
           },
         ]);
@@ -143,11 +137,11 @@ const WorkExperience: React.FC = () => {
     setWorks([
       ...updatedWorks,
       {
-        employer: '',
-        position: '',
-        from: '',
-        to: '',
-        reason: '',
+        employer: "",
+        position: "",
+        from: "",
+        to: "",
+        reason: "",
         isEditing: true,
       },
     ]);
@@ -169,11 +163,11 @@ const WorkExperience: React.FC = () => {
   };
 
   const formatDate = (dateString: string) => {
-    if (!dateString) return '';
+    if (!dateString) return "";
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      year: 'numeric',
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
     });
   };
 
@@ -189,8 +183,6 @@ const WorkExperience: React.FC = () => {
       orig.reason !== curr.reason
     );
   };
-
-  //sessionStorage.removeItem(WORK_STORAGE_KEY); Paki add nalang to sa API POST mo pre @peter
 
   return (
     <div className="space-y-6 bg-white p-8 rounded-md shadow-sm">
@@ -208,7 +200,9 @@ const WorkExperience: React.FC = () => {
                     <h3 className="text-base font-semibold text-gray-900">
                       {work.position}
                     </h3>
-                    <p className="text-sm font-medium text-gray-700">{work.employer}</p>
+                    <p className="text-sm font-medium text-gray-700">
+                      {work.employer}
+                    </p>
                   </div>
 
                   <div className="flex-1 space-x-2 md:space-x-4 pt-2 md:pt-6 justify-end">
@@ -317,44 +311,44 @@ const WorkExperience: React.FC = () => {
               </div>
               {/* Cancel and Save Buttons */}
               <div className="mt-4 flex justify-end">
-              {work.isEditing && index > 0 && (
-                <button
-                  onClick={() => cancelWork(index)}
-                  className="text-sm font-medium px-4 py-2 rounded transition-colors bg-gray-200 hover:bg-gray-300 text-gray-700 mr-2 cursor-pointer"
-                  type="button"
-                >
-                  Cancel
-                </button>
-              )}
-              {index !== works.length - 1 && work.isEditing && (
-                <button
-                  onClick={() => saveWork(index)}
-                  disabled={
-                    !(
+                {work.isEditing && index > 0 && (
+                  <button
+                    onClick={() => cancelWork(index)}
+                    className="text-sm font-medium px-4 py-2 rounded transition-colors bg-gray-200 hover:bg-gray-300 text-gray-700 mr-2 cursor-pointer"
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                )}
+                {index !== works.length - 1 && work.isEditing && (
+                  <button
+                    onClick={() => saveWork(index)}
+                    disabled={
+                      !(
+                        employerRegex.test(work.employer) &&
+                        positionRegex.test(work.position) &&
+                        reasonRegex.test(work.reason) &&
+                        work.from &&
+                        work.to &&
+                        isValidYearRange(work.from, work.to)
+                      ) || !isWorkChanged(index)
+                    }
+                    className={`text-sm font-medium px-4 py-2 rounded transition-colors ${
                       employerRegex.test(work.employer) &&
                       positionRegex.test(work.position) &&
                       reasonRegex.test(work.reason) &&
                       work.from &&
                       work.to &&
-                      isValidYearRange(work.from, work.to)
-                    ) || !isWorkChanged(index)
-                  }
-                  className={`text-sm font-medium px-4 py-2 rounded transition-colors ${
-                    employerRegex.test(work.employer) &&
-                    positionRegex.test(work.position) &&
-                    reasonRegex.test(work.reason) &&
-                    work.from &&
-                    work.to &&
-                    isValidYearRange(work.from, work.to) &&
-                    isWorkChanged(index)
-                      ? 'bg-teal-500 hover:bg-teal-600 text-white cursor-pointer'
-                      : 'bg-gray-300 text-gray-600 cursor-not-allowed'
-                  }`}
-                  type="button"
-                >
-                  Save
-                </button>
-              )}
+                      isValidYearRange(work.from, work.to) &&
+                      isWorkChanged(index)
+                        ? "bg-teal-500 hover:bg-teal-600 text-white cursor-pointer"
+                        : "bg-gray-300 text-gray-600 cursor-not-allowed"
+                    }`}
+                    type="button"
+                  >
+                    Save
+                  </button>
+                )}
               </div>
             </div>
           )}
@@ -368,9 +362,12 @@ const WorkExperience: React.FC = () => {
               <div className="text-red-500 mb-2">
                 <XCircle size={90} strokeWidth={1.5} className="mx-auto" />
               </div>
-              <h2 className="text-xl font-semibold text-red-600 mb-2">Delete Work Experience</h2>
+              <h2 className="text-xl font-semibold text-red-600 mb-2">
+                Delete Work Experience
+              </h2>
               <p className="text-gray-700 mb-6">
-                Are you sure you want to delete this work experience record? This process cannot be undone.
+                Are you sure you want to delete this work experience record?
+                This process cannot be undone.
               </p>
               <div className="flex justify-center gap-4">
                 <button
@@ -392,7 +389,7 @@ const WorkExperience: React.FC = () => {
                   disabled={isDeleting}
                   className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 font-medium cursor-pointer"
                 >
-                  {isDeleting ? 'Deleting...' : 'Delete'}
+                  {isDeleting ? "Deleting..." : "Delete"}
                 </button>
               </div>
             </div>
@@ -400,18 +397,18 @@ const WorkExperience: React.FC = () => {
         </div>
       )}
 
-        <button
-          onClick={addWork}
-          disabled={!areAllWorksValid()}
-          className={`text-sm font-medium px-4 py-2 rounded transition-colors ${
-            areAllWorksValid()
-              ? 'bg-teal-500 hover:bg-teal-600 text-white cursor-pointer'
-              : 'bg-gray-300 text-gray-600 cursor-not-allowed'
-          }`}
-          type="button"
-        >
-          Add Work Experience
-        </button>
+      <button
+        onClick={addWork}
+        disabled={!areAllWorksValid()}
+        className={`text-sm font-medium px-4 py-2 rounded transition-colors ${
+          areAllWorksValid()
+            ? "bg-teal-500 hover:bg-teal-600 text-white cursor-pointer"
+            : "bg-gray-300 text-gray-600 cursor-not-allowed"
+        }`}
+        type="button"
+      >
+        Add Work Experience
+      </button>
     </div>
   );
 };
