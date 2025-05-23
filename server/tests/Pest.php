@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -13,6 +15,11 @@
 
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->beforeEach(function () {
+        $this->user = User::factory()->create();
+
+        $this->token = $this->user->createToken('access-token')->plainTextToken;
+    })
     ->in('Feature');
 
 /*

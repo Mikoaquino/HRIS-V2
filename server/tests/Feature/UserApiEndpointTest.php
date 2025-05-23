@@ -5,12 +5,6 @@ use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Symfony\Component\HttpFoundation\Response;
 
-beforeEach(function () {
-    $this->user = User::factory()->create();
-
-    $this->token = $this->user->createToken('access-token')->plainTextToken;
-});
-
 test('`GET:` Get a paginated user resource collection', function () {
     $response = $this->withHeaders([
         'Authorization' => 'Bearer '.$this->token,

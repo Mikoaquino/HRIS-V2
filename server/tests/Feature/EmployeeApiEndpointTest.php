@@ -5,17 +5,10 @@ use App\Models\Employee;
 use App\Models\EmployeeStatus;
 use App\Models\EmploymentType;
 use App\Models\JobPosition;
-use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Symfony\Component\HttpFoundation\Response;
-
-beforeEach(function () {
-    $this->user = User::factory()->create();
-
-    $this->token = $this->user->createToken('access-token')->plainTextToken;
-});
 
 test('`GET:` Get a paginated resource collection of employee', function () {
     $response = $this->withHeaders([
@@ -67,9 +60,7 @@ test('`GET:` Get only archived employees in paginated resource collection', func
 
     $response->assertOk()->assertExactJsonStructure(['data', 'links', 'meta']);
 
-    foreach ($response->getData()->data as $data) {
-        expect($data)->toHaveKey('archived_at');
-    }
+    expect($response->getData()->data)->each()->toHaveKey('archived_at');
 });
 
 test('`POST:` Create a new employee resource', function () {
