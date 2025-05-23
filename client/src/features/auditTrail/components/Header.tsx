@@ -27,14 +27,12 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
   const [userFullName, setUserFullName] = useState("");
 
   useEffect(() => {
-    // Load user data from session storage
     const storedUserData = sessionStorage.getItem("user");
     if (storedUserData) {
       try {
         const parsedUserData: User = JSON.parse(storedUserData);
         setUserData(parsedUserData);
 
-        // Format the full name based on the employee data
         const employee = parsedUserData.employee;
         const fullName = `${employee.first_name} ${
           employee.middle_name ? employee.middle_name + " " : ""
