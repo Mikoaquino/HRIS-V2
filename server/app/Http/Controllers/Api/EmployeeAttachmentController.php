@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEmployeeAttachmentRequest;
 use App\Http\Resources\EmployeeAttachmentCollection;
-use App\Http\Resources\EmployeeAttachmentResource;
 use App\Models\EmployeeAttachment;
 use App\Services\EmployeeAttachmentService;
 use App\Traits\HttpResponse;
@@ -55,10 +54,8 @@ class EmployeeAttachmentController extends Controller
             ? 'response.attachment.delete.temporary.success'
             : 'response.attachment.delete.permanent.success';
 
-        return $this->success(
-            data: EmployeeAttachmentResource::make($attachment),
-            status: Response::HTTP_OK,
-            message: __($message, ['attachment' => $attachment->client_name]),
-        );
+        return $this->success(message: __($message, [
+            'attachment' => $attachment->client_name,
+        ]));
     }
 }
