@@ -32,7 +32,7 @@ class EmployeeFactory extends Factory
             'civil_status'       => fake()->randomElement(CivilStatus::cases()),
             'nationality'        => fake()->country(),
             'religion'           => fake()->randomElement(['Christianity', 'Islam', 'Hinduism', 'Buddhism']),
-            'contact_number'     => $this->faker->regexify('09\d{9}'),
+            'contact_number'     => fake()->regexify('09\d{9}'),
             'sss_id'             => fake()->numerify('###########'),
             'tin_id'             => fake()->numerify('###########'),
             'philhealth_id'      => fake()->numerify('###########'),
