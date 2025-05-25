@@ -3,11 +3,10 @@
 namespace App\Services;
 
 use App\Models\EmployeeEducation;
-use Illuminate\Database\Eloquent\Collection;
 
 class EmployeeEducationService
 {
-    public function createEducation(array $validated): Collection
+    public function createEducation(array $validated): bool
     {
         $data = array_map(fn ($education) => [
             'employee_id'  => $validated['employee_id'],
@@ -18,12 +17,10 @@ class EmployeeEducationService
             'updated_at'   => now(),
         ], $validated['educations']);
 
-        EmployeeEducation::insert($data);
-
-        return EmployeeEducation::hydrate($data);
+        return EmployeeEducation::insert($data);
     }
 
-    public function updateEducation(array $validated): Collection
+    public function updateEducation(array $validated): int
     {
         $data = array_map(fn ($education) => [
             'id'           => $education['id'] ?? null,
@@ -33,10 +30,8 @@ class EmployeeEducationService
             'graduated_at' => $education['graduated_at'],
         ], $validated['educations']);
 
-        EmployeeEducation::upsert($data, 'id', [
+        return EmployeeEducation::upsert($data, 'id', [
             'school', 'degree', 'graduated_at',
         ]);
-
-        return EmployeeEducation::hydrate($data);
     }
 }

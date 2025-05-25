@@ -3,11 +3,10 @@
 namespace App\Services;
 
 use App\Models\EmployeeWorkExperience;
-use Illuminate\Database\Eloquent\Collection;
 
 class EmployeeWorkExperienceService
 {
-    public function createWorkExperiences(array $validated): Collection
+    public function createWorkExperiences(array $validated): int
     {
         $data = array_map(fn ($workExperience) => [
             'employee_id'        => $validated['employee_id'],
@@ -20,12 +19,10 @@ class EmployeeWorkExperienceService
             'updated_at'         => now(),
         ], $validated['work_experiences']);
 
-        EmployeeWorkExperience::insert($data);
-
-        return EmployeeWorkExperience::hydrate($data);
+        return EmployeeWorkExperience::insert($data);
     }
 
-    public function updateWorkExperiences(array $validated): Collection
+    public function updateWorkExperiences(array $validated): int
     {
         $data = array_map(fn ($workExperience) => [
             'id'                 => $workExperience['id'] ?? null,
@@ -37,14 +34,12 @@ class EmployeeWorkExperienceService
             'reason_for_leaving' => $workExperience['reason_for_leaving'],
         ], $validated['work_experiences']);
 
-        EmployeeWorkExperience::upsert($data, 'id', [
+        return EmployeeWorkExperience::upsert($data, 'id', [
             'previous_employer',
             'job_position',
             'from',
             'to',
             'reason_for_leaving',
         ]);
-
-        return EmployeeWorkExperience::hydrate($data);
     }
 }
