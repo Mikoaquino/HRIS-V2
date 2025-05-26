@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             PsgcSeeder::class,
             EmployeeStatusSeeder::class,
             EmploymentTypeSeeder::class,
+            CompanySeeder::class,
             DepartmentSeeder::class,
             JobPositionSeeder::class,
             UserSeeder::class,

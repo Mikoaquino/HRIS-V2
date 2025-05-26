@@ -13,6 +13,8 @@ class DepartmentResource extends JsonResource
             'id'          => $this->id,
             'name'        => $this->name,
             'description' => $this->description,
+            'company_id'    => $this->company_id,
+            'company'       => CompanyResource::make($this->whenLoaded('company')),
         ];
     }
 }
