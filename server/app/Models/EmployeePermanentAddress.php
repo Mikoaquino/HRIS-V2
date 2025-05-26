@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class EmployeePermanentAddress extends Model
 {
     use HasFactory;
-    
+
     protected $guarded = [
         'id',
         'created_at',
