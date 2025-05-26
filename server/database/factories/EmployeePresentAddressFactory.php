@@ -20,7 +20,7 @@ class EmployeePresentAddressFactory extends Factory
     {
         return [
             'employee_id'        => Employee::factory(),
-            'barangay_id'        => Barangay::inRandomOrder()->first(),
+            'barangay_code'      => Barangay::inRandomOrder()->first()->code,
             'additional_details' => fake()->streetAddress(),
             'zip_code'           => fake()->numerify('####'),
         ];
