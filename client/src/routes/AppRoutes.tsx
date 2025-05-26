@@ -50,6 +50,9 @@ export const AppRoutes = () => {
             <Route path="/employee-management" element={<EmployeeManagement />} />
             <Route path="/education-background" element={<EducationalBackground />} />
             <Route path="/work-experience" element={<WorkExperience />} />
+            <Route path="/employee-management" element={<EmployeeManagement />} />
+            <Route path="/education-background" element={<EducationalBackground />} />
+            <Route path="/work-experience" element={<WorkExperience />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route
               path="/profile/change-password"

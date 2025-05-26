@@ -168,6 +168,14 @@ const HrSidebar = () => {
                         Employee List
                       </span>
                     </Link>
+                    <Link
+                      to="/emloyee-management"
+                      className="block py-2 text-sm text-gray-600 hover:text-blue-600"
+                    >
+                      Employee Management
+                    </Link>
+                    <Link
+                      to="/account-management"
 
                     <div>
                       <Link
