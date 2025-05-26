@@ -27,14 +27,12 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
   const [userFullName, setUserFullName] = useState("");
 
   useEffect(() => {
-    // Load user data from session storage
     const storedUserData = sessionStorage.getItem("user");
     if (storedUserData) {
       try {
         const parsedUserData: User = JSON.parse(storedUserData);
         setUserData(parsedUserData);
 
-        // Format the full name based on the employee data
         const employee = parsedUserData.employee;
         const fullName = `${employee.first_name} ${
           employee.middle_name ? employee.middle_name + " " : ""
@@ -190,6 +188,7 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
 
               {showMessages && (
                 <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                  {/* Messages dropdown content (unchanged) */}
                   <div className="px-4 py-2 border-b border-gray-200">
                     <div className="flex justify-between items-center">
                       <h6 className="text-sm font-medium">Messages</h6>
@@ -270,6 +269,7 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
 
               {showNotifications && (
                 <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                  {/* Notifications dropdown content (unchanged) */}
                   <div className="px-4 py-2 border-b border-gray-200">
                     <div className="flex justify-between items-center">
                       <h6 className="text-sm font-medium">Notifications</h6>
@@ -450,6 +450,7 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
                   >
                     <i className="far fa-sun mr-2"></i>Settings
                   </Link>
+
                   <button
                     onClick={handleSignOut}
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

@@ -1,4 +1,6 @@
+
 import { StepNavigationProps } from "../types/onboarding";
+
 const StepNavigation: React.FC<StepNavigationProps> = ({
   onNext,
   onBack,
@@ -35,4 +37,6 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
   );
 };
 
+
 export default StepNavigation;
+

@@ -15,21 +15,20 @@ import OnboardingDetails from "../features/employeeManagement/pages/OnboardingDe
 import UserProfile from "../features/userProfile/pages/UserProfile";
 import ChangePasswordPage from "../features/userProfile/pages/ChangePassword";
 import EmployeeManagement from "../features/employeeManagement/pages/EmployeeManagement";
-import EducationalBackground from '../features/employeeManagement/components/EducationalBackground';
-import WorkExperience from '../features/employeeManagement/components/WorkExperience';
+import EducationalBackground from "../features/employeeManagement/components/EducationalBackground";
+import WorkExperience from "../features/employeeManagement/components/WorkExperience";
 
-interface PrivateRouteProps {
-  children?: React.ReactNode;
-}
-
+// Authentication check
 const isAuthenticated = () => {
   return Boolean(sessionStorage.getItem("token"));
 };
 
+// Private route guard
 const PrivateRoute = () => {
   return isAuthenticated() ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
+// App routes
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -37,7 +36,7 @@ export const AppRoutes = () => {
         {/* Public Route */}
         <Route path="/login" element={<Login />} />
 
-        {/* Private Routes wrapper */}
+        {/* Private Routes */}
         <Route element={<PrivateRoute />}>
           <Route element={<HrLayout />}>
             <Route
@@ -46,9 +45,16 @@ export const AppRoutes = () => {
             />
             <Route path="/audit-trail" element={<AuditTrailPage />} />
             <Route path="/hr-dashboard" element={<HrDashboard />} />
+
             <Route path="/account-management" element={<AccountManagement />} />
-            <Route path="/employee-management" element={<EmployeeManagement />} />
-            <Route path="/education-background" element={<EducationalBackground />} />
+            <Route
+              path="/employee-management"
+              element={<EmployeeManagement />}
+            />
+            <Route
+              path="/education-background"
+              element={<EducationalBackground />}
+            />
             <Route path="/work-experience" element={<WorkExperience />} />
             <Route path="/employee-management" element={<EmployeeManagement />} />
             <Route path="/education-background" element={<EducationalBackground />} />

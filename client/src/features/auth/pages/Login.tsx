@@ -19,6 +19,7 @@ const LoginPage = () => {
       const response = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
         method: "POST",
 
+
         headers: {
           "Content-Type": "application/json",
         },
@@ -44,10 +45,11 @@ const LoginPage = () => {
 
       console.log("Token saved to localStorage:", token);
 
-      console.log("Navigating to audit-trail...");
+
       setTimeout(() => {
         navigate("/hr-dashboard", { replace: true });
       }, 1000);
+
     } catch (err: any) {
       console.error("Login error:", err);
       const msg = err?.message || "Unknown error";

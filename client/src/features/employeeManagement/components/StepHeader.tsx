@@ -1,4 +1,6 @@
+
 import { StepHeaderProps } from "../types/onboarding";
+
 
 const StepHeader: React.FC<StepHeaderProps> = ({
   steps,
@@ -71,4 +73,6 @@ const StepHeader: React.FC<StepHeaderProps> = ({
   );
 };
 
+
 export default StepHeader;
+
