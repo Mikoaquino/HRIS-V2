@@ -14,7 +14,7 @@ class EmployeeAttachmentResource extends JsonResource
             'hashed_name' => $this->hashed_name,
             'created_at'  => $this->created_at,
             'updated_at'  => $this->updated_at,
-            'deleted_at'  => $this->deleted_at,
+            'deleted_at'  => $this->whenNotNull($this->deleted_at),
             'employee'    => EmployeeResource::make($this->whenLoaded('employee')),
         ];
     }
