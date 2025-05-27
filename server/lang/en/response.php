@@ -25,6 +25,12 @@ return [
             'permanent' => ':employee\'s information has been permanently deleted.',
         ],
     ],
+     'company' => [
+        'delete' => [
+            'temporary' => ":company's information has been successfully archived.",
+            'permanent' => ":company's information has been permanently deleted.",
+        ],
+    ],
     'error' => [
         'show' => 'No result found for :resource',
     ],

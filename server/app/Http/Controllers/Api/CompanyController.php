@@ -26,21 +26,19 @@ class CompanyController extends Controller
 
         return CompanyCollection::make($companies);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
+   
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCompanyRequest $request)
+    public function store(StoreCompanyRequest $request): JsonResponse
     {
-        //
+        $company = $this->service->createCompany($request->validated());
+
+        return $this->success(
+            data: CompanyResource::make($company),
+            message: __('response.success.create', ['resource' => 'company']),
+            status: Response::HTTP_CREATED
+        );
     }
 
     /**
@@ -57,26 +55,31 @@ class CompanyController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Company $company)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCompanyRequest $request, Company $company)
+    public function update(UpdateCompanyRequest $request, Company $company):JsonResponse
     {
-        //
+        $updatedCompany = $this->service->updateCompany($request->validated(), $company);
+
+        return $this->success(
+            data: CompanyResource::make($updatedCompany),
+            message: __('response.success.update', ['resource' => 'company']),
+        );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Company $company)
+    public function destroy(Company $company): JsonResponse
     {
-        //
+        $company = $this->service->handleCompanyDelete($company);
+
+        $message = $company->exists
+            ? 'response.company.delete.temporary'
+            : 'response.company.delete.permanent';
+
+        return $this->success(message: __($message, [
+            'company' => $company->name,
+        ]));
     }
 }
