@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TrashedUserSeeder::class,
             EmployeeSeeder::class,
+            DailyTimeReportSeeder::class,
             UserSeeder::class,
             EmployeeEducationSeeder::class,
             EmployeeWorkExperienceSeeder::class,
