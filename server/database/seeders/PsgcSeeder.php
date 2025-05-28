@@ -35,6 +35,12 @@ class PsgcSeeder extends Seeder
         $db === 'sqlite' ? $this->seedSqlite() : $this->seedMysql();
     }
 
+    /**
+     * Should you encounter errors regarding the loading of the csv files into the tables,
+     * refer to the link below:
+     * 
+     * @link https://github.com/Mikoaquino/HRIS-V2/pull/32
+     */
     private function seedMysql(): void
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
