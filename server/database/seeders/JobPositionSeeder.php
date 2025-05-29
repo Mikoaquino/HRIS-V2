@@ -16,6 +16,6 @@ class JobPositionSeeder extends Seeder
     {
         activity()->disableLogging();
 
-        JobPosition::factory(13)->create();
+        JobPosition::factory(14)->create();
     }
 }

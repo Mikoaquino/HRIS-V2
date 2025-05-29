@@ -31,6 +31,7 @@ class JobPositionFactory extends Factory
             'Customer Service Representative',
             'Project Manager',
             'Legal Counsel',
+            'Supervisor',
         ]);
 
         $description = match ($name) {
