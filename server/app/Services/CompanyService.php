@@ -2,14 +2,15 @@
 
 namespace App\Services;
 
+use App\Models\Company;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Filters\LoadModelRelations;
 use App\Filters\PaginateQueryBuilder;
-use App\Models\Company;
-use App\Traits\LoadsRequestQueryRelationship;
-use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Pipeline;
-use Illuminate\Support\Facades\DB;
+use App\Filters\IncludeSoftDeletedModels;
+use App\Traits\LoadsRequestQueryRelationship;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CompanyService
 {
@@ -22,6 +23,7 @@ class CompanyService
         return Pipeline::send($this->company->query())
             ->through([
                 LoadModelRelations::class,
+                IncludeSoftDeletedModels::class,
                 PaginateQueryBuilder::class,
             ])
             ->thenReturn();
@@ -34,7 +36,7 @@ class CompanyService
                 'name'    => $validated['name'],
                 'type'    => $validated['type'],
                 'address' => $validated['address'],
-                'number'  => $validated['number'],
+                'contact_number'  => $validated['contact_number'],
             ]);
 
             return $company->unsetRelations(); 
@@ -43,7 +45,7 @@ class CompanyService
 
     public function getCompany(Request $request, Company $company): Company
     {
-        $company->when($request->has('load'),
+        $company->when($request->filled('load'),
             fn () => $this->applyRequestedRelations($company, $request)
         );
 

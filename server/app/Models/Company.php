@@ -16,9 +16,8 @@ class Company extends Model
         'name',
         'type',
         'address',
-        'number'
+        'contact_number'
     ];
-    
 
     public function departments(): HasMany
     {

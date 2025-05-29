@@ -15,7 +15,7 @@ class CompanyFormRequest extends FormRequest
             'name'    => ['required', 'string', 'max:255'],
             'type'    => ['required', 'string', 'max:100'],
             'address' => ['required', 'string', 'max:255'],
-            'number'  => ['required', 'string', 'max:20', 'regex:/^[0-9+\-\s()]*$/'],
+            'contact_number'  => ['required', 'string', 'max:11', 'regex:/^[0-9]*$/'],
         ];
     }
 }

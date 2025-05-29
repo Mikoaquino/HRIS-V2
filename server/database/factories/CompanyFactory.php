@@ -26,7 +26,7 @@ class CompanyFactory extends Factory
             'name' => fake()->company(),
             'type' => $type,
             'address' => fake()->address(),
-            'number' => fake()->numerify('09##-###-####')
+            'contact_number' => fake()->numerify('09#########')
         ];
     }
 }

@@ -27,9 +27,6 @@ class CompanyController extends Controller
         return CompanyCollection::make($companies);
     }
    
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreCompanyRequest $request): JsonResponse
     {
         $company = $this->service->createCompany($request->validated());
@@ -41,22 +38,16 @@ class CompanyController extends Controller
         );
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request, Company $company): JsonResponse
     {
         $company = $this->service->getCompany($request, $company);
-
+        
         return $this->success(
             data: CompanyResource::make($company),
             status: Response::HTTP_FOUND,
         );
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(UpdateCompanyRequest $request, Company $company):JsonResponse
     {
         $updatedCompany = $this->service->updateCompany($request->validated(), $company);
@@ -66,10 +57,7 @@ class CompanyController extends Controller
             message: __('response.success.update', ['resource' => 'company']),
         );
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(Company $company): JsonResponse
     {
         $company = $this->service->handleCompanyDelete($company);
