@@ -45,10 +45,7 @@ class EmployeeResource extends JsonResource
             'termination'             => TerminatedEmployeeResource::make($this->whenLoaded('termination')),
             'present_address'         => EmployeePresentAddressResource::make($this->whenLoaded('presentAddress')),
             'permanent_address'       => EmployeePermanentAddressResource::make($this->whenLoaded('permanentAddress')),
-
-            $this->mergeWhen($this->immediate_supervisor_id, [
-                'immediate_supervisor' => EmployeeResource::make($this->whenLoaded('immediateSupervisor')),
-            ]),
+            'immediate_supervisor'    => $this->when($this->immediate_supervisor_id, EmployeeResource::make($this->whenLoaded('immediateSupervisor'))),
         ];
     }
 }
