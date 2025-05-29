@@ -20,6 +20,14 @@ import {
   GovernmentID,
 } from "../types/onboarding";
 
+const formatToYearMonth = (dateStr: string) => {
+  if (!dateStr) return "";
+  const date = new Date(dateStr);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  return `${year}-${month}`;
+};
+
 const EditOnboardingDetails: React.FC = () => {
   console.log("Rendering EditOnboardingDetails parent component");
   const navigate = useNavigate();
@@ -167,8 +175,8 @@ const EditOnboardingDetails: React.FC = () => {
         id: work.id,
         employer: work.previous_employer,
         position: work.job_position,
-        from: work.from ? new Date(work.from).getFullYear().toString() : "",
-        to: work.to ? new Date(work.to).getFullYear().toString() : "",
+        from: formatToYearMonth(work.from),
+        to: formatToYearMonth(work.to),
         reason: work.reason_for_leaving,
       })) || [];
 
