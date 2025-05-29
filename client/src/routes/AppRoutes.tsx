@@ -17,6 +17,7 @@ import ChangePasswordPage from "../features/userProfile/pages/ChangePassword";
 import EmployeeManagement from "../features/employeeManagement/pages/EmployeeManagement";
 import EducationalBackground from "../features/employeeManagement/components/EducationalBackground";
 import WorkExperience from "../features/employeeManagement/components/WorkExperience";
+import EditOnboardingDetails from "../features/employeeManagement/pages/EditOnboardingDetails";
 
 // Authentication check
 const isAuthenticated = () => {
@@ -60,6 +61,10 @@ export const AppRoutes = () => {
             <Route
               path="/profile/change-password"
               element={<ChangePasswordPage />}
+            />
+            <Route
+              path="/employee/edit/:id"
+              element={<EditOnboardingDetails />}
             />
 
             {/* will change to the EmpLayout */}

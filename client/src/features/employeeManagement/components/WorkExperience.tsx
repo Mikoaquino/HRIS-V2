@@ -185,7 +185,7 @@ const WorkExperience: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 bg-white p-8 rounded-md shadow-sm">
+    <div className="space-y-6  p-8 rounded-md ">
       {works.map((work, index) => (
         <div key={index} className="border-b-3 border-gray-200 relative">
           {/* Summary to */}

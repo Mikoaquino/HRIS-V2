@@ -8,7 +8,8 @@ import { Step2PersonalInfo } from "../components/Step2PersonalInfo";
 import { Step3GovernmentID } from "../components/Step3GovernmentID";
 import WorkExperience from "../components/WorkExperience";
 import EducationalBackground from "../components/EducationalBackground";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 import {
   Document,
@@ -19,9 +20,10 @@ import {
   GovernmentID,
 } from "../types/onboarding";
 
-const OnboardingDetails: React.FC = () => {
-  console.log("Rendering OnboardingDetails parent component");
+const EditOnboardingDetails: React.FC = () => {
+  console.log("Rendering EditOnboardingDetails parent component");
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
 
   const {
     onboardingData = {
@@ -62,15 +64,176 @@ const OnboardingDetails: React.FC = () => {
   const isLastStep = activeStepIndex === steps.length - 1;
 
   const [isStepValid, setIsStepValid] = useState<boolean>(false);
-  const clearSessionStorage = () => {
-    sessionStorage.removeItem("employeeInformation");
-    sessionStorage.removeItem("personalInformation");
-    sessionStorage.removeItem("governmentIDs");
-    sessionStorage.removeItem("hris-educational-background");
-    sessionStorage.removeItem("hris-work-experience");
-    sessionStorage.removeItem("documents");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const fetchEmployeeData = async () => {
+    try {
+      setIsLoading(true);
+      // Configure axios to not follow redirects
+      const axiosConfig = {
+        params: {
+          load: "account,educations,work_experiences,attachments,present_address,permanent_address,employment_type,job_position,employee_status,department",
+        },
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+        maxRedirects: 0, // Don't follow redirects
+        validateStatus: function (status: number) {
+          return status >= 200 && status < 303; // Accept 302 as valid
+        },
+      };
+
+      const response = await axios.get(
+        `http://localhost:8000/api/v1/employees/${id}`,
+        axiosConfig
+      );
+
+      // Handle 302 redirect if needed
+      if (response.status === 302 && response.headers.location) {
+        const redirectResponse = await axios.get(response.headers.location, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        });
+        processEmployeeData(redirectResponse.data.data);
+      } else {
+        processEmployeeData(response.data.data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch employee data:", error);
+      setIsLoading(false);
+    }
   };
-  const submitOnboardingData = async () => {
+
+  const processEmployeeData = (employeeData: any) => {
+    // Transform the API data to match our form structure
+    const employeeInfo: EmployeeInfo = {
+      employeeNumber: employeeData.employee_number || "",
+      dateHired: employeeData.hired_at || "",
+      employmentType: employeeData.employment_type_id?.toString() || "",
+      jobPosition: employeeData.job_position_id?.toString() || "",
+      employeeStatus: employeeData.employee_status_id?.toString() || "",
+      department: employeeData.department_id?.toString() || "",
+      immediateSupervisor:
+        employeeData.immediate_supervisor_id?.toString() || "",
+      email: employeeData.account?.email || "",
+    };
+
+    const personalInfo: PersonalInfo = {
+      firstName: employeeData.first_name,
+      middleName: employeeData.middle_name || "",
+      lastName: employeeData.last_name,
+      suffix: employeeData.suffix || "",
+      dateOfBirth: employeeData.birth_date,
+      gender: employeeData.gender,
+      civilStatus: employeeData.civil_status,
+      nationality: employeeData.nationality,
+      religion: employeeData.religion,
+      contactNumber: employeeData.contact_number?.replace(/^0/, ""),
+      email: employeeData.account?.email,
+      birthPlace: employeeData.birth_place,
+      citizenship: employeeData.citizenship,
+      currentAddress: employeeData.present_address?.additional_details,
+      currentAddressCode: employeeData.present_address?.barangay_code,
+      currentAddressZip: employeeData.present_address?.zip_code,
+      permanentAddress: employeeData.permanent_address?.additional_details,
+      permanentAddressCode: employeeData.permanent_address?.barangay_code,
+      permanentAddressZip: employeeData.permanent_address?.zip_code,
+      age: calculateAge(employeeData.birth_date),
+    };
+
+    const govtIDs: GovernmentID = {
+      sssNumber: employeeData.sss_id?.toString() || "",
+      tinNumber: employeeData.tin_id?.toString() || "",
+      philhealthNumber: employeeData.philhealth_id?.toString() || "",
+      pagibigNumber: employeeData.pagibig_id?.toString() || "",
+    };
+
+    const educations: Education[] =
+      employeeData.educations?.map((edu: any) => ({
+        id: edu.id,
+        school: edu.school,
+        degree: edu.degree,
+        from: edu.from ? new Date(edu.from).getFullYear().toString() : "",
+        to: edu.to ? new Date(edu.to).getFullYear().toString() : "",
+        graduated_at: !!edu.graduated_at,
+        attainment: edu.attainment,
+        isPresent: !edu.graduated_at,
+      })) || [];
+
+    const workExp: Work[] =
+      employeeData.work_experiences?.map((work: any) => ({
+        id: work.id,
+        employer: work.previous_employer,
+        position: work.job_position,
+        from: work.from ? new Date(work.from).getFullYear().toString() : "",
+        to: work.to ? new Date(work.to).getFullYear().toString() : "",
+        reason: work.reason_for_leaving,
+      })) || [];
+
+    const docs: Document[] =
+      employeeData.attachments?.map((att: any, index: number) => ({
+        id: index,
+        name: att.client_name,
+        status: "uploaded",
+        required: true,
+        attachments: [
+          {
+            id: att.hashed_name,
+            name: att.client_name,
+            size: 0, // Will be updated when file is loaded
+            type: `application/${att.client_name.split(".").pop()}`,
+            url: `http://localhost:8000/storage/attachments/${att.hashed_name}`,
+            file: null as unknown as File, // Placeholder
+          },
+        ],
+      })) || [];
+
+    // Update session storage with fetched data
+    sessionStorage.setItem("employeeInformation", JSON.stringify(employeeInfo));
+    sessionStorage.setItem("personalInformation", JSON.stringify(personalInfo));
+    sessionStorage.setItem("governmentIDs", JSON.stringify([govtIDs]));
+    sessionStorage.setItem(
+      "hris-educational-background",
+      JSON.stringify(educations)
+    );
+    sessionStorage.setItem("hris-work-experience", JSON.stringify(workExp));
+    sessionStorage.setItem("documents", JSON.stringify(docs));
+
+    // Update state with fetched data
+    updateEmployeeInfo(employeeInfo);
+    updatePersonalInfo(personalInfo);
+    updateGovernmentIDs([govtIDs]);
+    updateEducationalBackground(educations);
+    updateWorkExperience(workExp);
+    updateDocument(docs);
+
+    setIsLoading(false);
+  };
+
+  const calculateAge = (birthDate: string) => {
+    if (!birthDate) return "";
+    const today = new Date();
+    const birthDateObj = new Date(birthDate);
+    let age = today.getFullYear() - birthDateObj.getFullYear();
+    const monthDiff = today.getMonth() - birthDateObj.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDateObj.getDate())
+    ) {
+      age--;
+    }
+    return age.toString();
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchEmployeeData();
+    }
+  }, [id]);
+
+  const updateOnboardingData = async () => {
     const token = sessionStorage.getItem("token");
     if (!token) {
       console.error("No authentication token found");
@@ -83,6 +246,7 @@ const OnboardingDetails: React.FC = () => {
     };
 
     const formData = new FormData();
+    formData.append("_method", "PUT");
 
     const addFormField = (name: string, value: any) => {
       if (value !== undefined && value !== null) {
@@ -149,10 +313,7 @@ const OnboardingDetails: React.FC = () => {
     educations.forEach((edu: any, index: number) => {
       addFormField(`educations[${index}][school]`, edu.school);
       addFormField(`educations[${index}][degree]`, edu.degree);
-      addFormField(
-        `educations[${index}][graduated_at]`,
-        edu.graduated_at ? "" : `${edu.to}-1`
-      );
+      addFormField(`educations[${index}][graduated_at]`, `${edu.to}-1`);
       addFormField(`educations[${index}][from]`, `${edu.from}-1`);
       addFormField(`educations[${index}][attainment]`, edu.attainment);
     });
@@ -164,8 +325,8 @@ const OnboardingDetails: React.FC = () => {
         work.employer
       );
       addFormField(`work_experiences[${index}][job_position]`, work.position);
-      addFormField(`work_experiences[${index}][from]`, `${work.from}-1`);
-      addFormField(`work_experiences[${index}][to]`, `${work.to}-1`);
+      addFormField(`work_experiences[${index}][from]`, `${work.from}-1-1`);
+      addFormField(`work_experiences[${index}][to]`, `${work.to}-1-1`);
       addFormField(
         `work_experiences[${index}][reason_for_leaving]`,
         work.reason
@@ -245,30 +406,33 @@ const OnboardingDetails: React.FC = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/v1/employees", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        `http://localhost:8000/api/v1/employees/${id}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
         console.error("API Error:", errorData);
-        throw new Error(errorData.message || "Submission failed");
+        throw new Error(errorData.message || "Update failed");
       }
 
       const data = await response.json();
-      console.log("Submission successful:", data);
-      clearSessionStorage();
+      console.log("Update successful:", data);
       navigate("/employee-management");
       return data;
     } catch (error) {
-      console.error("Error submitting onboarding data:", error);
+      console.error("Error updating employee data:", error);
       throw error;
     }
   };
+
   const handleDocumentUpdate = (document: Document) => {
     updateDocument(document.id, document.status, document.attachments);
 
@@ -290,6 +454,7 @@ const OnboardingDetails: React.FC = () => {
 
     sessionStorage.setItem("documents", JSON.stringify(updatedDocuments));
   };
+
   const handleStepClick = (stepId: number) => {
     console.log("Navigating to step:", stepId);
     if (stepId < currentStep.id) {
@@ -322,8 +487,11 @@ const OnboardingDetails: React.FC = () => {
   const handleGovernmentIDsUpdate = (data: GovernmentID) => {
     console.log("Updating government IDs:", data);
     try {
-      updateGovernmentIDs([data]);
-      sessionStorage.setItem("governmentIDs", JSON.stringify([data]));
+      const govtIDs = Array.isArray(data) ? data[0] : data;
+
+      updateGovernmentIDs(govtIDs);
+
+      sessionStorage.setItem("governmentIDs", JSON.stringify(govtIDs));
       console.log("Government IDs saved to sessionStorage");
     } catch (error) {
       console.error("Failed to update government IDs:", error);
@@ -354,6 +522,7 @@ const OnboardingDetails: React.FC = () => {
 
   const renderStepComponent = () => {
     if (!currentStep) return null;
+    if (isLoading) return <div className="p-4">Loading employee data...</div>;
 
     console.log("Rendering step component:", currentStep.component);
 
@@ -364,6 +533,7 @@ const OnboardingDetails: React.FC = () => {
             data={employeeInformation || {}}
             onUpdate={handleEmployeeInfoUpdate}
             onValidationChange={setIsStepValid}
+            isEditMode={true}
           />
         );
       case "Step2PersonalInfo":
@@ -372,6 +542,7 @@ const OnboardingDetails: React.FC = () => {
             data={personalInformation || {}}
             onUpdate={handlePersonalInfoUpdate}
             onValidationChange={setIsStepValid}
+            isEditMode={true}
           />
         );
       case "Step3GovernmentID":
@@ -380,6 +551,7 @@ const OnboardingDetails: React.FC = () => {
             data={governmentIDs[0] || {}}
             onUpdate={handleGovernmentIDsUpdate}
             onValidationChange={setIsStepValid}
+            isEditMode={true}
           />
         );
       case "EducationalBackground":
@@ -388,6 +560,7 @@ const OnboardingDetails: React.FC = () => {
             data={educationalBackground || []}
             onUpdate={handleEducationalBackgroundUpdate}
             onValidationChange={setIsStepValid}
+            isEditMode={true}
           />
         );
       case "WorkExperience":
@@ -396,6 +569,7 @@ const OnboardingDetails: React.FC = () => {
             data={workExperience || []}
             onUpdate={handleWorkExperienceUpdate}
             onValidationChange={setIsStepValid}
+            isEditMode={true}
           />
         );
       case "DocumentAttachment":
@@ -404,6 +578,7 @@ const OnboardingDetails: React.FC = () => {
             documents={documents || []}
             onDocumentUpdate={handleDocumentUpdate}
             onValidationChange={setIsStepValid}
+            isEditMode={true}
           />
         );
       default:
@@ -478,10 +653,6 @@ const OnboardingDetails: React.FC = () => {
     loadFromSession();
   }, []);
 
-  useEffect(() => {
-    return () => {};
-  }, []);
-
   return (
     <div>
       <div className="mx-autoshadow-lg rounded-lg">
@@ -499,7 +670,7 @@ const OnboardingDetails: React.FC = () => {
         <StepNavigation
           onNext={async () => {
             if (isLastStep) {
-              await submitOnboardingData();
+              await updateOnboardingData();
             } else {
               goToNextStep();
             }
@@ -514,4 +685,4 @@ const OnboardingDetails: React.FC = () => {
   );
 };
 
-export default OnboardingDetails;
+export default EditOnboardingDetails;
