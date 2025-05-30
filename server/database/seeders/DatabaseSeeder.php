@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             EmployeePresentAddressSeeder::class,
             EmployeePermanentAddressSeeder::class,
             EmployeeAttachmentSeeder::class,
+            ImmediateSupervisorSeeder::class,
         ]);
 
         DB::enableQueryLog();

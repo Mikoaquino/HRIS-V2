@@ -148,6 +148,14 @@ test('`POST:` Create a new employee resource', function () {
         'attachments' => $attachments->toArray(),
     ];
 
+    $isSupervisor = $requestPayload['job_position_id'] !== JobPosition::firstWhere('name', 'Supervisor')->id;
+
+    if ($isSupervisor) {
+        $requestPayload = array_merge($requestPayload, [
+            'immediate_supervisor_id' => Employee::inRandomOrder()->first()->id,
+        ]);
+    }
+
     $response = $this->withHeaders(['Authorization' => 'Bearer '.$this->token])->postJson('/api/v1/employees', $requestPayload);
 
     $hashedAttachments = $attachments->map(fn ($attachment) => 'employees/'.$attachment->hashName())->toArray();
@@ -170,7 +178,11 @@ test('`POST:` Create a new employee resource', function () {
 
     $response
         ->assertCreated()
-        ->assertJsonStructure(['message', 'status', 'data' => array_merge($responsePayload, ['created_at', 'updated_at'])])
+        ->assertExactJsonStructure([
+            'message',
+            'status',
+            'data' => array_merge($responsePayload, ['id', 'created_at', 'updated_at']),
+        ])
         ->assertJson([
             'message' => __('response.success.create', ['resource' => 'employee']),
             'status'  => Response::HTTP_CREATED,
