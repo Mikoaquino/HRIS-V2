@@ -25,7 +25,7 @@ return [
             'permanent' => ':employee\'s information has been permanently deleted.',
         ],
     ],
-     'company' => [
+    'company' => [
         'delete' => [
             'temporary' => ":company's information has been successfully archived.",
             'permanent' => ":company's information has been permanently deleted.",

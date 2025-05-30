@@ -12,9 +12,9 @@ class CompanyFormRequest extends FormRequest
     public function baseRules(): array
     {
         return [
-            'name'    => ['required', 'string', 'max:255'],
-            'type'    => ['required', 'string', 'max:100'],
-            'address' => ['required', 'string', 'max:255'],
+            'name'            => ['required', 'string', 'max:255'],
+            'type'            => ['required', 'string', 'max:100'],
+            'address'         => ['required', 'string', 'max:255'],
             'contact_number'  => ['required', 'string', 'max:11', 'regex:/^[0-9]*$/'],
         ];
     }

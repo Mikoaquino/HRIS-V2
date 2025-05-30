@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DepartmentCollection;
-use App\Models\Department;
-use App\Traits\HttpResponse;
-use App\Services\DepartmentService;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\DepartmentResource;
+use App\Models\Department;
+use App\Services\DepartmentService;
+use App\Traits\HttpResponse;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DepartmentController extends Controller
 {

@@ -20,13 +20,14 @@ class CompanyFactory extends Factory
             'Private Corporation',
             'Public Corporation',
             'Sole Proprietorship',
-            'Partnership'
+            'Partnership',
         ]);
+
         return [
-            'name' => fake()->company(),
-            'type' => $type,
-            'address' => fake()->address(),
-            'contact_number' => fake()->numerify('09#########')
+            'name'           => fake()->company(),
+            'type'           => $type,
+            'address'        => fake()->address(),
+            'contact_number' => fake()->numerify('09#########'),
         ];
     }
 }
