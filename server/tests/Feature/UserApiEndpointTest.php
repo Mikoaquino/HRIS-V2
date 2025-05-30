@@ -12,9 +12,7 @@ test('`GET:` Get a paginated user resource collection', function () {
 
     $response->assertOk()->assertExactJsonStructure(['data', 'links', 'meta']);
 
-    foreach ($response->getData()->data as $data) {
-        expect($data)->not()->toHaveKey('deleted_at');
-    }
+    expect($response->getData()->data)->each()->not()->toHaveKey('deleted_at');
 });
 
 test('`GET:` Get a specific user resource', function () {

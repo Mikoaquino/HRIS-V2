@@ -2,20 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\JobPosition;
+use App\Models\Company;
 use Illuminate\Database\Seeder;
 
-class JobPositionSeeder extends Seeder
+class CompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         activity()->disableLogging();
 
-        JobPosition::factory(14)->create();
+        Company::factory(4)->create();
     }
 }

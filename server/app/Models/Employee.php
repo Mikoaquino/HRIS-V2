@@ -94,6 +94,11 @@ class Employee extends Model
         return $this->belongsTo(Department::class);
     }
 
+    public function immediateSupervisor(): BelongsTo
+    {
+        return $this->belongsTo($this, 'immediate_supervisor_id');
+    }
+
     public function getActivityLogOptions(): LogOptions
     {
         return LogOptions::defaults()

@@ -17,7 +17,8 @@ beforeEach(function () {
 test('`POST:` Generate an access token', function () {
     $response = $this->postJson('/api/v1/auth/login', $this->requestPayload);
 
-    $response->assertCreated()
+    $response
+        ->assertCreated()
         ->assertJsonStructure([
             'status',
             'data' => [
@@ -35,7 +36,8 @@ test('`POST:` Revoke access tokens', function () {
         'Authorization' => 'Bearer '.$response->getData()->data->token,
     ])->postJson('/api/v1/auth/logout');
 
-    $response->assertOk()
+    $response
+        ->assertOk()
         ->assertExactJsonStructure(['message', 'status'])
         ->assertExactJson([
             'message' => __('auth.tokens.deleted'),

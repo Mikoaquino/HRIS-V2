@@ -32,7 +32,7 @@ class EmployeeAttachmentService
         return Storage::get(sprintf('%s/%s', 'employees', $attachment->hashed_name));
     }
 
-    public function handleDelete(EmployeeAttachment $attachment)
+    public function handleDelete(EmployeeAttachment $attachment): EmployeeAttachment
     {
         if (! $attachment->trashed()) {
             return tap($attachment)->delete();
