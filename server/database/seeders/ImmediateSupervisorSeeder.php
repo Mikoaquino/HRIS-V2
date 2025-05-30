@@ -22,7 +22,7 @@ class ImmediateSupervisorSeeder extends Seeder
             ->each(function ($employee) use ($supervisor) {
                 if ($employee->jobPosition->isNot($supervisor)) {
                     $employee->update([
-                        'immediate_supervisor_id' => Employee::inRandomOrder()->first()->id
+                        'immediate_supervisor_id' => Employee::inRandomOrder()->first()->id,
                     ]);
                 }
             });

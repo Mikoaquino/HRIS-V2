@@ -5,7 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 test('`GET:` Get a paginated resource collection of DTR', function () {
     $response = $this->withHeaders([
-        'Authorization' => 'Bearer '.$this->token
+        'Authorization' => 'Bearer '.$this->token,
     ])->getJson('/api/v1/dtrs');
 
     $response
@@ -62,7 +62,7 @@ test('`POST:` Import a dtr of .txt file', function () {
     $dtrFile = UploadedFile::fake()->createWithContent('dtr.txt', $logs);
 
     $response = $this->withHeaders([
-        'Authorization' => 'Bearer '.$this->token
+        'Authorization' => 'Bearer '.$this->token,
     ])->post('/api/v1/dtrs', ['dtr' => $dtrFile]);
 
     $response
@@ -70,7 +70,7 @@ test('`POST:` Import a dtr of .txt file', function () {
         ->assertExactJsonStructure(['message', 'status'])
         ->assertExactJson([
             'message' => __('response.dtr_import.success'),
-            'status' => Response::HTTP_CREATED
+            'status'  => Response::HTTP_CREATED,
         ]);
 });
 
@@ -78,7 +78,7 @@ test('`POST:` Import an empty .txt file', function () {
     $dtrFile = UploadedFile::fake()->create('dtr.txt');
 
     $response = $this->withHeaders([
-        'Authorization' => 'Bearer '.$this->token
+        'Authorization' => 'Bearer '.$this->token,
     ])->post('/api/v1/dtrs', ['dtr' => $dtrFile]);
 
     $response
@@ -86,6 +86,6 @@ test('`POST:` Import an empty .txt file', function () {
         ->assertExactJsonStructure(['message', 'status'])
         ->assertExactJson([
             'message' => __('response.dtr_import.error'),
-            'status' => Response::HTTP_BAD_REQUEST
+            'status'  => Response::HTTP_BAD_REQUEST,
         ]);
 });
