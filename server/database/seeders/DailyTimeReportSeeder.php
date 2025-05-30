@@ -18,7 +18,6 @@ class DailyTimeReportSeeder extends Seeder
             'date_time'   => fake()->dateTime(),
             'created_at'  => now(),
             'updated_at'  => now(),
-            'archived_at' => fake()->optional()->dateTime(),
         ])->toArray();
 
         DailyTimeReport::insert($data);
