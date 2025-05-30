@@ -44,7 +44,8 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
 
             Route::apiResource('departments', DepartmentController::class);
 
-            Route::apiResource('companies', CompanyController::class);
+            Route::apiResource('companies', CompanyController::class)
+            ->withTrashed(['show', 'update', 'destroy']);
 
             Route::apiResource('employee-statuses', EmployeeStatusController::class);
         });
