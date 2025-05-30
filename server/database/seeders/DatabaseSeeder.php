@@ -29,7 +29,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TrashedUserSeeder::class,
             EmployeeSeeder::class,
-            DailyTimeReportSeeder::class,
             UserSeeder::class,
             EmployeeEducationSeeder::class,
             EmployeeWorkExperienceSeeder::class,
@@ -39,6 +38,7 @@ class DatabaseSeeder extends Seeder
             EmployeePermanentAddressSeeder::class,
             EmployeeAttachmentSeeder::class,
             ImmediateSupervisorSeeder::class,
+            DailyTimeReportSeeder::class,
         ]);
 
         DB::enableQueryLog();
