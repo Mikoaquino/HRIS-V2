@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Company;
-use App\Traits\HttpResponse;
-use App\Services\CompanyService;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CompanyResource;
-use App\Http\Resources\CompanyCollection;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Request;
+use App\Http\Resources\CompanyCollection;
+use App\Http\Resources\CompanyResource;
+use App\Models\Company;
+use App\Services\CompanyService;
+use App\Traits\HttpResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CompanyController extends Controller
 {
     use HttpResponse;
-    
+
     public function __construct(protected CompanyService $service) {}
-    
+
     public function index(Request $request): CompanyCollection
     {
         $companies = $this->service->getCompanies($request);
 
         return CompanyCollection::make($companies);
     }
-   
+
     public function store(StoreCompanyRequest $request): JsonResponse
     {
         $company = $this->service->createCompany($request->validated());
@@ -41,14 +41,14 @@ class CompanyController extends Controller
     public function show(Request $request, Company $company): JsonResponse
     {
         $company = $this->service->getCompany($request, $company);
-        
+
         return $this->success(
             data: CompanyResource::make($company),
             status: Response::HTTP_FOUND,
         );
     }
-   
-    public function update(UpdateCompanyRequest $request, Company $company):JsonResponse
+
+    public function update(UpdateCompanyRequest $request, Company $company): JsonResponse
     {
         $updatedCompany = $this->service->updateCompany($request->validated(), $company);
 
@@ -57,7 +57,7 @@ class CompanyController extends Controller
             message: __('response.success.update', ['resource' => 'company']),
         );
     }
-    
+
     public function destroy(Company $company): JsonResponse
     {
         $company = $this->service->handleCompanyDelete($company);

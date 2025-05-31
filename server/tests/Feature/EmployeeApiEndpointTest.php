@@ -148,9 +148,9 @@ test('`POST:` Create a new employee resource', function () {
         'attachments' => $attachments->toArray(),
     ];
 
-    $isSupervisor = $requestPayload['job_position_id'] !== JobPosition::firstWhere('name', 'Supervisor')->id;
+    $isNotSupervisor = $requestPayload['job_position_id'] !== JobPosition::firstWhere('name', 'Supervisor')->id;
 
-    if ($isSupervisor) {
+    if ($isNotSupervisor) {
         $requestPayload = array_merge($requestPayload, [
             'immediate_supervisor_id' => Employee::inRandomOrder()->first()->id,
         ]);

@@ -25,7 +25,7 @@ return [
             'permanent' => ':employee\'s information has been permanently deleted.',
         ],
     ],
-     'company' => [
+    'company' => [
         'delete' => [
             'temporary' => ":company's information has been successfully archived.",
             'permanent' => ":company's information has been permanently deleted.",
@@ -53,5 +53,9 @@ return [
         'relation' => [
             'error' => 'Resource relation [:relation] was not found.',
         ],
+    ],
+    'dtr_import' => [
+        'success' => 'Successfully imported daily time report file.',
+        'error'   => 'Something went wrong, file contents might be empty.',
     ],
 ];

@@ -15,15 +15,15 @@ class ImmediateSupervisorSeeder extends Seeder
     {
         $supervisor = JobPosition::firstWhere('name', 'Supervisor');
 
-        $supervisors = Employee::where('job_position_id', $supervisor->id)->get();
-
         Employee::query()
             ->withTrashed()
             ->with('jobPosition')
             ->get()
-            ->each(function ($employee) use ($supervisor, $supervisors) {
+            ->each(function ($employee) use ($supervisor) {
                 if ($employee->jobPosition->isNot($supervisor)) {
-                    $employee->update(['immediate_supervisor_id' => $supervisors->random()->id]);
+                    $employee->update([
+                        'immediate_supervisor_id' => Employee::inRandomOrder()->first()->id,
+                    ]);
                 }
             });
     }

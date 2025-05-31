@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-use App\Models\Company;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Filters\IncludeSoftDeletedModels;
 use App\Filters\LoadModelRelations;
 use App\Filters\PaginateQueryBuilder;
-use Illuminate\Support\Facades\Pipeline;
-use App\Filters\IncludeSoftDeletedModels;
+use App\Models\Company;
 use App\Traits\LoadsRequestQueryRelationship;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Pipeline;
 
 class CompanyService
 {
@@ -33,13 +33,13 @@ class CompanyService
     {
         return DB::transaction(function () use ($validated) {
             $company = Company::create([
-                'name'    => $validated['name'],
-                'type'    => $validated['type'],
-                'address' => $validated['address'],
+                'name'            => $validated['name'],
+                'type'            => $validated['type'],
+                'address'         => $validated['address'],
                 'contact_number'  => $validated['contact_number'],
             ]);
 
-            return $company->unsetRelations(); 
+            return $company->unsetRelations();
         });
     }
 
@@ -64,9 +64,9 @@ class CompanyService
     public function handleCompanyDelete(Company $company): Company
     {
         if ($company->trashed()) {
-            return tap($company)->forceDelete(); 
+            return tap($company)->forceDelete();
         }
 
-        return tap($company)->delete(); 
+        return tap($company)->delete();
     }
 }

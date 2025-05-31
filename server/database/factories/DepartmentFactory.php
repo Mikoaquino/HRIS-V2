@@ -35,8 +35,8 @@ class DepartmentFactory extends Factory
         };
 
         return [
-            'name'        => $name,
-            'description' => $description,
+            'name'            => $name,
+            'description'     => $description,
             'company_id'      => Company::inRandomOrder()->first(),
         ];
     }
