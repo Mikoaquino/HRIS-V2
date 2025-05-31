@@ -26,31 +26,42 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
             Route::apiResource('users', UserController::class)
                 ->withTrashed(['show', 'update', 'destroy']);
 
-            Route::apiResource('activities', ActivityController::class);
+            Route::apiResource('activities', ActivityController::class)
+                ->only(['index']);
 
-            Route::apiResource('regions', RegionController::class);
+            Route::apiResource('regions', RegionController::class)
+                ->only(['index', 'show']);
 
-            Route::apiResource('provinces', ProvinceController::class);
+            Route::apiResource('provinces', ProvinceController::class)
+                ->only(['index', 'show']);
 
-            Route::apiResource('cities', CityController::class);
+            Route::apiResource('cities', CityController::class)
+                ->only(['index', 'show']);
 
-            Route::apiResource('barangays', BarangayController::class);
+            Route::apiResource('barangays', BarangayController::class)
+                ->only(['index', 'show']);
 
             Route::apiResource('attachments', EmployeeAttachmentController::class)
-                ->withTrashed(['show', 'destroy']);
+                ->withTrashed(['show', 'destroy'])
+                ->except(['index', 'update']);
 
-            Route::apiResource('employment-types', EmploymentTypeController::class);
+            Route::apiResource('employment-types', EmploymentTypeController::class)
+                ->only(['index']);
 
-            Route::apiResource('job-positions', JobPositionController::class);
+            Route::apiResource('job-positions', JobPositionController::class)
+                ->only(['index']);
 
-            Route::apiResource('departments', DepartmentController::class);
+            Route::apiResource('departments', DepartmentController::class)
+                ->only(['index', 'show']);
 
             Route::apiResource('companies', CompanyController::class)
                 ->withTrashed(['show', 'update', 'destroy']);
 
-            Route::apiResource('employee-statuses', EmployeeStatusController::class);
+            Route::apiResource('employee-statuses', EmployeeStatusController::class)
+                ->only(['index']);
 
-            Route::apiResource('dtrs', DailyTimeReportController::class);
+            Route::apiResource('dtrs', DailyTimeReportController::class)
+                ->only(['index', 'store']);
         });
 
         Route::prefix('auth')->group(function () {

@@ -11,6 +11,7 @@ use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -63,5 +64,14 @@ return Application::configure(basePath: dirname(__DIR__))
                     'message' => __('response.req_query.relation.error', ['relation' => $relation]),
                     'status'  => Response::HTTP_BAD_REQUEST,
                 ], Response::HTTP_BAD_REQUEST);
+            })
+            ->render(function (MethodNotAllowedHttpException $e, Request $request) {
+                return response()->json([
+                    'message' => $e->getMessage(),
+                    'status'  => $e->getStatusCode(),
+                ],
+                    $e->getStatusCode(),
+                    $e->getHeaders()
+                );
             });
     })->create();
