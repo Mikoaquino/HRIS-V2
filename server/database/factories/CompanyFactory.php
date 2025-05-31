@@ -30,4 +30,11 @@ class CompanyFactory extends Factory
             'contact_number' => fake()->numerify('09#########'),
         ];
     }
+
+    public function softDeleted(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'deleted_at' => now(),
+        ]);
+    }
 }
