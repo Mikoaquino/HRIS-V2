@@ -14,6 +14,7 @@ class DailyTimeReportResource extends JsonResource
             'date'        => $this->date,
             'time'        => $this->time,
             'archived_at' => $this->whenNotNull($this->archived_at),
+            'employee'    => EmployeeResource::make($this->whenLoaded('employee')),
         ];
     }
 }
