@@ -54,4 +54,8 @@ return [
             'error' => 'Resource relation [:relation] was not found.',
         ],
     ],
+    'dtr_import' => [
+        'success' => 'Successfully imported daily time report file.',
+        'error'   => 'Something went wrong, file contents might be empty.',
+    ],
 ];

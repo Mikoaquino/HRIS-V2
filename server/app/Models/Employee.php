@@ -99,6 +99,11 @@ class Employee extends Model
         return $this->belongsTo($this, 'immediate_supervisor_id');
     }
 
+    public function dailyTimeReports(): HasMany
+    {
+        return $this->hasMany(DailyTimeReport::class);
+    }
+
     public function getActivityLogOptions(): LogOptions
     {
         return LogOptions::defaults()

@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\ActivityController;
 use App\Http\Controllers\Api\BarangayController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\DailyTimeReportController;
 use App\Http\Controllers\Api\DepartmentController;
 use App\Http\Controllers\Api\EmployeeAttachmentController;
 use App\Http\Controllers\Api\EmployeeController;
@@ -48,6 +49,8 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
                 ->withTrashed(['show', 'update', 'destroy']);
 
             Route::apiResource('employee-statuses', EmployeeStatusController::class);
+
+            Route::apiResource('dtrs', DailyTimeReportController::class);
         });
 
         Route::prefix('auth')->group(function () {
