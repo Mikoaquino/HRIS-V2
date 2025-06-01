@@ -6,6 +6,7 @@ use App\Models\EmployeePermanentAddress;
 use App\Models\EmployeePresentAddress;
 use App\Services\EmployeeAddressService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 
 uses(RefreshDatabase::class);
 
@@ -48,7 +49,7 @@ test('can update an employee\'s present address', function () {
         'zip_code'           => fake()->numerify('####'),
     ];
 
-    sleep(1); // to allow interval between created_at and updated_at
+    Carbon::setTestNow(now()->addDay());
 
     $updatedPresent = $this->service->updatePresentAddress($updateData, $presentAddress);
 
@@ -107,7 +108,7 @@ test('can update an employee\'s permanent address', function () {
         'zip_code'           => fake()->numerify('####'),
     ];
 
-    sleep(1); // to allow interval between created_at and updated_at
+    Carbon::setTestNow(now()->addDay());
 
     $updatedPermanent = $this->service->updatePermanentAddress($updateData, $permanentAddress);
 

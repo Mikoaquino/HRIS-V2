@@ -20,7 +20,8 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->string('school');
             $table->string('degree')->nullable();
-            $table->date('graduated_at');
+            $table->char('from', 7);
+            $table->char('to', 7)->nullable();
             $table->timestamps();
         });
     }

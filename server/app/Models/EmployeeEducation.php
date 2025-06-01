@@ -18,10 +18,6 @@ class EmployeeEducation extends Model
         'updated_at',
     ];
 
-    protected $casts = [
-        'graduated_at' => 'date',
-    ];
-
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);

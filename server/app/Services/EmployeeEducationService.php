@@ -12,7 +12,8 @@ class EmployeeEducationService
             'employee_id'  => $validated['employee_id'],
             'school'       => $education['school'],
             'degree'       => $education['degree'],
-            'graduated_at' => $education['graduated_at'],
+            'from'         => $education['from'],
+            'to'           => $education['to'],
             'created_at'   => now(),
             'updated_at'   => now(),
         ], $validated['educations']);
@@ -23,15 +24,16 @@ class EmployeeEducationService
     public function updateEducation(array $validated): int
     {
         $data = array_map(fn ($education) => [
-            'id'           => $education['id'] ?? null,
-            'employee_id'  => $validated['employee_id'],
-            'school'       => $education['school'],
-            'degree'       => $education['degree'],
-            'graduated_at' => $education['graduated_at'],
+            'id'          => $education['id'] ?? null,
+            'employee_id' => $validated['employee_id'],
+            'school'      => $education['school'],
+            'degree'      => $education['degree'],
+            'from'        => $education['from'],
+            'to'          => $education['to'],
         ], $validated['educations']);
 
         return EmployeeEducation::upsert($data, 'id', [
-            'school', 'degree', 'graduated_at',
+            'school', 'degree', 'from', 'to',
         ]);
     }
 }

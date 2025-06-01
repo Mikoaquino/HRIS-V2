@@ -5,6 +5,7 @@ use App\Models\Employee;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 uses(RefreshDatabase::class);
@@ -44,7 +45,7 @@ test('can update a user model', function () {
 
     $updateData = ['email' => fake()->unique()->safeEmail()];
 
-    sleep(1); // to allow interval between created_at and updated_at
+    Carbon::setTestNow(now()->addDay());
 
     $updatedUser = $this->service->updateUser($updateData, $user);
 
