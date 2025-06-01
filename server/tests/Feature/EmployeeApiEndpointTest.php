@@ -102,14 +102,22 @@ test('`POST:` Create a new employee resource', function () {
         'employee_status_id' => EmployeeStatus::firstWhere(['name' => 'Active'])->id,
         'educations'         => [
             [
-                'school'       => 'Polytechnic University of the Philippines Santa Rosa',
-                'degree'       => 'Bachelor of Science in Information Technology',
-                'graduated_at' => '2024-02-01',
+                'school' => 'Polytechnic University of the Philippines Santa Rosa',
+                'degree' => 'Bachelor of Science in Information Technology',
+                'from'   => '2016-02',
+                'to'     => '2020-03',
             ],
             [
-                'school'       => 'AMA University',
-                'degree'       => 'Master of Science in Information Technology',
-                'graduated_at' => '2025-03-01',
+                'school' => 'AMA University',
+                'degree' => 'Master of Science in Information Technology',
+                'from'   => '2020-05',
+                'to'     => '2025-02',
+            ],
+            [
+                'school' => 'AMA University',
+                'degree' => 'Doctor of Philosophy Ph.D',
+                'from'   => '2025-04',
+                'to'     => null,
             ],
         ],
         'work_experiences' => [

@@ -41,10 +41,11 @@ class EmployeeFormRequest extends FormRequest
             'immediate_supervisor_id' => ['nullable', Rule::exists(new Employee()->getTable(), 'id')],
 
             // Educations
-            'educations'                => ['required', 'array'],
-            'educations.*.school'       => ['required', 'string', 'max:255'],
-            'educations.*.degree'       => ['required', 'string', 'max:255'],
-            'educations.*.graduated_at' => ['required', 'date'],
+            'educations'          => ['required', 'array'],
+            'educations.*.school' => ['required', 'string', 'max:255'],
+            'educations.*.degree' => ['required', 'string', 'max:255'],
+            'educations.*.from'   => ['required', 'date', 'date_format:Y-m'],
+            'educations.*.to'     => ['nullable', 'date', 'date_format:Y-m', 'after:educations.*.from'],
 
             // Work Experiences
             'work_experiences'                      => ['nullable', 'array'],
