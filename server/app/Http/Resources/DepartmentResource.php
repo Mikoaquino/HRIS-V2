@@ -14,6 +14,7 @@ class DepartmentResource extends JsonResource
             'name'          => $this->name,
             'description'   => $this->description,
             'company_id'    => $this->company_id,
+            'archived_at'   => $this->whenNotNull($this->archived_at),
             'company'       => CompanyResource::make($this->whenLoaded('company')),
         ];
     }

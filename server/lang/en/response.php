@@ -58,4 +58,12 @@ return [
         'success' => 'Successfully imported daily time report file.',
         'error'   => 'Something went wrong, file contents might be empty.',
     ],
+    'department' => [
+        'success_create' => ':department\'s department has been successfully created.',
+        'success_update' => ':department\'s department information has been successfully updated.',
+        'delete'         => [
+            'temporary' => ':department\'s department has been successfully archived.',
+            'permanent' => ':department\'s department has been permanently deleted.',
+        ],
+    ],
 ];
