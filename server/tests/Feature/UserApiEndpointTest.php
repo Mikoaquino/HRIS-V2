@@ -1,8 +1,8 @@
 <?php
 
+use App\Enums\UserStatus;
 use App\Models\Employee;
 use App\Models\User;
-use Illuminate\Testing\Fluent\AssertableJson;
 use Symfony\Component\HttpFoundation\Response;
 
 test('`GET:` Get a paginated user resource collection', function () {
@@ -63,29 +63,42 @@ test('`POST:` Create a new user resource', function () {
         'email'       => 'sample.mail@yahoo.com',
         'employee_id' => Employee::factory()->create()->id,
         'password'    => 'sTr0nk_P4ssword',
-        'status'      => 'active',
+        'status'      => UserStatus::ACTIVE->value,
     ];
 
     $response = $this->withHeaders([
         'Authorization' => 'Bearer '.$this->token,
     ])->postJson('/api/v1/users', $requestPayload);
 
+    $request = (object) $requestPayload;
+
     $response
         ->assertCreated()
-        ->assertExactJsonStructure(['message', 'status', 'data'])
+        ->assertExactJsonStructure([
+            'message',
+            'status',
+            'data' => [
+                'id',
+                'email',
+                'employee_id',
+                'status',
+                'created_at',
+                'updated_at',
+            ],
+        ])
         ->assertJson([
             'message' => __('response.success.create', ['resource' => 'user']),
             'status'  => Response::HTTP_CREATED,
         ])
         ->assertJsonFragment([
-            'email'       => $requestPayload['email'],
-            'employee_id' => $requestPayload['employee_id'],
-            'status'      => $requestPayload['status'],
+            'email'       => $request->email,
+            'employee_id' => $request->employee_id,
+            'status'      => $request->status,
         ]);
 });
 
 test('`PATCH:` Update a user resource fields', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->unverified()->create();
 
     $requestPayload = ['email' => 'new.email@gmail.com'];
 
@@ -104,7 +117,7 @@ test('`PATCH:` Update a user resource fields', function () {
 });
 
 test('`PUT:` Replace the entire resource of a user', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->unverified()->create();
 
     $requestPayload = [
         'email'       => 'change.mail2@yahoo.com',
@@ -117,23 +130,32 @@ test('`PUT:` Replace the entire resource of a user', function () {
         'Authorization' => 'Bearer '.$this->token,
     ])->putJson('/api/v1/users/'.$user->id, $requestPayload);
 
+    $request = (object) $requestPayload;
+
     $response
         ->assertOk()
-        ->assertExactJsonStructure(['message', 'data', 'status'])
+        ->assertExactJsonStructure([
+            'message',
+            'status',
+            'data' => [
+                'id',
+                'email',
+                'employee_id',
+                'status',
+                'created_at',
+                'updated_at',
+            ],
+        ])
         ->assertJson([
             'message' => __('response.success.update', ['resource' => 'user']),
             'status'  => Response::HTTP_OK,
         ])
-        ->assertJson(
-            fn (AssertableJson $json) => $json->has('data',
-                fn (AssertableJson $json) => $json->where('email', $requestPayload['email'])
-                    ->where('employee_id', $requestPayload['employee_id'])
-                    ->where('status', $requestPayload['status'])
-                    ->where('created_at', fn ($createdAt) => $createdAt < 'updated_at')
-                    ->missingAll(['password', 'deleted_at'])
-                    ->etc()
-            )->etc()
-        );
+        ->assertJsonFragment([
+            'email'       => $request->email,
+            'employee_id' => $request->employee_id,
+            'status'      => $request->status,
+            'created_at'  => $user->created_at,
+        ]);
 });
 
 test('`DELETE:` Flag a user resource as deleted', function () {
