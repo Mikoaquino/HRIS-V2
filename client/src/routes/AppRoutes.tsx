@@ -76,8 +76,8 @@ export const AppRoutes = () => {
         </Route>
 
         {/* Redirects */}
-        <Route path="/" element={<Navigate to="/audit-trail" replace />} />
-        <Route path="*" element={<Navigate to="/audit-trail" replace />} />
+        <Route path="/" element={<Navigate to="/hr-dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/hr-dashboard" replace />} />
       </Routes>
     </BrowserRouter>
   );
