@@ -39,9 +39,7 @@ const HrLayout = ({ children }: HrLayoutProps) => {
       {/* Page */}
       <div className="flex h-screen overflow-hidden">
         {/* Sidebar - desktop only */}
-        <div className="hidden lg:block">
           <HrSidebar />
-        </div>
 
         {/* Mobile Sidebar */}
         {mobileMenuOpen && (
