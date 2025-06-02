@@ -114,7 +114,7 @@ test('`POST:` Create a new employee resource', function () {
                 'to'     => '2025-02',
             ],
             [
-                'school' => 'AMA University',
+                'school' => 'De La Salle University',
                 'degree' => 'Doctor of Philosophy Ph.D',
                 'from'   => '2025-04',
                 'to'     => null,
