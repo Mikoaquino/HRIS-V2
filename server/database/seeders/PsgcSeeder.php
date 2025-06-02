@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use PDO;
-use App\Models\City;
-use App\Models\Region;
 use App\Models\Barangay;
+use App\Models\City;
 use App\Models\Province;
+use App\Models\Region;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use PDO;
 
 class PsgcSeeder extends Seeder
 {
@@ -38,7 +38,7 @@ class PsgcSeeder extends Seeder
     /**
      * Should you encounter errors regarding the loading of the csv files into the tables,
      * refer to the link below:
-     * 
+     *
      * @link https://github.com/Mikoaquino/HRIS-V2/pull/32
      */
     private function seedMysql(): void
@@ -111,14 +111,14 @@ class PsgcSeeder extends Seeder
             'code'        => $row[0],
             'name'        => $row[1],
             'region_code' => substr($row[0], 0, 2),
-        ], new Region()->getTable());
+        ], (new Region)->getTable());
 
         $this->chunkInsert($this->provincesCsvPath, fn ($row) => [
             'code'          => $row[0],
             'name'          => $row[1],
             'province_code' => substr($row[0], 0, 5),
             'region_code'   => substr($row[0], 0, 2),
-        ], new Province()->getTable());
+        ], (new Province)->getTable());
 
         $this->chunkInsert($this->citiesCsvPath, fn ($row) => [
             'code'          => $row[0],
@@ -126,7 +126,7 @@ class PsgcSeeder extends Seeder
             'city_code'     => substr($row[0], 0, 7),
             'province_code' => substr($row[0], 0, 5),
             'region_code'   => substr($row[0], 0, 2),
-        ], new City()->getTable());
+        ], (new City)->getTable());
 
         $this->chunkInsert($this->barangaysCsvPath, fn ($row) => [
             'code'          => $row[0],
@@ -134,7 +134,7 @@ class PsgcSeeder extends Seeder
             'city_code'     => substr($row[0], 0, 7),
             'province_code' => substr($row[0], 0, 5),
             'region_code'   => substr($row[0], 0, 2),
-        ], new Barangay()->getTable());
+        ], (new Barangay)->getTable());
 
         DB::statement('PRAGMA foreign_keys=ON');
         DB::statement('PRAGMA synchronous=FULL');
@@ -148,7 +148,7 @@ class PsgcSeeder extends Seeder
 
         $data = [];
 
-        while(($row = fgetcsv($file)) !== false) {
+        while (($row = fgetcsv($file)) !== false) {
             $data[] = $generator($row);
 
             if (count($data) === $chunkSize) {

@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Models\Barangay;
-use Illuminate\Validation\Rule;
 use App\Models\EmployeeEducation;
 use App\Models\EmployeeWorkExperience;
+use Illuminate\Validation\Rule;
 
 class UpdateEmployeeRequest extends EmployeeFormRequest
 {
@@ -20,19 +20,19 @@ class UpdateEmployeeRequest extends EmployeeFormRequest
 
         $modelMap = [
             'educations' => [
-                'table' => new EmployeeEducation()->getTable(),
+                'table'  => (new EmployeeEducation)->getTable(),
                 'column' => 'id',
             ],
             'work_experiences' => [
-                'table' => new EmployeeWorkExperience()->getTable(),
+                'table'  => (new EmployeeWorkExperience)->getTable(),
                 'column' => 'id',
             ],
             'present_address' => [
-                'table' => new Barangay()->getTable(),
+                'table'  => (new Barangay)->getTable(),
                 'column' => 'code',
             ],
             'permanent_address' => [
-                'table' => new Barangay()->getTable(),
+                'table'  => (new Barangay)->getTable(),
                 'column' => 'code',
             ],
         ];
