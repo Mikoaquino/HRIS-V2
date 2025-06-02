@@ -122,10 +122,10 @@ export default function Calendar() {
           {/* Arrows */}
           <div className="flex items-center space-x-2">
           <button onClick={() => setCurrentDate(subMonths(currentDate, 1))}>
-            <span className="text-gray-400 hover:text-black text-sm">&lt;</span>
+            <span className="text-gray-400 hover:text-black text-sm cursor-pointer">&lt;</span>
           </button>
           <button onClick={() => setCurrentDate(addMonths(currentDate, 1))}>
-            <span className="text-gray-400 hover:text-black text-sm">&gt;</span>
+            <span className="text-gray-400 hover:text-black text-sm cursor-pointer">&gt;</span>
           </button>
           </div>
         </div>

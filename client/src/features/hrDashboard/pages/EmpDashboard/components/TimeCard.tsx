@@ -39,11 +39,11 @@ export default function TimeCard() {
 
         {/* Buttons */}
         <div className="flex space-x-2">
-          <button className="flex items-center justify-center gap-1 py-1.5 px-3 border border-yellow-400 text-yellow-700 rounded-md text-[10px] hover:bg-yellow-50">
+          <button className="flex items-center justify-center gap-1 py-1.5 px-3 border border-yellow-400 text-yellow-700 rounded-md text-[10px] hover:bg-yellow-100 cursor-pointer">
             <Coffee size={14} />
             Start Break
           </button>
-          <button className="flex items-center justify-center gap-1 py-1.5 px-3 bg-red-500 text-white rounded-md text-[10px] hover:bg-red-600">
+          <button className="flex items-center justify-center gap-1 py-1.5 px-3 bg-red-500 text-white rounded-md text-[10px] hover:bg-red-600 cursor-pointer">
             <LogOut size={14} />
             Clock Out
           </button>
@@ -66,7 +66,7 @@ export default function TimeCard() {
         </div>
         {/* View Attendance */}
         <div className="flex flex-col justify-center">
-          <button className="bg-teal-500 hover:bg-teal-600 text-white text-xs px-2 py-0.5 text-[11px] rounded-md">
+          <button className="bg-teal-500 hover:bg-teal-600 text-white text-xs px-2 py-0.5 text-[11px] rounded-md cursor-pointer">
             View Attendance
           </button>
         </div>

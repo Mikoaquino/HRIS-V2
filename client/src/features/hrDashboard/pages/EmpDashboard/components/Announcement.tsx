@@ -63,7 +63,7 @@ export default function Announcements() {
           </div>
           <button
             onClick={toggleFullScreen}
-            className="text-gray-500 hover:text-gray-700 transition-colors text-sm"
+            className="text-gray-500 hover:text-gray-700 transition-colors text-sm cursor-pointer"
           >
             {isFullScreen ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
           </button>
