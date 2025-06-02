@@ -142,7 +142,7 @@ const EmployeeTable: React.FC<Props> = ({
                     </button>
 
                     {openActionMenu === emp.id && (
-                      <div className="absolute right-6 top-6 w-40 rounded-3xl shadow-xl bg-white z-10 py-2 border border-gray-100">
+                      <div className="absolute right-6 top-6 w-40 rounded-3xl shadow-xl bg-white z-10 py-2 border border-gray-100 cursor-pointer">
                         <ActionItem
                           icon={<Edit size={16} />}
                           color="teal"

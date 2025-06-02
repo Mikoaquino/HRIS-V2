@@ -34,11 +34,9 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
         setUserData(parsedUserData);
 
         const employee = parsedUserData.employee;
-        const fullName = `${employee.first_name} ${
-          employee.middle_name ? employee.middle_name + " " : ""
-        }${employee.last_name}${
-          employee.suffix ? " " + employee.suffix : ""
-        }`.trim();
+        const fullName = `${employee.first_name} ${employee.middle_name ? employee.middle_name + " " : ""
+          }${employee.last_name}${employee.suffix ? " " + employee.suffix : ""
+          }`.trim();
 
         setUserFullName(fullName);
       } catch (err) {
@@ -92,7 +90,7 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
           <div className="flex items-center">
             <div className="flex items-center mr-4">
               <button
-                className="lg:hidden mr-2 text-gray-600 hover:text-gray-900"
+                className="mr-2 text-gray-600 hover:text-gray-900"
                 onClick={toggleMobileMenu}
               >
                 <svg
@@ -110,13 +108,10 @@ const Header: React.FC<HeaderProps> = ({ toggleMobileMenu }) => {
                   ></path>
                 </svg>
               </button>
-              <Link to="/" className="flex items-center">
-                <Menu className="h-6 w-6 text-gray-800" />
-              </Link>
             </div>
 
             {/* Search Bar */}
-            <div className="hidden md:flex relative">
+            <div className="md:flex relative flex w-full">
               <input
                 type="search"
                 placeholder="Search..."

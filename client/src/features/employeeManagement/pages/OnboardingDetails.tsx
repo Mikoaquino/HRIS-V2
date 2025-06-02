@@ -150,10 +150,10 @@ const OnboardingDetails: React.FC = () => {
       addFormField(`educations[${index}][school]`, edu.school);
       addFormField(`educations[${index}][degree]`, edu.degree);
       addFormField(
-        `educations[${index}][graduated_at]`,
-        edu.graduated_at ? "" : `${edu.to}-1`
+        `educations[${index}][to]`,
+        edu.to ? "" : `${edu.graduated_at}`
       );
-      addFormField(`educations[${index}][from]`, `${edu.from}-1`);
+      addFormField(`educations[${index}][from]`, `${edu.from}`);
       addFormField(`educations[${index}][attainment]`, edu.attainment);
     });
 

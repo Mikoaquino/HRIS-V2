@@ -38,22 +38,30 @@ const HrLayout = ({ children }: HrLayoutProps) => {
 
       {/* Page */}
       <div className="flex h-screen overflow-hidden">
-        {/* Sidebar - desktop */}
-        <HrSidebar />
+        {/* Sidebar - desktop only */}
+        <div className="hidden lg:block">
+          <HrSidebar />
+        </div>
 
         {/* Mobile Sidebar */}
         {mobileMenuOpen && (
           <div className="lg:hidden fixed inset-0 z-40">
+            {/* Overlay */}
             <div
               className="fixed inset-0 bg-gray-600 bg-opacity-75"
               onClick={toggleMobileMenu}
             ></div>
-            <div className="relative flex flex-col w-80 max-w-xs h-full bg-white">
+            {/* Sidebar */}
+            <div
+              className="relative flex flex-col w-80 max-w-xs h-full bg-white"
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className="absolute top-0 right-0 p-1">
                 <button
                   onClick={toggleMobileMenu}
                   className="flex items-center justify-center w-10 h-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
                 >
+                  {/* X icon */}
                   <svg
                     className="w-6 h-6 text-gray-600"
                     fill="none"

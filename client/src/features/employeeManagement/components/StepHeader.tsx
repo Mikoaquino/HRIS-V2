@@ -1,15 +1,27 @@
-
 import { StepHeaderProps } from "../types/onboarding";
-
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const StepHeader: React.FC<StepHeaderProps> = ({
   steps,
   currentStep,
   onStepClick,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="mb-8">
-      <h1 className="text-xl font-bold mb-2 p-4">Onboarding Details</h1>
+      <div className="flex items-center justify-between"> 
+        <h1 className="text-xl font-bold mb-2 p-4">Onboarding Details</h1>
+        <button
+          type="button"
+          onClick={() => navigate("/employee-management")}
+          className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-1.5 rounded-md text-sm flex items-center gap-2 cursor-pointer"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Go Back
+        </button>
+      </div>
       <p className="text-gray-600 mb-6 px-4">
         Please fill out all required fields.
       </p>

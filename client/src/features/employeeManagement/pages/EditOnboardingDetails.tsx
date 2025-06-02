@@ -20,11 +20,15 @@ import {
   GovernmentID,
 } from "../types/onboarding";
 
-const formatToYearMonth = (dateStr: string) => {
+const formatToYearMonth = (dateStr: string): string => {
   if (!dateStr) return "";
+
   const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return "";
+
   const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+
   return `${year}-${month}`;
 };
 
@@ -92,7 +96,7 @@ const EditOnboardingDetails: React.FC = () => {
       };
 
       const response = await axios.get(
-        `http://localhost:8000/api/v1/employees/${id}`,
+        `http://127.0.0.1:8000/api/v1/employees/${id}`,
         axiosConfig
       );
 
@@ -163,8 +167,8 @@ const EditOnboardingDetails: React.FC = () => {
         id: edu.id,
         school: edu.school,
         degree: edu.degree,
-        from: edu.from ? new Date(edu.from).getFullYear().toString() : "",
-        to: edu.to ? new Date(edu.to).getFullYear().toString() : "",
+        from: formatToYearMonth(edu.from),
+        to: formatToYearMonth(edu.to), 
         graduated_at: !!edu.graduated_at,
         attainment: edu.attainment,
         isPresent: !edu.graduated_at,
@@ -192,7 +196,7 @@ const EditOnboardingDetails: React.FC = () => {
             name: att.client_name,
             size: 0, // Will be updated when file is loaded
             type: `application/${att.client_name.split(".").pop()}`,
-            url: `http://localhost:8000/storage/attachments/${att.hashed_name}`,
+            url: `http://127.0.0.1:8000/storage/attachments/${att.hashed_name}`,
             file: null as unknown as File, // Placeholder
           },
         ],
@@ -321,8 +325,8 @@ const EditOnboardingDetails: React.FC = () => {
     educations.forEach((edu: any, index: number) => {
       addFormField(`educations[${index}][school]`, edu.school);
       addFormField(`educations[${index}][degree]`, edu.degree);
-      addFormField(`educations[${index}][graduated_at]`, `${edu.to}-1`);
-      addFormField(`educations[${index}][from]`, `${edu.from}-1`);
+      addFormField(`educations[${index}][to]`, edu.to);
+      addFormField(`educations[${index}][from]`, edu.from);
       addFormField(`educations[${index}][attainment]`, edu.attainment);
     });
 
@@ -415,7 +419,7 @@ const EditOnboardingDetails: React.FC = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/employees/${id}`,
+        `http://127.0.0.1:8000/api/v1/employees/${id}`,
         {
           method: "POST",
           headers: {
