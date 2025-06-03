@@ -19,13 +19,16 @@ class EmployeeFormRequest extends FormRequest
     {
         return [
             // General
+            'personal_email'          => ['required', 'email:rfc,strict,dns,spoof,filter,filter_unicode', 'unique:employees,personal_email'],
             'first_name'              => ['required', 'string', 'max:255'],
             'middle_name'             => ['nullable', 'string', 'max:255'],
             'last_name'               => ['required', 'string', 'max:255'],
             'suffix'                  => ['nullable', 'string', 'max:255'],
             'birth_date'              => ['required', 'date', 'before_or_equal:'.now()->subYears(18)],
+            'birth_place'             => ['required', 'string'],
             'gender'                  => ['required', 'string', 'max:255', Rule::in(Gender::getValues())],
             'civil_status'            => ['required', 'string', 'max:255', Rule::in(CivilStatus::getValues())],
+            'citizenship'             => ['required', 'string'],
             'nationality'             => ['required', 'string', 'max:255'],
             'religion'                => ['required', 'string', 'max:255'],
             'contact_number'          => ['required', 'string', 'digits:11', 'regex:/^09\d{9}$/'],
