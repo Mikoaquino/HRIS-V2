@@ -263,7 +263,7 @@ const AccountManagement: React.FC = () => {
               <button
                 onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
                 disabled={currentPage === 1}
-                className={`py-1 px-4 rounded-md text-xs ${currentPage === 1 ? 'bg-gray-200 text-gray-400' : 'bg-gray-300 text-gray-700'}`}
+                className={`py-1 px-4 rounded-md text-xs ${currentPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-300 text-gray-700 cursor-pointer'}`}
               >
                 Previous
               </button>
@@ -272,7 +272,7 @@ const AccountManagement: React.FC = () => {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`py-1 px-3 rounded-md text-xs ${currentPage === page ? 'bg-teal-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+                  className={`py-1 px-3 rounded-md text-xs ${currentPage === page ? 'bg-teal-500 text-white' : 'bg-gray-200 text-gray-700 cursor-pointer'}`}
                 >
                   {page}
                 </button>
@@ -281,7 +281,7 @@ const AccountManagement: React.FC = () => {
               <button
                 onClick={() => currentPage < (meta?.last_page ?? 1) && setCurrentPage(currentPage + 1)}
                 disabled={currentPage >= (meta?.last_page ?? 1)}
-                className={`py-1 px-4 rounded-md text-xs ${currentPage >= (meta?.last_page ?? 1) ? 'bg-gray-200 text-gray-400' : 'bg-gray-300 text-gray-700'}`}
+                className={`py-1 px-4 rounded-md text-xs ${currentPage >= (meta?.last_page ?? 1) ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-300 text-gray-700 cursor-pointer'}`}
               >
                 Next
               </button>

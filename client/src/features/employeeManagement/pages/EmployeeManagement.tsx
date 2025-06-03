@@ -200,7 +200,7 @@ const EmployeeManagement: React.FC = () => {
                     className={`py-1 px-3 rounded-md text-xs ${
                       currentPage === page
                         ? 'bg-teal-500 text-white'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer'
                     }`}
                   >
                     {page}
@@ -212,8 +212,8 @@ const EmployeeManagement: React.FC = () => {
                 disabled={currentPage >= (meta?.last_page ?? 1)}
                 className={`py-1 px-4 rounded-md text-xs ${
                   currentPage >= (meta?.last_page ?? 1)
-                    ? 'bg-gray-200 text-gray-400'
-                    : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
+                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                    : 'bg-gray-300 text-gray-700 hover:bg-gray-400 cursor-pointer'
                 }`}
               >
                 Next
