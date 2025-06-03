@@ -60,7 +60,7 @@ test('`GET:` Get only soft-deleted users in paginated resource collection', func
 
 test('`POST:` Create a new user resource', function () {
     $requestPayload = [
-        'email'       => 'sample.mail@yahoo.com',
+        'work_email'  => fake()->email(),
         'employee_id' => Employee::factory()->create()->id,
         'password'    => 'sTr0nk_P4ssword',
         'status'      => UserStatus::ACTIVE->value,
@@ -79,7 +79,7 @@ test('`POST:` Create a new user resource', function () {
             'status',
             'data' => [
                 'id',
-                'email',
+                'work_email',
                 'employee_id',
                 'status',
                 'created_at',
@@ -91,7 +91,7 @@ test('`POST:` Create a new user resource', function () {
             'status'  => Response::HTTP_CREATED,
         ])
         ->assertJsonFragment([
-            'email'       => $request->email,
+            'work_email'  => $request->work_email,
             'employee_id' => $request->employee_id,
             'status'      => $request->status,
         ]);
@@ -100,7 +100,7 @@ test('`POST:` Create a new user resource', function () {
 test('`PATCH:` Update a user resource fields', function () {
     $user = User::factory()->unverified()->create();
 
-    $requestPayload = ['email' => 'new.email@gmail.com'];
+    $requestPayload = ['work_email' => 'new.email@gmail.com'];
 
     $response = $this->withHeaders([
         'Authorization' => 'Bearer '.$this->token,
@@ -113,14 +113,14 @@ test('`PATCH:` Update a user resource fields', function () {
             'message' => __('response.success.update', ['resource' => 'user']),
             'status'  => Response::HTTP_OK,
         ])
-        ->assertJsonPath('data.email', $requestPayload['email']);
+        ->assertJsonPath('data.work_email', $requestPayload['work_email']);
 });
 
 test('`PUT:` Replace the entire resource of a user', function () {
     $user = User::factory()->unverified()->create();
 
     $requestPayload = [
-        'email'       => 'change.mail2@yahoo.com',
+        'work_email'  => 'change.mail2@yahoo.com',
         'employee_id' => Employee::factory()->create()->id,
         'password'    => 'sTr0nk_P4ssword',
         'status'      => 'active',
@@ -139,7 +139,7 @@ test('`PUT:` Replace the entire resource of a user', function () {
             'status',
             'data' => [
                 'id',
-                'email',
+                'work_email',
                 'employee_id',
                 'status',
                 'created_at',
@@ -151,7 +151,7 @@ test('`PUT:` Replace the entire resource of a user', function () {
             'status'  => Response::HTTP_OK,
         ])
         ->assertJsonFragment([
-            'email'       => $request->email,
+            'work_email'  => $request->work_email,
             'employee_id' => $request->employee_id,
             'status'      => $request->status,
             'created_at'  => $user->created_at,
