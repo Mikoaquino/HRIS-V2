@@ -136,7 +136,7 @@ const EmployeeTable: React.FC<Props> = ({
                   <td className="py-3 px-3 relative">
                     <button
                       onClick={() => toggleActionMenu(emp.id)}
-                      className="text-gray-400 hover:text-gray-600"
+                      className="text-gray-400 hover:text-gray-600 cursor-pointer"
                     >
                       <MoreHorizontal size={16} />
                     </button>
@@ -193,7 +193,7 @@ const ActionItem = ({
   color: string;
 }) => (
   <button
-    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left cursor-pointer"
     onClick={onClick}
   >
     <div

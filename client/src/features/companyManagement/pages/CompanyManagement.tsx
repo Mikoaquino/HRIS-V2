@@ -1,45 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import { useEmployees, deleteEmployee } from '../hooks/useEmployee';
+import { useCompanies, deleteCompany } from '../hooks/useCompany';
 import { ChevronDown, CircleCheckBig, MoreHorizontal, XCircle } from 'lucide-react';
-import EmployeeTable from '../components/EmployeeTable';
-import EmployeeViewModal from '../components/EmployeeView';
-import { Link } from 'react-router-dom';
+import CompanyTable, { Company } from '../components/CompanyTable';
+import CompanyViewModal from '../components/CompanyView';
+import CompanyCreate from '../components/CompanyCreate';
 
-const EmployeeManagement: React.FC = () => {
+const CompanyManagement: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [openActionMenu, setOpenActionMenu] = useState<number | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [successAction, setSuccessAction] = useState<'create' | 'edit' | 'delete' | null>(null);
-  const [employeeToDelete, setEmployeeToDelete] = useState<number | null>(null);
+  const [successAction, setSuccessAction] = useState<'create' | 'delete' | null>(null);
+  const [CompanyToDelete, setCompanyToDelete] = useState<number | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedEmployee, setSelectedEmployee] = useState<any | null>(null);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [viewCompany, setViewCompany] = useState<Company | null>(null);
 
   const token = sessionStorage.getItem('token');
-  const { employees, meta, loading, refetchEmployees } = useEmployees(currentPage, token, perPage);
-
-  useEffect(() => {
-    if (!loading && meta && employees.length === 0 && currentPage > 1 && meta.total > 0) {
-      setCurrentPage(1);
-    }
-  }, [employees, loading, meta, currentPage]);
-  
-  const toggleActionMenu = (employeeId: number | null) => {
-    setOpenActionMenu((prev) => (prev === employeeId ? null : employeeId));
+  const { companies, meta, loading, refetchCompanies, createCompany } = useCompanies(currentPage, token, perPage) as unknown as {
+    companies: Company[];
+    meta: any;
+    loading: boolean;
+    refetchCompanies: () => Promise<void>;
+    createCompany: (data: any) => Promise<any>;
   };
 
-  const handleDelete = (employeeId: number) => {
-    setEmployeeToDelete(employeeId);
+  useEffect(() => {
+    if (!loading && meta && companies.length === 0 && currentPage > 1 && meta.total > 0) {
+      setCurrentPage(1);
+    }
+  }, [companies, loading, meta, currentPage]);
+  
+  const toggleActionMenu = (companyId: number | null) => {
+    setOpenActionMenu((prev) => (prev === companyId ? null : companyId));
+  };
+
+  const handleDelete = (companyId: number) => {
+    setCompanyToDelete(companyId);
     setShowDeleteModal(true);
   };
 
   const confirmDelete = async () => {
-    if (!token || employeeToDelete === null) return;
+    if (!token || CompanyToDelete === null) return;
     try {
       setIsSubmitting(true);
-      await deleteEmployee(employeeToDelete, token);
-      await refetchEmployees();
+      await deleteCompany(CompanyToDelete, token);
+      await refetchCompanies();
       setSuccessAction('delete');
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
@@ -48,40 +55,57 @@ const EmployeeManagement: React.FC = () => {
       setSuccessAction(null);
     }
     setShowDeleteModal(false);
-    setEmployeeToDelete(null);
+    setCompanyToDelete(null);
     setOpenActionMenu(null);
     setIsSubmitting(false);
   };
 
   const calculatePaginationInfo = () => {
-    if (!meta || employees.length === 0) return 'No employees to display';
+    if (!meta || companies.length === 0) return 'No company to display';
     return `Showing ${meta.from} to ${meta.to} of ${meta.total} entries`;
   };
 
-  const handleView = (employeeId: number) => {
-    const emp = employees.find(emp => emp.id === employeeId);
-    if (emp) setSelectedEmployee(emp);
+  const handleView = (companyId: number) => {
+    const comp = companies.find(comp => comp.id === companyId);
+    if (comp) setViewCompany(comp);
+  };
+
+  const handleCreateSubmit = async (data: any) => {
+    try {
+      setIsSubmitting(true);
+      await createCompany(data); // Only pass data, not token
+      await refetchCompanies();
+      setSuccessAction('create');
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
+    } catch (error) {
+      setShowSuccess(false);
+      setSuccessAction(null);
+    }
+    setIsCreateOpen(false);
+    setIsSubmitting(false);
   };
 
   useEffect(() => {
-    refetchEmployees();
-  }, [refetchEmployees]);
-  
+    refetchCompanies();
+  }, [refetchCompanies]);
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm w-full min-h-screen">
-      <h5 className="text-black text-lg font-semibold mb-6">EMPLOYEE MANAGEMENT</h5>
+      <h5 className="text-black text-lg font-semibold mb-6">COMPANY MANAGEMENT</h5>
 
       {showSuccess && (
       <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-[1025]">
-          <div className="bg-gray-100 border border-green-300 rounded-md shadow-md px-8 py-6 max-w-md text-center">
+          <div className="bg-gray-100 border border-gray-300 rounded-md shadow-md px-8 py-6 max-w-md text-center">
             <div className="flex justify-center items-center mb-4">
-              <div className="w-12 h-12 rounded-full border-2 border-green-300 flex items-center justify-center">
-                <CircleCheckBig className="text-green-600 w-6 h-6" />
+              <div className="w-16 h-16 rounded-full border-2 border-green-300 flex items-center justify-center">
+                <CircleCheckBig className="text-green-600 w-8 h-8" />
               </div>
             </div>
             <h2 className="text-green-700 text-2xl font-semibold mb-2">Success!</h2>
             <p className="text-gray-700 text-sm">
-              {successAction === 'delete' && 'Employee has been deleted'}
+              {successAction === 'delete' && 'Company has been deleted'}
+              {successAction === 'create' && 'Company has been created'}
             </p>
           </div>
         </div>
@@ -91,20 +115,20 @@ const EmployeeManagement: React.FC = () => {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1025]">
           <div className="bg-white rounded-md shadow-lg px-8 py-6 max-w-sm text-center border border-gray-200">
             <div className="flex justify-center items-center">
-              <div className="text-yellow-500 mb-2">
+              <div className="text-red-500 mb-2">
                 <XCircle size={80} strokeWidth={1.5} className="mx-auto" />
               </div>
             </div>
-            <h2 className="text-yellow-600 text-lg font-semibold mb-2">Archive Employee</h2>
+            <h2 className="text-red-600 text-lg font-semibold mb-2">Delete Company</h2>
             <p className="text-gray-600 text-sm mb-4">
-              Are you sure you want to archive this Employee? This process cannot be undone
+              Are you sure you want to delete this Company? This process cannot be undone
             </p>
             <hr className="mb-4 text-gray-200 justify-center items-center"/>
             <div className="flex justify-center gap-4">
               <button
                 onClick={() => {
                   setShowDeleteModal(false);
-                  setEmployeeToDelete(null);
+                  setCompanyToDelete(null);
                 }}
                 className="bg-gray-200 hover:bg-gray-400 text-gray-800 px-4 py-1.5 rounded-md text-sm cursor-pointer"
               >
@@ -113,19 +137,28 @@ const EmployeeManagement: React.FC = () => {
               <button
                 onClick={confirmDelete}
                 disabled={isSubmitting}
-                className="px-4 py-2 text-sm text-white bg-yellow-500 hover:bg-yellow-600 rounded-md cursor-pointer"
+                className="px-4 py-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded-md cursor-pointer"
               >
-                {isSubmitting ? 'Archiving...' : 'Archive'}
+                {isSubmitting ? 'Deleting...' : 'Delete'}
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {selectedEmployee && (
-        <EmployeeViewModal
-          employee={selectedEmployee}
-          onClose={() => setSelectedEmployee(null)}
+      {viewCompany && (
+        <CompanyViewModal
+          company={viewCompany}
+          onClose={() => setViewCompany(null)}
+        />
+      )}
+
+      {isCreateOpen && (
+        <CompanyCreate
+          isOpen={isCreateOpen}
+          onClose={() => setIsCreateOpen(false)}
+          onSubmit={handleCreateSubmit}
+          isSubmitting={isSubmitting}
         />
       )}
 
@@ -159,22 +192,23 @@ const EmployeeManagement: React.FC = () => {
           <button className="mx-2">
             <MoreHorizontal size={20} className="text-gray-500" />
           </button>
-          <Link to="/employee-management/onboarding" className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-1.5 rounded-md text-sm"
+          <button
+            onClick={() => setIsCreateOpen(true)}
+            className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-1.5 rounded-md text-sm cursor-pointer"
           >
-            Add Employee
-          </Link>
+            Add Company
+          </button>
         </div>
       </div>
 
       {loading ? (
-        <p className="text-gray-500 flex justify-center items-center mt-10">Loading employees...</p>
+        <p className="text-gray-500 flex justify-center items-center mt-10">Loading company...</p>
       ) : (
         <>
-          <EmployeeTable
-            employees={employees}
+          <CompanyTable
+            company={companies}
             openActionMenu={openActionMenu}
             toggleActionMenu={toggleActionMenu}
-            handleEdit={() => {}}
             handleDelete={handleDelete}
             handleView={handleView}
           />
@@ -186,7 +220,7 @@ const EmployeeManagement: React.FC = () => {
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
                 className={`py-1 px-4 rounded-md text-xs ${
-                  currentPage === 1 ? 'bg-gray-200 text-gray-400' : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
+                  currentPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-300 text-gray-700 hover:bg-gray-400 cursor-pointer'
                 }`}
               >
                 Previous
@@ -226,4 +260,4 @@ const EmployeeManagement: React.FC = () => {
   );
 };
 
-export default EmployeeManagement;
+export default CompanyManagement;

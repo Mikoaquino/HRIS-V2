@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   UsersRound,
   Plane,
@@ -7,11 +7,13 @@ import {
   ShieldCheck,
   TimerReset,
   UserRoundPlus,
+  Building2,
 } from "lucide-react";
 
 const HrSidebar = () => {
   const [activeCategory, setActiveCategory] = useState("dashboard");
   const [activeSubItem, setActiveSubItem] = useState("onboarding");
+  const location = useLocation();
 
   const toggleSubmenu = (category: string) => {
     setActiveCategory(activeCategory === category ? "" : category);
@@ -22,6 +24,7 @@ const HrSidebar = () => {
   };
 
   const hrLinks = [
+    { label: "Company Management", link: "/company-management", icon: Building2 },
     { label: "Time Management", link: "/time-management", icon: Calendar },
     { label: "Leave Management", link: "/leave-management", icon: Plane },
     { label: "Certificates", link: "/certificates", icon: ShieldCheck },
@@ -232,14 +235,14 @@ const HrSidebar = () => {
                       <Link
                         key={item.label}
                         to={item.link}
-                        className={`w-full flex items-center justify-between px-[30px] py-[10px] text-[14px]whitespace-nowrap ${
+                        className={`group w-full flex items-center justify-between px-[30px] py-[10px] text-[14px] whitespace-nowrap ${
                           isActive ? "text-teal-400" : "text-gray-400"
                         } hover:text-teal-400 focus:text-teal-400`}
                       >
                         <div className="flex items-center">
                           <Icon
                             className={`w-4 h-4 mr-3 ${
-                              isActive ? "text-teal-400" : "text-gray-400"
+                              isActive ? "text-teal-400" : "text-gray-400 group-hover:text-teal-400 group-focus:text-teal-400"
                             }`}
                           />
                           <span className="text-xs cursor-pointer">

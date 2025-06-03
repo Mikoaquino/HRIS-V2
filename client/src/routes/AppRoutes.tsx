@@ -18,6 +18,7 @@ import EmployeeManagement from "../features/employeeManagement/pages/EmployeeMan
 import EducationalBackground from "../features/employeeManagement/components/EducationalBackground";
 import WorkExperience from "../features/employeeManagement/components/WorkExperience";
 import EditOnboardingDetails from "../features/employeeManagement/pages/EditOnboardingDetails";
+import CompanyManagement from "../features/companyManagement/pages/CompanyManagement";
 
 // Authentication check
 const isAuthenticated = () => {
@@ -60,6 +61,7 @@ export const AppRoutes = () => {
             <Route path="/employee-management" element={<EmployeeManagement />} />
             <Route path="/education-background" element={<EducationalBackground />} />
             <Route path="/work-experience" element={<WorkExperience />} />
+            <Route path="/company-management" element={<CompanyManagement />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route
               path="/profile/change-password"

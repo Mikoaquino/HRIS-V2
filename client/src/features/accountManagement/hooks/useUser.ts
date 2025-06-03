@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
+import { Employee } from '../../employeeManagement/hooks/useEmployee';
 
 export interface User {
   created_at: string | null;
@@ -7,6 +8,7 @@ export interface User {
   name: string;
   email: string;
   employee_id: number | null;
+  employee?: Employee;
   permissions: 'User' | 'Admin';
   addedDate: string;
   status: 'Active' | 'Inactive';
@@ -42,7 +44,7 @@ export const useUsers = (
     setLoading(true);
     try {
       const response = await axios.get<PaginatedUserResponse>(
-        `http://127.0.0.1:8000/api/v1/users?page=${page}&per_page=${perPage}`,
+        `http://127.0.0.1:8000/api/v1/users?page=${page}&per_page=${perPage}&load=employee`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
