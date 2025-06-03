@@ -52,7 +52,7 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
                 ->only(['index']);
 
             Route::apiResource('departments', DepartmentController::class)
-                ->only(['index', 'show']);
+                ->withTrashed(['show', 'update', 'destroy']);
 
             Route::apiResource('companies', CompanyController::class)
                 ->withTrashed(['show', 'update', 'destroy']);

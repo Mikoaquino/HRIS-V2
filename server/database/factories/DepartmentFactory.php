@@ -35,9 +35,17 @@ class DepartmentFactory extends Factory
         };
 
         return [
-            'name'            => $name,
-            'description'     => $description,
-            'company_id'      => Company::inRandomOrder()->first(),
+            'name'        => $name,
+            'description' => $description,
+            'company_id'  => Company::inRandomOrder()->first(),
+            'archived_at' => null,
         ];
+    }
+
+    public function archived(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'archived_at' => now(),
+        ]);
     }
 }

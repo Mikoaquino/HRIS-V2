@@ -32,6 +32,11 @@ class DepartmentService
             ->thenReturn();
     }
 
+    public function createDepartment(array $validated): Department
+    {
+        return Department::create($validated);
+    }
+
     public function getDepartment(Request $request, Department $department): Department
     {
         $department->when($request->filled('load'),
@@ -39,5 +44,19 @@ class DepartmentService
         );
 
         return $department;
+    }
+
+    public function updateDepartment(array $validated, Department $department): Department
+    {
+        return tap($department)->update($validated);
+    }
+
+    public function deleteDepartment(Department $department): Department
+    {
+        if ($department->trashed()) {
+            return tap($department)->forceDelete();
+        }
+
+        return tap($department)->delete();
     }
 }
