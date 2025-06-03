@@ -322,27 +322,61 @@ const EditOnboardingDetails: React.FC = () => {
     );
 
     const educations = getSessionData(`hris-educational-background`) || [];
-    educations.forEach((edu: any, index: number) => {
+    const uniqueEducations = educations.reduce((acc: any[], current: any) => {
+      const existingIndex = acc.findIndex(item => 
+        item.school === current.school && 
+        item.degree === current.degree && 
+        item.from === current.from
+      );
+      
+      if (existingIndex >= 0) {
+        if (!current.id || current.id > acc[existingIndex].id) {
+          acc[existingIndex] = current;
+        }
+      } else {
+        acc.push(current);
+      }
+      return acc;
+    }, []);
+  
+    uniqueEducations.forEach((edu: any, index: number) => {
       addFormField(`educations[${index}][school]`, edu.school);
       addFormField(`educations[${index}][degree]`, edu.degree);
       addFormField(`educations[${index}][to]`, edu.to);
       addFormField(`educations[${index}][from]`, edu.from);
       addFormField(`educations[${index}][attainment]`, edu.attainment);
+      if (edu.id && edu.id <= 1000) {
+        addFormField(`educations[${index}][id]`, edu.id);
+      }
     });
 
     const workExperiences = getSessionData(`hris-work-experience`) || [];
-    workExperiences.forEach((work: any, index: number) => {
-      addFormField(
-        `work_experiences[${index}][previous_employer]`,
-        work.employer
+    const uniqueWorkExp = workExperiences.reduce((acc: any[], current: any) => {
+      const existingIndex = acc.findIndex(item => 
+        item.employer === current.employer && 
+        item.position === current.position && 
+        item.from === current.from
       );
+      
+      if (existingIndex >= 0) {
+        if (!current.id || current.id > acc[existingIndex].id) {
+          acc[existingIndex] = current;
+        }
+      } else {
+        acc.push(current);
+      }
+      return acc;
+    }, []);
+  
+    uniqueWorkExp.forEach((work: any, index: number) => {
+      addFormField(`work_experiences[${index}][previous_employer]`, work.employer);
       addFormField(`work_experiences[${index}][job_position]`, work.position);
-      addFormField(`work_experiences[${index}][from]`, `${work.from}-1-1`);
-      addFormField(`work_experiences[${index}][to]`, `${work.to}-1-1`);
-      addFormField(
-        `work_experiences[${index}][reason_for_leaving]`,
-        work.reason
-      );
+      addFormField(`work_experiences[${index}][from]`, `${work.from}-01-01`);
+      addFormField(`work_experiences[${index}][to]`, `${work.to}-01-01`);
+      addFormField(`work_experiences[${index}][reason_for_leaving]`, work.reason);
+      if (work.id && work.id <= 1000) { 
+        addFormField(`work_experiences[${index}][id]`, work.id);
+      }
     });
 
     const savedDocuments = JSON.parse(
