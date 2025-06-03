@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Pencil, Trash, XCircle } from "lucide-react";
 import { Work } from "../types/onboarding";
 
-const reasonRegex = /^[A-Za-z0-9 .,\-'"()]{0,200}$/;
+const reasonRegex = /^[A-Za-z0-9 .,\-'"()]{4,200}$/;
 const employerRegex = /^[A-Za-z .,\-'"&()]{3,100}$/;
 const positionRegex = /^[A-Za-z .,\-'"()]{2,100}$/;
 const currentMonth = new Date().toISOString().slice(0, 7);
