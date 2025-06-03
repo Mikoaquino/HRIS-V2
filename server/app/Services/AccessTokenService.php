@@ -11,7 +11,7 @@ class AccessTokenService
 {
     public function createToken(array $request): ?object
     {
-        $user = User::firstWhere('email', $request['email']);
+        $user = User::firstWhere('work_email', $request['work_email']);
 
         if (! $user || ! Hash::check($request['password'], $user->password)) {
             return null;

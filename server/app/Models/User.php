@@ -18,7 +18,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, LogsActivity, Notifiable, SoftDeletes;
 
     protected $fillable = [
-        'email',
+        'work_email',
         'employee_id',
         'password',
         'status',

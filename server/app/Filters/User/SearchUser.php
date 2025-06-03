@@ -13,6 +13,6 @@ class SearchUser
             return $next($builder);
         }
 
-        return $next($builder->whereLike('email', '%'.request()->q.'%'));
+        return $next($builder->whereLike('work_email', '%'.request()->q.'%'));
     }
 }
