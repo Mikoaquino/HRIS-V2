@@ -15,8 +15,10 @@ return new class extends Migration
             $table->after('last_name', function ($table) {
                 $table->string('suffix')->nullable();
                 $table->date('birth_date');
+                $table->string('birth_place');
                 $table->string('gender');
                 $table->string('civil_status');
+                $table->string('citizenship');
                 $table->string('nationality');
                 $table->string('religion');
                 $table->string('contact_number', 11);

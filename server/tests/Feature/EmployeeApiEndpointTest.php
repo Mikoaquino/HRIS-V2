@@ -81,14 +81,17 @@ test('`POST:` Create a new employee resource', function () {
     });
 
     $requestPayload = [
+        'personal_email'     => 'sample.mail@yahoo.com',
         'first_name'         => 'Carl',
         'middle_name'        => 'Francisco',
         'last_name'          => 'Tabuso',
         'suffix'             => null,
         'birth_date'         => '2003-02-19',
+        'birth_place'        => 'Santa Cruz, Manila',
         'gender'             => 'male',
         'civil_status'       => 'single',
-        'nationality'        => 'Filipino',
+        'citizenship'        => 'Filipino',
+        'nationality'        => 'Hispanic',
         'religion'           => 'Saksi ni Java',
         'contact_number'     => '09300758835',
         'sss_id'             => '123456789101',

@@ -14,8 +14,8 @@ class StoreAccessTokenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'    => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'work_email' => ['required', 'string', 'email'],
+            'password'   => ['required', 'string'],
         ];
     }
 }

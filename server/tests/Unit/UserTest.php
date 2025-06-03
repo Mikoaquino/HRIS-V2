@@ -14,7 +14,7 @@ beforeEach(fn () => $this->service = app()->make(UserService::class));
 
 test('can create a user model', function () {
     $validated = [
-        'email'       => fake()->unique()->safeEmail(),
+        'work_email'  => fake()->email(),
         'employee_id' => Employee::factory()->create()->id,
         'password'    => Str::password(),
         'status'      => UserStatus::ACTIVE,
@@ -27,7 +27,7 @@ test('can create a user model', function () {
     expect($user)
         ->toBeInstanceOf(User::class)
         ->id->toBeInt()
-        ->email->toBe($validated['email'])
+        ->work_email->toBe($validated['work_email'])
         ->employee_id->toBe($validated['employee_id'])
         ->password->toHaveLength(60)
         ->status->toBe(UserStatus::ACTIVE)
@@ -35,15 +35,12 @@ test('can create a user model', function () {
         ->created_at->not->toBeNull()
         ->updated_at->not->toBeNull()
         ->deleted_at->toBeNull();
-
-    unset($validated['password']);
-
 });
 
 test('can update a user model', function () {
     $user = User::factory()->create(['status' => UserStatus::INACTIVE]);
 
-    $updateData = ['email' => fake()->unique()->safeEmail()];
+    $updateData = ['work_email' => fake()->email()];
 
     Carbon::setTestNow(now()->addDay());
 
@@ -53,7 +50,7 @@ test('can update a user model', function () {
 
     expect($updatedUser)
         ->toBeInstanceOf(User::class)
-        ->email->toBe($updateData['email'])
+        ->work_email->toBe($updateData['work_email'])
         ->status->toBe(UserStatus::INACTIVE);
 
     expect($updatedUser->updated_at)->toBeGreaterThan($updatedUser->created_at);
