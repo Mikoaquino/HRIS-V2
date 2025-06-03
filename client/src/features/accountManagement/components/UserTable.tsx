@@ -51,7 +51,18 @@ const UserTable: React.FC<Props> = ({
                   <td className="py-3 px-3">
                     <div className="flex items-center">
                       <div className="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0" />
-                      <span className="ml-3 text-sm text-gray-800">{user.name ? 'None' : 'None'}</span>
+                      <span className="ml-3 text-sm text-gray-800">
+                        {user.employee
+                          ? [
+                              user.employee.first_name,
+                              user.employee.middle_name,
+                              user.employee.last_name,
+                              user.employee.suffix
+                            ]
+                              .filter(Boolean)
+                              .join(' ')
+                          : 'None'}
+                      </span>
                     </div>
                   </td>
                   <td className="py-3 px-3 text-sm text-gray-500">{user.email}</td>
