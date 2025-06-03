@@ -12,7 +12,7 @@ class UserFormRequest extends FormRequest
     public function baseRules(): array
     {
         return [
-            'email'       => ['required', 'email:rfc,strict,dns,spoof,filter,filter_unicode', 'unique:users,email'],
+            'work_email'  => ['required', 'email', 'unique:users,work_email'],
             'employee_id' => ['required', 'exists:employees,id', 'unique:users,employee_id'],
             'password'    => ['required', Password::defaults()],
             'status'      => ['required', 'string', Rule::in(UserStatus::getValues())],

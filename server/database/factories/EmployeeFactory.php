@@ -23,13 +23,16 @@ class EmployeeFactory extends Factory
     public function definition(): array
     {
         return [
+            'personal_email'          => fake()->unique()->safeEmail(),
             'first_name'              => fake()->firstName(),
             'middle_name'             => fake()->optional()->firstName(),
             'last_name'               => fake()->lastName(),
             'suffix'                  => fake()->optional()->randomElement(['Jr.', 'Sr.']),
             'gender'                  => fake()->randomElement(Gender::cases()),
             'birth_date'              => fake()->date(),
+            'birth_place'             => fake()->address(),
             'civil_status'            => fake()->randomElement(CivilStatus::cases()),
+            'citizenship'             => fake()->randomElement(['American', 'Filipino', 'Hispanic']),
             'nationality'             => fake()->country(),
             'religion'                => fake()->randomElement(['Christianity', 'Islam', 'Hinduism', 'Buddhism']),
             'contact_number'          => fake()->regexify('09\d{9}'),

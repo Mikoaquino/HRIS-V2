@@ -9,8 +9,8 @@ beforeEach(function () {
     $this->user = User::factory()->create(['password' => $this->password]);
 
     $this->requestPayload = [
-        'email'    => $this->user->email,
-        'password' => $this->password,
+        'work_email' => $this->user->work_email,
+        'password'   => $this->password,
     ];
 });
 

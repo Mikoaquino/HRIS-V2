@@ -19,13 +19,16 @@ class EmployeeFormRequest extends FormRequest
     {
         return [
             // General
+            'personal_email'          => ['required', 'email:rfc,strict,dns,spoof,filter,filter_unicode', 'unique:employees,personal_email'],
             'first_name'              => ['required', 'string', 'max:255'],
             'middle_name'             => ['nullable', 'string', 'max:255'],
             'last_name'               => ['required', 'string', 'max:255'],
             'suffix'                  => ['nullable', 'string', 'max:255'],
-            'birth_date'              => ['required', 'date', 'before_or_equal:' . now()->subYears(18)],
+            'birth_date'              => ['required', 'date', 'before_or_equal:'.now()->subYears(18)],
+            'birth_place'             => ['required', 'string'],
             'gender'                  => ['required', 'string', 'max:255', Rule::in(Gender::getValues())],
             'civil_status'            => ['required', 'string', 'max:255', Rule::in(CivilStatus::getValues())],
+            'citizenship'             => ['required', 'string'],
             'nationality'             => ['required', 'string', 'max:255'],
             'religion'                => ['required', 'string', 'max:255'],
             'contact_number'          => ['required', 'string', 'digits:11', 'regex:/^09\d{9}$/'],
@@ -34,11 +37,11 @@ class EmployeeFormRequest extends FormRequest
             'philhealth_id'           => ['required', 'numeric', 'digits:12'],
             'pagibig_id'              => ['required', 'numeric', 'digits:12'],
             'hired_at'                => ['required', 'date'],
-            'employment_type_id'      => ['required', Rule::exists(new EmploymentType()->getTable(), 'id')],
-            'job_position_id'         => ['required', Rule::exists(new JobPosition()->getTable(), 'id')],
-            'employee_status_id'      => ['required', Rule::exists(new EmployeeStatus()->getTable(), 'id')],
-            'department_id'           => ['required', Rule::exists(new Department()->getTable(), 'id')],
-            'immediate_supervisor_id' => ['nullable', Rule::exists(new Employee()->getTable(), 'id')],
+            'employment_type_id'      => ['required', Rule::exists((new EmploymentType)->getTable(), 'id')],
+            'job_position_id'         => ['required', Rule::exists((new JobPosition)->getTable(), 'id')],
+            'employee_status_id'      => ['required', Rule::exists((new EmployeeStatus)->getTable(), 'id')],
+            'department_id'           => ['required', Rule::exists((new Department)->getTable(), 'id')],
+            'immediate_supervisor_id' => ['nullable', Rule::exists((new Employee)->getTable(), 'id')],
 
             // Educations
             'educations'          => ['required', 'array'],
@@ -61,13 +64,13 @@ class EmployeeFormRequest extends FormRequest
 
             // Present Addresses
             'present_address'                    => ['required', 'array'],
-            'present_address.barangay_code'      => ['required', Rule::exists(new Barangay()->getTable(), 'code')],
+            'present_address.barangay_code'      => ['required', Rule::exists((new Barangay)->getTable(), 'code')],
             'present_address.additional_details' => ['required', 'string', 'max:255'],
             'present_address.zip_code'           => ['required', 'digits:4'],
 
             // Permanent Addresses
             'permanent_address'                    => ['required', 'array'],
-            'permanent_address.barangay_code'      => ['required', Rule::exists(new Barangay()->getTable(), 'code')],
+            'permanent_address.barangay_code'      => ['required', Rule::exists((new Barangay)->getTable(), 'code')],
             'permanent_address.additional_details' => ['required', 'string', 'max:255'],
             'permanent_address.zip_code'           => ['required', 'digits:4'],
         ];

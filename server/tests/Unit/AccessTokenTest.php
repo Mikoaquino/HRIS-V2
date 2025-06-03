@@ -12,8 +12,8 @@ test('can generate an access token for a user', function () {
     $user = User::factory()->create(['password' => 'test-password']);
 
     $response = $this->service->createToken([
-        'email'    => $user->email,
-        'password' => 'test-password',
+        'work_email' => $user->work_email,
+        'password'   => 'test-password',
     ]);
 
     $this->assertDatabaseHas('personal_access_tokens', [
@@ -27,12 +27,12 @@ test('can generate an access token for a user', function () {
     expect($response)->toBeObject();
 });
 
-test('returns null for email and password mismatched', function () {
+test('returns null for work email and password mismatched', function () {
     $user = User::factory()->create(['password' => 'test-password']);
 
     $response = $this->service->createToken([
-        'email'    => $user->email,
-        'password' => 'wrong-password',
+        'work_email' => $user->work_email,
+        'password'   => 'wrong-password',
     ]);
 
     expect($response)->toBeNull();

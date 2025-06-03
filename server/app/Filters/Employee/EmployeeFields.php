@@ -24,6 +24,7 @@ readonly class EmployeeFields
     ];
 
     public const SORTABLE = [
+        'id',
         'first_name',
         'middle_name',
         'last_name',
