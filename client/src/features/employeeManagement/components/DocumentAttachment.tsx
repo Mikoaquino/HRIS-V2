@@ -323,7 +323,7 @@ const DocumentAttachment: React.FC<DocumentAttachmentProps> = ({
     if (!selectedDocument) return null;
 
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1500]">
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1500]">
         <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
           <h3 className="text-xl font-semibold mb-4">
             Upload {selectedDocument.name}

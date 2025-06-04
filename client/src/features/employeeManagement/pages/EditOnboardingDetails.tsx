@@ -81,17 +81,16 @@ const EditOnboardingDetails: React.FC = () => {
   const fetchEmployeeData = async () => {
     try {
       setIsLoading(true);
-      // Configure axios to not follow redirects
       const axiosConfig = {
         params: {
-          load: "account,educations,work_experiences,attachments,present_address,permanent_address,employment_type,job_position,employee_status,department",
+          load: "account,educations,work_experiences,attachments,present_address,permanent_address,employment_type,job_position,employee_status,department,lifecycle",
         },
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
-        maxRedirects: 0, // Don't follow redirects
+        maxRedirects: 0,
         validateStatus: function (status: number) {
-          return status >= 200 && status < 303; // Accept 302 as valid
+          return status >= 200 && status < 303;
         },
       };
 
@@ -100,7 +99,6 @@ const EditOnboardingDetails: React.FC = () => {
         axiosConfig
       );
 
-      // Handle 302 redirect if needed
       if (response.status === 302 && response.headers.location) {
         const redirectResponse = await axios.get(response.headers.location, {
           headers: {
@@ -118,18 +116,23 @@ const EditOnboardingDetails: React.FC = () => {
     }
   };
 
+  const formatDate = (isoDate: string | undefined | null): string => {
+    if (!isoDate) return "";
+    const date = new Date(isoDate);
+    return date.toISOString().split("T")[0];
+  };
   const processEmployeeData = (employeeData: any) => {
-    // Transform the API data to match our form structure
     const employeeInfo: EmployeeInfo = {
       employeeNumber: employeeData.employee_number || "",
-      dateHired: employeeData.hired_at || "",
+      dateHired: formatDate(employeeData.lifecycle?.hired_at),
       employmentType: employeeData.employment_type_id?.toString() || "",
       jobPosition: employeeData.job_position_id?.toString() || "",
       employeeStatus: employeeData.employee_status_id?.toString() || "",
       department: employeeData.department_id?.toString() || "",
+      company: employeeData.department?.company_id?.toString() || "",
       immediateSupervisor:
         employeeData.immediate_supervisor_id?.toString() || "",
-      email: employeeData.account?.email || "",
+      email: employeeData.account?.work_email || "",
     };
 
     const personalInfo: PersonalInfo = {
@@ -143,7 +146,7 @@ const EditOnboardingDetails: React.FC = () => {
       nationality: employeeData.nationality,
       religion: employeeData.religion,
       contactNumber: employeeData.contact_number?.replace(/^0/, ""),
-      email: employeeData.account?.email,
+      personal_email: employeeData.personal_email,
       birthPlace: employeeData.birth_place,
       citizenship: employeeData.citizenship,
       currentAddress: employeeData.present_address?.additional_details,
@@ -168,7 +171,7 @@ const EditOnboardingDetails: React.FC = () => {
         school: edu.school,
         degree: edu.degree,
         from: formatToYearMonth(edu.from),
-        to: formatToYearMonth(edu.to), 
+        to: formatToYearMonth(edu.to),
         graduated_at: !!edu.graduated_at,
         attainment: edu.attainment,
         isPresent: !edu.graduated_at,
@@ -194,7 +197,7 @@ const EditOnboardingDetails: React.FC = () => {
           {
             id: att.hashed_name,
             name: att.client_name,
-            size: 0, // Will be updated when file is loaded
+            size: 0,
             type: `application/${att.client_name.split(".").pop()}`,
             url: `http://127.0.0.1:8000/storage/attachments/${att.hashed_name}`,
             file: null as unknown as File, // Placeholder
@@ -202,7 +205,6 @@ const EditOnboardingDetails: React.FC = () => {
         ],
       })) || [];
 
-    // Update session storage with fetched data
     sessionStorage.setItem("employeeInformation", JSON.stringify(employeeInfo));
     sessionStorage.setItem("personalInformation", JSON.stringify(personalInfo));
     sessionStorage.setItem("governmentIDs", JSON.stringify([govtIDs]));
@@ -213,7 +215,6 @@ const EditOnboardingDetails: React.FC = () => {
     sessionStorage.setItem("hris-work-experience", JSON.stringify(workExp));
     sessionStorage.setItem("documents", JSON.stringify(docs));
 
-    // Update state with fetched data
     updateEmployeeInfo(employeeInfo);
     updatePersonalInfo(personalInfo);
     updateGovernmentIDs([govtIDs]);
@@ -280,7 +281,7 @@ const EditOnboardingDetails: React.FC = () => {
       "contact_number",
       personalInfo.contactNumber ? `0${personalInfo.contactNumber}` : ""
     );
-    addFormField("email", personalInfo.email);
+    addFormField("personal_email", personalInfo.personal_email);
     addFormField("birth_place", personalInfo.birthPlace);
     addFormField("citizenship", personalInfo.citizenship);
 
@@ -323,12 +324,13 @@ const EditOnboardingDetails: React.FC = () => {
 
     const educations = getSessionData(`hris-educational-background`) || [];
     const uniqueEducations = educations.reduce((acc: any[], current: any) => {
-      const existingIndex = acc.findIndex(item => 
-        item.school === current.school && 
-        item.degree === current.degree && 
-        item.from === current.from
+      const existingIndex = acc.findIndex(
+        (item) =>
+          item.school === current.school &&
+          item.degree === current.degree &&
+          item.from === current.from
       );
-      
+
       if (existingIndex >= 0) {
         if (!current.id || current.id > acc[existingIndex].id) {
           acc[existingIndex] = current;
@@ -338,7 +340,7 @@ const EditOnboardingDetails: React.FC = () => {
       }
       return acc;
     }, []);
-  
+
     uniqueEducations.forEach((edu: any, index: number) => {
       addFormField(`educations[${index}][school]`, edu.school);
       addFormField(`educations[${index}][degree]`, edu.degree);
@@ -352,12 +354,13 @@ const EditOnboardingDetails: React.FC = () => {
 
     const workExperiences = getSessionData(`hris-work-experience`) || [];
     const uniqueWorkExp = workExperiences.reduce((acc: any[], current: any) => {
-      const existingIndex = acc.findIndex(item => 
-        item.employer === current.employer && 
-        item.position === current.position && 
-        item.from === current.from
+      const existingIndex = acc.findIndex(
+        (item) =>
+          item.employer === current.employer &&
+          item.position === current.position &&
+          item.from === current.from
       );
-      
+
       if (existingIndex >= 0) {
         if (!current.id || current.id > acc[existingIndex].id) {
           acc[existingIndex] = current;
@@ -367,14 +370,20 @@ const EditOnboardingDetails: React.FC = () => {
       }
       return acc;
     }, []);
-  
+
     uniqueWorkExp.forEach((work: any, index: number) => {
-      addFormField(`work_experiences[${index}][previous_employer]`, work.employer);
+      addFormField(
+        `work_experiences[${index}][previous_employer]`,
+        work.employer
+      );
       addFormField(`work_experiences[${index}][job_position]`, work.position);
       addFormField(`work_experiences[${index}][from]`, `${work.from}-01-01`);
       addFormField(`work_experiences[${index}][to]`, `${work.to}-01-01`);
-      addFormField(`work_experiences[${index}][reason_for_leaving]`, work.reason);
-      if (work.id && work.id <= 1000) { 
+      addFormField(
+        `work_experiences[${index}][reason_for_leaving]`,
+        work.reason
+      );
+      if (work.id && work.id <= 1000) {
         addFormField(`work_experiences[${index}][id]`, work.id);
       }
     });

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { EmployeeInfo } from "../types/onboarding";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 interface Step1EmployeeInfoProps {
   data: EmployeeInfo;
   onUpdate: (data: EmployeeInfo) => void;
   onValidationChange: (isValid: boolean) => void;
+  isEditMode?: boolean;
 }
 
 interface ApiOption {
@@ -14,43 +16,52 @@ interface ApiOption {
   first_name?: string;
   last_name?: string;
   department_id?: string;
+  company_id?: string;
+  work_email?: string;
 }
 
 interface ValidationErrors {
-  employeeNumber?: string;
   dateHired?: string;
   employmentType?: string;
   jobPosition?: string;
+  company?: string;
   department?: string;
   immediateSupervisor?: string;
   employeeStatus?: string;
-  email?: string;
 }
 
 interface TouchedFields {
-  employeeNumber?: boolean;
   dateHired?: boolean;
   employmentType?: boolean;
   jobPosition?: boolean;
+  company?: boolean;
   department?: boolean;
   immediateSupervisor?: boolean;
   employeeStatus?: boolean;
-  email?: boolean;
 }
 
 export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
   data: initialData,
   onUpdate,
   onValidationChange,
+  isEditMode = false,
 }) => {
+  const { id } = useParams<{ id: string }>();
+
   const getInitialFormData = (): EmployeeInfo => {
     const savedData = sessionStorage.getItem("employeeInformation");
-    return savedData ? JSON.parse(savedData) : initialData;
+    const baseData = savedData ? JSON.parse(savedData) : initialData;
+
+    return {
+      ...baseData,
+      employeeNumber: isEditMode && id ? id : baseData.employeeNumber || "",
+    };
   };
 
   const [formData, setFormData] = useState<EmployeeInfo>(getInitialFormData());
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [touched, setTouched] = useState<TouchedFields>({});
+  const [lastEmployeeId, setLastEmployeeId] = useState<number>(0);
 
   useEffect(() => {
     validateForm(formData, false);
@@ -58,12 +69,14 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
 
+  const [companies, setCompanies] = useState<ApiOption[]>([]);
   const [departments, setDepartments] = useState<ApiOption[]>([]);
   const [employmentTypes, setEmploymentTypes] = useState<ApiOption[]>([]);
   const [jobPositions, setJobPositions] = useState<ApiOption[]>([]);
   const [employeeStatuses, setEmployeeStatuses] = useState<ApiOption[]>([]);
   const [supervisors, setSupervisors] = useState<ApiOption[]>([]);
   const [loading, setLoading] = useState({
+    companies: true,
     departments: true,
     employmentTypes: true,
     jobPositions: true,
@@ -94,43 +107,124 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
 
       try {
         const [
-          departmentsRes,
+          companiesRes,
           employmentTypesRes,
           employeeStatusesRes,
           supervisorsRes,
           jobPositionsRes,
         ] = await Promise.all([
-          api.get("/departments"),
+          api.get("/companies"),
           api.get("/employment-types"),
           api.get("/employee-statuses"),
           api.get("/employees"),
           api.get("/job-positions"),
         ]);
 
-        setDepartments(departmentsRes.data.data || []);
+        setCompanies(companiesRes.data.data || []);
         setEmploymentTypes(employmentTypesRes.data.data || []);
         setEmployeeStatuses(employeeStatusesRes.data.data || []);
         setSupervisors(supervisorsRes.data.data || []);
         setJobPositions(jobPositionsRes.data.data || []);
 
         setLoading({
-          departments: false,
+          companies: false,
           employmentTypes: false,
           jobPositions: false,
           employeeStatuses: false,
           supervisors: false,
+          departments: false,
         });
+
+        if (isEditMode && id) {
+          const employeeNumber = id.startsWith("EMP-")
+            ? id
+            : `EMP-${String(id).padStart(6, "0")}`;
+
+          const newFormData = {
+            ...formData,
+            employeeNumber,
+          };
+          setFormData(newFormData);
+          onUpdate(newFormData);
+          sessionStorage.setItem(
+            "employeeInformation",
+            JSON.stringify(newFormData)
+          );
+        } else {
+          const lastEmployeeRes = await api.get(
+            "/employees?sort[id]=desc&limit=1"
+          );
+          const lastEmployee = lastEmployeeRes.data.data[0] || { id: "0" };
+          const newId = parseInt(lastEmployee.id) + 1;
+          setLastEmployeeId(newId);
+
+          const employeeNumber = `EMP-${String(newId).padStart(6, "0")}`;
+
+          const newFormData = {
+            ...formData,
+            employeeNumber,
+            email: lastEmployee.work_email || "",
+          };
+
+          setFormData(newFormData);
+          onUpdate(newFormData);
+          sessionStorage.setItem(
+            "employeeInformation",
+            JSON.stringify(newFormData)
+          );
+        }
+
+        if (formData.company) {
+          await fetchDepartments(formData.company);
+        }
       } catch (err) {
         handleApiError(err);
       }
     };
 
     fetchData();
-
     return () => {
       axios.CancelToken.source().cancel("Component unmounted");
     };
-  }, []);
+  }, [isEditMode, id]);
+
+  const fetchDepartments = async (companyId: string) => {
+    try {
+      setLoading((prev) => ({ ...prev, departments: true }));
+      const response = await api.get(
+        `/companies/${companyId}?load=departments`
+      );
+
+      const responseData =
+        response.status === 302 ? response.data.data : response.data.data;
+      const newDepartments = responseData.departments || [];
+
+      setDepartments(newDepartments);
+      setLoading((prev) => ({ ...prev, departments: false }));
+
+      if (isEditMode && formData.department) {
+        const departmentExists = newDepartments.some(
+          (dept: ApiOption) => dept.id === formData.department
+        );
+        if (!departmentExists) {
+          const newData = { ...formData, department: "" };
+          setFormData(newData);
+          onUpdate(newData);
+        }
+      }
+    } catch (err) {
+      if (
+        axios.isAxiosError(err) &&
+        err.response?.status === 302 &&
+        err.response?.data?.data
+      ) {
+        const responseData = err.response.data.data;
+        const newDepartments = responseData.departments || [];
+        setDepartments(newDepartments);
+      }
+      setLoading((prev) => ({ ...prev, departments: false }));
+    }
+  };
 
   const handleApiError = (err: unknown) => {
     if (axios.isAxiosError(err)) {
@@ -147,27 +241,12 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
     console.error("Error fetching data:", err);
   };
 
-  const validateEmployeeNumber = (value: string): string | undefined => {
-    if (!value.trim()) return "Employee number is required";
-    if (!/^[0-9-]+$/.test(value)) return "Only numbers and dashes are allowed";
-    if (!/^\d{4}-\d{3}$/.test(value))
-      return "Format should be YYYY-NNN (e.g., 2025-001)";
-    return undefined;
-  };
-
   const validateDateHired = (value: string): string | undefined => {
     if (!value) return "Date hired is required";
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const selectedDate = new Date(value);
     if (selectedDate > today) return "Date cannot be in the future";
-    return undefined;
-  };
-
-  const validateEmail = (value: string): string | undefined => {
-    if (!value.trim()) return "Email is required";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
-      return "Invalid email format";
     return undefined;
   };
 
@@ -181,13 +260,13 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
 
   const validateForm = (data: EmployeeInfo, showErrors = true): boolean => {
     const newErrors: ValidationErrors = {
-      employeeNumber: validateEmployeeNumber(data.employeeNumber),
       dateHired: validateDateHired(data.dateHired),
       employmentType: validateRequiredField(
         data.employmentType,
         "Employment type"
       ),
       jobPosition: validateRequiredField(data.jobPosition, "Job position"),
+      company: validateRequiredField(data.company, "Company"),
       department: validateRequiredField(data.department, "Department"),
       immediateSupervisor: validateRequiredField(
         data.immediateSupervisor,
@@ -197,7 +276,6 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
         data.employeeStatus,
         "Employee status"
       ),
-      email: validateEmail(data.email),
     };
 
     if (showErrors) {
@@ -211,24 +289,29 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
 
   const handleInputChange = (field: keyof EmployeeInfo, value: string) => {
     const newData = { ...formData, [field]: value };
+
+    if (field === "company") {
+      newData.department = "";
+      fetchDepartments(value);
+    }
+
     setFormData(newData);
     onUpdate(newData);
     sessionStorage.setItem("employeeInformation", JSON.stringify(newData));
 
-    if (touched[field]) {
+    if (touched[field as keyof TouchedFields]) {
       const newErrors = { ...errors };
       switch (field) {
-        case "employeeNumber":
-          newErrors.employeeNumber = validateEmployeeNumber(value);
-          break;
         case "dateHired":
           newErrors.dateHired = validateDateHired(value);
           break;
-        case "email":
-          newErrors.email = validateEmail(value);
-          break;
         default:
-          newErrors[field] = validateRequiredField(value, field.toString());
+          if (field in newErrors) {
+            newErrors[field as keyof ValidationErrors] = validateRequiredField(
+              value,
+              field.toString()
+            );
+          }
       }
       setErrors(newErrors);
     }
@@ -241,22 +324,16 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
 
     const newErrors = { ...errors };
     switch (field) {
-      case "employeeNumber":
-        newErrors.employeeNumber = validateEmployeeNumber(
-          formData.employeeNumber
-        );
-        break;
       case "dateHired":
         newErrors.dateHired = validateDateHired(formData.dateHired);
         break;
-      case "email":
-        newErrors.email = validateEmail(formData.email);
-        break;
       default:
-        newErrors[field] = validateRequiredField(
-          formData[field],
-          field.toString()
-        );
+        if (field in newErrors) {
+          newErrors[field as keyof ValidationErrors] = validateRequiredField(
+            formData[field],
+            field.toString()
+          );
+        }
     }
     setErrors(newErrors);
   };
@@ -274,35 +351,28 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-        {/* Employee Number */}
         <div>
           <label
             htmlFor="employeeNumber"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Employee Number <span className="text-red-400">*</span>
+            Employee Number
           </label>
           <input
             type="text"
             id="employeeNumber"
-            placeholder="Enter employee number (e.g., 2025-001)"
-            value={formData.employeeNumber}
-            onChange={(e) =>
-              handleInputChange("employeeNumber", e.target.value)
+            value={
+              isEditMode
+                ? formData.employeeNumber
+                : formData.employeeNumber || "Generating..."
             }
-            onBlur={() => handleBlur("employeeNumber")}
-            className={`w-full px-3 py-2 border ${
-              shouldShowError("employeeNumber")
-                ? "border-red-500"
-                : "border-gray-300"
-            } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+            readOnly
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
           />
-          {shouldShowError("employeeNumber") && (
-            <p className="mt-1 text-sm text-red-600">{errors.employeeNumber}</p>
-          )}
+          <p className="mt-1 text-xs text-gray-500">
+            {isEditMode ? "Employee ID" : "Automatically generated"}
+          </p>
         </div>
-
-        {/* Date Hired */}
         <div>
           <label
             htmlFor="dateHired"
@@ -314,6 +384,7 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
             <input
               type="date"
               id="dateHired"
+              disabled={isEditMode}
               value={formData.dateHired}
               onChange={(e) => handleInputChange("dateHired", e.target.value)}
               onBlur={() => handleBlur("dateHired")}
@@ -321,7 +392,11 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
                 shouldShowError("dateHired")
                   ? "border-red-500"
                   : "border-gray-300"
-              } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+              } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                isEditMode
+                  ? "disabled:opacity-50 bg-gray-100 cursor-not-allowed"
+                  : ""
+              }`}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
               <svg
@@ -344,7 +419,74 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           )}
         </div>
 
-        {/* Employment Type */}
+        <div>
+          <label
+            htmlFor="company"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
+            Company <span className="text-red-400">*</span>
+          </label>
+          <select
+            id="company"
+            value={formData.company}
+            onChange={(e) => handleInputChange("company", e.target.value)}
+            onBlur={() => handleBlur("company")}
+            disabled={loading.companies}
+            className={`w-full px-3 py-2 border ${
+              shouldShowError("company") ? "border-red-500" : "border-gray-300"
+            } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50`}
+          >
+            <option value="">
+              {loading.companies ? "Loading..." : "Select"}
+            </option>
+            {companies.map((company) => (
+              <option key={company.id} value={company.id}>
+                {company.name}
+              </option>
+            ))}
+          </select>
+          {shouldShowError("company") && (
+            <p className="mt-1 text-sm text-red-600">{errors.company}</p>
+          )}
+        </div>
+
+        <div>
+          <label
+            htmlFor="department"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
+            Department <span className="text-red-400">*</span>
+          </label>
+          <select
+            id="department"
+            value={formData.department}
+            onChange={(e) => handleInputChange("department", e.target.value)}
+            onBlur={() => handleBlur("department")}
+            disabled={loading.departments || !formData.company}
+            className={`w-full px-3 py-2 border ${
+              shouldShowError("department")
+                ? "border-red-500"
+                : "border-gray-300"
+            } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50`}
+          >
+            <option value="">
+              {loading.departments
+                ? "Loading..."
+                : !formData.company
+                ? "Select a company first"
+                : "Select"}
+            </option>
+            {departments.map((dept) => (
+              <option key={dept.id} value={dept.id}>
+                {dept.name}
+              </option>
+            ))}
+          </select>
+          {shouldShowError("department") && (
+            <p className="mt-1 text-sm text-red-600">{errors.department}</p>
+          )}
+        </div>
+
         <div>
           <label
             htmlFor="employmentType"
@@ -380,7 +522,6 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           )}
         </div>
 
-        {/* Job Position */}
         <div>
           <label
             htmlFor="jobPosition"
@@ -414,41 +555,6 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           )}
         </div>
 
-        {/* Department */}
-        <div>
-          <label
-            htmlFor="department"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
-            Department <span className="text-red-400">*</span>
-          </label>
-          <select
-            id="department"
-            value={formData.department}
-            onChange={(e) => handleInputChange("department", e.target.value)}
-            onBlur={() => handleBlur("department")}
-            disabled={loading.departments}
-            className={`w-full px-3 py-2 border ${
-              shouldShowError("department")
-                ? "border-red-500"
-                : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50`}
-          >
-            <option value="">
-              {loading.departments ? "Loading..." : "Select"}
-            </option>
-            {departments.map((dept) => (
-              <option key={dept.id} value={dept.id}>
-                {dept.name}
-              </option>
-            ))}
-          </select>
-          {shouldShowError("department") && (
-            <p className="mt-1 text-sm text-red-600">{errors.department}</p>
-          )}
-        </div>
-
-        {/* Immediate Supervisor */}
         <div>
           <label
             htmlFor="immediateSupervisor"
@@ -486,7 +592,6 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           )}
         </div>
 
-        {/* Employee Status */}
         <div>
           <label
             htmlFor="employeeStatus"
@@ -522,28 +627,25 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           )}
         </div>
 
-        {/* Email Address */}
         <div>
           <label
             htmlFor="email"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Email Address <span className="text-red-400">*</span>
+            Work Email Address
           </label>
           <input
             type="email"
             id="email"
-            placeholder="johndoe@gmail.com"
-            value={formData.email}
-            onChange={(e) => handleInputChange("email", e.target.value)}
-            onBlur={() => handleBlur("email")}
-            className={`w-full px-3 py-2 border ${
-              shouldShowError("email") ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+            value={formData.email || "No existing work email"}
+            disabled
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
           />
-          {shouldShowError("email") && (
-            <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-          )}
+          <p className="mt-1 text-xs text-gray-500">
+            {formData.email
+              ? "Automatically retrieved"
+              : "Will be created after onboarding"}
+          </p>
         </div>
       </div>
     </div>

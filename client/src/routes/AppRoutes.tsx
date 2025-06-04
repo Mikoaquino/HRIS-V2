@@ -19,6 +19,7 @@ import EducationalBackground from "../features/employeeManagement/components/Edu
 import WorkExperience from "../features/employeeManagement/components/WorkExperience";
 import EditOnboardingDetails from "../features/employeeManagement/pages/EditOnboardingDetails";
 import CompanyManagement from "../features/companyManagement/pages/CompanyManagement";
+import CompanyDetailsPage from "../features/companyManagement/pages/CompanyDetailsPage";
 
 // Authentication check
 const isAuthenticated = () => {
@@ -58,8 +59,14 @@ export const AppRoutes = () => {
               element={<EducationalBackground />}
             />
             <Route path="/work-experience" element={<WorkExperience />} />
-            <Route path="/employee-management" element={<EmployeeManagement />} />
-            <Route path="/education-background" element={<EducationalBackground />} />
+            <Route
+              path="/employee-management"
+              element={<EmployeeManagement />}
+            />
+            <Route
+              path="/education-background"
+              element={<EducationalBackground />}
+            />
             <Route path="/work-experience" element={<WorkExperience />} />
             <Route path="/company-management" element={<CompanyManagement />} />
             <Route path="/profile" element={<UserProfile />} />
@@ -71,6 +78,11 @@ export const AppRoutes = () => {
               path="/employee/edit/:id"
               element={<EditOnboardingDetails />}
             />
+            <Route
+              path="/employee/edit/:id"
+              element={<EditOnboardingDetails />}
+            />
+            <Route path="/company/edit/:id" element={<CompanyDetailsPage />} />
 
             {/* will change to the EmpLayout */}
             <Route path="/employee-dashboard" element={<EmpDashboard />} />
