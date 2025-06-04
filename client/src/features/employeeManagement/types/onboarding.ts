@@ -10,6 +10,7 @@ export interface EmployeeInfo {
   employeeNumber: string;
   employmentType: string;
   department: string;
+  company:string;
   employeeStatus: string;
   dateHired: string;
   jobPosition: string;
@@ -50,7 +51,7 @@ export interface PersonalInfo {
   permanentAddressZip:string;
   currentAddress:string;
   currentAddressZip:string;
-  email: string;
+  personal_email: string;
   citizenship:string;
   birthPlace:string;
   age:string;

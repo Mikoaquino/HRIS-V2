@@ -104,7 +104,7 @@ const OnboardingDetails: React.FC = () => {
       "contact_number",
       personalInfo.contactNumber ? `0${personalInfo.contactNumber}` : ""
     );
-    addFormField("email", personalInfo.email);
+    addFormField("personal_email", personalInfo.personal_email);
     addFormField("birth_place", personalInfo.birthPlace);
     addFormField("citizenship", personalInfo.citizenship);
 
@@ -355,8 +355,6 @@ const OnboardingDetails: React.FC = () => {
   const renderStepComponent = () => {
     if (!currentStep) return null;
 
-    console.log("Rendering step component:", currentStep.component);
-
     switch (currentStep.component) {
       case "Step1EmployeeInfo":
         return (
@@ -364,6 +362,7 @@ const OnboardingDetails: React.FC = () => {
             data={employeeInformation || {}}
             onUpdate={handleEmployeeInfoUpdate}
             onValidationChange={setIsStepValid}
+            isEditMode={true}
           />
         );
       case "Step2PersonalInfo":
