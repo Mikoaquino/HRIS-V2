@@ -106,7 +106,6 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
       }
 
       try {
-        // First, fetch all the dropdown options
         const [
           companiesRes,
           employmentTypesRes,
@@ -136,9 +135,7 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           departments: false,
         });
 
-        // Then handle employee number generation based on mode
         if (isEditMode && id) {
-          // Edit mode logic
           const employeeNumber = id.startsWith("EMP-")
             ? id
             : `EMP-${String(id).padStart(6, "0")}`;
@@ -154,7 +151,6 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
             JSON.stringify(newFormData)
           );
         } else {
-          // Create new employee logic
           const lastEmployeeRes = await api.get(
             "/employees?sort[id]=desc&limit=1"
           );
@@ -178,7 +174,6 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
           );
         }
 
-        // Fetch departments if company is already selected
         if (formData.company) {
           await fetchDepartments(formData.company);
         }

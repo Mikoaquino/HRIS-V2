@@ -59,14 +59,12 @@ const AddDepartmentModal: React.FC<AddDepartmentModalProps> = ({
 
     try {
       if (department) {
-        // Update existing department
         const updatedDept = await updateDepartment(department.id, {
           ...formData,
           company_id: companyId,
         });
         if (onUpdate) onUpdate(updatedDept);
       } else {
-        // Create new department
         const newDepartment = await createDepartment({
           ...formData,
           company_id: companyId,
