@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ActivityLog;
+use App\Enums\Role;
 use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,6 +34,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password'          => 'hashed',
         'status'            => UserStatus::class,
+        'role'              => Role::class,
     ];
 
     public function employee(): BelongsTo
