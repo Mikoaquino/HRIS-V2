@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [role, setRole] = useState<"admin" | "employee">("employee");
-  const [email, setEmail] = useState("");
+  const [work_email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -19,11 +19,10 @@ const LoginPage = () => {
       const response = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
         method: "POST",
 
-
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ work_email, password }),
       });
 
       const data = await response.json();
@@ -45,11 +44,9 @@ const LoginPage = () => {
 
       console.log("Token saved to localStorage:", token);
 
-
       setTimeout(() => {
         navigate("/hr-dashboard", { replace: true });
       }, 1000);
-
     } catch (err: any) {
       console.error("Login error:", err);
       const msg = err?.message || "Unknown error";
@@ -103,9 +100,9 @@ const LoginPage = () => {
           <div>
             <label className="text-sm font-medium text-gray-700">Email</label>
             <input
-              type="email"
+              type="work_email"
               placeholder="Enter your email"
-              value={email}
+              value={work_email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full mt-1 border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400 text-black"
               required
