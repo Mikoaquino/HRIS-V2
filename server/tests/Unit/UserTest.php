@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Role;
 use App\Enums\UserStatus;
 use App\Models\Employee;
 use App\Models\User;
@@ -16,6 +17,7 @@ test('can create a user model', function () {
     $validated = [
         'work_email'  => fake()->email(),
         'employee_id' => Employee::factory()->create()->id,
+        'role'        => fake()->randomElement(Role::cases()),
         'password'    => Str::password(),
         'status'      => UserStatus::ACTIVE,
     ];
@@ -30,6 +32,7 @@ test('can create a user model', function () {
         ->work_email->toBe($validated['work_email'])
         ->employee_id->toBe($validated['employee_id'])
         ->password->toHaveLength(60)
+        ->role->toBe($validated['role'])
         ->status->toBe(UserStatus::ACTIVE)
         ->email_verified_at->toBeNull()
         ->created_at->not->toBeNull()
