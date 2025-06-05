@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Role;
 use App\Enums\UserStatus;
 use App\Models\Employee;
 use App\Models\User;
@@ -63,6 +64,7 @@ test('`POST:` Create a new user resource', function () {
         'work_email'  => fake()->email(),
         'employee_id' => Employee::factory()->create()->id,
         'password'    => 'sTr0nk_P4ssword',
+        'role'        => fake()->randomElement(Role::cases()),
         'status'      => UserStatus::ACTIVE->value,
     ];
 
@@ -81,6 +83,7 @@ test('`POST:` Create a new user resource', function () {
                 'id',
                 'work_email',
                 'employee_id',
+                'role',
                 'status',
                 'created_at',
                 'updated_at',
@@ -123,6 +126,7 @@ test('`PUT:` Replace the entire resource of a user', function () {
         'work_email'  => 'change.mail2@yahoo.com',
         'employee_id' => Employee::factory()->create()->id,
         'password'    => 'sTr0nk_P4ssword',
+        'role'        => fake()->randomElement(Role::cases()),
         'status'      => 'active',
     ];
 
@@ -141,6 +145,7 @@ test('`PUT:` Replace the entire resource of a user', function () {
                 'id',
                 'work_email',
                 'employee_id',
+                'role',
                 'status',
                 'created_at',
                 'updated_at',

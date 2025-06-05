@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\EmploymentTypeController;
 use App\Http\Controllers\Api\JobPositionController;
 use App\Http\Controllers\Api\ProvinceController;
 use App\Http\Controllers\Api\RegionController;
+use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +63,9 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function () {
 
             Route::apiResource('dtrs', DailyTimeReportController::class)
                 ->only(['index', 'store']);
+
+            Route::apiResource('roles', RoleController::class)
+                ->only(['index']);
         });
 
         Route::prefix('auth')->group(function () {

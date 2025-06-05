@@ -16,7 +16,7 @@ class UserFormRequest extends FormRequest
             'work_email'  => ['required', 'email', 'unique:users,work_email'],
             'employee_id' => ['required', 'exists:employees,id', 'unique:users,employee_id'],
             'password'    => ['required', Password::defaults()],
-            'role'        => ['required', 'string', Rule::in(Role::getValues())],
+            'role'        => ['required', Rule::in(Role::cases())], // no clear instructions
             'status'      => ['required', 'string', Rule::in(UserStatus::getValues())],
         ];
     }
