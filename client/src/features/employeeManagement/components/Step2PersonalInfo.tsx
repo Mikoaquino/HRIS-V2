@@ -20,7 +20,7 @@ interface ValidationErrors {
   birthPlace?: string;
   nationality?: string;
   religion?: string;
-  email?: string;
+  personal_email?: string;
   contactNumber?: string;
   permanentAddress?: string;
   permanentAddressZip?: string;
@@ -41,7 +41,7 @@ interface TouchedFields {
   birthPlace?: boolean;
   nationality?: boolean;
   religion?: boolean;
-  email?: boolean;
+  personal_email?: boolean;
   contactNumber?: boolean;
   permanentAddress?: boolean;
   permanentAddressZip?: boolean;
@@ -165,7 +165,7 @@ export const Step2PersonalInfo: React.FC<Step2PersonalInfoProps> = ({
       birthPlace: validateRequiredField(data.birthPlace || ""),
       nationality: validateRequiredField(data.nationality || ""),
       religion: validateRequiredField(data.religion || ""),
-      email: validateEmail(data.email || ""),
+      personal_email: validateEmail(data.personal_email || ""),
       contactNumber: validateContactNumber(data.contactNumber || ""),
       permanentAddress: validateAddress(data.permanentAddress || ""),
       permanentAddressZip: validateZipCode(data.permanentAddressZip || ""),
@@ -225,8 +225,8 @@ export const Step2PersonalInfo: React.FC<Step2PersonalInfoProps> = ({
         case "age":
           newErrors.age = validateAge(value);
           break;
-        case "email":
-          newErrors.email = validateEmail(value);
+        case "personal_email":
+          newErrors.personal_email = validateEmail(value);
           break;
         case "contactNumber":
           newErrors.contactNumber = validateContactNumber(value);
@@ -282,8 +282,8 @@ export const Step2PersonalInfo: React.FC<Step2PersonalInfoProps> = ({
       case "age":
         newErrors.age = validateAge(formData.age || "");
         break;
-      case "email":
-        newErrors.email = validateEmail(formData.email || "");
+      case "personal_email":
+        newErrors.personal_email = validateEmail(formData.personal_email || "");
         break;
       case "contactNumber":
         newErrors.contactNumber = validateContactNumber(
@@ -582,15 +582,17 @@ export const Step2PersonalInfo: React.FC<Step2PersonalInfoProps> = ({
             Email address <span className="text-red-400">*</span>
           </label>
           <input
-            type="email"
-            value={formData.email || ""}
-            onChange={(e) => handleInputChange("email", e.target.value)}
-            onBlur={() => handleBlur("email")}
-            className={inputClasses("email")}
+            type="personal_email"
+            value={formData.personal_email || ""}
+            onChange={(e) =>
+              handleInputChange("personal_email", e.target.value)
+            }
+            onBlur={() => handleBlur("personal_email")}
+            className={inputClasses("personal_email")}
             placeholder="Enter email"
           />
-          {shouldShowError("email") && (
-            <p className="mt-1 text-xs text-red-600">{errors.email}</p>
+          {shouldShowError("personal_email") && (
+            <p className="mt-1 text-xs text-red-600">{errors.personal_email}</p>
           )}
         </div>
 
