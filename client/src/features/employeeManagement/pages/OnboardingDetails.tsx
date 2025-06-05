@@ -362,7 +362,7 @@ const OnboardingDetails: React.FC = () => {
             data={employeeInformation || {}}
             onUpdate={handleEmployeeInfoUpdate}
             onValidationChange={setIsStepValid}
-            isEditMode={true}
+            isEditMode={false}
           />
         );
       case "Step2PersonalInfo":

@@ -3,22 +3,20 @@ import { FaUserShield, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const [role, setRole] = useState<"admin" | "employee">("employee");
   const [work_email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate(); // Step 1: Initialized navigate
+  const navigate = useNavigate();
 
   const handleLogin = async (e: FormEvent) => {
-    e.preventDefault(); // Step 2: Prevent default form submission to stop page refresh
+    e.preventDefault();
     setIsLoading(true);
     setError("");
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
         },
@@ -42,11 +40,17 @@ const LoginPage = () => {
         sessionStorage.setItem("user", JSON.stringify(data.data.user));
       }
 
-      console.log("Token saved to localStorage:", token);
+      const userRole = data.data.user?.role;
+      let redirectPath = "/hr-dashboard";
 
-      setTimeout(() => {
-        navigate("/hr-dashboard", { replace: true });
-      }, 1000);
+      if (userRole === "Regular Employee") {
+        redirectPath = "/employee-dashboard";
+      } else if (!userRole) {
+        console.warn("User role not found in response");
+      }
+
+      console.log("Login successful, redirecting to:", redirectPath);
+      navigate(redirectPath, { replace: true });
     } catch (err: any) {
       console.error("Login error:", err);
       const msg = err?.message || "Unknown error";
@@ -61,38 +65,12 @@ const LoginPage = () => {
       <div className="bg-white text-black p-10 rounded-lg shadow-lg w-full max-w-xl">
         <div className="text-center mb-6">
           <div className="flex items-center justify-center gap-2 text-teal-600 text-xl font-semibold">
-            <span className="text-3xl">🌀</span>
             <h2>Welcome Back</h2>
           </div>
-          <p className="text-gray-600">
-            Sign in as {role === "admin" ? "an Admin" : "an Employee"}.
-          </p>
+          <p className="text-gray-600">Sign in</p>
         </div>
 
-        <div className="flex justify-center gap-4 mb-6">
-          <button
-            type="button"
-            onClick={() => setRole("admin")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition duration-200 ${
-              role === "admin"
-                ? "bg-teal-700 text-white hover:bg-teal-800"
-                : "bg-teal-100 text-teal-700 border border-teal-500 hover:bg-teal-200"
-            }`}
-          >
-            <FaUserShield /> Admin
-          </button>
-          <button
-            type="button"
-            onClick={() => setRole("employee")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition duration-200 ${
-              role === "employee"
-                ? "bg-teal-700 text-white hover:bg-teal-800"
-                : "bg-teal-100 text-teal-700 border border-teal-500 hover:bg-teal-200"
-            }`}
-          >
-            <FaUser /> Employee
-          </button>
-        </div>
+        <div className="flex justify-center gap-4 mb-6"></div>
 
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 

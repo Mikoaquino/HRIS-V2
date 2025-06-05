@@ -62,6 +62,7 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [touched, setTouched] = useState<TouchedFields>({});
   const [lastEmployeeId, setLastEmployeeId] = useState<number>(0);
+  const [userRole, setUserRole] = useState<string>("");
 
   useEffect(() => {
     validateForm(formData, false);
@@ -89,6 +90,13 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
     return sessionStorage.getItem("token");
   };
 
+  useEffect(() => {
+    const sessionData = sessionStorage.getItem("user");
+    if (sessionData) {
+      const user = JSON.parse(sessionData);
+      setUserRole(user.role);
+    }
+  }, []);
   const api = axios.create({
     baseURL: `${API_BASE_URL}/api/v1/`,
     headers: {
@@ -366,9 +374,18 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
                 ? formData.employeeNumber
                 : formData.employeeNumber || "Generating..."
             }
-            readOnly
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
+            disabled={userRole !== "Administrator" && isEditMode}
+            className={`w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm ${
+              userRole !== "Administrator"
+                ? "bg-gray-100 cursor-not-allowed"
+                : ""
+            }`}
+            onChange={(e) =>
+              userRole === "Administrator" &&
+              handleInputChange("employeeNumber", e.target.value)
+            }
           />
+
           <p className="mt-1 text-xs text-gray-500">
             {isEditMode ? "Employee ID" : "Automatically generated"}
           </p>
@@ -384,7 +401,7 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
             <input
               type="date"
               id="dateHired"
-              disabled={isEditMode}
+              disabled={userRole !== "Administrator" && isEditMode}
               value={formData.dateHired}
               onChange={(e) => handleInputChange("dateHired", e.target.value)}
               onBlur={() => handleBlur("dateHired")}
@@ -393,7 +410,7 @@ export const Step1EmployeeInfo: React.FC<Step1EmployeeInfoProps> = ({
                   ? "border-red-500"
                   : "border-gray-300"
               } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                isEditMode
+                userRole !== "Administrator" && isEditMode
                   ? "disabled:opacity-50 bg-gray-100 cursor-not-allowed"
                   : ""
               }`}

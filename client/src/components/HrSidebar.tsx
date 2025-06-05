@@ -24,7 +24,11 @@ const HrSidebar = () => {
   };
 
   const hrLinks = [
-    { label: "Company Management", link: "/company-management", icon: Building2 },
+    {
+      label: "Company Management",
+      link: "/company-management",
+      icon: Building2,
+    },
     { label: "Time Management", link: "/time-management", icon: Calendar },
     { label: "Leave Management", link: "/leave-management", icon: Plane },
     { label: "Certificates", link: "/certificates", icon: ShieldCheck },
@@ -103,13 +107,6 @@ const HrSidebar = () => {
                       className="block py-2 text-sm text-gray-600 hover:text-blue-600"
                     >
                       HR Dashboard
-                    </Link>
-
-                    <Link
-                      to="/employee-dashboard"
-                      className="block py-2 text-sm text-gray-600 hover:text-blue-600"
-                    >
-                      Employee Dashboard
                     </Link>
                   </div>
                 )}
@@ -242,7 +239,9 @@ const HrSidebar = () => {
                         <div className="flex items-center">
                           <Icon
                             className={`w-4 h-4 mr-3 ${
-                              isActive ? "text-teal-400" : "text-gray-400 group-hover:text-teal-400 group-focus:text-teal-400"
+                              isActive
+                                ? "text-teal-400"
+                                : "text-gray-400 group-hover:text-teal-400 group-focus:text-teal-400"
                             }`}
                           />
                           <span className="text-xs cursor-pointer">
